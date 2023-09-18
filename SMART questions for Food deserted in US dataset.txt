@@ -1,0 +1,48 @@
+SMART questions for Food deserted in US dataset :
+
+**Specific**:
+1. **What is the geographic distribution of food deserts in the dataset by state and county?**
+   - How many unique states and counties are represented in the dataset?
+   - What is the total number of census tracts included?
+ 
+2. **How does urban vs. rural classification (Urban) affect the prevalence of food deserts?**
+   - What percentage of census tracts are classified as urban vs. rural?
+   - Are food deserts more common in urban or rural areas?
+ 
+3. **What are the characteristics of areas with a high percentage of group quarters (GroupQuartersFlag)?**
+   - How many census tracts have a high percentage of group quarters?
+   - Is there a correlation between the percentage of group quarters and the prevalence of food deserts?
+ 
+4. **What is the relationship between poverty rates (PovertyRate) and the presence of food deserts in different regions (State/County)?**
+   - Are there states/counties with higher poverty rates that also have a higher prevalence of food deserts?
+   - Is there a correlation between poverty rates and food desert status?
+ 
+**Measurable**:
+5. **Can we measure the impact of vehicle availability (LILATracts_Vehicle) on food desert designation?**
+   - What percentage of food deserts have limited access to vehicles?
+   - Is there a significant difference in the prevalence of food deserts in areas with and without vehicle access issues?
+ 
+6. **How do income-related variables (MedianFamilyIncome, LowIncomeTracts) relate to food deserts?**
+   - What is the median family income in food desert areas compared to non-food desert areas?
+   - What percentage of food deserts are classified as low-income tracts?
+ 
+7. **Can we quantify the extent of low access areas (e.g., LILATracts_1And10, LILATracts_1And20) in the dataset?**
+   - What percentage of census tracts fall into different categories of low access areas?
+   - Are there patterns in the prevalence of food deserts in these categories?
+ 
+**Achievable**:
+8. **Can we identify actionable insights for policymakers and community organizations to address food deserts?**
+   - Are there specific areas with a high prevalence of food deserts that require targeted interventions?
+   - What factors are strongly associated with the presence of food deserts and can be addressed to alleviate the issue?
+ 
+**Relevant**:
+9. **How do food deserts impact different demographic groups (e.g., racial and ethnic populations, age groups)?**
+   - Are there disparities in food desert prevalence among different racial or ethnic groups?
+   - How does the presence of food deserts affect children (TractKids) and seniors (TractSeniors) in the population?
+ 
+**Time-bound**:
+10. **Have there been changes in the prevalence of food deserts over time, and if so, what are the trends?**
+    - Can we analyze changes in food desert prevalence between 2010 and the present (if applicable)?
+    - Have there been notable shifts in food desert status over recent years?
+ 
+
