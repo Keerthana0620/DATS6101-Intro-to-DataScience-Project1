@@ -1,4 +1,6 @@
-SMART questions for Food deserted in US dataset :
+a. Topic:  Food Insecurity
+
+b. SMART questions for Food deserted in US dataset :
 
 **Specific**:
 1. **What is the geographic distribution of food deserts in the dataset by state and county?**
@@ -44,5 +46,9 @@ SMART questions for Food deserted in US dataset :
 10. **Have there been changes in the prevalence of food deserts over time, and if so, what are the trends?**
     - Can we analyze changes in food desert prevalence between 2010 and the present (if applicable)?
     - Have there been notable shifts in food desert status over recent years?
- 
+
+
+c.  Source:  https://www.kaggle.com/datasets/tcrammond/food-access-and-food-deserts and at least 4,000 observations 
+
+d. Team Link:https://github.com/Keerthana0620/DATS6101-Intro-to-DataScience-Project1
 
