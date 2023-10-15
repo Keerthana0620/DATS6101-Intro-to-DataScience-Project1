@@ -1,0 +1,80 @@
+---
+title: "Food Deserts Analysis"
+output: html_document
+---
+## Data Loading and Preprocessing
+```{r init, include=F}
+library(tidyverse)
+library(ezids)
+```
+
+```{r read_data}
+# Loading data
+data <- read.csv("food_access_research_atlas.csv")
+
+```
+
+## Question 4: Relationship between Poverty Rate and Food Deserts
+
+### Analyzing Poverty Rate in Different Tracts
+
+```{r}
+
+# Assuming `data` is the dataframe you have
+data %>% 
+  group_by(LILATracts_1And10) %>% 
+  summarise(mean_poverty_rate = mean(PovertyRate))
+
+data %>% 
+  group_by(LILATracts_1And20) %>% 
+  summarise(mean_poverty_rate = mean(PovertyRate))
+
+data %>% 
+  group_by(LowIncomeTracts) %>% 
+  summarise(mean_poverty_rate = mean(PovertyRate))
+
+## Poverty rate is high in non low access areas
+data %>% 
+  group_by(LA1and10) %>% 
+  summarise(mean_poverty_rate = mean(PovertyRate))
+
+data %>% 
+  group_by(LA1and20) %>% 
+  summarise(mean_poverty_rate = mean(PovertyRate))
+
+```
+# Calculate statewise average poverty rate
+
+```{r statewise_poverty_rate }
+
+states_pov <- data %>% 
+  group_by(State) %>% 
+  summarise(avg_poverty_rate = mean(PovertyRate))
+print(states_pov)
+```
+# Normalize poverty rate
+
+```{r statewise_poverty_rate }
+states_pov$norm_poverty_rate <- scale(states_pov$avg_poverty_rate)
+print(states_pov)
+```
+# Identify states with high poverty
+threshold <- quantile(states_pov$norm_poverty_rate, 0.85)
+states_high_pov <- states_pov %>% 
+  filter(norm_poverty_rate > threshold)
+
+# Calculate statewise food desert count
+states_food_deserts <- data %>% 
+  filter(LILATracts_1And10 == 1) %>% 
+  count(State)
+
+# Normalize food desert counts
+states_food_deserts$norm_count <- scale(states_food_deserts$n)
+
+length(states_high_pov$norm_poverty_rate)
+length(states_food_deserts$norm_count)
+
+# Get correlation
+#cor(states_high_pov$norm_poverty_rate, states_food_deserts$norm_count, method = "pearson")
+#table(data$Urban, data$LILATracts_1And10)
+```
