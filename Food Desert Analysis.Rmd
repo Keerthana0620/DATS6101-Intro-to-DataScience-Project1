@@ -14,6 +14,59 @@ data <- read.csv("food_access_research_atlas.csv")
 
 ```
 
+## Questions 1: Geographic Distribution of State/County wise Prevelance of Food Deserts
+
+```{r}
+grpddata <- data %>%
+  filter(LILATracts_1And10 == 1) %>% # Filtering the food desert flags
+  group_by(State, County) %>% # Grouping by State and County
+  reframe(full=State, count=sum(LILATracts_1And10)) # Reframing to dataframe for Plotting
+grpddata$county <- paste(grpddata$County, "County") # Adding " County" text to support prerequisite of the plot_usmap() counties 
+grpddata <- distinct(grpddata, .keep_all = TRUE) %>% select(full, county, count) # Ignoring the duplicates and selecting particular columns to supply the plot_usmap() 
+counties_df <- us_map("counties") %>% select(fips, full, county) %>% distinct() # Getting the FIPS data of the counties. Mandatory for plotting in maps. Available from the us_map() dataframe built-in with the plot_usmap() library
+merged_df <- grpddata %>% right_join(counties_df, by=c("county", "full")) # Right joining the dataframes to get relevant FIPS code
+
+
+state_map <- plot_usmap("states", color = "#ff000030",size = 0.01) # Creating a State-Wise Plot
+counties_map <- plot_usmap(data = merged_df, 
+                       values = "count",
+                       color = "black",
+                       size = 0.1) # Creating a County-Wise Plot
+
+# Merging both the plots using ggplot and rendering the combined map using geom_polygon()
+ggplot() +  
+  geom_polygon(data=counties_map[[1]], 
+               aes(x=x, 
+                   y=y, 
+                   group=group, 
+                   fill = counties_map[[1]]$count,), 
+               color = "black",
+               size = 0.1) +  
+  geom_polygon(data=state_map[[1]], 
+               aes(x=x, 
+                   y=y, 
+                   group=group), 
+               color = "#ff000030", 
+               fill = alpha(0.01)) + 
+  coord_equal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),   
+    strip.text = element_blank(),
+    plot.subtitle = element_text(size = rel(0.8)),
+    panel.background = element_rect(fill="white"),
+    
+    ) +
+  scale_fill_gradient(low='white', high='grey20') +
+  labs(
+    title = "Geographic Distribution of Food Desert in US",
+    subtitle = "LI and LA 1 and 10 miles for Urban and Rural",
+    fill = "Prevelance of FD"
+  )
+```
+
 ## Question 4: Relationship between Poverty Rate and Food Deserts
 
 ### Analyzing Poverty Rate in Different Tracts
