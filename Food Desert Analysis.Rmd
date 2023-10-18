@@ -176,7 +176,9 @@ data %>%
   summarise(mean_poverty_rate = mean(PovertyRate))
 
 ```
-# Calculate statewise average poverty rate
+## Relationship between states and poverty rate
+
+### Calculate statewise average poverty rate
 
 ```{r statewise_poverty_rate }
 
@@ -185,21 +187,29 @@ states_pov <- data %>%
   summarise(avg_poverty_rate = mean(PovertyRate))
 print(states_pov)
 ```
-# Normalize poverty rate
+### Normalize poverty rate
 
 ```{r statewise_avg_poverty_rate }
 states_pov$norm_poverty_rate <- scale(states_pov$avg_poverty_rate)
 print(states_pov)
 ```
-# Identify states with high poverty
+### Identify states with high poverty
+```{r high_pov_states}
 threshold <- quantile(states_pov$norm_poverty_rate, 0.85)
 states_high_pov <- states_pov %>% 
   filter(norm_poverty_rate > threshold)
+print(states_high_pov)
 
+```
+
+### Correlation between states and food deserts
+
+```{r corr_states_food_deserts}
 # Calculate statewise food desert count
 states_food_deserts <- data %>% 
   filter(LILATracts_1And10 == 1) %>% 
   count(State)
+print(states_food_deserts)
 
 # Normalize food desert counts
 states_food_deserts$norm_count <- scale(states_food_deserts$n)
@@ -207,7 +217,180 @@ states_food_deserts$norm_count <- scale(states_food_deserts$n)
 length(states_high_pov$norm_poverty_rate)
 length(states_food_deserts$norm_count)
 
+merged_data <- inner_join(states_high_pov, states_food_deserts, by = "State")
 # Get correlation
-#cor(states_high_pov$norm_poverty_rate, states_food_deserts$norm_count, method = "pearson")
-#table(data$Urban, data$LILATracts_1And10)
+# There is no correlation between poverty rates and food desert status
+# The states with high poverty don't have high number of food deserts
+print(cor(merged_data$norm_poverty_rate, merged_data$norm_count, method = "pearson"))
+#### Checking correlation of poverty rate and food desert status of all the states 
+#### There is very less correlation between povery rate and food deserts in all states
+print(cor(states_pov$norm_poverty_rate, states_food_deserts$norm_count, method = "pearson"))
+
+print(merged_data)
+cor.test(merged_data$norm_poverty_rate, merged_data$norm_count, method="pearson")
+cor.test(states_pov$norm_poverty_rate, states_food_deserts$norm_count, method="pearson")
+
 ```
+
+## Relationship between counties and poverty rate
+
+### Calculate countywise average poverty rate
+
+```{r countywise_poverty_rate }
+
+counties_pov <- data %>% 
+  group_by(County) %>% 
+  summarise(avg_poverty_rate = mean(PovertyRate))
+print(counties_pov)
+```
+### Normalize county poverty rate
+
+```{r countywise_poverty_rate_normalise }
+counties_pov$norm_poverty_rate <- scale(counties_pov$avg_poverty_rate)
+print(counties_pov)
+```
+### Identify county with high poverty
+```{r high_pov_counties}
+county_threshold <- quantile(counties_pov$norm_poverty_rate, 0.85)
+counties_high_pov <- counties_pov %>% 
+  filter(norm_poverty_rate > county_threshold)
+print(counties_high_pov)
+
+```
+
+### Correlation between counties and food deserts
+
+```{r corr_counties_food_deserts}
+# Calculate statewise food desert count
+counties_food_deserts <- data %>% 
+  filter(LILATracts_1And10 == 1) %>% 
+  count(County)
+print(counties_food_deserts)
+
+# Normalize food desert counts
+counties_food_deserts$norm_count <- scale(counties_food_deserts$n)
+
+length(counties_food_deserts$norm_poverty_rate)
+length(counties_food_deserts$norm_count)
+
+counties_merged_data <- inner_join(counties_high_pov, counties_food_deserts, by = "County")
+# Get correlation
+# There is no correlation between poverty rates and food desert status
+# The states with high poverty don't have high number of food deserts
+print(cor(counties_merged_data$norm_poverty_rate, counties_merged_data$norm_count, method = "pearson"))
+#### Checking correlation of poverty rate and food desert status of all the states 
+#### There is very less correlation between povery rate and food deserts in all states
+counties_all_merged_data <- inner_join(counties_pov, counties_food_deserts, by = "County")
+print(cor(counties_all_merged_data$norm_poverty_rate, counties_all_merged_data$norm_count, method = "pearson"))
+
+cor.test(counties_merged_data$norm_poverty_rate, counties_merged_data$norm_count, method="pearson")
+cor.test(counties_all_merged_data$norm_poverty_rate, counties_all_merged_data$norm_count, method="pearson")
+
+
+# print(sum(is.na(counties_all_merged_data$norm_poverty_rate)))
+# sum(is.infinite(counties_all_merged_data$norm_poverty_rate))
+# print(sum(is.na(counties_all_merged_data$norm_count)))
+# sum(is.infinite(counties_all_merged_data$norm_count))
+#print(counties_all_merged_data)
+```
+
+# Question 5: Vehicle Access and Food Deserts
+## Visualizing Vehicle Access
+
+#### Filtering and plotting vehicle access
+```{r vis_vehicle_access}
+data %>% 
+  filter(LILATracts_1And10 == 1) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Percentage of total population who does not have vehicles in food desert")
+
+data %>% 
+  filter(LILATracts_1And10 == 0) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Percentage of total population who does not have vehicles in non-food desert")
+
+data %>% 
+  filter(LILATracts_1And10 == 1 & Urban == 1) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Percentage of urban population who does not have vehicles in food desert")
+
+data %>% 
+  filter(LILATracts_1And10 == 1 & Urban == 0) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Percentage of rural population who does not have vehicles in food desert")
+
+data %>% 
+  filter(LILATracts_1And10 == 0 & Urban == 1) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Percentage of urban population who does not have vehicles in non-food desert")
+
+data %>% 
+  filter(LILATracts_1And10 == 0 & Urban == 0) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Percentage of rural population who does not have vehicles in non-food desert")
+```
+
+### Share of population without vehicles - boxplots
+
+``` {r vehicle_box_plots}
+data$LILATracts_1And10 <- as.factor(data$LILATracts_1And10)
+
+
+levels(data$LILATracts_1And10) <- c("Non-Food desert", "Food desert")
+
+ggplot(data = data,
+       aes(x = c(LILATracts_1And10,Urban), y =lahunv1share)) +
+      geom_boxplot(fill='white', color="darkred") +
+      labs(title="Percentage of total population who does not have vehicles in food desert and non-food deserts",
+      x ="Types of tracts ", y = "Population share without vehicles") +
+      theme(plot.title = element_text(hjust = 0.5))
+  
+```
+#### Observations from the box plot
+
+Central Tendency: The median line inside the box for the "food desert" category appears to be higher than the "non-food desert" category. This suggests that, on average, a higher percentage of the population in food deserts lack vehicles compared to those in non-food deserts.
+
+Spread & Variability: The interquartile range (box height) for both categories is roughly similar, indicating a similar spread or variability in the data for both food and non-food deserts.
+
+Outliers: There are some outliers in both categories, but it's particularly noticeable in the "non-food desert" category. This indicates that while most non-food desert tracts have a relatively lower percentage of people without vehicles, there are a few tracts where this isn't the case.
+
+Skewness: The median line appears to be roughly in the middle of the box for both categories, suggesting that the distribution of the share of the population without vehicles in both food and non-food desert tracts is roughly symmetric.
+
+Overall Comparison: The entire box (representing the middle 50% of the data) for the "food desert" category is higher on the y-axis compared to the "non-food desert" category. This indicates that a larger share of the population in food deserts typically lacks vehicles compared to those in non-food deserts. This could be concerning, as people in food deserts without vehicles may have even more difficulty accessing fresh and healthy food.
+
+### Vehicle access in rural and urban tracts 
+
+```{r veh_access_urban_rural}
+data$Urban <- as.factor(data$Urban)
+levels(data$Urban) <- c("Rural", "Urban")
+ggplot(data = data,
+       aes(x = interaction(LILATracts_1And10, Urban), y = lahunv1share)) +
+  geom_boxplot(fill='white', color="darkred") +
+  labs(title="Percentage of total population who does not have vehicles",
+       x ="Types of tracts", y = "Population share without vehicles") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+Question 6: Income-related Variables and Food Deserts
+Visualizing Median Family Income
+
+data %>% 
+  filter(LILATracts_1And10 == 1) %>%
+  ggplot(aes(x = MedianFamilyIncome)) +
+  geom_histogram(bins = 50) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Median Family Income in Food Deserts")
+
