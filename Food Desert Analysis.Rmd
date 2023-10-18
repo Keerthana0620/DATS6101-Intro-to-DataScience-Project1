@@ -6,6 +6,7 @@ output: html_document
 ```{r init, include=F}
 library(tidyverse)
 library(ezids)
+library(usmap)
 ```
 
 ```{r read_data}
@@ -14,7 +15,7 @@ data <- read.csv("food_access_research_atlas.csv")
 
 ```
 
-## Questions 1: Geographic Distribution of State/County wise Prevelance of Food Deserts
+## Questions 1a: Geographic Distribution of State/County wise Prevelance of Food Deserts
 
 ```{r}
 plot_map <- function(dataset, colx, region, subx) {
@@ -94,6 +95,58 @@ plot_map(data, colx = "LILATracts_1And10", region="State", subx="LI and LA 1 and
 plot_map(data, colx = "LILATracts_1And20", region="State", subx="LI and LA 1 and 20 miles for Urban and Rural")
 ```
 
+## Question 1b: Unique states and counties are represented in the dataset
+
+```{r}
+unique_states <- data %>% group_by(State) %>% distinct(State) # Grouping by State and using distinct() to get unique states
+unique_counties <- data %>% group_by(State, County) %>% distinct(County) 
+# Grouping by both State and County and then 
+# using distinct() to get unique states. Because directly Grouping the counties will result in lesser results as different 
+# counties in different States can exists with the same name
+```
+## Question 1c: Total census tracts included in the dataset
+```{r}
+total_census_tracts <- nrow(data)
+```
+
+```{r}
+unique_states <- data %>% group_by(State) %>% distinct(State) # Grouping by State and using distinct() to get unique states
+unique_counties <- data %>% group_by(State, County) %>% distinct(County) 
+# Grouping by both State and County and then 
+# using distinct() to get unique states. Because directly Grouping the counties will result in lesser results as different 
+# counties in different States can exists with the same name
+```
+
+## Question 2: Urban vs Rural Classification impacts
+```{r}
+total_count <- nrow(data)
+urban_count <- nrow(data %>% filter(Urban == 1))
+rural_count <- nrow(data %>% filter(Urban == 0))
+urban_food_desert_count <- nrow(data %>% filter(Urban == 1, LILATracts_1And10 == 1))
+rural_food_desert_count <- nrow(data %>% filter(Urban == 0, LILATracts_1And10 == 1))
+
+urban_percentage <- urban_count / total_count * 100
+rural_percentage <- rural_count / total_count * 100
+urban_food_desert_percentage <- urban_food_desert_count / urban_count * 100
+rural_food_desert_percentage <- rural_food_desert_count / rural_count * 100
+overall_percentage <- (urban_food_desert_count + rural_food_desert_count) / total_count * 100
+
+cat("There are", urban_count, "Urban Counties\n")
+cat("There are", rural_count, "Rural Counties\n\n")
+
+cat("There are", urban_food_desert_count, "Urban Food Deserts\n")
+cat("There are", rural_food_desert_count, "Rural Food Deserts\n\n")
+
+cat("The Urban tracts constitute", round(urban_percentage, 2), "% of the total Census tracts\n")
+cat("The Rural tracts constitute", round(rural_percentage, 2), "% of the total Census tracts\n\n")
+
+cat("Based on the dataset, it is found that", round(urban_food_desert_percentage, 2), "% of the Urban tracts are food deserts\n")
+cat("And", round(rural_food_desert_percentage, 2), "% of the Rural tracts are food deserts\n\n")
+
+cat("Overall,", round(overall_percentage, 2), "% are food deserts based on the analysis made over the dataset\n")
+cat("From the analysis, it is evident that Food Deserts are more common in the Urban Areas, due to many factors like Population, Poverty Rates, Low Access and Low Income tracts")
+```
+
 ## Question 4: Relationship between Poverty Rate and Food Deserts
 
 ### Analyzing Poverty Rate in Different Tracts
@@ -134,7 +187,7 @@ print(states_pov)
 ```
 # Normalize poverty rate
 
-```{r statewise_poverty_rate }
+```{r statewise_avg_poverty_rate }
 states_pov$norm_poverty_rate <- scale(states_pov$avg_poverty_rate)
 print(states_pov)
 ```
