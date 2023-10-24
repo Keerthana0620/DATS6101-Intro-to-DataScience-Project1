@@ -1,0 +1,504 @@
+
+---
+title: "R code For Intro to DS project:"
+author: "Keerthana Aravindhan"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    number_sections: false
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+
+```{r init, include=F}
+# The package "ezids" (EZ Intro to Data Science) includes some helper functions we developed for the course. 
+# Some of the frequently used functions are loadPkg(), xkabledply(), xkablesummary(), uzscale(), etc.
+# You will need to install it (once) from GitHub.
+# library(devtools)
+# devtools::install_github("physicsland/ezids")
+# Then load the package in your R session.
+library(ezids)
+```
+
+```{r setup, include=FALSE}
+# Some of common RMD options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+knitr::opts_chunk$set(warning = F, message = F)
+# Can globally set option for number display format.
+options(scientific=T, digits = 3) 
+# options(scipen=9, digits = 3) 
+```
+
+
+# Loading and viewing the data set:
+
+<div style="width: 100%; overflow-x: scroll;">
+```{r code1, echo=TRUE}
+df = data.frame(read.csv("D:/Keerthu/GW/IntroToDataScience_6101/Project/Data_sets/Food_Deserts_in_US.csv"))
+knitr::kable(head(df, 5), format ='markdown')
+```
+</div>
+
+
+# Summary of the dataset:
+
+```{r code1.1, echo=TRUE}
+summary(df)
+```
+
+# Question 3:
+
+## Characteristics of Areas with Group Quarters
+
+<br>
+
+`Group Quarters` : Places where people live or stay in a group. Living arrangement that is owned or managed by an entity or organization providing housing and/or services for the residents.
+
+ - Percentage of Group Quarters in Food desert regions:
+
+```{r code2, echo=TRUE}
+df$GroupQuartersFlag <- as.factor(df$GroupQuartersFlag)
+df$LILATracts_1And10 <- as.factor(df$LILATracts_1And10)
+
+GroupQuarters_LILA <- df[ (df$GroupQuartersFlag == 1 & df$LILATracts_1And10 == 1), c("GroupQuartersFlag", "LILATracts_1And10")]
+NonGroupQuarters_LILA <- df[df$GroupQuartersFlag == 0 & df$LILATracts_1And10 == 1, c("GroupQuartersFlag", "LILATracts_1And10")]
+
+data = data.frame()
+Percentage_GroupQuarters_LILA = nrow(GroupQuarters_LILA)/(sum(nrow(GroupQuarters_LILA)+ nrow(NonGroupQuarters_LILA)))*100
+Percentage_NonGroupQuarters_LILA = nrow(NonGroupQuarters_LILA)/(sum(nrow(GroupQuarters_LILA)+ nrow(NonGroupQuarters_LILA)))*100
+data <- rbind(data, Percentage_GroupQuarters_LILA)
+data <- rbind(data, Percentage_NonGroupQuarters_LILA)
+GroupQuartersFlag = c(1,0)
+data <- cbind(data, GroupQuartersFlag)
+colnames(data) <- c('Percentage', 'GroupQuartersFlag')
+```
+
+```{r code 3, echo=TRUE}
+library(ggplot2)
+pie_chart <- ggplot(data, aes(x = "", y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Group quarters in Food desert regions",
+       fill = "GroupQuartersFlag") +
+  scale_fill_manual(values = c("0" = "grey", "1" = "black"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+```
+
+`Analysis` :
+   The proportion of group quarters is lower across all food deserts. Additionally, when compared to the entire Groupquarters,a smaller fraction of Groupquarters are located in food deserted areas.
+   
+## Percentage of Group quarters by state:
+
+```{r code4, echo=TRUE}
+df$State <- as.factor(df$State)
+
+bar_chart <- ggplot(df, aes(x = State, y = PCTGQTRS)) +
+  geom_bar(stat = "identity", fill = "lightblue") +
+  labs(title = "Percentage of Group Quarters by State",
+       x = "State",
+       y = "Percentage of Group Quarters") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+print(bar_chart)
+```
+
+`Analysis`:
+
+- California and New York have more group quarters tracts.
+
+- Wyoming and Delaware are states with least group quarters.
+
+California, Illinois, and New York are among the states that rank last when compared to the food deserts chart.
+This demonstrates that they have more stretches of group housing but fewer areas where food is deserted.
+
+
+## Correlation between Group quarters and the prevalence of Food deserts:
+
+<br>
+
+Testing using chi-square (GOF) between 2 categorical variables (GroupQuartersFlag and LILATracts_1And10):
+
+- Null Hypothesis (H0): There is no association between the two categorical variables
+
+- Alternative Hypothesis (H1): There is an association between the two categorical variables
+
+Significance level $\alpha$ = 0.05
+
+```{r code5, echo=TRUE}
+contingency_table <- table(df$GroupQuartersFlag, df$LILATracts_1And10)
+
+chi_squared_test_result <- chisq.test(contingency_table)
+chi_squared_test_result
+
+```
+
+`Analysis`:
+
+Due to the extremely low p value, H0 is rejected. This shows a large discrepancy between observed and predicted frequencies for the "GroupQuartersFlag" and "LILATracts_1And10" variables, indicating that the observed data does not follow the expected distribution.
+
+Therefore, there is a **significant association or correlation** between "GroupQuartersFlag" and "LILATracts_1And10."
+
+## Group quarters link with other variables in data
+
+<br>
+
+ - Bar chart to compare the Group quarters in Urban and Rural.
+
+```{r code6, echo=TRUE}
+df$GroupQuartersFlag <- as.factor(df$GroupQuartersFlag)
+df$Urban <- as.factor(df$Urban)
+
+GroupQuarters <- df[df$GroupQuartersFlag == 1, c("GroupQuartersFlag", "Urban")]
+
+```
+
+```{r code7, echo=TRUE}
+bar_chart <- ggplot(GroupQuarters, aes(x = GroupQuartersFlag, fill = Urban)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Comparison of GroupQuartersFlag and Urban Flag",
+       x = "Group Quarters Flag",
+       y = "Count") +
+  scale_fill_manual(values = c("1" = "lightgreen", "0" = "magenta")) +
+  theme_minimal()
+
+print(bar_chart)
+```
+
+`Analysis`:
+Group quarters are more in urban compared to Rural.
+
+<br>
+
+- How is Groupquarters associated with Poverty rate:
+
+```{r code8, include=FALSE}
+
+df_outliers <- ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+
+GroupQuarters_Poverty <- df_outliers[df_outliers$GroupQuartersFlag == 1, c("GroupQuartersFlag", "PovertyRate")]
+NonGroupQuarters_Poverty <- df_outliers[df_outliers$GroupQuartersFlag == 0, c("GroupQuartersFlag", "PovertyRate")]
+
+```
+
+```{r code9, echo=TRUE}
+
+data2 = data.frame()
+Percentage_GroupQuarters_Poverty = nrow(GroupQuarters_Poverty)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+Percentage_NonGroupQuarters_Poverty = nrow(NonGroupQuarters_Poverty)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+data2 <- rbind(data2, Percentage_GroupQuarters_Poverty)
+data2 <- rbind(data2, Percentage_NonGroupQuarters_Poverty)
+GroupQuartersFlag = c(1,0)
+data2 <- cbind(data2, GroupQuartersFlag)
+colnames(data2) <- c('Percentage', 'GroupQuartersFlag')
+
+pie_chart <- ggplot(data2, aes(x = "", y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Poverty in group quarters",
+       fill = "GroupQuartersFlag") +
+  scale_fill_manual(values = c("0" = "pink", "1" = "black"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+
+```
+
+`Analysis` :
+Poverty rate is more in Non Group Quarters tracts.
+
+<br>
+
+- Applying T-Test on "PovertyRate" with respect to Group quarters:
+
+   - Null Hypothesis (H0): The average Poverty rate are the same for with and without group quarters .
+
+   - Alternative Hypothesis (H1): The average Poverty rate are different for with and without group quarters .
+  
+  Significance level $\alpha$ = 0.05
+
+```{r code10, echo=TRUE }
+t_test_result <- t.test(df_outliers$PovertyRate ~ df_outliers$GroupQuartersFlag)
+t_test_result
+
+```
+
+`Analysis`:
+
+p value is less than $\alpha$ (0.05).
+Thus, Null hypothesis is rejected, indicating that there is a significant difference between the means of poverty rate of Groupquarters and nongroupquarters.
+
+- **Group quarters are more prevalent in Non-Food deserted regions and have a lower poverty incidence.** 
+
+- **This begs the question of why food sellers choose these kinds of neighborhood settings for their stores. Or more specifically, are they even relocating their current stores to these affluent areas?**
+
+- **Consequently, "supermarket redlining" is becoming a common practice.**
+
+# Question 9
+
+## Different Demographic groups in Food deserted Tracts:
+
+<br>
+
+Food Deserts impact in demographic groups of the society.
+
+```{r code11, echo=TRUE}
+LILA_df <- df[df$LILATracts_1And10 == 1,]
+LILA_Urban <- LILA_df[LILA_df$Urban == 1,]
+LILA_Rural <- LILA_df[LILA_df$Urban == 0,]
+
+Percentage_LILA_White <- ((sum(LILA_Urban$lawhite1) + sum(LILA_Rural$lawhite10))/sum(df$TractWhite))*100
+Percentage_LILA_Black <- ((sum(LILA_Urban$lablack1) + sum(LILA_Rural$lablack10))/sum(df$TractBlack))*100
+Percentage_LILA_Asian <- ((sum(LILA_Urban$laasian1) + sum(LILA_Rural$laasian10))/sum(df$TractAsian))*100
+Percentage_LILA_Hisp <- ((sum(LILA_Urban$lahisp1) + sum(LILA_Rural$lahisp10))/sum(df$TractHispanic))*100
+Percentage_LILA_Hopi <- ((sum(LILA_Urban$lanhopi1) + sum(LILA_Rural$lanhopi10))/sum(df$TractNHOPI))*100
+Percentage_LILA_Multir <- ((sum(LILA_Urban$laomultir1) + sum(LILA_Rural$laomultir10))/sum(df$TractOMultir))*100
+Percentage_LILA_Aian <- ((sum(LILA_Urban$laaian1) + sum(LILA_Rural$laaian10))/sum(df$TractAIAN))*100
+
+data3 = data.frame()
+data3 <- rbind(data3, Percentage_LILA_White)
+data3 <- rbind(data3, Percentage_LILA_Black)
+data3 <- rbind(data3, Percentage_LILA_Asian)
+data3 <- rbind(data3, Percentage_LILA_Hisp)
+data3 <- rbind(data3, Percentage_LILA_Hopi)
+data3 <- rbind(data3, Percentage_LILA_Multir)
+data3 <- rbind(data3, Percentage_LILA_Aian)
+Groups = c("White", "Black", "Asian", "Hisp", "Hopi", "OMultir", "Aian")
+data3 <- cbind(data3, Groups)
+colnames(data3) <- c('Percentage', 'Groups')
+
+```
+
+```{r code12, echo=TRUE}
+
+
+bar_chart <- ggplot(data3, aes(x = Groups, y = Percentage)) +
+  geom_bar(stat = "identity", fill = "navy") +
+  labs(title = "Percentage of each demographic groups by Food deserts",
+       x = "Demographic Groups",
+       y = "Percentage") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=1))  
+
+print(bar_chart)
+
+```
+
+AIAN - American Indian or Alaska Native
+
+HOPI - Native Hawaiian or Other Pacific Islander
+
+OMultir - other/multiple race
+
+HISP - Hispanic or Latino.
+
+- **we can see from the chart that *AIAN* and *Black* neighborhoods are more likely to lack access to supermarkets than other groups.** 
+
+- **And the least is *Asian* group.**
+
+- **This prompts the question of whether "food deserts" are a result of structural racial inequity.**
+
+## Food access to vulnerable age groups of society:
+
+<br>
+
+- Pie chart of Kids in food deserts and non food deserts.
+
+```{r code13, echo=TRUE}
+LILA_df <- df[df$LILATracts_1And10 == 1,]
+LILA_Urban <- LILA_df[LILA_df$Urban == 1,]
+LILA_Rural <- LILA_df[LILA_df$Urban == 0,]
+
+Percentage_LILA_kids <- ((sum(LILA_Urban$lakids1) + sum(LILA_Rural$lakids10))/sum(df$TractKids))*100
+
+NonLILA_df <- df[df$LILATracts_1And10 == 0,]
+NonLILA_Urban <- NonLILA_df[NonLILA_df$Urban == 1,]
+NonLILA_Rural <- NonLILA_df[NonLILA_df$Urban == 0,]
+
+Percentage_NonLILA_kids <- ((sum(NonLILA_Urban$lakids1) + sum(NonLILA_Rural$lakids10))/sum(df$TractKids))*100
+
+
+data5 = data.frame()
+data5 <- rbind(data5, Percentage_LILA_kids)
+data5 <- rbind(data5, Percentage_NonLILA_kids)
+
+LILA = c(1,0)
+data5 <- cbind(data5, LILA)
+colnames(data5) <- c('Percentage', 'LILA')
+
+pie_chart <- ggplot(data5, aes(x = "", y = Percentage, fill = factor(LILA))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Kids in Food desert regions",
+       fill = "Food desert regions") +
+  scale_fill_manual(values = c("0" = "#5b84c4", "1" = "#F98125"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+
+```
+
+
+ - Pie chart of Seniors in food deserts and non food deserts.
+
+
+```{r code14, echo=TRUE}
+
+Percentage_LILA_Seniors <- ((sum(LILA_Urban$laseniors1) + sum(LILA_Rural$laseniors10))/sum(df$TractSeniors))*100
+
+Percentage_NonLILA_Seniors <- ((sum(NonLILA_Urban$laseniors1) + sum(NonLILA_Rural$laseniors10))/sum(df$TractSeniors))*100
+
+
+data6 = data.frame()
+data6 <- rbind(data6, Percentage_LILA_Seniors)
+data6 <- rbind(data6, Percentage_NonLILA_Seniors)
+
+LILA = c(1,0)
+data6 <- cbind(data6, LILA)
+colnames(data6) <- c('Percentage', 'LILA')
+
+pie_chart <- ggplot(data6, aes(x = "", y = Percentage, fill = factor(LILA))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Seniors in Food desert regions",
+       fill = "Food desert regions") +
+  scale_fill_manual(values = c("0" = "#F54F52", "1" = "#93F03B"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+
+```
+
+**From these pie charts we can view that both kids and seniors live more in non-deserted regions.**
+
+**Are they intentionally choosing neighborhoods near supermarkets which limits the opportunity for other groups to live better?**
+
+
+# Loading 2010 Dataset:
+
+<div style="width: 100%; overflow-x: scroll;">
+```{r code15, echo=TRUE}
+df2010 = data.frame(read.csv("D:/Keerthu/GW/IntroToDataScience_6101/Project/Data_sets/Food_Deserts_in_US_2010.csv"))
+knitr::kable(head(df2010, 5), format ='markdown')
+```
+</div>
+
+
+# Question 10
+
+
+## Food desert Population change over in US from 2010 to 2015:
+
+```{r code16, echo=TRUE}
+df2010$State_name <- as.factor(df2010$State_name)
+
+LILA_df2010 <- df2010[df2010$LILATracts_1And10 == 1, c("POP2010", "State_name")]
+LILA_df2015 <- df[df$LILATracts_1And10 == 1, c("POP2010", "State")]
+colnames(LILA_df2015) <- c("POP2015", "State")
+colnames(LILA_df2010) <- c("POP2010", "State")
+```
+
+In 2010, `r sum(LILA_df2010$POP2010)` of US Population lived in Food deserted tracts.
+
+In 2015, `r sum(LILA_df2015$POP2015)` of US Population lived in Food deserted tracts.
+
+Within 5 years, From 2010 to 2015, this population is `increased by 2 million`. Which is actually a alarming fact.
+
+
+```{r code17, echo=TRUE}
+library(dplyr)
+
+summed_df_2015 <- LILA_df2015 %>% 
+  group_by(State) %>% 
+  summarise(POP2015 = sum(POP2015))
+
+summed_df_2010 <- LILA_df2010 %>% 
+  group_by(State) %>% 
+  summarise(POP2010 = sum(POP2010))
+
+merged_df <- full_join(summed_df_2015, summed_df_2010, by = "State")
+
+merged_df$PopulationDifference <- merged_df$POP2015 - merged_df$POP2010
+
+```
+
+- This Graph shows the population of people in Food deserts by state in 2010 and 2015.
+
+```{r code18, echo=TRUE}
+
+# Create a bar chart
+library(ggplot2)
+p <- ggplot(merged_df, aes(x = State)) +
+  geom_bar(aes(y = POP2015, fill = "2015"), stat = "identity", position = "dodge") +
+  geom_bar(aes(y = POP2010, fill = "2010"), stat = "identity", position = "dodge") +
+  labs(y = "Population", fill = "Year") +
+  scale_fill_manual(values = c("2010" = "gold", "2015" = "black")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 4  # Set the desired height in inches
+)
+
+print(p)
+  
+```
+ 
+- Population difference in Food deserts from 2010 to 2015:
+
+
+```{r code19, echo=TRUE}
+
+bar_chart <- ggplot(merged_df, aes(x = State, y = PopulationDifference)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Population change in Food quarters by State",
+       x = "State",
+       y = "Percentage change") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 4  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+- **Ohio, Georgia, and Florida have strong positive bars, indicating that the population rise is greater.**
+
+- **Few states, like Texas and Minnesota, have seen a decline in the population of areas that are food deserts over time**
+
+<br>
+
+- MAP representation of population change:
+
+```{r code20, echo=TRUE}
+library(usmap)
+
+merged_dff <- merged_df[merged_df$State != "District of Columbia",]
+merged_dff <- merged_dff[order(merged_dff$State),]
+map_df <- data.frame(
+  state = state.name,
+  diff = merged_dff$PopulationDifference)
+
+plot_usmap(data = map_df, values = "diff", labels = FALSE)
+
+```
+
+**The map shows that Eastern US states have experienced a greater population growth in food deserted areas than other US regions.**
+
+
+
