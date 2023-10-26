@@ -1,0 +1,1361 @@
+---
+title: "Exploring Food Deserts"
+author: "Team 1 : Abishek Chiffon, Keerthana Aravindhan, Mowzli Sre Mohan Dass, Robert Williams"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    number_sections: false
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  editor_options: 
+    markdown: 
+      wrap: sentence
+---
+
+```{css, echo=F}
+#TOC::before {
+  content: "";
+  display: block;
+  height: 200px;
+  margin: 20px 20px 40px 20px;
+  background-image: url("image.webp");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+```
+
+```{=html}
+<style>
+/* Footer Styles */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 19%;
+  background-color: white; /* Background color for the footer */
+  border: 1px solid #ddd; /* Optional border line at the top of the footer */
+  padding: 10px; /* Adjust padding as needed */
+  text-align: center; /* Center-align the content in the footer */
+  margin-left: 90px;
+  border-radius: 5px;
+}
+
+body {
+  background-color: 'cornsilk';
+}
+
+</style>
+```
+
+```{r init, include=F}
+library(tidyverse)
+library(ezids)
+library(usmap)
+```
+
+```{r setup, include=FALSE}
+# Some of common RMD options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+knitr::opts_chunk$set(warning = F, message = F)
+# Can globally set option for number display format.
+options(scientific=T, digits = 5) 
+```
+
+<br>
+<br>
+
+- Limited access to supermarkets, supercenters, grocery stores, or other sources of healthy and affordable food may make it harder for some people to eat a healthy diet in this country and to achieve food security.
+
+- Expanding the availability of nutritious and affordable food by developing and equipping grocery stores, small retailers, corner markets and farmers’ markets in communities with limited access is an important part of the Healthy Food Financing Initiative.
+
+
+# Data Loading and Preprocessing
+
+<br>
+Viewing Food desert dataset:
+
+<div style="width: 100%; overflow-x: scroll;">
+```{r read_data, echo=TRUE}
+# Loading data
+data <- data.frame(read.csv("food_access_research_atlas_2015.csv"))
+knitr::kable(head(data, 5), format ='markdown')
+```
+</div>
+
+# Summary of the dataset:
+
+<div style="max-height: 300px; overflow-y: scroll;">
+```{r summary, echo=TRUE}
+summary(data)
+```
+</div>
+
+
+# Exposition and Curation
+
+<br>
+
+## About the Dataset:
+
+This information on supermarket availability at different distances was taken from the Food Access Research Atlas. This data gives a rich detailed summary because it measures access by the Census-Tract. Data on food access was linked with information on age, race, location (rural or urban), income and vehicle access.
+
+- USDA calls Low income Low access areas as Food deserts.
+- Census tract level : subdivisions of counties.
+
+
+## Limitations of the Dataset:
+
+The dataset lacks variables to monitor the median household income and vehicle accessibility across different ethnic groups. It is crucial to note that the term "vehicle access" in this context does not necessarily imply the absence of vehicles at a residence; rather, individuals are deemed to have access to a vehicle if public transportation is readily available to them. Additionally, there are no variables present to explicitly denote households without any vehicles.
+
+
+## How was the information gathered?
+
+Beside knowing the dataset requirements for Project 1. The idea of Food Desert came from one of our team members that did some volunteer work on a number of community project in past.
+
+This data set is maintained by the Economic Research Service (ERS) and U.S. Department of Agriculture (USDA). Thus, it is pulled from the Food Access Research Atlas, and contains information on supermarket access at various distances. This data measures access by the Census-Tract, and as such provides a fairly granular overview.
+
+
+## Previous analysis on Food deserting:
+
+- An article titled `What Are Food Deserts and Why Do They Exit? (FFAC Staff, 2022)` was the subject of an analysis that was relevant to the dataset's content.
+
+- The report highlights a sobering reality: the challenge of envisioning life without access to nutritious food is a daily struggle for numerous individuals. The issue does not stem from a lack of food production; rather, it's the unfortunate reality that millions of people, particularly those residing in "food deserts," face a profound lack of access to wholesome sustenance.
+
+
+## Research contribution to question development:
+
+The data in the article, “What Are Food Deserts and Why Do They Exits?,” had some of the variables, such as census tract and areas that are low-income and low-access in our food desert dataset. It also helped to frame achievable questions.
+
+
+## Additional information that would be beneficial:
+
+According to another article, “Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise” (FFAC Staff, 2023), from Food Research & Action Center (FRAC), stated today by the U.S. Department of Agriculture's Economic Research Service (ERS), that the COVID-19 pandemic relief efforts caused hunger in America to decline the previous year, but it surged in 2022.  
+
+- So additional information on how covid affected food desert status would be beneficial.
+- The most recent year's dataset is missing, which could provide light on the food desert impact currently.
+
+
+# EDA Analysis:
+
+## Question 1:
+
+### Geographic Distribution of State/County wise Prevelance of Food Deserts
+
+```{r Q1a, echo=TRUE}
+
+plot_map <- function(dataset, colx, region, subx) {
+  grpddata <- dataset %>%
+    filter(.data[[colx]] == 1) %>% # Filtering the food desert flags
+    group_by(State, County) %>% # Grouping by State and County
+    reframe(full = State, count = sum(.data[[colx]]))  # Reframing to dataframe for Plotting
+  grpddata$county <-
+    paste(grpddata$County, "County") # Adding " County" text to support prerequisite of the plot_usmap() counties
+  grpddata <-
+    distinct(grpddata, .keep_all = TRUE) %>% select(full, county, count) # Ignoring the duplicates and selecting particular columns to supply the plot_usmap()
+  counties_df <-
+    us_map("counties") %>% select(fips, full, county) %>% distinct() # Getting the FIPS data of the counties. Mandatory for plotting in maps. Available from the us_map() dataframe built-in with the plot_usmap() library
+  merged_df <-
+    grpddata %>% right_join(counties_df, by = c("county", "full")) # Right joining the dataframes to get relevant FIPS code
+  
+  if (region == "State") {
+    merged_df <-
+      merged_df %>% select(-fips) %>% rename(state = full) # Changing the structure for State wise plotting
+  }
+  state_map <-
+    plot_usmap("states", color = "#ff000030", size = 0.01)
+  
+  counties_map <- plot_usmap(
+    data = merged_df,
+    values = "count",
+    color = "black",
+    size = 0.1
+  )
+  
+  # Merging both the plots using ggplot and rendering the combined map using geom_polygon()
+  ggplot() +
+    geom_polygon(
+      data = counties_map[[1]],
+      aes(
+        x = x,
+        y = y,
+        group = group,
+        fill = counties_map[[1]]$count,
+      ),
+      color = "black",
+      size = 0.1
+    ) +
+    geom_polygon(
+      data = state_map[[1]],
+      aes(x = x,
+          y = y,
+          group = group),
+      color = "#ff000030",
+      fill = alpha(0.01)
+    ) +
+    coord_equal() +
+    theme(
+      panel.grid = element_blank(),
+      axis.title = element_blank(),
+      axis.text = element_blank(),
+      axis.ticks = element_blank(),
+      strip.text = element_blank(),
+      plot.subtitle = element_text(size = rel(0.8)),
+      panel.background = element_rect(fill = "white"),
+      
+    ) +
+    scale_fill_gradient(low = 'white', high = 'grey20') +
+    labs(
+      title = paste(region, "- Wise Geographic Distribution of Food Desert in US"),
+      subtitle = subx,
+      fill = "Prevelance of FD"
+    )
+}
+
+
+plot_map(data, colx = "LILATracts_halfAnd10", region="County", subx="LI and LA half and 10 miles for Urban and Rural")
+plot_map(data, colx = "LILATracts_1And10", region="County", subx="LI and LA 1 and 10 miles for Urban and Rural")
+plot_map(data, colx = "LILATracts_1And20", region="County", subx="LI and LA 1 and 20 miles for Urban and Rural")
+plot_map(data, colx = "LILATracts_halfAnd10", region="State", subx="LI and LA half and 10 miles for Urban and Rural")
+plot_map(data, colx = "LILATracts_1And10", region="State", subx="LI and LA 1 and 10 miles for Urban and Rural")
+plot_map(data, colx = "LILATracts_1And20", region="State", subx="LI and LA 1 and 20 miles for Urban and Rural")
+```
+
+Unique states and counties are represented in the dataset.
+
+```{r Q1b, echo=TRUE}
+unique_states <- data %>% group_by(State) %>% distinct(State) # Grouping by State and using distinct() to get unique states
+unique_counties <- data %>% group_by(State, County) %>% distinct(County) 
+# Grouping by both State and County and then 
+# using distinct() to get unique states. Because directly Grouping the counties will result in lesser results as different 
+# counties in different States can exists with the same name
+```
+
+**Total census tracts included in the dataset : `r nrow(data)` **
+
+```{r Q1c, echo=TRUE}
+unique_states <- data %>% group_by(State) %>% distinct(State) # Grouping by State and using distinct() to get unique states
+unique_counties <- data %>% group_by(State, County) %>% distinct(County) 
+# Grouping by both State and County and then 
+# using distinct() to get unique states. Because directly Grouping the counties will result in lesser results as different 
+# counties in different States can exists with the same name
+```
+
+## Question 2:
+
+Urban vs Rural Classification impacts :
+```{r Q2, echo=TRUE}
+total_count <- nrow(data)
+urban_count <- nrow(data %>% filter(Urban == 1))
+rural_count <- nrow(data %>% filter(Urban == 0))
+urban_food_desert_count <- nrow(data %>% filter(Urban == 1, LILATracts_1And10 == 1))
+rural_food_desert_count <- nrow(data %>% filter(Urban == 0, LILATracts_1And10 == 1))
+
+urban_percentage <- urban_count / total_count * 100
+rural_percentage <- rural_count / total_count * 100
+urban_food_desert_percentage <- urban_food_desert_count / urban_count * 100
+rural_food_desert_percentage <- rural_food_desert_count / rural_count * 100
+overall_percentage <- (urban_food_desert_count + rural_food_desert_count) / total_count * 100
+
+```
+
+There are `r urban_count` Urban Counties.
+
+There are `r rural_count` Rural Counties.
+
+There are `r urban_food_desert_count` Urban Food Deserts.
+
+There are `r rural_food_desert_count` Rural Food Deserts.
+
+The Urban tracts constitute `r round(urban_percentage, 2)`% of the total Census tracts.
+The Rural tracts constitute `r round(rural_percentage, 2)`% of the total Census tracts.
+
+Based on the dataset, it is found that `r round(urban_food_desert_percentage, 2)`% of the Urban tracts are food deserts.
+And `r round(rural_food_desert_percentage, 2)` % of the Rural tracts are food deserts.
+
+Overall, `r round(overall_percentage, 2)`% are food deserts based on the analysis made over the dataset.
+
+**From the analysis, it is evident that Food Deserts are more common in the Urban Areas, due to many factors like Population, Poverty Rates, Low Access and Low Income tracts**
+
+
+## Question 3:
+
+### Characteristics of Areas with Group Quarters
+
+<br>
+
+`Group Quarters` : Places where people live or stay in a group. Living arrangement that is owned or managed by an entity or organization providing housing and/or services for the residents.
+
+ - Percentage of Group Quarters in Food desert regions:
+
+```{r code2, echo=TRUE}
+data$GroupQuartersFlag <- as.factor(data$GroupQuartersFlag)
+data$LILATracts_1And10 <- as.factor(data$LILATracts_1And10)
+
+GroupQuarters_LILA <- data[ (data$GroupQuartersFlag == 1 & data$LILATracts_1And10 == 1), c("GroupQuartersFlag", "LILATracts_1And10")]
+NonGroupQuarters_LILA <- data[data$GroupQuartersFlag == 0 & data$LILATracts_1And10 == 1, c("GroupQuartersFlag", "LILATracts_1And10")]
+
+data1 = data.frame()
+Percentage_GroupQuarters_LILA = nrow(GroupQuarters_LILA)/(sum(nrow(GroupQuarters_LILA)+ nrow(NonGroupQuarters_LILA)))*100
+Percentage_NonGroupQuarters_LILA = nrow(NonGroupQuarters_LILA)/(sum(nrow(GroupQuarters_LILA)+ nrow(NonGroupQuarters_LILA)))*100
+data1 <- rbind(data1, Percentage_GroupQuarters_LILA)
+data1 <- rbind(data1, Percentage_NonGroupQuarters_LILA)
+GroupQuartersFlag = c(1,0)
+data1 <- cbind(data1, GroupQuartersFlag)
+colnames(data1) <- c('Percentage', 'GroupQuartersFlag')
+```
+
+```{r code_3, echo=TRUE}
+library(ggplot2)
+pie_chart <- ggplot(data1, aes(x = "", y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Group quarters in Food desert regions",
+       fill = "GroupQuartersFlag") +
+  scale_fill_manual(values = c("0" = "grey", "1" = "black"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+```
+
+   The proportion of group quarters is lower across all food deserts. Additionally, when compared to the entire Groupquarters,a smaller fraction of Groupquarters are located in food deserted areas.
+   
+### Percentage of Group quarters by state:
+
+```{r code4, echo=TRUE}
+data$State <- as.factor(data$State)
+
+bar_chart <- ggplot(data, aes(x = State, y = PCTGQTRS)) +
+  geom_bar(stat = "identity", fill = "lightblue") +
+  labs(title = "Percentage of Group Quarters by State",
+       x = "State",
+       y = "Percentage of Group Quarters") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+print(bar_chart)
+```
+
+- California and New York have more group quarters tracts.
+
+- Wyoming and Delaware are states with least group quarters.
+
+California, Illinois, and New York are among the states that rank last when compared to the food deserts chart.
+This demonstrates that they have more stretches of group housing but fewer areas where food is deserted.
+
+
+### Correlation between Group quarters and the prevalence of Food deserts:
+
+<br>
+
+Testing using chi-square (GOF) between 2 categorical variables (GroupQuartersFlag and LILATracts_1And10):
+
+- Null Hypothesis (H0): There is no association between the two categorical variables
+
+- Alternative Hypothesis (H1): There is an association between the two categorical variables
+
+Significance level $\alpha$ = 0.05
+
+```{r code5, echo=TRUE}
+contingency_table <- table(data$GroupQuartersFlag, data$LILATracts_1And10)
+
+chi_squared_test_result <- chisq.test(contingency_table)
+chi_squared_test_result
+
+```
+
+Due to the extremely low p value, H0 is rejected. This shows a large discrepancy between observed and predicted frequencies for the "GroupQuartersFlag" and "LILATracts_1And10" variables, indicating that the observed data does not follow the expected distribution.
+
+Therefore, there is a **significant association or correlation** between "GroupQuartersFlag" and "LILATracts_1And10."
+
+### Group quarters link with other variables in data1
+
+<br>
+
+ - Bar chart to compare the Group quarters in Urban and Rural.
+
+```{r code6, echo=TRUE}
+data$GroupQuartersFlag <- as.factor(data$GroupQuartersFlag)
+data$Urban <- as.factor(data$Urban)
+
+GroupQuarters <- data[data$GroupQuartersFlag == 1, c("GroupQuartersFlag", "Urban")]
+
+```
+
+```{r code7, echo=TRUE}
+bar_chart <- ggplot(GroupQuarters, aes(x = GroupQuartersFlag, fill = Urban)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Comparison of GroupQuartersFlag and Urban Flag",
+       x = "Group Quarters Flag",
+       y = "Count") +
+  scale_fill_manual(values = c("1" = "lightgreen", "0" = "magenta")) +
+  theme_minimal()
+
+print(bar_chart)
+```
+
+Group quarters are more in urban compared to Rural.
+
+<br>
+
+- How is Groupquarters associated with Poverty rate:
+
+```{r code8, include=FALSE}
+
+data_outliers <- ezids::outlierKD2(data, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+
+GroupQuarters_Poverty <- data_outliers[data_outliers$GroupQuartersFlag == 1, c("GroupQuartersFlag", "PovertyRate")]
+NonGroupQuarters_Poverty <- data_outliers[data_outliers$GroupQuartersFlag == 0, c("GroupQuartersFlag", "PovertyRate")]
+
+```
+
+```{r code9, echo=TRUE}
+
+data2 = data.frame()
+Percentage_GroupQuarters_Poverty = nrow(GroupQuarters_Poverty)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+Percentage_NonGroupQuarters_Poverty = nrow(NonGroupQuarters_Poverty)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+data2 <- rbind(data2, Percentage_GroupQuarters_Poverty)
+data2 <- rbind(data2, Percentage_NonGroupQuarters_Poverty)
+GroupQuartersFlag = c(1,0)
+data2 <- cbind(data2, GroupQuartersFlag)
+colnames(data2) <- c('Percentage', 'GroupQuartersFlag')
+
+pie_chart <- ggplot(data2, aes(x = "", y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Poverty in group quarters",
+       fill = "GroupQuartersFlag") +
+  scale_fill_manual(values = c("0" = "pink", "1" = "black"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+
+```
+
+Poverty rate is more in Non Group Quarters tracts.
+
+<br>
+
+- Applying T-Test on "PovertyRate" with respect to Group quarters:
+
+   - Null Hypothesis (H0): The average Poverty rate are the same for with and without group quarters .
+
+   - Alternative Hypothesis (H1): The average Poverty rate are different for with and without group quarters .
+  
+  Significance level $\alpha$ = 0.05
+
+```{r code10, echo=TRUE}
+t_test_result <- t.test(data_outliers$PovertyRate ~ data_outliers$GroupQuartersFlag)
+t_test_result
+
+```
+
+p value is less than $\alpha$ (0.05).
+Thus, Null hypothesis is rejected, indicating that there is a significant difference between the means of poverty rate of Groupquarters and nongroupquarters.
+
+`**Analysis**`
+
+- **Group quarters are more prevalent in Non-Food deserted regions and have a lower poverty incidence.** 
+
+- **This begs the question of why food sellers choose these kinds of neighborhood settings for their stores. Or more specifically, are they even relocating their current stores to these affluent areas?**
+
+- **Consequently, "supermarket redlining" is becoming a common practice.**
+
+
+## Question 4:
+
+### Analyzing Poverty Rate in Different Tracts
+
+```{r Q4, include=FALSE}
+
+# Assuming `data` is the dataframe you have
+data %>% 
+  group_by(LILATracts_1And10) %>% 
+  summarise(mean_poverty_rate = mean(PovertyRate))
+
+data %>% 
+  group_by(LILATracts_1And20) %>% 
+  summarise(mean_poverty_rate = mean(PovertyRate))
+
+data %>% 
+  group_by(LowIncomeTracts) %>% 
+  summarise(mean_poverty_rate = mean(PovertyRate))
+
+## Poverty rate is high in non low access areas
+data %>% 
+  group_by(LA1and10) %>% 
+  summarise(mean_poverty_rate = mean(PovertyRate))
+
+data %>% 
+  group_by(LA1and20) %>% 
+  summarise(mean_poverty_rate = mean(PovertyRate))
+
+```
+
+The mean poverty rate is 26.5 for food deserts and for non-food deserts it is 15.1. So the Poverty rate in food deserts is 75% higher than non-food deserts. Poverty rate in Low access area is 14.2 whereas in non-low access area is 18.0.
+
+### Count of Low Income tracts in Low access tracts
+
+```{r low_income_low_access}
+
+# Filtering data for rows where LA1and10 is 1
+filtered_data <- data[data$LA1and10 == 1, ]
+
+# Calculating value counts for LowIncomeTracts
+value_counts <- table(filtered_data$LowIncomeTracts)
+
+# Converting to data frame for ggplot
+value_counts_df <- as.data.frame(value_counts)
+names(value_counts_df) <- c("LowIncomeTracts", "Counts")
+
+# Creating custom labels
+value_counts_df$Labels <- ifelse(value_counts_df$LowIncomeTracts == 0, "Not Low Income", 
+                                 ifelse(value_counts_df$LowIncomeTracts == 1, "Low Income", value_counts_df$LowIncomeTracts))
+
+# Creating the bar plot
+p <- ggplot(value_counts_df, aes(x = reorder(Labels, -Counts), y = Counts)) +
+  geom_bar(stat = "identity", fill = "skyblue", color = "black") +
+  labs(title = "Counts of LowIncomeTracts in low access areas", x = "LowIncomeTracts", y = "Counts") +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1))
+
+# Showing the plot
+print(p)
+
+```
+
+* 66% of the non-low income tracts are low access tracts
+* This means that Low access people are rich which may indicate that rich people wants to stay outside.
+
+### Relationship between states and poverty rate:
+
+- Statewise average poverty rate
+
+```{r statewise_poverty_rate }
+
+states_pov <- data %>%
+  group_by(State) %>%
+  summarise(avg_poverty_rate = mean(PovertyRate, na.rm = TRUE)) %>%
+  arrange(desc(avg_poverty_rate))
+
+print(states_pov)
+```
+
+* Mississippi has the highest povery rate of 24.64 and Florida has the lowest poverty rate of 24.64.
+* There are no missing values in the PovertyRate.
+
+- Normalize poverty rate
+
+```{r statewise_poverty_rate_normalise }
+states_pov$norm_poverty_rate <- scale(states_pov$avg_poverty_rate)
+
+print(states_pov)
+```
+
+The poverty rate is normalised to find the correlation between poverty rate of states and food deserts
+
+- Identify states with high poverty
+
+```{r high_pov_states}
+threshold <- quantile(states_pov$norm_poverty_rate, 0.85)
+states_high_pov <- states_pov %>% 
+  filter(norm_poverty_rate > threshold)
+
+print(states_high_pov)
+
+```
+
+To address the question whether states with high poverty rate also have high number of food deserts, we are filtering only the states above 85th percentile of poverty rate.
+
+- Correlation between states and food deserts
+
+High Poverty States and food desert count
+
+Using Pearson Correlation:
+
+**Null hypothesis**: There is no correlation between High poverty rate states with count of their food desert.
+
+**Alternate hypothesis** : There is Correlation between High poverty rate states with count of their food desert.
+
+```{r corr_states_food_deserts}
+# Calculate statewise food desert count
+states_food_deserts <- data %>% 
+  filter(LILATracts_1And10 == 1) %>% 
+  count(State)
+#print(states_food_deserts)
+
+# Normalize food desert counts
+states_food_deserts$norm_count <- scale(states_food_deserts$n)
+
+merged_data <- inner_join(states_high_pov, states_food_deserts, by = "State")
+merged_data_all <- inner_join(states_pov, states_food_deserts, by = "State")
+# Get correlation
+# There is no correlation between poverty rates and food desert status
+# The states with high poverty don't have high number of food deserts
+
+cor.test(merged_data$norm_poverty_rate, merged_data$norm_count, method="pearson")
+```
+
+At level of significance alpha set at = 0.05, as The p-value 0.6  is higher than the 0.05, we fail to reject the null hypothesis.
+
+The pearson correlation results tell us "There is no correlation between High poverty rate states with count of their food desert"
+
+- Poverty rate of All States and food desert count
+
+**Null hypothesis**: There is no correlation between poverty rate of all states with count of their food desert.
+
+**Alternate hypothesis** : There is Correlation between poverty rate of all states with count of their food desert.
+
+```{r Q4.1}
+cor.test(merged_data_all$norm_poverty_rate, merged_data_all$norm_count, method="pearson")
+```
+
+At level of significance alpha set at = 0.05, as The p-value 0.003  is lesser than the 0.05, we reject the null hypothesis.
+
+The pearson correlation results tell us there is statistically significant correlation between poverty rate of all states with count of their food desert.
+
+### Relationship between counties and poverty rate
+
+We calculate the correlation between counties and poverty rate just like we did for the states.
+
+- Calculate countywise average poverty rate
+
+Highest :
+```{r countywise_poverty_rate }
+
+counties_pov <- data %>% 
+  group_by(County) %>% 
+  summarise(avg_poverty_rate = mean(PovertyRate,na.rm = TRUE)) %>%
+  arrange(desc(avg_poverty_rate))
+print(head(counties_pov))
+
+```
+
+Lowest :
+```{r check}
+print(tail(counties_pov))
+```
+
+* Radford has the highest average povery rate of 24.64 and Bedford City has the lowest average poverty rate of 24.64.
+
+- Normalize county poverty rate
+
+```{r countywise_poverty_rate_normalise }
+counties_pov$norm_poverty_rate <- scale(counties_pov$avg_poverty_rate)
+print(head(counties_pov))
+```
+
+- Identify county with high poverty
+
+```{r high_pov_counties}
+county_threshold <- quantile(counties_pov$norm_poverty_rate, 0.85)
+counties_high_pov <- counties_pov %>% 
+  filter(norm_poverty_rate > county_threshold)
+print(head(counties_high_pov))
+
+```
+
+- Correlation between counties and food deserts
+
+High Poverty counties and food desert count
+
+Using Pearson Correlation:
+
+**Null hypothesis**: There is no correlation between High poverty rate counties with count of their food desert
+
+**Alternate hypothesis** : There is Correlation between High poverty rate counties with count of their food desert.
+
+```{r corr_counties_food_deserts}
+# Calculate statewise food desert count
+counties_food_deserts <- data %>% 
+  filter(LILATracts_1And10 == 1) %>% 
+  count(County)
+
+# Normalize food desert counts
+counties_food_deserts$norm_count <- scale(counties_food_deserts$n)
+
+counties_merged_data <- inner_join(counties_high_pov, counties_food_deserts, by = "County")
+
+# Get correlation
+# There is no correlation between poverty rates and food desert status
+# The states with high poverty don't have high number of food deserts
+#print(cor(counties_merged_data$norm_poverty_rate, counties_merged_data$norm_count, method = "pearson"))
+#### Checking correlation of poverty rate and food desert status of all the states 
+#### There is very less correlation between povery rate and food deserts in all states
+counties_all_merged_data <- inner_join(counties_pov, counties_food_deserts, by = "County")
+
+cor.test(counties_merged_data$norm_poverty_rate, counties_merged_data$norm_count, method="pearson")
+```
+
+At level of significance alpha set at = 0.05, as The p-value 1  is higher than the 0.05, we fail to reject the null hypothesis. The correlation coefficient is cor 5.98e-05 .
+The pearson correlation results tell us "There is no correlation between High poverty rate counties with count of their food desert"
+
+- Poverty rate of All counties and food desert count
+
+**Null hypothesis**: There is no correlation between poverty rate of all counties with count of their food desert.
+**Alternate hypothesis** : There is Correlation between poverty rate of all counties with count of their food desert.
+```{r qq4}
+cor.test(counties_all_merged_data$norm_poverty_rate, counties_all_merged_data$norm_count, method="pearson")
+```
+At level of significance alpha set at = 0.05, as The p-value 0.003  is lesser than the 0.05, we reject the null hypothesis.The correlation coefficient is cor 0.0147. 
+
+The pearson correlation results tell us there is no statistically significant correlation between poverty rate of all counties with count of their food desert.
+
+## Question 5:
+
+### Visualizing Vehicle Access
+
+- Filtering and plotting vehicle access
+
+```{r vis_vehicle_access}
+data %>%
+  filter(LILATracts_1And10 == 1) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill= "red", color="darkred") +
+  labs(title = "Percentage of total population who does not have vehicles in food desert")
+
+data %>%
+  filter(LILATracts_1And10 == 0) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill= "red", color="darkred") +
+  labs(title = "Percentage of total population who does not have vehicles in non-food desert")
+
+data %>%
+  filter(LILATracts_1And10 == 1 & Urban == 1) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill = "red", color="darkred") +
+  labs(title = "Percentage of urban population who does not have vehicles in food desert")
+
+data %>%
+  filter(LILATracts_1And10 == 1 & Urban == 0) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill = "red", color="darkred") +
+  labs(title = "Percentage of rural population who does not have vehicles in food desert")
+
+data %>%
+  filter(LILATracts_1And10 == 0 & Urban == 1) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill = "red", color="darkred") +
+  labs(title = "Percentage of urban population who does not have vehicles in non-food desert")
+
+data %>%
+  filter(LILATracts_1And10 == 0 & Urban == 0) %>%
+  ggplot(aes(x = lahunv1share)) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill = "red", color="darkred") +
+  labs(title = "Percentage of rural population who does not have vehicles in non-food desert")
+
+result <- data %>%
+  filter(LILATracts_1And10 == 1) %>%
+  group_by(Urban) %>%
+  summarise(
+    lahunv1share_mean = mean(lahunv1share, na.rm = TRUE),
+    lahunv10share_mean = mean(lahunv10share, na.rm = TRUE)
+  )
+
+print(result)
+fd_urban = subset(result, Urban == 1)["lahunv1share_mean"] * 100
+fd_rural = subset(result, Urban == 0)["lahunv10share_mean"] * 100
+fd_vehicle = 100 - fd_urban + fd_urban
+
+```
+
+```{r vehicle_access_pie}
+
+data_pie <- data.frame(
+  Category = c("Urban without vehicles", "Rural without vehicles", "Population with Vehicles"),
+  Percentage = c(result[[2, "lahunv1share_mean"]] * 100 ,result[[1, "lahunv10share_mean"]] * 100, 100 - (result[[1, "lahunv1share_mean"]]  + result[[2, "lahunv10share_mean"]])* 100)
+)
+#print(data_pie)
+# Generate the pie chart
+ggplot(data_pie, aes(x = "", y = Percentage, fill = Category)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start=0) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    panel.border = element_blank(),
+    panel.grid=element_blank(),
+    axis.ticks = element_blank(),
+    plot.title=element_text(size=14, face="bold")
+  ) +
+  labs(fill = "") +
+  scale_fill_manual(values = c("skyblue", "darkred", "pink"))
+```
+
+Around 5% urban population in food desert doesn't have vehicles. Around 4% rural population in food desert doesn't have vehicles. 91% population in food desert have vehicles.
+
+### Share of population without vehicles - boxplots
+
+``` {r vehicle_box_plots}
+data$LILATracts_1And10 <- as.factor(data$LILATracts_1And10)
+
+
+levels(data$LILATracts_1And10) <- c("Non-Food desert", "Food desert")
+
+ggplot(data = data,
+       aes(x = LILATracts_1And10, y =lahunv1share)) +
+      geom_boxplot(fill='white', color="darkred") +
+      labs(title="Percentage of population doesn't have vehicles in food desert and non-food deserts",
+      x ="Types of tracts ", y = "Population share without vehicles") +
+      theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+Seems like there is a lot of outliers in the data to make any conclusions. So removed outliers using KD2 method.
+
+```{r outlier_removal_vehicle_access_food_deserts}
+app_wo_gre_outlier <- ezids::outlierKD2(data, lahunv1share ,qqplt= TRUE, boxplt= TRUE, rm = TRUE)
+#str(app_wo_gre_outlier)
+#gre_na = sum(is.na(app_wo_gre_outlier$gre))
+```
+
+The QQ plot looks like a straight line after removing outliers. This indicates that it is normally distributed.
+
+``` {r vehicle_box_plots_2}
+app_wo_gre_outlier$LILATracts_1And10 <- as.factor(app_wo_gre_outlier$LILATracts_1And10)
+
+
+levels(app_wo_gre_outlier$LILATracts_1And10) <- c("Non-Food desert", "Food desert")
+
+ggplot(data = app_wo_gre_outlier,
+       aes(x = LILATracts_1And10, y =lahunv1share)) +
+      geom_boxplot(fill='white', color="darkred") +
+      labs(title="Percentage of total population who does not have vehicles in food desert and non-food deserts",
+      x ="Types of tracts ", y = "Population share without vehicles") +
+      theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+* A higher percentage of the population in food deserts lack vehicles compared to those in non-food desert.
+* This could be concerning, as people in food deserts without vehicles may have even more difficulty accessing fresh and healthy food.
+
+**Observations from the box plot**
+
+The entire box (representing the middle 50% of the data) for the "food desert" category is higher on the y-axis compared to the "non-food desert" category. This indicates that a larger share of the population in food deserts typically lacks vehicles compared to those in non-food deserts. This could be concerning, as people in food deserts without vehicles may have even more difficulty accessing fresh and healthy food.
+
+### Vehicle access in rural and urban tracts
+
+```{r veh_access_urban_rural}
+data$Urban <- as.factor(data$Urban)
+levels(data$Urban) <- c("Rural", "Urban")
+ggplot(data = data,
+       aes(x = interaction(LILATracts_1And10, Urban), y = lahunv1share)) +
+  geom_boxplot(fill='white', color="darkred") +
+  labs(title="Percentage of total population who does not have vehicles",
+       x ="Types of tracts", y = "Population share without vehicles") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+Seems like there is a lot of outliers in the data to make any conclusions. So let's use outlier removed data.
+
+```{r veh_access_urban_rural_without_outliers}
+app_wo_gre_outlier$Urban <- as.factor(app_wo_gre_outlier$Urban)
+levels(app_wo_gre_outlier$Urban) <- c("Rural", "Urban")
+
+app_wo_gre_outlier$LILATracts_1And10 <- as.factor(app_wo_gre_outlier$LILATracts_1And10)
+levels(app_wo_gre_outlier$LILATracts_1And10) <- c("Non-food desert", "Food desert")
+ggplot(data = app_wo_gre_outlier,
+       aes(x = interaction(LILATracts_1And10, Urban), y = lahunv1share)) +
+  geom_boxplot(fill='white', color="darkred") +
+  labs(title="Percentage of total population who does not have vehicles - outliers removed",
+       x ="Types of tracts", y = "Population share without vehicles") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+`Analysis`
+
+- Urban Areas:
+
+The non-food desert urban areas have the smallest median percentage of people without vehicle access. This is likely because urban areas often have alternative modes of transportation, such as public transit, walking, or biking, making vehicle ownership less necessary. Moreover, urban areas often have amenities and services within walking distance, further reducing the need for a vehicle.
+
+- Impact of Food Deserts:
+
+In both rural and urban contexts, food deserts show a higher median percentage of people without vehicle access compared to non-food deserts. This is a significant concern because it suggests that people in food deserts, who already might have limited access to healthy food options, might also face transportation challenges.
+
+- Rural vs. Urban:
+
+While non-food desert urban areas have the lowest median percentage of people without vehicle access, food desert rural areas have the highest. This highlights the impact of food desert status on transportation barriers, irrespective of the urban or rural context.
+
+## Question 6: 
+
+Income-related Variables and Food Deserts
+
+### Visualizing Median Family Income
+
+```{r medincom_food_deserts}
+
+data %>%
+  filter(LILATracts_1And10 == "Food desert") %>%
+  ggplot(aes(x = MedianFamilyIncome)) +
+  geom_histogram(bins = 50, fill='skyblue', color="darkred") +  # Changed colors here
+  geom_density(alpha = 0.8, fill="red", color="darkred") +      # And here
+  labs(title = "Median Family Income in Food Deserts")
+
+data %>%
+  filter(LILATracts_1And10 == "Non-Food desert") %>%
+  ggplot(aes(x = MedianFamilyIncome)) +
+  geom_histogram(bins = 50, fill='skyblue', color="darkred") +  # Changed colors here
+  geom_density(alpha = 0.5, fill = "red", color="darkred") +      # And here
+  labs(title = "Median Family Income in Non-food Deserts")
+
+```
+
+
+1.	**Median Family Income in Food Deserts**: This histogram appears to be skewed to the right, indicating that a significant portion of families in food deserts have lower incomes. There seems to be a peak around the lower income values, which tapers off as income increases.
+
+2.	**Median Family Income in Non-Food Deserts**: This histogram looks more symmetrical and possibly bell-shaped, suggesting a more normal distribution. The peak is closer to the middle income values, and the tails decrease symmetrically on both sides.
+3.	From this visual inspection, it seems that food deserts tend to have a higher proportion of families with lower incomes, while non-food deserts have a more even distribution of incomes, with a peak around the middle values.
+
+
+### Median income in food desert - boxplots
+
+``` {r medincome_box_plots}
+data$LILATracts_1And10 <- as.factor(data$LILATracts_1And10)
+
+
+levels(data$LILATracts_1And10) <- c("Non-Food desert", "Food desert")
+
+ggplot(data = data,
+       aes(x = LILATracts_1And10, y = MedianFamilyIncome)) +
+      geom_boxplot(fill='white', color="darkred") +
+      labs(title="Median Family Income between food desert and non-food deserts",
+      x ="Types of tracts ", y = "MedianFamilyIncome") +
+      theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+
+- Confidence Interval tests
+
+```{r food_desert_confidence_interval}
+fd_data <- subset(data, data$LILATracts_1And10 == "Food desert")
+
+non_fd_data <- subset(data, data$LILATracts_1And10 == "Non-Food desert")
+#print(fd_data)
+ttest_fd_medincome_95 = t.test(x=fd_data$MedianFamilyIncome, conf.level=0.95 )
+ttest_non_fd_medincome_95 = t.test(x=non_fd_data$MedianFamilyIncome, conf.level=0.95 )
+
+print(ttest_fd_medincome_95)
+print(ttest_non_fd_medincome_95)
+```
+
+- T-intervals for the median income
+
+ **At 0.95 level**
+
+   [`r ttest_fd_medincome_95$conf.int[1] `, `r ttest_fd_medincome_95$conf.int[2] `]
+
+- T-intervals for the median income in non-food desert
+
+ **At 0.95 level**
+
+   [`r ttest_non_fd_medincome_95$conf.int[1] `, `r ttest_non_fd_medincome_95$conf.int[2] `]
+
+The difference in the intervals indicates the median income between food desert and non-food desert is different.
+
+- ANOVA ON median income
+
+Null hypothesis : There is no difference in the median income between food desert and non-food desert
+Alternate hypothesis : There is difference in the median income between food desert and non-food desert
+
+
+```{r anova_med_incom_food_desert}
+med_income_aov = aov(MedianFamilyIncome ~ LILATracts_1And10, data = data)
+# plant_aov  # this does not give the easy-to-read result of the aov analysis
+# summary(plant_aov)
+plantaovsummary = summary(med_income_aov)
+plantaovsummary
+```
+
+At level of significance alpha set at = 0.05, as The p-value 2e-16  is less than the 0.05, we reject the null hypothesis "There is no difference in the median income between food desert and non-food desert"
+Given the large F value and the extremely low p-value, we can be confident in this result.
+
+The anova results tell us that there is statistically significant difference in median income among food desert and non -deserts.
+
+-  Post-hoc Tukey HSD
+
+```{r tukeyHSD}
+tukeyAoV <- TukeyHSD(med_income_aov)
+tukeyAoV
+```
+
+The post-hoc test confirms that families living in food deserts have a significantly lower median income compared to those not living in food deserts.
+
+### Median Family Income in urban and rural areas
+
+``` {r medincome_urban_box_plots}
+data$LILATracts_1And10 <- as.factor(data$LILATracts_1And10)
+levels(data$LILATracts_1And10) <- c("Non-Food desert", "Food desert")
+
+data$Urban <- as.factor(data$Urban)
+levels(data$Urban) <- c("Rural", "Urban")
+ggplot(data = data,
+       aes(x = interaction(LILATracts_1And10, Urban), y = MedianFamilyIncome)) +
+      geom_boxplot(fill='white', color="darkred") +
+      labs(title="Median Family Income between in urban and rural food deserts",
+      x ="Types of tracts ", y = "MedianFamilyIncome") +
+      theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+**Urban**: As expected Non-food deserts in urban have higher median income than others.
+
+**Rural**:Contrary to common perceptions, rural food deserts appear to have median family income similar to the urab food deserts.This suggest that the food desert in the rural areas is not solely due to economic reasons but could be influenced by other factors like distribution logistics, infrastructure, or availability of food retailers.
+
+**Non-Food Deserts**: Whether in urban or rural settings, areas that are not classified as food deserts appear to have a more balanced mix of family incomes, suggesting that economic disparities might be less pronounced in these areas.
+
+## Question 7 
+
+After importing the dataset, food_access_research_atlas.csv, we identified the variables LILATracts_1And10 and LILATracts_1And20 that had the values, 0, 1 and we assigned value 1 as access and 0 as non-acces.
+
+```{r Q7}
+
+dfFD = subset(data)
+
+fooddesert_LILATracts_1And10_access = data.frame(dfFD$LILATracts_1And10 == 1)
+fooddesert_LILATracts_1And10_access = dfFD%>%
+  filter(LILATracts_1And10==1)
+
+fooddesert_LILATracts_1And10_nonaccess = data.frame(dfFD$LILATracts_1And10 == 0)
+fooddesert_LILATracts_1And10_nonaccess = dfFD%>%
+  filter(LILATracts_1And10==0)
+
+fooddesert_LILATracts_1And20_access = data.frame(dfFD$LILATracts_1And20 == 1)
+fooddesert_LILATracts_1And20_access = dfFD%>%
+  filter(LILATracts_1And20==1)
+
+fooddesert_LILATracts_1And20_nonaccess = data.frame(dfFD$LILATracts_1And20 == 0)
+fooddesert_LILATracts_1And20_nonaccess = dfFD%>%
+  filter(LILATracts_1And20==0)
+
+```
+
+
+## Question 8: 
+
+Are the patterns in the prevalence of food deserts in these categories? 
+
+```{r Q8}
+
+library(ggplot2)
+
+library(tidyverse)
+fg <- data %>%
+  count(LILATracts_1And10) %>%
+  mutate(
+    perc = round(proportions(n) * 100, 1),
+    res = str_c(n, "(", perc, ")%"),
+    LILATracts_1And10 = as.factor(LILATracts_1And10)
+    )
+
+ggplot(fg, aes(LILATracts_1And10, n, fill = LILATracts_1And10)) +
+  geom_col() +
+  geom_text(aes(label = res), vjust = -0.5) + scale_fill_discrete(labels = c("Nonaccess", "Access"))
+
+fg1 <- data %>%
+  count(LILATracts_1And20) %>%
+  mutate(
+    perc = round(proportions(n) * 100, 1),
+    res = str_c(n, "(", perc, ")%"),
+    LILATracts_1And20 = as.factor(LILATracts_1And20)
+    )
+
+ggplot(fg1, aes(LILATracts_1And20, n, fill = LILATracts_1And20)) +
+  geom_col() +
+  geom_text(aes(label = res), vjust = -0.5) + scale_fill_discrete(labels = c("Nonaccess", "Access"))
+
+```
+
+## Question 9
+
+### Different Demographic groups in Food deserted Tracts:
+
+<br>
+
+Food Deserts impact in demographic groups of the society.
+
+```{r code11, echo=TRUE}
+levels(data$LILATracts_1And10) <- c(0, 1)
+levels(data$Urban) <- c(0, 1)
+LILA_df <- data[data$LILATracts_1And10 == 1,]
+LILA_Urban <- LILA_df[LILA_df$Urban == 1,]
+LILA_Rural <- LILA_df[LILA_df$Urban == 0,]
+
+Percentage_LILA_White <- ((sum(LILA_Urban$lawhite1) + sum(LILA_Rural$lawhite10))/sum(data$TractWhite))*100
+Percentage_LILA_Black <- ((sum(LILA_Urban$lablack1) + sum(LILA_Rural$lablack10))/sum(data$TractBlack))*100
+Percentage_LILA_Asian <- ((sum(LILA_Urban$laasian1) + sum(LILA_Rural$laasian10))/sum(data$TractAsian))*100
+Percentage_LILA_Hisp <- ((sum(LILA_Urban$lahisp1) + sum(LILA_Rural$lahisp10))/sum(data$TractHispanic))*100
+Percentage_LILA_Hopi <- ((sum(LILA_Urban$lanhopi1) + sum(LILA_Rural$lanhopi10))/sum(data$TractNHOPI))*100
+Percentage_LILA_Multir <- ((sum(LILA_Urban$laomultir1) + sum(LILA_Rural$laomultir10))/sum(data$TractOMultir))*100
+Percentage_LILA_Aian <- ((sum(LILA_Urban$laaian1) + sum(LILA_Rural$laaian10))/sum(data$TractAIAN))*100
+
+data3 = data.frame()
+data3 <- rbind(data3, Percentage_LILA_White)
+data3 <- rbind(data3, Percentage_LILA_Black)
+data3 <- rbind(data3, Percentage_LILA_Asian)
+data3 <- rbind(data3, Percentage_LILA_Hisp)
+data3 <- rbind(data3, Percentage_LILA_Hopi)
+data3 <- rbind(data3, Percentage_LILA_Multir)
+data3 <- rbind(data3, Percentage_LILA_Aian)
+Groups = c("White", "Black", "Asian", "Hisp", "Hopi", "OMultir", "Aian")
+data3 <- cbind(data3, Groups)
+colnames(data3) <- c('Percentage', 'Groups')
+
+```
+
+```{r code12, echo=TRUE}
+
+
+bar_chart <- ggplot(data3, aes(x = Groups, y = Percentage)) +
+  geom_bar(stat = "identity", fill = "navy") +
+  labs(title = "Percentage of each demographic groups by Food deserts",
+       x = "Demographic Groups",
+       y = "Percentage") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=1))  
+
+print(bar_chart)
+
+```
+
+AIAN - American Indian or Alaska Native
+
+HOPI - Native Hawaiian or Other Pacific Islander
+
+OMultir - other/multiple race
+
+HISP - Hispanic or Latino.
+
+- **we can see from the chart that *AIAN* and *Black* neighborhoods are more likely to lack access to supermarkets than other groups.** 
+
+- **And the least is *Asian* group.**
+
+- **This prompts the question of whether "food deserts" are a result of structural racial inequity.**
+
+### Food access to vulnerable age groups of society:
+
+<br>
+
+- Pie chart of Kids in food deserts and non food deserts.
+
+```{r code13, echo=TRUE}
+LILA_df <- data[data$LILATracts_1And10 == 1,]
+LILA_Urban <- LILA_df[LILA_df$Urban == 1,]
+LILA_Rural <- LILA_df[LILA_df$Urban == 0,]
+
+Percentage_LILA_kids <- ((sum(LILA_Urban$lakids1) + sum(LILA_Rural$lakids10))/sum(data$TractKids))*100
+
+NonLILA_df <- data[data$LILATracts_1And10 == 0,]
+NonLILA_Urban <- NonLILA_df[NonLILA_df$Urban == 1,]
+NonLILA_Rural <- NonLILA_df[NonLILA_df$Urban == 0,]
+
+Percentage_NonLILA_kids <- ((sum(NonLILA_Urban$lakids1) + sum(NonLILA_Rural$lakids10))/sum(data$TractKids))*100
+
+
+data5 = data.frame()
+data5 <- rbind(data5, Percentage_LILA_kids)
+data5 <- rbind(data5, Percentage_NonLILA_kids)
+
+LILA = c(1,0)
+data5 <- cbind(data5, LILA)
+colnames(data5) <- c('Percentage', 'LILA')
+
+pie_chart <- ggplot(data5, aes(x = "", y = Percentage, fill = factor(LILA))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Kids in Food desert regions",
+       fill = "Food desert regions") +
+  scale_fill_manual(values = c("0" = "#5b84c4", "1" = "#F98125"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+
+```
+
+
+ - Pie chart of Seniors in food deserts and non food deserts.
+
+
+```{r code14, echo=TRUE}
+
+Percentage_LILA_Seniors <- ((sum(LILA_Urban$laseniors1) + sum(LILA_Rural$laseniors10))/sum(data$TractSeniors))*100
+
+Percentage_NonLILA_Seniors <- ((sum(NonLILA_Urban$laseniors1) + sum(NonLILA_Rural$laseniors10))/sum(data$TractSeniors))*100
+
+
+data6 = data.frame()
+data6 <- rbind(data6, Percentage_LILA_Seniors)
+data6 <- rbind(data6, Percentage_NonLILA_Seniors)
+
+LILA = c(1,0)
+data6 <- cbind(data6, LILA)
+colnames(data6) <- c('Percentage', 'LILA')
+
+pie_chart <- ggplot(data6, aes(x = "", y = Percentage, fill = factor(LILA))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Seniors in Food desert regions",
+       fill = "Food desert regions") +
+  scale_fill_manual(values = c("0" = "#F54F52", "1" = "#93F03B"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+
+```
+
+**From these pie charts we can view that both kids and seniors live more in non-deserted regions.**
+
+**Are they intentionally choosing neighborhoods near supermarkets which limits the opportunity for other groups to live better?**
+
+## Question 10
+
+
+### Loading 2010 Dataset:
+
+<div style="width: 100%; overflow-x: scroll;">
+```{r code15, echo=TRUE}
+df2010 = data.frame(read.csv("food_access_research_atlas_2010.csv"))
+knitr::kable(head(df2010, 5), format ='markdown')
+```
+</div>
+
+### Food desert Population change over in US from 2010 to 2015:
+
+```{r code16, echo=TRUE}
+df2010$State_name <- as.factor(df2010$State_name)
+
+LILA_df2010 <- df2010[df2010$LILATracts_1And10 == 1, c("POP2010", "State_name")]
+LILA_df2015 <- data[data$LILATracts_1And10 == 1, c("POP2010", "State")]
+colnames(LILA_df2015) <- c("POP2015", "State")
+colnames(LILA_df2010) <- c("POP2010", "State")
+```
+
+In 2010, `r sum(LILA_df2010$POP2010)` of US Population lived in Food deserted tracts.
+
+In 2015, `r sum(LILA_df2015$POP2015)` of US Population lived in Food deserted tracts.
+
+Within 5 years, From 2010 to 2015, this population is `increased by 2 million`. Which is actually a alarming fact.
+
+
+```{r code17, echo=TRUE}
+library(dplyr)
+
+summed_df_2015 <- LILA_df2015 %>% 
+  group_by(State) %>% 
+  summarise(POP2015 = sum(POP2015))
+
+summed_df_2010 <- LILA_df2010 %>% 
+  group_by(State) %>% 
+  summarise(POP2010 = sum(POP2010))
+
+merged_df <- full_join(summed_df_2015, summed_df_2010, by = "State")
+
+merged_df$PopulationDifference <- merged_df$POP2015 - merged_df$POP2010
+
+```
+
+- This Graph shows the population of people in Food deserts by state in 2010 and 2015.
+
+```{r code18, echo=TRUE}
+
+# Create a bar chart
+library(ggplot2)
+p <- ggplot(merged_df, aes(x = State)) +
+  geom_bar(aes(y = POP2015, fill = "2015"), stat = "identity", position = "dodge") +
+  geom_bar(aes(y = POP2010, fill = "2010"), stat = "identity", position = "dodge") +
+  labs(y = "Population", fill = "Year") +
+  scale_fill_manual(values = c("2010" = "gold", "2015" = "black")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 4  # Set the desired height in inches
+)
+
+print(p)
+  
+```
+ 
+- Population difference in Food deserts from 2010 to 2015:
+
+
+```{r code19, echo=TRUE}
+
+bar_chart <- ggplot(merged_df, aes(x = State, y = PopulationDifference)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Population change in Food quarters by State",
+       x = "State",
+       y = "Percentage change") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 4  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+- **Ohio, Georgia, and Florida have strong positive bars, indicating that the population rise is greater.**
+
+- **Few states, like Texas and Minnesota, have seen a decline in the population of areas that are food deserts over time**
+
+<br>
+
+- MAP representation of population change:
+
+```{r code20, echo=TRUE}
+library(usmap)
+
+merged_dff <- merged_df[merged_df$State != "District of Columbia",]
+merged_dff <- merged_dff[order(merged_dff$State),]
+map_df <- data.frame(
+  state = state.name,
+  diff = merged_dff$PopulationDifference)
+
+plot_usmap(data = map_df, values = "diff", labels = FALSE)
+
+```
+
+**The map shows that Eastern US states have experienced a greater population growth in food deserted areas than other US regions.**
+
+
+# Expectation difference after Exploratory Data Analysis
+
+Upon examining the query, “What percentage of food deserts are classified as low-income tracts?”, we discovered that food deserts inherently embody a convergence of low income and limited access. 
+
+Also, The high poverty rate states are not correlated with food desert status. Which was different from our expectation.
+
+# References
+
+- [Strengthen SNAP Benefits. (2023, October 13)](https://frac.salsalabs.org/update-13october2023?eType=EmailBlastContent&eId=abd0e534-77e3-409c-957e-ae342b6d3f50)
+
+- [FFAC Staff. (2022, April 05). What Are Food Deserts and Why Do They Exist? Factory Farming Awareness Coalition](https://ffacoalition.org/articles/food-deserts/)
+
+- [FFRA Staff. (2023, October 25). Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise](https://frac.org/news/usdafoodinsecurityreport2023)
+
+<footer>
+<p style="text-align: center;">
+BY TEAM 1
+</p>
+<p style="text-align: center;">
+Date: "`r Sys.Date()`"
+</p>
+</footer>
