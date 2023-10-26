@@ -152,7 +152,8 @@ ggplot(fg1, aes(LILATracts_1And20, n, fill = LILATracts_1And20)) +
 
 **2.	What are the limitations of the dataset?**
 
-**Still working on add some data to this question ….**
+**For policymakers and community organizations to address food desert issues and resolutions limitations, we used another source/article, “Strengthen SNAP Benefits,” to identify the Close the Meal Gap Act (H.R. 3037/S.1336) would give households more relevant SNAP benefit that helped SNAP participants buy the food they need. And we identified community organizations, such as the Maryland Food Bank, that has a Strategic Plan (MFB 3.0) to address food insecurity with three pillars of strategies: increasing food access, establishing pathways out of hunger, and organizing sustainability and growth to end hunger in Maryland.**
+
 
 **3.	How was the information gathered?**
 
@@ -172,9 +173,23 @@ ggplot(fg1, aes(LILATracts_1And20, n, fill = LILATracts_1And20)) +
 **According to another article, “Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise” (FFAC Staff, 2023), from Food Research & Action Center (FRAC), stated today by the U.S. Department of Agriculture's Economic Research Service (ERS), that the COVID-19 pandemic relief efforts caused hunger in America to decline the previous year, but it surged in 2022.  According to the report, there were 44.2 million individuals living in households that experienced hunger in 2022—a 10.3 million rise over the previous year's estimate on food insecurity.  Congress is urged by FRAC to provide more funding in any short- and long-term fiscal year 2024 spending proposals to ensure that eligible families continue to receive the substantial health and nutrition benefits of WIC.  Congress needs to move quickly to fund anti-hunger and anti-poverty initiatives in order to stop the rise in hunger rates.  Those in hunger cannot wait.**
 
 
-**7.	How did your question change, if at all, after Exploratory Data Analysis? still writing-up data from EDA**
+**7.	How did your question change, if at all, after Exploratory Data Analysis?**
 
-**8.	Based on EDA can you begin to sketch out an answer to your question?  still writing-up data from EDA**
+**Our questions did not change, because we created enough questions in the Exploratory Data Analysis to create a sufficient number of SMART questions.**
+
+**8.	Based on EDA can you begin to sketch out an answer to your question?**
+
+**Based on the EDA, we created questions in our EDA, such as the following:  **
+
+**•	Urban vs Rural Classification impacts?**
+**•	Vehicle Access percentages and Food Deserts?**
+
+**The EDA questions above provided filtered data to create/design the following SMART questions: **
+
+**•	How does urban vs. rural classification affect the prevalence of food deserts?**
+**•	Can we measure the impact of vehicle availability (LILATracts_vehicles) on food desert designation? **
+
+**The questions above and other questions, we able to identify from filtered data that one of many perspectives indicated families living in food deserts have a significantly lower median income compared to those not living in food desert, per the Post-hoc Tukey test.**
 
 *References**
 
