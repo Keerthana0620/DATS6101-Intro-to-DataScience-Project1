@@ -19,6 +19,8 @@ editor_options:
 library(tidyverse)
 library(ezids)
 library(usmap)
+library(dplyr)
+
 ```
 
 
@@ -34,17 +36,17 @@ options(scientific=T, digits = 5)
 
 ```{r read_data}
 # Loading data
-data <- read.csv("Documents/food_access_research_atlas.csv")
+data <- read.csv("food_access_research_atlas.csv")
 
 ```
 
-# Summary of the dataset:
+## Summary of the dataset:
 
 ```{r code1.1, echo=TRUE}
 summary(data)
 ```
 
-# a) Exposition and Curation
+## Exposition and Curation
 
 **1.	What do we know about this dataset?**
 
@@ -75,7 +77,7 @@ summary(data)
 **7.	How did your question change, if at all, after Exploratory Data Analysis? still writing-up data from EDA**
 Upon examining the query, “What percentage of food deserts are classified as low-income tracts?”, we discovered that food deserts inherently embody a convergence of low income and limited access. So we ignored it.
 
-# 8. Based on EDA can you begin to sketch out an answer to your question?**
+**8. Based on EDA can you begin to sketch out an answer to your question?**
 
 
 ## Questions 1a: Geographic Distribution of State/County wise Prevelance of Food Deserts
@@ -158,26 +160,39 @@ plot_map(data, colx = "LILATracts_1And10", region="State", subx="LI and LA 1 and
 plot_map(data, colx = "LILATracts_1And20", region="State", subx="LI and LA 1 and 20 miles for Urban and Rural")
 ```
 
+**State-wise Geographical Distribution:**
+
+When examining the geographical distribution of food deserts at the state level, you're getting a broad view of the situation. This allows you to identify which states have food desert issues, but it doesn't provide a detailed understanding of where these issues are most concentrated within those states. State-level data can be useful for high-level policy decisions and resource allocation but may not be sufficient for local-level interventions.
+
+**County-wise Geographical Distribution:**
+
+Zooming in to the county level provides a more detailed perspective. Now, you can pinpoint specific regions within states where food deserts are prevalent. This information can be invaluable for local governments, non-profits, and community organizations working to address the issue. They can use this data to target interventions and resources more effectively.
+
+**Increasing Granularity within Counties:**
+
+The observation that increasing granularity within counties reveals even more prevalence of food deserts underscores the fact that food desert distribution can vary widely within a single county. In some cases, specific neighborhoods or areas within a county may have a much higher concentration of food deserts than others. This information can help prioritize efforts and resources to address the most critical areas.
+
+**Local Engagement:**
+
+Detailed, county-level data can also facilitate local community engagement. When residents have access to specific information about food deserts in their neighborhoods, they may be more motivated to take action, such as starting community gardens, advocating for better public transportation, or organizing local initiatives to improve food access.
+
 ## Question 1b: Unique states and counties are represented in the dataset
 
 ```{r}
 unique_states <- data %>% group_by(State) %>% distinct(State) # Grouping by State and using distinct() to get unique states
 unique_counties <- data %>% group_by(State, County) %>% distinct(County) 
+cat("The dataset represented", nrow(unique_counties), "counties from", nrow(unique_states), "state.s")
 # Grouping by both State and County and then 
 # using distinct() to get unique states. Because directly Grouping the counties will result in lesser results as different 
 # counties in different States can exists with the same name
 ```
+
+
+
 ## Question 1c: Total census tracts included in the dataset
 ```{r}
 total_census_tracts <- nrow(data)
-```
-
-```{r}
-unique_states <- data %>% group_by(State) %>% distinct(State) # Grouping by State and using distinct() to get unique states
-unique_counties <- data %>% group_by(State, County) %>% distinct(County) 
-# Grouping by both State and County and then 
-# using distinct() to get unique states. Because directly Grouping the counties will result in lesser results as different 
-# counties in different States can exists with the same name
+cat("The total census tracts included in the dataset are", total_census_tracts)
 ```
 
 ## Question 2: Urban vs Rural Classification impacts
