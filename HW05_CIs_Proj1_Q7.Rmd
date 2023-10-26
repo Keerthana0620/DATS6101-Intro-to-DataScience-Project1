@@ -54,7 +54,7 @@ head(fooddesert)
 ```
 
 ```{r}
-
+library(dplyr)
 #dfCA = subset(colAdm)
 dfFD = subset(fooddesert)
 
