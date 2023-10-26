@@ -1,0 +1,127 @@
+a.)	Exposition and Curation, 25%
+	
+1.	What do we know about this dataset?
+
+This information on supermarket availability at different distances was taken from the Food Access Research Atlas. This data gives a rich detailed summary because it measures access by the Census-Tract. Data on food access was linked with information on age, race, location (rural or urban), and income.
+
+2.	What are the limitations of the dataset?
+
+Still working on this question ….
+
+3.	How was the information gathered?
+
+Beside knowing the dataset requirements for Project 1, all team member brainstormed a number of topics that went into our datasets’ pool. We analyzed and discussed all the datasets in the pool, and we decided and selected the Food Deserts in the United States. The Food Desert dataset came from one of our team members that did some volunteer work on a number of community project in past, such as the Watershed Community (Community Landscaping), 1996 Atlanta Olympics Volunteer Program, and Church activities (Food Banks & Pantries – Feed the Hungry). The team member did Google searches on Food Banks and Hunger that were impacting the world and the United States, US. Then, he asked a friend, “Are there still Food Banks and Hunger in the local area and/or the US?” And the friend stated that Hunger and Food Banks still exit in the US and one of the key issues is Food Insecurity.  Therefore, the team member searched the list of dataset sources and identified the Food Deserts dataset on the site, Kaggle.com.
+
+4.	What analysis has already been completed related to the content in your dataset?
+
+Yes, there has been an analysis that is related to the content in our dataset, and it was an article, “What Are Food Deserts and Why Do They Exits? (FFAC Staff, 2022)” According to the report, many people find it difficult to picture their lives without access to wholesome food. It is an everyday occurrence for many.  Not that we don't produce enough food, but rather the fact that millions of people, especially those who reside in "food deserts," lack access to it, is the issue.
+
+5.	How did the research you gathered contribute to your question development?
+
+The data in the article, “What Are Food Deserts and Why Do They Exits?,” had some of the variables, such as census tract and areas that are low-income and low-access in our food desert dataset.
+
+
+6.	What additional information would be beneficial?
+
+According to another article, “Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise” (FFAC Staff, 2023), from Food Research & Action Center (FRAC), stated today by the U.S. Department of Agriculture's Economic Research Service (ERS), that the COVID-19 pandemic relief efforts caused hunger in America to decline the previous year, but it surged in 2022.  According to the report, there were 44.2 million individuals living in households that experienced hunger in 2022—a 10.3 million rise over the previous year's estimate on food insecurity.  Congress is urged by FRAC to provide more funding in any short- and long-term fiscal year 2024 spending proposals to ensure that eligible families continue to receive the substantial health and nutrition benefits of WIC.  Congress needs to move quickly to fund anti-hunger and anti-poverty initiatives in order to stop the rise in hunger rates.  Those in hunger cannot wait.
+
+7.	How did your question change, if at all, after Exploratory Data Analysis?
+
+Chiffon may need to respond to this question …
+
+8.	Based on EDA can you begin to sketch out an answer to your question?
+
+Chiffon created the questions based on EDA and/or other data, ideas … may need to respond to this question, appropriately …
+
+For questions 7 & 8, I based researched the answers in a couple of articles. 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+Q 7.  Can we quantify the extent of low access areas (e.g., LILATracts_1And10, LILATracts_1And20) in the dataset?
+
+Yes, we’re able to quantify the low access areas within the dataset, food_access_research_atlas.csv.
+For example, we create a block of R code to filter-out the variable, low income and low access tract measured at 1 mile for urban areas and 10 miles for rural areas, LILATracts_1And10, using the value, 1, to represent census tracts that had access and the value, 0, to represent census tracts that were not within the 1 mile to 10 miles range, non-access. 
+We also did the same methodology for access of low income and low access tract measured at 1 mile for urban areas and 20 miles for rural areas, LILATracts_1And20, as well as non-access.
+What’s the percentage of census tracts fall into different categories of low access areas?
+For the variable, LILATracts_1And10, we ran the R code to filter access and non-access for low income and low access tract measured at 1 mile for urban areas and 10 miles for rural areas, LILATracts_1And10 and the results were the following:
+
+•	LILATracts_1And10
+
+Access census tract, 9,245, divided by total number of census tracts, 72,864  times .10 = 12.7%
+Non-access census tract, 63,619, divided by total number of census tracts, 72,864  times .10 = 87.3%
+
+•	LILATracts_1And20
+
+Access census tract, 8,105, divided by total number of census tracts, 72,864  times .10 = 11.1%
+Non-access census tract, 64759, divided by total number of census tracts, 72,864  times .10 = 88.9%
+
+
+Are the patterns in the prevalence of food deserts in these categories?
+
+•	LILATracts_1And10
+ 
+•	LILATracts_1And20
+ 
+
+Q8. Can we identify actionable insights for policymakers and community organizations to address food deserts?
+
+Government Policies & Non-government Programs
+
+Government Policies
+
+In order to eradicate food apartheid and create a food system where everyone has equitable access to fresh produce, vegetables, and other healthful foods, government regulations must now be a major factor.
+
+•	Supplemental Nutrition Assistance Program (SNAP)
+
+To help SNAP participants buy the food they need, the Close the Meal Gap Act (H.R. 3037/S.1336) would give households more relevant SNAP benefit amounts and amend the guidelines for calculating SNAP benefits with the Low-Cost Food Plan.
+
+Nongovernmental Food Assistance Programs 
+
+While food assistance programs are considered a temporary fix, without the support of charitable groups, non-profits, and neighborhood businesses, many families would go hungry.
+
+•	Maryland Food Bank (MFB)
+
+The Maryland Food Bank's Strategic Plan (MFB 3.0) addresses food insecurity with three pillars of strategies: increasing food access, establishing pathways out of hunger, and organizing sustainability and growth. This makes the MFB 3.0 work smarter, more efficiently, and with renewed energy to end hunger for more Marylanders.
+
+Target Areas Issues & Resolutions
+
+Areas with Issues
+
+Mississippi had the greatest percentage of food deserts in the US as of 2015; 31% of its census tracts were categorized as low-income and low-access.  New Mexico and Arkansas came next, with 27 and 26 percent respectively, after Mississippi.
+
+•	Other U.S. Locations
+
+There is food apartheid in many areas of the nation, including:
+Chicago, Los Angeles, New York City
+
+Potential Resolutions
+
+In so-called "food deserts," farmers' markets, community gardens, and financial assistance for low-income families are some potential remedies for the problem of food insecurity.
+
+•	Farmers’ Markets, Arabbers, and Roadside Carts 
+
+Can give local farmers' markets the chance to sell communities fresh, high-quality seasonal produce that is farmed nearby, and can serve senior citizens who are unable to travel by providing food delivery services through mobile farmers' markets.
+
+•	Community Gardens 
+
+Urban areas can be transformed into community gardens, giving locals and volunteers the chance to cultivate low-cost, wholesome organic veggies for their families and the larger community.
+
+•	Federal Resources for Low-Income Households
+
+Federal funds have the power to assist people escape poverty. One such is the Supplemental Nutrition Assistance Program (SNAP), also referred to as food stamps, which assists individuals who qualify in covering the cost of food.
+
+///////////////////////////////////////////////////////////////////////////////////////
+ 
+
+The following information below can be used for a summary or add to a summary in the Technical Analysis - Summary:
+
+This information on supermarket availability at different distances was taken from the Food Access Research Atlas. This data gives a rich detailed summary because it measures access by the Census-Tract. Data on food access was linked with information on age, race, location (rural or urban), and income
+
+
+References
+
+Strengthen SNAP Benefits. (2023, October 13). Retrieved from https://frac.salsalabs.org/update-13october2023?eType=EmailBlastContent&eId=abd0e534-77e3-409c-957e-ae342b6d3f50
+
+FFAC Staff. (2022, April 05). What Are Food Deserts and Why Do They Exist? Factory Farming Awareness Coalition. https://ffacoalition.org/articles/food-deserts/
+
+FFRA Staff. (2023, October 25). Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise. https://frac.org/news/usdafoodinsecurityreport2023
