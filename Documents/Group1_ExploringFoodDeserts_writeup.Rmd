@@ -25,7 +25,7 @@ output:
   margin: 20px 20px 40px 20px;
   background-image: url("image.webp");
   background-size: contain;
-  background-color: azure
+  background-color: white
   background-position: center center;
   background-repeat: no-repeat;
   border-radius: 50%;
@@ -40,7 +40,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 19%;
-  background-color: azure; /* Background color for the footer */
+  background-color: white; /* Background color for the footer */
   border: 1px solid #ddd; /* Optional border line at the top of the footer */
   padding: 10px; /* Adjust padding as needed */
   text-align: center; /* Center-align the content in the footer */
@@ -49,8 +49,7 @@ footer {
 }
 
 body {
-  background-color: beige; /* Change to your desired background color */
-  background-image: url('image2.webp'); /* URL to your background image */
+  background-color: #FFFFF0; /* Change to your desired background color */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
