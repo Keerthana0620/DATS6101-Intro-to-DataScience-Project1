@@ -1,0 +1,197 @@
+---
+title: "Project 1:  Data for Exposition and Curation"
+author: "Robert Williams"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    number_sections: false
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+---
+
+```{r init, include=F}
+# The package "ezids" (EZ Intro to Data Science) includes some helper functions we developed for the course. 
+# Some of the frequently used functions are loadPkg(), xkabledply(), xkablesummary(), uzscale(), etc.
+# You will need to install it (once) from GitHub.
+# library(devtools)
+# devtools::install_github("physicsland/ezids")
+# Then load the package in your R session.
+library(ezids)
+```
+
+
+```{r setup, include=FALSE}
+# Some of common RMD options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+knitr::opts_chunk$set(warning = F, message = F)
+# Can globally set option for number display format.
+options(scientific=T, digits = 3) 
+# options(scipen=9, digits = 3) 
+```
+
+```{r}
+# 1. Do not provide answers/comments inside code blocks (like here) -- those are notes between coders/self and will be ignored for grading. 
+# 2. Make sure your knitr options are set to include all results/code to be graded in the final document.
+# 3. All charts/graphs/tables should have appropriate titles/labels/captions. 
+# 4. Compose your answers using inline R code instead of using the code-block output as much as you can. 
+# 5. Your grade is also determined by the style. Even if you answer everything correctly, but the .html does not look appealing, you will not get full credit. Pay attention to the details that we mentioned in class/homework and in previous sample .Rmd files. For example, how to use #, ##, ###, ..., bold face, italics, inline codes, tables, ..., {results = "asis"}, use of colors in plots/ggplots, and so forth.
+```
+
+This exercise uses the graduate school admissions dataset from the applicants to a higher-ed institute. The dataset is *LogRegAdmit.csv.*
+
+The variables in the dataset are:  
+
+* `admit`: 0 or 1 (False or True)
+* `gre`: gre score
+* `gpa`: grade point average at undergraduate level
+* `rank`: the ranking of the applicant's undergraduate institute, 1, 2, 3, or 4
+
+# Question 1  
+**After importing the dataset, check the structure. Make sure `admit` and `rank` are stored as factors, instead of numeric or integers. (Hint: Use `as.factor()` or `factor()` function).**
+
+```{r import_data, include=FALSE}
+fooddesert <- read.csv("food_access_research_atlas.csv", header=TRUE)
+str(fooddesert)
+head(fooddesert)
+```
+
+```{r}
+
+#dfCA = subset(colAdm)
+dfFD = subset(fooddesert)
+
+
+#colAdm_admitted = dfCA$admit == 1
+#print("admitted")
+
+#fooddesert_LILATracts_1and10 = dfFD$LILATracts_1and10 == 1
+#print("access")
+
+#colAdm_rejected = dfCA$admit == 0
+#print("rejected")
+
+#fooddesert_LILATracts_1and10 = dfFD$LILATracts_1and10 == 0
+#print("non-access")
+
+#colAdm_admitted = data.frame(dfCA$admit == 1)
+#print("admitted")
+#colAdm_admitted = dfCA%>% 
+  #filter(admit==1)
+
+fooddesert_LILATracts_1And10_access = data.frame(dfFD$LILATracts_1And10 == 1)
+print("access")
+fooddesert_LILATracts_1And10_access = dfFD%>%
+  filter(LILATracts_1And10==1)
+
+#colAdm_rejected = dfCA$admit == 0
+#print("rejected")
+#colAdm_rejected = dfCA%>% 
+  #filter(admit==0)
+
+fooddesert_LILATracts_1And10_nonaccess = data.frame(dfFD$LILATracts_1And10 == 0)
+print("non-access")
+fooddesert_LILATracts_1And10_nonaccess = dfFD%>%
+  filter(LILATracts_1And10==0)
+
+
+
+fooddesert_LILATracts_1And20_access = data.frame(dfFD$LILATracts_1And20 == 1)
+print("access")
+fooddesert_LILATracts_1And20_access = dfFD%>%
+  filter(LILATracts_1And20==1)
+
+
+fooddesert_LILATracts_1And20_nonaccess = data.frame(dfFD$LILATracts_1And20 == 0)
+print("non-access")
+fooddesert_LILATracts_1And20_nonaccess = dfFD%>%
+  filter(LILATracts_1And20==0)
+
+
+
+```
+
+# Question 2  
+**Construct t-intervals for the `gre` and `gpa` variables for all applicants at 0.80 level and 0.99 level.**
+
+
+# Question 3  
+**Repeat the same calculation for `gre` in Question 2 but for admitted (`admit=1`) and rejected (`admit=0`) students separately. (You can subset them first.)  Comparing the admitted and rejected, do the two intervals overlap at 0.80 level? How about at 0.99 level?**
+
+
+# Question 4   
+**Make box-plots showing `gre` distribution among applicants from different school rankings for the admitted and rejected separately. Please use ggplot for this. The x-variable should be `rank`, and the y-variable should be `gre`.**
+
+
+# Question 5   
+**Repeat Question 2 and Question 3 for `gpa`. Do the two groups have t-intervals overlap at 0.80 level? At 0.99 level?**
+
+
+# Question 6   
+**Repeat Question 4 for `gpa`. Make box-plots showing the gpa distribution among applicants from different school rankings for the admitted and rejected separately. Again, use ggplot.**
+
+
+# Question 7  
+**Based on EDA from the charts and the t-interval calculations you produced, do you observe any potential effects between gre/gpa/rank on admissions? Explain briefly. **
+
+
+
+
+# Question 4
+**Plot a scatterplot (using `ggplot`) between `sodium` and `cal`, with points colored by `brand`.  Describe any interesting patterns revealed with this data visualization.** 
+
+```{r}
+
+library(ggplot2)
+
+
+
+#ggplot(pizza, aes(x = cal, y = sodium, color = brand)) + geom_point() + 
+
+#labs(title = "Pizza Variables", y = "Sodium", x = "Cal")
+
+
+#ggplot(fooddesert_LILATracts_1And10_access, aes(x = fooddesert_LILATracts_1And10_access, y = fooddesert_LILATracts_1And10_nonaccess, color = brand)) + geom_point() labs(title = "Food Deserts Variables", y = "Non-access", x = "Access")
+
+#ggplot(fooddesert_LILATracts_1And10_access, aes(x = LILATracts_1And10, y = fooddesert_LILATracts_1And10_nonaccess$LILATracts_1And10)) +
+  #geom_boxplot()
+
+#ggplot(colAdm_admitted, aes(x = rank, y = gpa)) +
+  #geom_boxplot()
+
+
+
+library(tidyverse)
+fg <- fooddesert %>%
+  count(LILATracts_1And10) %>%
+  mutate(
+    perc = round(proportions(n) * 100, 1),
+    res = str_c(n, "(", perc, ")%"),
+    LILATracts_1And10 = as.factor(LILATracts_1And10)
+    )
+
+ggplot(fg, aes(LILATracts_1And10, n, fill = LILATracts_1And10)) +
+  geom_col() +
+  geom_text(aes(label = res), vjust = -0.5) + scale_fill_discrete(labels = c("Nonaccess", "Access"))
+
+fg1 <- fooddesert %>%
+  count(LILATracts_1And20) %>%
+  mutate(
+    perc = round(proportions(n) * 100, 1),
+    res = str_c(n, "(", perc, ")%"),
+    LILATracts_1And20 = as.factor(LILATracts_1And20)
+    )
+
+ggplot(fg1, aes(LILATracts_1And20, n, fill = LILATracts_1And20)) +
+  geom_col() +
+  geom_text(aes(label = res), vjust = -0.5) + scale_fill_discrete(labels = c("Nonaccess", "Access"))
+
+```
+
+
+
+
