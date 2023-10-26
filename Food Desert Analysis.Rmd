@@ -1,12 +1,30 @@
 ---
 title: "Food Deserts Analysis"
-output: html_document
+author: "Team 1"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    number_sections: false
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+
 ---
 ## Data Loading and Preprocessing
 ```{r init, include=F}
 library(tidyverse)
 library(ezids)
 library(usmap)
+```
+
+
+```{r setup, include=FALSE}
+# Some of common RMD options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+knitr::opts_chunk$set(warning = F, message = F)
+# Can globally set option for number display format.
+options(scientific=T, digits = 5) 
 ```
 
 ```{r read_data}
@@ -176,23 +194,72 @@ data %>%
   summarise(mean_poverty_rate = mean(PovertyRate))
 
 ```
+
+The mean poverty rate is 26.5 for food deserts and for non-food deserts it is 15.1. So the Poverty rate in food deserts is 75% higher than non-food deserts. Poverty rate in Low access area is 14.2 whereas in non-low access area is 18.0.
+
+### Count of Low Income tracts in Low access tracts
+```{r low_income_low_access}
+
+# Filtering data for rows where LA1and10 is 1
+filtered_data <- data[data$LA1and10 == 1, ]
+
+# Calculating value counts for LowIncomeTracts
+value_counts <- table(filtered_data$LowIncomeTracts)
+
+# Converting to data frame for ggplot
+value_counts_df <- as.data.frame(value_counts)
+names(value_counts_df) <- c("LowIncomeTracts", "Counts")
+
+# Creating custom labels
+value_counts_df$Labels <- ifelse(value_counts_df$LowIncomeTracts == 0, "Not Low Income", 
+                                 ifelse(value_counts_df$LowIncomeTracts == 1, "Low Income", value_counts_df$LowIncomeTracts))
+
+# Creating the bar plot
+p <- ggplot(value_counts_df, aes(x = reorder(Labels, -Counts), y = Counts)) +
+  geom_bar(stat = "identity", fill = "skyblue", color = "black") +
+  labs(title = "Counts of LowIncomeTracts in low access areas", x = "LowIncomeTracts", y = "Counts") +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1))
+
+# Showing the plot
+print(p)
+
+```
+
+* 66% of the non-low income tracts are low access tracts
+* This means that Low access people are rich which may indicate that rich people wants to stay outside.
+
+
 ## Relationship between states and poverty rate
 
-### Calculate statewise average poverty rate
+### Statewise average poverty rate
 
 ```{r statewise_poverty_rate }
+# 
+# states_pov <- data %>%
+#   group_by(State) %>%
+#   summarise(avg_poverty_rate = mean(PovertyRate))
+# #print(states_pov)
 
-states_pov <- data %>% 
-  group_by(State) %>% 
-  summarise(avg_poverty_rate = mean(PovertyRate))
+
+states_pov <- data %>%
+  group_by(State) %>%
+  summarise(avg_poverty_rate = mean(PovertyRate, na.rm = TRUE)) %>%
+  arrange(desc(avg_poverty_rate))
 print(states_pov)
+print(sum(is.na(data$PovertyRate)))
 ```
+* Mississippi has the highest povery rate of 24.64 and Florida has the lowest poverty rate of 24.64.
+* There are no missing values in the PovertyRate.
+
 ### Normalize poverty rate
 
-```{r statewise_avg_poverty_rate }
+```{r statewise_poverty_rate_normalise }
 states_pov$norm_poverty_rate <- scale(states_pov$avg_poverty_rate)
 print(states_pov)
 ```
+
+The poverty rate is normalised to find the correlation between poverty rate of states and food deserts
+
 ### Identify states with high poverty
 ```{r high_pov_states}
 threshold <- quantile(states_pov$norm_poverty_rate, 0.85)
@@ -201,6 +268,7 @@ states_high_pov <- states_pov %>%
 print(states_high_pov)
 
 ```
+To address the question whether states with high poverty rate also have high number of food deserts, we are filtering only the states above 85th percentile of poverty rate.
 
 ### Correlation between states and food deserts
 
@@ -209,30 +277,46 @@ print(states_high_pov)
 states_food_deserts <- data %>% 
   filter(LILATracts_1And10 == 1) %>% 
   count(State)
-print(states_food_deserts)
+#print(states_food_deserts)
 
 # Normalize food desert counts
 states_food_deserts$norm_count <- scale(states_food_deserts$n)
 
-length(states_high_pov$norm_poverty_rate)
-length(states_food_deserts$norm_count)
-
 merged_data <- inner_join(states_high_pov, states_food_deserts, by = "State")
+merged_data_all <- inner_join(states_pov, states_food_deserts, by = "State")
 # Get correlation
 # There is no correlation between poverty rates and food desert status
 # The states with high poverty don't have high number of food deserts
-print(cor(merged_data$norm_poverty_rate, merged_data$norm_count, method = "pearson"))
+#print(cor(merged_data$norm_poverty_rate, merged_data$norm_count, method = "pearson"))
 #### Checking correlation of poverty rate and food desert status of all the states 
 #### There is very less correlation between povery rate and food deserts in all states
-print(cor(states_pov$norm_poverty_rate, states_food_deserts$norm_count, method = "pearson"))
+#print(cor(states_pov$norm_poverty_rate, states_food_deserts$norm_count, method = "pearson"))
 
-print(merged_data)
+#print(merged_data)
 cor.test(merged_data$norm_poverty_rate, merged_data$norm_count, method="pearson")
-cor.test(states_pov$norm_poverty_rate, states_food_deserts$norm_count, method="pearson")
+#cor.test(states_pov$norm_poverty_rate, states_food_deserts$norm_count, method="pearson")
+cor.test(merged_data_all$norm_poverty_rate, merged_data_all$norm_count, method="pearson")
 
 ```
+### Pearson Correlation:
+
+#### High Poverty States and food desert count
+
+**Null hypothesis**: There is no correlation between High poverty rate states with count of their food desert
+**Alternate hypothesis** : There is Correlation between High poverty rate states with count of their food desert.
+At level of significance alpha set at = 0.05, as The p-value 0.6  is higher than the 0.05, we fail to reject the null hypothesis.
+The pearson correlation results tell us "There is no correlation between High poverty rate states with count of their food desert"
+
+#### Poverty rate of All States and food desert count
+
+**Null hypothesis**: There is no correlation between poverty rate of all states with count of their food desert
+**Alternate hypothesis** : There is Correlation between poverty rate of all states with count of their food desert.
+At level of significance alpha set at = 0.05, as The p-value 0.003  is lesser than the 0.05, we reject the null hypothesis.
+The pearson correlation results tell us there is statistically significant correlation between poverty rate of all states with count of their food desert.
+ 
 
 ## Relationship between counties and poverty rate
+We calculate the correlation between counties and poverty rate just like we did for the states.
 
 ### Calculate countywise average poverty rate
 
@@ -240,21 +324,26 @@ cor.test(states_pov$norm_poverty_rate, states_food_deserts$norm_count, method="p
 
 counties_pov <- data %>% 
   group_by(County) %>% 
-  summarise(avg_poverty_rate = mean(PovertyRate))
-print(counties_pov)
+  summarise(avg_poverty_rate = mean(PovertyRate,na.rm = TRUE)) %>%
+  arrange(desc(avg_poverty_rate))
+print(head(counties_pov))
+print(tail(counties_pov))
 ```
+
+* Radford has the highest average povery rate of 24.64 and Bedford City has the lowest average poverty rate of 24.64.
+
 ### Normalize county poverty rate
 
 ```{r countywise_poverty_rate_normalise }
 counties_pov$norm_poverty_rate <- scale(counties_pov$avg_poverty_rate)
-print(counties_pov)
+print(head(counties_pov))
 ```
 ### Identify county with high poverty
 ```{r high_pov_counties}
 county_threshold <- quantile(counties_pov$norm_poverty_rate, 0.85)
 counties_high_pov <- counties_pov %>% 
   filter(norm_poverty_rate > county_threshold)
-print(counties_high_pov)
+print(head(counties_high_pov))
 
 ```
 
@@ -265,23 +354,24 @@ print(counties_high_pov)
 counties_food_deserts <- data %>% 
   filter(LILATracts_1And10 == 1) %>% 
   count(County)
-print(counties_food_deserts)
+#print(counties_food_deserts)
 
 # Normalize food desert counts
 counties_food_deserts$norm_count <- scale(counties_food_deserts$n)
 
-length(counties_food_deserts$norm_poverty_rate)
-length(counties_food_deserts$norm_count)
+#length(counties_food_deserts$norm_poverty_rate)
+#length(counties_food_deserts$norm_count)
 
 counties_merged_data <- inner_join(counties_high_pov, counties_food_deserts, by = "County")
+
 # Get correlation
 # There is no correlation between poverty rates and food desert status
 # The states with high poverty don't have high number of food deserts
-print(cor(counties_merged_data$norm_poverty_rate, counties_merged_data$norm_count, method = "pearson"))
+#print(cor(counties_merged_data$norm_poverty_rate, counties_merged_data$norm_count, method = "pearson"))
 #### Checking correlation of poverty rate and food desert status of all the states 
 #### There is very less correlation between povery rate and food deserts in all states
 counties_all_merged_data <- inner_join(counties_pov, counties_food_deserts, by = "County")
-print(cor(counties_all_merged_data$norm_poverty_rate, counties_all_merged_data$norm_count, method = "pearson"))
+#print(cor(counties_all_merged_data$norm_poverty_rate, counties_all_merged_data$norm_count, method = "pearson"))
 
 cor.test(counties_merged_data$norm_poverty_rate, counties_merged_data$norm_count, method="pearson")
 cor.test(counties_all_merged_data$norm_poverty_rate, counties_all_merged_data$norm_count, method="pearson")
@@ -294,53 +384,128 @@ cor.test(counties_all_merged_data$norm_poverty_rate, counties_all_merged_data$no
 #print(counties_all_merged_data)
 ```
 
-# Question 5: Vehicle Access and Food Deserts
+### Pearson Correlation:
+
+#### High Poverty counties and food desert count
+
+**Null hypothesis**: There is no correlation between High poverty rate counties with count of their food desert
+**Alternate hypothesis** : There is Correlation between High poverty rate counties with count of their food desert.
+At level of significance alpha set at = 0.05, as The p-value 1  is higher than the 0.05, we fail to reject the null hypothesis. The correlation coefficient is cor 5.98e-05 .
+The pearson correlation results tell us "There is no correlation between High poverty rate counties with count of their food desert"
+
+#### Poverty rate of All counties and food desert count
+
+**Null hypothesis**: There is no correlation between poverty rate of all counties with count of their food desert.
+**Alternate hypothesis** : There is Correlation between poverty rate of all counties with count of their food desert.
+At level of significance alpha set at = 0.05, as The p-value 0.003  is lesser than the 0.05, we reject the null hypothesis.The correlation coefficient is cor 0.0147. 
+The pearson correlation results tell us there is no statistically significant correlation between poverty rate of all counties with count of their food desert.
+
+# Question 5: The impact of vehicle availability on food desert designation
+
 ## Visualizing Vehicle Access
 
 #### Filtering and plotting vehicle access
+
 ```{r vis_vehicle_access}
-data %>% 
+data %>%
   filter(LILATracts_1And10 == 1) %>%
   ggplot(aes(x = lahunv1share)) +
-  geom_histogram(bins = 50) +
-  geom_density(alpha = 0.5) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill= "red", color="darkred") +
   labs(title = "Percentage of total population who does not have vehicles in food desert")
 
-data %>% 
+data %>%
   filter(LILATracts_1And10 == 0) %>%
   ggplot(aes(x = lahunv1share)) +
-  geom_histogram(bins = 50) +
-  geom_density(alpha = 0.5) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill= "red", color="darkred") +
   labs(title = "Percentage of total population who does not have vehicles in non-food desert")
 
-data %>% 
+data %>%
   filter(LILATracts_1And10 == 1 & Urban == 1) %>%
   ggplot(aes(x = lahunv1share)) +
-  geom_histogram(bins = 50) +
-  geom_density(alpha = 0.5) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill = "red", color="darkred") +
   labs(title = "Percentage of urban population who does not have vehicles in food desert")
 
-data %>% 
+data %>%
   filter(LILATracts_1And10 == 1 & Urban == 0) %>%
   ggplot(aes(x = lahunv1share)) +
-  geom_histogram(bins = 50) +
-  geom_density(alpha = 0.5) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill = "red", color="darkred") +
   labs(title = "Percentage of rural population who does not have vehicles in food desert")
 
-data %>% 
+data %>%
   filter(LILATracts_1And10 == 0 & Urban == 1) %>%
   ggplot(aes(x = lahunv1share)) +
-  geom_histogram(bins = 50) +
-  geom_density(alpha = 0.5) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill = "red", color="darkred") +
   labs(title = "Percentage of urban population who does not have vehicles in non-food desert")
 
-data %>% 
+data %>%
   filter(LILATracts_1And10 == 0 & Urban == 0) %>%
   ggplot(aes(x = lahunv1share)) +
-  geom_histogram(bins = 50) +
-  geom_density(alpha = 0.5) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill = "red", color="darkred") +
   labs(title = "Percentage of rural population who does not have vehicles in non-food desert")
+
+# fd_urban <- data %>%
+#   filter(LILATracts_1And10 == 1 & Urban == 1) %>%
+#   summarise(per_without_vehicle_urban = mean(lahunv1share,na.rm = TRUE))
+# print(fd_urban)
+#
+# fd_rural <- data %>%
+#   filter(LILATracts_1And10 == 1 & Urban == 0) %>%
+#    summarise(per_without_vehicle_rural = mean(lahunv10share,na.rm = TRUE))
+# print(fd_rural)
+
+# fd_vehicle <- data %>%
+#   filter(LILATracts_1And10 == 1) %>%
+#    summarise(per_with_vehicle = mean(lahunv10share,na.rm = TRUE))
+# print(fd_vehicle)
+
+result <- data %>%
+  filter(LILATracts_1And10 == 1) %>%
+  group_by(Urban) %>%
+  summarise(
+    lahunv1share_mean = mean(lahunv1share, na.rm = TRUE),
+    lahunv10share_mean = mean(lahunv10share, na.rm = TRUE)
+  )
+
+print(result)
+fd_urban = subset(result, Urban == 1)["lahunv1share_mean"] * 100
+fd_rural = subset(result, Urban == 0)["lahunv10share_mean"] * 100
+fd_vehicle = 100 - fd_urban + fd_urban
+
 ```
+
+```{r vehicle_access_pie}
+#print(result[[2, "lahunv1share_mean"]])
+#print(fd_urban)
+data_pie <- data.frame(
+  Category = c("Urban without vehicles", "Rural without vehicles", "Population with Vehicles"),
+  Percentage = c(result[[2, "lahunv1share_mean"]] * 100 ,result[[1, "lahunv10share_mean"]] * 100, 100 - (result[[1, "lahunv1share_mean"]]  + result[[2, "lahunv10share_mean"]])* 100)
+)
+#print(data_pie)
+# Generate the pie chart
+ggplot(data_pie, aes(x = "", y = Percentage, fill = Category)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start=0) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    panel.border = element_blank(),
+    panel.grid=element_blank(),
+    axis.ticks = element_blank(),
+    plot.title=element_text(size=14, face="bold")
+  ) +
+  labs(fill = "") +
+  scale_fill_manual(values = c("skyblue", "darkred", "pink"))
+```
+
+Around 5% urban population in food desert doesn't have vehicles. Around 4% rural population in food desert doesn't have vehicles. 91% population in food desert have vehicles.
 
 ### Share of population without vehicles - boxplots
 
@@ -351,26 +516,55 @@ data$LILATracts_1And10 <- as.factor(data$LILATracts_1And10)
 levels(data$LILATracts_1And10) <- c("Non-Food desert", "Food desert")
 
 ggplot(data = data,
-       aes(x = c(LILATracts_1And10,Urban), y =lahunv1share)) +
+       aes(x = LILATracts_1And10, y =lahunv1share)) +
+      geom_boxplot(fill='white', color="darkred") +
+      labs(title="Percentage of population doesn't have vehicles in food desert and non-food deserts",
+      x ="Types of tracts ", y = "Population share without vehicles") +
+      theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+Seems like there is a lot of outliers in the data to make any conclusions. So removed outliers using KD2 method.
+
+```{r outlier_removal_vehicle_access_food_deserts}
+app_wo_gre_outlier <- ezids::outlierKD2(data, lahunv1share ,qqplt= TRUE, boxplt= TRUE, rm = TRUE)
+#str(app_wo_gre_outlier)
+#gre_na = sum(is.na(app_wo_gre_outlier$gre))
+```
+
+The QQ plot looks like a straight line after removing outliers. This indicates that it is normally distributed.
+
+``` {r vehicle_box_plots_2}
+app_wo_gre_outlier$LILATracts_1And10 <- as.factor(app_wo_gre_outlier$LILATracts_1And10)
+
+
+levels(app_wo_gre_outlier$LILATracts_1And10) <- c("Non-Food desert", "Food desert")
+
+ggplot(data = app_wo_gre_outlier,
+       aes(x = LILATracts_1And10, y =lahunv1share)) +
       geom_boxplot(fill='white', color="darkred") +
       labs(title="Percentage of total population who does not have vehicles in food desert and non-food deserts",
       x ="Types of tracts ", y = "Population share without vehicles") +
       theme(plot.title = element_text(hjust = 0.5))
-  
+
 ```
+
+* A higher percentage of the population in food deserts lack vehicles compared to those in non-food desert.
+* This could be concerning, as people in food deserts without vehicles may have even more difficulty accessing fresh and healthy food.
+
 #### Observations from the box plot
 
 Central Tendency: The median line inside the box for the "food desert" category appears to be higher than the "non-food desert" category. This suggests that, on average, a higher percentage of the population in food deserts lack vehicles compared to those in non-food deserts.
 
-Spread & Variability: The interquartile range (box height) for both categories is roughly similar, indicating a similar spread or variability in the data for both food and non-food deserts.
+Spread & Variability: The interquartile range is higher for food desert.
 
 Outliers: There are some outliers in both categories, but it's particularly noticeable in the "non-food desert" category. This indicates that while most non-food desert tracts have a relatively lower percentage of people without vehicles, there are a few tracts where this isn't the case.
 
-Skewness: The median line appears to be roughly in the middle of the box for both categories, suggesting that the distribution of the share of the population without vehicles in both food and non-food desert tracts is roughly symmetric.
+Skewness: The median line appears to be roughly in the middle of the box for food desert suggesting that the distribution of the share of the population without vehicles in food desert is roughly symmetric, but non-food desert is skewed towards the right.
 
 Overall Comparison: The entire box (representing the middle 50% of the data) for the "food desert" category is higher on the y-axis compared to the "non-food desert" category. This indicates that a larger share of the population in food deserts typically lacks vehicles compared to those in non-food deserts. This could be concerning, as people in food deserts without vehicles may have even more difficulty accessing fresh and healthy food.
 
-### Vehicle access in rural and urban tracts 
+### Vehicle access in rural and urban tracts
 
 ```{r veh_access_urban_rural}
 data$Urban <- as.factor(data$Urban)
@@ -384,11 +578,8 @@ ggplot(data = data,
         axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-```{r outlier_removal_vehicle_access}
-app_wo_gre_outlier <- ezids::outlierKD2(data, lahunv1share ,qqplt= TRUE, boxplt= TRUE, rm = TRUE)
-str(app_wo_gre_outlier)
-#gre_na = sum(is.na(app_wo_gre_outlier$gre))
-```
+Seems like there is a lot of outliers in the data to make any conclusions. So let's use outlier removed data.
+
 
 ```{r veh_access_urban_rural_without_outliers}
 app_wo_gre_outlier$Urban <- as.factor(app_wo_gre_outlier$Urban)
@@ -405,24 +596,47 @@ ggplot(data = app_wo_gre_outlier,
         axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
+#### Non-Food Desert in Urban (3rd category):
+* Central Tendency: The median suggests that a relatively low percentage of the population in non-food desert urban areas lack vehicle access, even lower than the non-food desert rural areas.
+
+#### Urban Areas:
+The non-food desert urban areas have the smallest median percentage of people without vehicle access. This is likely because urban areas often have alternative modes of transportation, such as public transit, walking, or biking, making vehicle ownership less necessary. Moreover, urban areas often have amenities and services within walking distance, further reducing the need for a vehicle.
+
+#### Impact of Food Deserts:
+In both rural and urban contexts, food deserts show a higher median percentage of people without vehicle access compared to non-food deserts. This is a significant concern because it suggests that people in food deserts, who already might have limited access to healthy food options, might also face transportation challenges.
+
+#### Rural vs. Urban:
+While non-food desert urban areas have the lowest median percentage of people without vehicle access, food desert rural areas have the highest. This highlights the impact of food desert status on transportation barriers, irrespective of the urban or rural context.
+
+
+
 # Question 6: Income-related Variables and Food Deserts
 ## Visualizing Median Family Income
 
 ```{r medincom_food_deserts}
-data %>% 
-  filter(LILATracts_1And10 == 1) %>%
+
+
+data %>%
+  filter(LILATracts_1And10 == "Food desert") %>%
   ggplot(aes(x = MedianFamilyIncome)) +
-  geom_histogram(bins = 50) +
-  geom_density(alpha = 0.5) +
+  geom_histogram(bins = 50, fill='skyblue', color="darkred") +  # Changed colors here
+  geom_density(alpha = 0.8, fill="red", color="darkred") +      # And here
   labs(title = "Median Family Income in Food Deserts")
 
-data %>% 
-  filter(LILATracts_1And10 == 0) %>%
+data %>%
+  filter(LILATracts_1And10 == "Non-Food desert") %>%
   ggplot(aes(x = MedianFamilyIncome)) +
-  geom_histogram(bins = 50) +
-  geom_density(alpha = 0.5) +
+  geom_histogram(bins = 50, fill='skyblue', color="darkred") +  # Changed colors here
+  geom_density(alpha = 0.5, fill = "red", color="darkred") +      # And here
   labs(title = "Median Family Income in Non-food Deserts")
+
 ```
+
+
+1.	**Median Family Income in Food Deserts**: This histogram appears to be skewed to the right, indicating that a significant portion of families in food deserts have lower incomes. There seems to be a peak around the lower income values, which tapers off as income increases.
+2.	**Median Family Income in Non-Food Deserts**: This histogram looks more symmetrical and possibly bell-shaped, suggesting a more normal distribution. The peak is closer to the middle income values, and the tails decrease symmetrically on both sides.
+3.	From this visual inspection, it seems that food deserts tend to have a higher proportion of families with lower incomes, while non-food deserts have a more even distribution of incomes, with a peak around the middle values.
+
 
 ### Median income in food desert - boxplots
 
@@ -438,28 +652,16 @@ ggplot(data = data,
       labs(title="Median Family Income between food desert and non-food deserts",
       x ="Types of tracts ", y = "MedianFamilyIncome") +
       theme(plot.title = element_text(hjust = 0.5))
-  
+
 ```
 
-``` {r medincome_urban_box_plots}
-data$LILATracts_1And10 <- as.factor(data$LILATracts_1And10)
-levels(data$LILATracts_1And10) <- c("Non-Food desert", "Food desert")
 
-data$Urban <- as.factor(data$Urban)
-levels(data$Urban) <- c("Rural", "Urban")
-ggplot(data = data,
-       aes(x = interaction(LILATracts_1And10, Urban), y = MedianFamilyIncome)) +
-      geom_boxplot(fill='white', color="darkred") +
-      labs(title="Median Family Income between in urban and rural food deserts",
-      x ="Types of tracts ", y = "MedianFamilyIncome") +
-      theme(plot.title = element_text(hjust = 0.5))
-  
-```
+## Confidence Interval tests
 
 ```{r food_desert_confidence_interval}
-fd_data <- subset(data, data$LILATracts_1And10 == "Food desert") 
+fd_data <- subset(data, data$LILATracts_1And10 == "Food desert")
 
-non_fd_data <- subset(data, data$LILATracts_1And10 == "Non-Food desert") 
+non_fd_data <- subset(data, data$LILATracts_1And10 == "Non-Food desert")
 #print(fd_data)
 ttest_fd_medincome_95 = t.test(x=fd_data$MedianFamilyIncome, conf.level=0.95 )
 ttest_non_fd_medincome_95 = t.test(x=non_fd_data$MedianFamilyIncome, conf.level=0.95 )
@@ -468,27 +670,29 @@ print(ttest_fd_medincome_95)
 print(ttest_non_fd_medincome_95)
 ```
 
-### Food deserts
+#### Food deserts
 
-The T-intervals for the median income 
+The T-intervals for the median income
 
-* **At 0.95 level** 
-  
-   [`r ttest_fd_medincome_95$conf.int[1] `, `r ttest_fd_medincome_95$conf.int[2] `] 
-   
-### Non-Food deserts
+* **At 0.95 level**
 
-The T-intervals for the median income in non-food desert 
+   [`r ttest_fd_medincome_95$conf.int[1] `, `r ttest_fd_medincome_95$conf.int[2] `]
 
-* **At 0.95 level** 
-  
-   [`r ttest_non_fd_medincome_95$conf.int[1] `, `r =ttest_non_fd_medincome_95$conf.int[2] `] 
-   
+#### Non-Food deserts
+
+The T-intervals for the median income in non-food desert
+
+* **At 0.95 level**
+
+   [`r ttest_non_fd_medincome_95$conf.int[1] `, `r ttest_non_fd_medincome_95$conf.int[2] `]
+
+The difference in the intervals indicates the median income between food desert and non-food desert is different.
+
 ## ANOVA ON median income
 Null hypothesis : There is no difference in the median income between food desert and non-food desert
 Alternate hypothesis : There is difference in the median income between food desert and non-food desert
 
-   
+
 ```{r anova_med_incom_food_desert}
 med_income_aov = aov(MedianFamilyIncome ~ LILATracts_1And10, data = data)
 # plant_aov  # this does not give the easy-to-read result of the aov analysis
@@ -509,4 +713,28 @@ The anova results tell us that there is statistically significant difference in 
 tukeyAoV <- TukeyHSD(med_income_aov)
 tukeyAoV
 ```
+
 The post-hoc test confirms that families living in food deserts have a significantly lower median income compared to those not living in food deserts.
+
+#### Median Family Income in urban and rural areas
+
+``` {r medincome_urban_box_plots}
+data$LILATracts_1And10 <- as.factor(data$LILATracts_1And10)
+levels(data$LILATracts_1And10) <- c("Non-Food desert", "Food desert")
+
+data$Urban <- as.factor(data$Urban)
+levels(data$Urban) <- c("Rural", "Urban")
+ggplot(data = data,
+       aes(x = interaction(LILATracts_1And10, Urban), y = MedianFamilyIncome)) +
+      geom_boxplot(fill='white', color="darkred") +
+      labs(title="Median Family Income between in urban and rural food deserts",
+      x ="Types of tracts ", y = "MedianFamilyIncome") +
+      theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+**Urban**: As expected Non-food deserts in urban have higher median income than others.
+
+**Rural**:Contrary to common perceptions, rural food deserts appear to have median family income similar to the urab food deserts.This suggest that the food desert in the rural areas is not solely due to economic reasons but could be influenced by other factors like distribution logistics, infrastructure, or availability of food retailers.
+
+**Non-Food Deserts**: Whether in urban or rural settings, areas that are not classified as food deserts appear to have a more balanced mix of family incomes, suggesting that economic disparities might be less pronounced in these areas.
