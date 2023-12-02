@@ -66,6 +66,26 @@ plt.savefig('C:\Keerthu\GW\IntroToDataScience_6101\Project\Data_sets\your_plot.p
 
 #%%
 
+from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
+
+numlist = dff.columns.to_list()
+numlist.remove('CensusTract')
+numlist.remove('LILATracts_1And10')
+
+pizzaPreprocessorNum = ColumnTransformer(
+    [
+        ("numerical", StandardScaler(), numlist),
+    ],
+    verbose_feature_names_out=False,
+    remainder= 'passthrough',
+).fit(dff)
+
+df_std = pd.DataFrame(pizzaPreprocessorNum.fit_transform(dff), columns=pizzaPreprocessorNum.fit(dff).get_feature_names_out())
+print(df_std.head())
+
+#%%
+
 X = dff.drop('LILATracts_1And10', axis=1)
 y = dff['LILATracts_1And10']
 
