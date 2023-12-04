@@ -167,6 +167,7 @@ unique_counties <- data %>% group_by(State, County) %>% distinct(County)
 # using distinct() to get unique states. Because directly Grouping the counties will result in lesser results as different 
 # counties in different States can exists with the same name
 ```
+
 ## Question 1c: Total census tracts included in the dataset
 ```{r}
 total_census_tracts <- nrow(data)
