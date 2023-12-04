@@ -1,0 +1,533 @@
+---
+title: "Project2 - GWU Intro to Data Science DATS 6101"
+author: "Keerthana"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    number_sections: true
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+---
+
+```{r include=FALSE}
+# The package "ezids" (EZ Intro to Data Science) includes a lot of the helper functions we developed for the course. 
+# Some of the frequently used functions are loadPkg(), xkabledply(), xkablesummary(), uzscale(), etc.
+library(ezids)
+ 
+# some of common options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+# knitr::opts_chunk$set(warning = F, results = "markup", message = F)
+knitr::opts_chunk$set(warning = F, results = "hide", message = F)
+options(scientific=T, digits = 3) 
+# options(scipen=9, digits = 3) 
+# ‘scipen’: integer. A penalty to be applied when deciding to print numeric values in fixed or exponential notation.  Positive values bias towards fixed and negative towards scientific notation: fixed notation will be preferred unless it is more than ‘scipen’ digits wider.
+# use scipen=999 to prevent scientific notation at all times
+```
+
+```{r base_lib}
+loadPkg("ggplot2")
+```
+
+
+## Initialize
+
+```{r}
+df <- data.frame(read.csv("FoodDesert2015.csv")) 
+head(df)
+summary(df)
+``` 
+
+############################################################
+# Can we quantify the impact of the "PovertyRate" and "Group Quarters" on the likelihood of a census tract being classified as a food desert?
+############################################################
+
+
+## Effect of Group quarters by food desert:
+
+```{r crosstable}
+FooddesertGroupquarterstable = xtabs(~ LILATracts_1And10 + GroupQuartersFlag, data = df)
+FooddesertGroupquarterstable
+```
+
+### Chi squared test
+
+We can then quickly run a chi-squared test to see if the two are independent (or same frequency distribution).  
+```{r chisq}
+chisqres = chisq.test(FooddesertGroupquarterstable)
+chisqres
+```
+
+From the small p-value of `r chisqres$p.value`, we conclude that the food desert and non food desert subgroups have different frequency distribution among the Groupquarters. This is just another way of saying that the group quarters and Fooddesrts are NOT independent. 
+
+## Effect of poverty rate by food desert:
+
+### T -test
+
+```{r ttest}
+food_desert_group <- subset(df, LILATracts_1And10 == 1)
+non_food_desert_group <- subset(df, LILATracts_1And10 == 0)
+
+# Perform t-test
+t_test_result <- t.test(food_desert_group$PovertyRate, non_food_desert_group$PovertyRate)
+
+# Display the results
+print(t_test_result)
+```
+
+The p-value is extremely small, indicating strong evidence against the null hypothesis. In practical terms, it suggests that there is a highly significant difference in the mean PovertyRate between food desert and non-food desert census tracts.
+
+## Model 1: PovertyRate + GroupQuartersFlag
+
+```{r model}
+df$LILATracts_1And10 <- factor(df$LILATracts_1And10)
+df$GroupQuartersFlag <- factor(df$GroupQuartersFlag)
+
+model <- glm(LILATracts_1And10 ~ PovertyRate + GroupQuartersFlag, family = "binomial", data = df)
+
+summary(model)
+```
+
+AIC is low here compared to other models.
+
+All the coefficients are found significant (small p-values). Poverty rate have positive effects on Food desert chance (Food desert = 1), while GroupQuartersflag negatively affect the Food deserts likelihood.
+
+```{r results='markup'}
+xkabledply(model, title = paste("Logistic Regression :", format(formula(model)) ))
+```
+
+```{r growthDecayFactors, results='markup', collapse=F}
+expcoeff = exp(coef(model))
+# expcoeff
+xkabledply( as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
+```
+
+## Model 2: PovertyRate
+
+```{r model1}
+
+model1 <- glm(LILATracts_1And10 ~ PovertyRate, family = "binomial", data = df)
+
+summary(model1)
+```
+
+coefficients are found significant (small p-values). Poverty rate have positive effects on Food desert chance (Food desert = 1)
+
+AIC greater than model 1.
+
+## Model 3: GroupQuartersFlag
+
+```{r model2}
+
+model2 <- glm(LILATracts_1And10 ~ GroupQuartersFlag, family = "binomial", data = df)
+
+summary(model2)
+```
+
+coefficients are found significant (small p-values). AIC greater than model 2.
+
+############################################################
+# What specific factors most significantly contribute to a tract being classified as a food desert?
+############################################################
+
+```{r}
+df_subset <- df[, c('Urban', 'POP2010', 'OHU2010', 'GroupQuartersFlag', 'NUMGQTRS', 'PCTGQTRS', 'LILATracts_Vehicle', 'HUNVFlag', 'LowIncomeTracts', 'PovertyRate', 'MedianFamilyIncome', 'LA1and10', 'LATracts1', 'LATracts10', 'LATractsVehicle_20')]
+
+df_subset
+
+```
+
+```{r featureSelect}
+
+#str(df)
+#df_subset = subset(df, select = -c(LILATracts_1And10, CensusTract, State, County))
+df_subset$y = df$LILATracts_1And10
+
+#convert some columns into factos as appropriate
+df_subset$Urban = factor(df_subset$Urban)
+#df_subset$LILATracts_halfAnd10 = factor(df_subset$LILATracts_halfAnd10)
+#df_subset$LILATracts_1And20 = factor(df_subset$LILATracts_1And20)
+df_subset$LILATracts_Vehicle = factor(df_subset$LILATracts_Vehicle)
+df_subset$HUNVFlag = factor(df_subset$HUNVFlag)
+df_subset$LowIncomeTracts = factor(df_subset$LowIncomeTracts)
+df_subset$LA1and10 = factor(df_subset$LA1and10)
+#df_subset$LAhalfand10 = factor(df_subset$LAhalfand10)
+#df_subset$LA1and20 = factor(df_subset$LA1and20)
+#df_subset$LATracts_half = factor(df_subset$LATracts_half)
+df_subset$LATracts1 = factor(df_subset$LATracts1)
+df_subset$LATracts10 = factor(df_subset$LATracts10)
+#df_subset$LATracts20 = factor(df_subset$LATracts20)
+df_subset$LATractsVehicle_20 = factor(df_subset$LATractsVehicle_20)
+
+
+#df_subset$y <- ifelse(df_subset$y == 1,TRUE,FALSE)
+df_subset$y = factor(df_subset$y)
+str(df_subset)
+```
+
+```{r leaps}
+loadPkg("pROC") 
+loadPkg("aod") 
+loadPkg("leaps")
+reg.leaps <- regsubsets(y~., data = df_subset, nbest = 1, method = "exhaustive", really.big=T)  # leaps, 
+plot(reg.leaps, scale = "adjr2", main = "Adjusted R^2")
+plot(reg.leaps, scale = "bic", main = "BIC")
+plot(reg.leaps, scale = "Cp", main = "Cp")
+```
+
+important variable:
+
+GroupQuartersFlag
+PCTGQTRS
+HUNVFlag
+Poverty rate
+MedianFamilyIncome
+LATracts1
+LATractsVehicle_20
+
+```{r}
+model_imp <- glm(LILATracts_1And10 ~ GroupQuartersFlag + PovertyRate + HUNVFlag + MedianFamilyIncome + LATracts1 + LATractsVehicle_20, family = "binomial", data = df)
+
+summary(model_imp)
+```
+
+```{r bestglm, results='markup'}
+# loadPkg("bestglm")
+res.bestglm <- bestglm(Xy = df_subset, family = binomial,
+            IC = "AIC",                 # Information criteria for
+            method = "exhaustive")
+summary(res.bestglm)
+res.bestglm$BestModels
+summary(res.bestglm$BestModels)
+# unloadPkg("bestglm") 
+# unloadPkg("leaps") # leaps is required by bestglm, thus cannot be unloaded before bestglm
+```
+
+############################################################
+# How does the model's performance vary across different demographic groups?
+############################################################
+
+## Urban
+
+```{r model}
+df_Urban <- subset(df, Urban == 1)
+df_Urban$LILATracts_1And10 <- factor(df_Urban$LILATracts_1And10)
+#df$GroupQuartersFlag <- factor(df$GroupQuartersFlag)
+
+model_urbanWhite <- glm(LILATracts_1And10 ~ lawhite1 + lawhite1share + TractWhite, family = "binomial", data = df_Urban)
+summary(model_urbanWhite)
+```
+```{r}
+
+model_urbanBlack <- glm(LILATracts_1And10 ~ lablack1 + lablack1share + TractBlack, family = "binomial", data = df_Urban)
+summary(model_urbanBlack)
+
+```
+
+```{r}
+
+model_urbanNHOPI <- glm(LILATracts_1And10 ~ lanhopi1 + lanhopi1share + TractNHOPI, family = "binomial", data = df_Urban)
+summary(model_urbanNHOPI)
+
+```
+
+```{r}
+
+model_urbanAsian <- glm(LILATracts_1And10 ~ laasian1 + laasian1share + TractAsian, family = "binomial", data = df_Urban)
+summary(model_urbanAsian)
+
+```
+
+```{r}
+
+model_urbanAian <- glm(LILATracts_1And10 ~ laaian1 + laaian1share + TractAIAN, family = "binomial", data = df_Urban)
+summary(model_urbanAian)
+
+```
+
+```{r}
+
+model_urbanomultir <- glm(LILATracts_1And10 ~ laomultir1 + laomultir1share + TractOMultir, family = "binomial", data = df_Urban)
+summary(model_urbanomultir)
+
+```
+
+```{r}
+
+model_urbanhispanic <- glm(LILATracts_1And10 ~ lahisp1 + lahisp1share + TractHispanic, family = "binomial", data = df_Urban)
+summary(model_urbanhispanic)
+
+```
+
+```{r roc_auc}
+loadPkg("pROC") # receiver operating characteristic curve, gives the diagnostic ability of a binary classifier system as its discrimination threshold is varied. The curve is on sensitivity/recall/true-positive-rate vs false_alarm/false-positive-rate/fall-out.
+probwhite=predict(model_urbanWhite, type = "response" )
+probblack=predict(model_urbanBlack, type = "response" )
+probnhopi=predict(model_urbanNHOPI, type = "response" )
+probasian=predict(model_urbanAsian, type = "response" )
+probaian=predict(model_urbanAian, type = "response" )
+probomultir=predict(model_urbanomultir, type = "response" )
+probhisp=predict(model_urbanhispanic, type = "response" )
+
+df_Urban$probwhite=probwhite
+df_Urban$probblack=probblack
+df_Urban$probnhopi=probnhopi
+df_Urban$probasian=probasian
+df_Urban$probaian=probaian
+df_Urban$probomultir=probomultir
+df_Urban$probhisp=probhisp
+
+h1 <- roc(LILATracts_1And10~probwhite, data=df_Urban)
+auc(h1) # area-under-curve prefer 0.8 or higher.
+
+h2 <- roc(LILATracts_1And10~probblack, data=df_Urban)
+auc(h2)
+h3 <- roc(LILATracts_1And10~probnhopi, data=df_Urban)
+auc(h3)
+h4 <- roc(LILATracts_1And10~probasian, data=df_Urban)
+auc(h4)
+h5 <- roc(LILATracts_1And10~probaian, data=df_Urban)
+auc(h5)
+h6 <- roc(LILATracts_1And10~probomultir, data=df_Urban)
+auc(h6)
+h7 <- roc(LILATracts_1And10~probhisp, data=df_Urban)
+auc(h7)
+
+#plot(h)
+# unloadPkg("pROC")
+```
+
+## Rural:
+
+```{r modell}
+df_rural <- subset(df, Urban == 0)
+df_rural$LILATracts_1And10 <- factor(df_rural$LILATracts_1And10)
+#df$GroupQuartersFlag <- factor(df$GroupQuartersFlag)
+
+model_ruralWhite <- glm(LILATracts_1And10 ~ lawhite10 + TractWhite, family = "binomial", data = df_rural)
+
+summary(model_ruralWhite)
+```
+
+```{r}
+
+model_ruralBlack <- glm(LILATracts_1And10 ~ lablack10 + lablack10share + TractBlack, family = "binomial", data = df_rural)
+summary(model_ruralBlack)
+
+```
+
+```{r}
+
+model_ruralNHOPI <- glm(LILATracts_1And10 ~ lanhopi10 + lanhopi10share + TractNHOPI, family = "binomial", data = df_rural)
+summary(model_ruralNHOPI)
+
+```
+
+```{r}
+
+model_ruralAsian <- glm(LILATracts_1And10 ~ laasian10 + laasian10share + TractAsian, family = "binomial", data = df_rural)
+summary(model_ruralAsian)
+
+```
+
+```{r}
+
+model_ruralAian <- glm(LILATracts_1And10 ~ laaian10 + laaian10share + TractAIAN, family = "binomial", data = df_rural)
+summary(model_ruralAian)
+
+```
+
+```{r}
+
+model_ruralomultir <- glm(LILATracts_1And10 ~ laomultir10 + laomultir10share + TractOMultir, family = "binomial", data = df_rural)
+summary(model_ruralomultir)
+
+```
+
+```{r}
+
+model_ruralhispanic <- glm(LILATracts_1And10 ~ lahisp10 + lahisp10share + TractHispanic, family = "binomial", data = df_rural)
+summary(model_ruralhispanic)
+
+```
+
+```{r roc_auc}
+loadPkg("pROC") # receiver operating characteristic curve, gives the diagnostic ability of a binary classifier system as its discrimination threshold is varied. The curve is on sensitivity/recall/true-positive-rate vs false_alarm/false-positive-rate/fall-out.
+probwhite=predict(model_ruralWhite, type = "response" )
+probblack=predict(model_ruralBlack, type = "response" )
+probnhopi=predict(model_ruralNHOPI, type = "response" )
+probasian=predict(model_ruralAsian, type = "response" )
+probaian=predict(model_ruralAian, type = "response" )
+probomultir=predict(model_ruralomultir, type = "response" )
+probhisp=predict(model_ruralhispanic, type = "response" )
+
+df_rural$probwhite=probwhite
+df_rural$probblack=probblack
+df_rural$probnhopi=probnhopi
+df_rural$probasian=probasian
+df_rural$probaian=probaian
+df_rural$probomultir=probomultir
+df_rural$probhisp=probhisp
+
+h1 <- roc(LILATracts_1And10~probwhite, data=df_rural)
+auc(h1) # area-under-curve prefer 0.8 or higher.
+
+h2 <- roc(LILATracts_1And10~probblack, data=df_rural)
+auc(h2)
+h3 <- roc(LILATracts_1And10~probnhopi, data=df_rural)
+auc(h3)
+h4 <- roc(LILATracts_1And10~probasian, data=df_rural)
+auc(h4)
+h5 <- roc(LILATracts_1And10~probaian, data=df_rural)
+auc(h5)
+h6 <- roc(LILATracts_1And10~probomultir, data=df_rural)
+auc(h6)
+h7 <- roc(LILATracts_1And10~probhisp, data=df_rural)
+auc(h7)
+
+#plot(h)
+# unloadPkg("pROC")
+```
+
+```{r HosmerLemeshow}
+loadPkg("ResourceSelection") # function hoslem.test( ) for logit model evaluation
+admitLogitHoslem = hoslem.test(df_Urban$LILATracts_1And10, fitted(model_urbanWhite)) # Hosmer and Lemeshow test, a chi-squared test
+unloadPkg("ResourceSelection") 
+admitLogitHoslem
+```
+
+```{r roc_auc}
+loadPkg("pROC") # receiver operating characteristic curve, gives the diagnostic ability of a binary classifier system as its discrimination threshold is varied. The curve is on sensitivity/recall/true-positive-rate vs false_alarm/false-positive-rate/fall-out.
+prob=predict(model_imp, type = "response" )
+df_subset$prob=prob
+h <- roc(y~prob, data=df_subset)
+auc(h) # area-under-curve prefer 0.8 or higher.
+plot(h)
+# unloadPkg("pROC")
+```
+
+```{r McFadden}
+loadPkg("pscl") # use pR2( ) function to calculate McFadden statistics for model eval
+admitLogitpr2 = pR2(model_urbanWhite)
+admitLogitpr2
+unloadPkg("pscl") 
+```
+
+## Total:
+
+```{r model}
+df$Urban <- factor(df$Urban)
+
+model_White <- glm(LILATracts_1And10 ~ Urban + lawhite1 + lawhite10 + lawhite1share + lawhite10share + TractWhite, family = "binomial", data = df)
+summary(model_White)
+```
+```{r}
+
+model_Black <- glm(LILATracts_1And10 ~ Urban + lablack1share + lablack10share + TractBlack, family = "binomial", data = df)
+summary(model_Black)
+
+```
+
+```{r}
+
+model_NHOPI <- glm(LILATracts_1And10 ~ Urban + lanhopi1 + lanhopi1share + lanhopi10 + lanhopi10share + TractNHOPI, family = "binomial", data = df)
+summary(model_NHOPI)
+
+```
+
+```{r}
+
+model_Asian <- glm(LILATracts_1And10 ~ Urban + laasian1 + laasian1share + laasian10 + laasian10share + TractAsian, family = "binomial", data = df)
+summary(model_Asian)
+
+```
+
+```{r}
+
+model_Aian <- glm(LILATracts_1And10 ~ Urban + laaian1 + laaian10share + TractAIAN, family = "binomial", data = df)
+summary(model_Aian)
+
+```
+
+```{r}
+
+model_omultir <- glm(LILATracts_1And10 ~ Urban + laomultir1share + laomultir10 + laomultir10share + TractOMultir, family = "binomial", data = df)
+summary(model_omultir)
+
+```
+
+```{r}
+
+model_hispanic <- glm(LILATracts_1And10 ~ Urban + lahisp1 + lahisp1share + lahisp10share + TractHispanic, family = "binomial", data = df)
+summary(model_hispanic)
+
+```
+
+```{r roc_auc}
+loadPkg("pROC") # receiver operating characteristic curve, gives the diagnostic ability of a binary classifier system as its discrimination threshold is varied. The curve is on sensitivity/recall/true-positive-rate vs false_alarm/false-positive-rate/fall-out.
+df_demo =df
+probwhite=predict(model_White, type = "response" )
+probblack=predict(model_Black, type = "response" )
+probnhopi=predict(model_NHOPI, type = "response" )
+probasian=predict(model_Asian, type = "response" )
+probaian=predict(model_Aian, type = "response" )
+probomultir=predict(model_omultir, type = "response" )
+probhisp=predict(model_hispanic, type = "response" )
+
+df_demo$probwhite=probwhite
+df_demo$probblack=probblack
+df_demo$probnhopi=probnhopi
+df_demo$probasian=probasian
+df_demo$probaian=probaian
+df_demo$probomultir=probomultir
+df_demo$probhisp=probhisp
+
+h1 <- roc(LILATracts_1And10~probwhite, data=df_demo)
+auc(h1) # area-under-curve prefer 0.8 or higher.
+
+h2 <- roc(LILATracts_1And10~probblack, data=df_demo)
+auc(h2)
+h3 <- roc(LILATracts_1And10~probnhopi, data=df_demo)
+auc(h3)
+h4 <- roc(LILATracts_1And10~probasian, data=df_demo)
+auc(h4)
+h5 <- roc(LILATracts_1And10~probaian, data=df_demo)
+auc(h5)
+h6 <- roc(LILATracts_1And10~probomultir, data=df_demo)
+auc(h6)
+h7 <- roc(LILATracts_1And10~probhisp, data=df_demo)
+auc(h7)
+
+#plot(h)
+# unloadPkg("pROC")
+```
+
+
+############################################################
+# Correlation
+############################################################
+
+```{r}
+#df <- data.frame(read.csv("FoodDesert2015.csv")) 
+#df_corr = subset(df, select = -c(CensusTract, State, County))
+df_subset <- df[, c('LILATracts_1And10', 'Urban', 'POP2010', 'OHU2010', 'GroupQuartersFlag', 'NUMGQTRS', 'PCTGQTRS', 'LILATracts_Vehicle', 'HUNVFlag', 'LowIncomeTracts', 'PovertyRate', 'MedianFamilyIncome', 'LA1and10', 'LATracts1', 'LATracts10', 'LATractsVehicle_20')]
+
+correlation_matrix <- cor(df_subset)
+
+# Print the correlation matrix
+print(correlation_matrix)
+
+```
+
+```{r}
+loadPkg("corrplot")
+mtcarscor = cor(df_subset)
+corrplot(mtcarscor, method = "number")
+
+```
+
+
