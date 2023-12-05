@@ -1,0 +1,48 @@
+---
+title: "Mowzli-Analysis"
+output: html_document
+date: "2023-12-04"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+
+# Read the dataset
+food_access_data <- read.csv("Documents/food_access_research_atlas.csv")
+
+# Set thresholds for defining potential food deserts
+poverty_rate_threshold <- 20  # percent
+median_income_threshold <- quantile(food_access_data$MedianFamilyIncome, 0.25)  # lower quartile
+snap_beneficiary_threshold <- 20  # percent
+
+# Creating a food desert indicator
+food_access_data$PotentialFoodDesert <- with(food_access_data, 
+  (PovertyRate >= poverty_rate_threshold) &
+  (MedianFamilyIncome <= median_income_threshold) &
+  (TractSNAP / POP2010 * 100 >= snap_beneficiary_threshold)
+)
+
+# Calculating average median family income for potential food desert areas and non-food desert areas
+average_income_food_desert <- mean(food_access_data[food_access_data$PotentialFoodDesert, "MedianFamilyIncome"])
+average_income_non_food_desert <- mean(food_access_data[!food_access_data$PotentialFoodDesert, "MedianFamilyIncome"])
+
+# Performing a t-test to check if the difference in median family incomes is statistically significant
+t_test_result <- t.test(
+  food_access_data[food_access_data$PotentialFoodDesert, "MedianFamilyIncome"],
+  food_access_data[!food_access_data$PotentialFoodDesert, "MedianFamilyIncome"]
+)
+
+# Print the results
+cat("Average Median Family Income in Potential Food Deserts:", average_income_food_desert, "\n")
+cat("Average Median Family Income in Non-Food Desert Areas:", average_income_non_food_desert, "\n")
+cat("T-Test Results:\n")
+print(t_test_result)
+```
+*Inference:*
+
+These findings suggest that lower median family income is a strong indicator of an area's likelihood to be a potential food desert. Areas with significantly lower median family incomes are more likely to meet the criteria set for potential food deserts in this analysis, considering the poverty rate and SNAP beneficiaries as additional factors.
