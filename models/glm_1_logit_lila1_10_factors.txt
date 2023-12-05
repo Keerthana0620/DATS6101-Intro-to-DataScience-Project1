@@ -1,0 +1,938 @@
+               (Intercept)                StateAlaska               StateArizona              StateArkansas 
+                         0                        Inf                          0                        Inf 
+           StateCalifornia              StateColorado           StateConnecticut              StateDelaware 
+                         0                          0                        Inf                        Inf 
+ StateDistrict of Columbia               StateFlorida               StateGeorgia                StateHawaii 
+                         0                          0                        Inf                          0 
+                StateIdaho              StateIllinois               StateIndiana                  StateIowa 
+                       Inf                          0                          0                          0 
+               StateKansas              StateKentucky             StateLouisiana                 StateMaine 
+                         0                          0                          0                        Inf 
+             StateMaryland         StateMassachusetts              StateMichigan             StateMinnesota 
+                         0                          0                          0                        Inf 
+          StateMississippi              StateMissouri               StateMontana              StateNebraska 
+                       Inf                          0                        Inf                          0 
+               StateNevada         StateNew Hampshire            StateNew Jersey            StateNew Mexico 
+                       Inf                          0                          0                          0 
+             StateNew York        StateNorth Carolina          StateNorth Dakota                  StateOhio 
+                         0                          0                        Inf                          0 
+             StateOklahoma                StateOregon          StatePennsylvania          StateRhode Island 
+                       Inf                          0                          0                          0 
+       StateSouth Carolina          StateSouth Dakota             StateTennessee                 StateTexas 
+                         0                        Inf                          0                          0 
+                 StateUtah               StateVermont              StateVirginia            StateWashington 
+                       Inf                        Inf                          0                          0 
+        StateWest Virginia             StateWisconsin               StateWyoming            CountyAbbeville 
+                         0                          0                        Inf                        Inf 
+              CountyAcadia             CountyAccomack                  CountyAda                CountyAdair 
+                         0                          0                          0                          0 
+               CountyAdams              CountyAddison                CountyAiken               CountyAitkin 
+                         0                        Inf                          0                          0 
+             CountyAlachua             CountyAlamance              CountyAlameda              CountyAlamosa 
+                         0                          0                          0                          0 
+              CountyAlbany            CountyAlbemarle               CountyAlcona               CountyAlcorn 
+                         0                          0                          0                          0 
+      CountyAleutians West            CountyAlexander           CountyAlexandria              CountyAlfalfa 
+                         0                        Inf                          0                        Inf 
+               CountyAlger            CountyAllamakee              CountyAllegan             CountyAllegany 
+                       Inf                          0                        Inf                          0 
+           CountyAlleghany            CountyAllegheny                CountyAllen            CountyAllendale 
+                         0                          0                          0                          0 
+              CountyAlpena               CountyAlpine               CountyAmador               CountyAmelia 
+                         0                        Inf                        Inf                        Inf 
+             CountyAmherst                CountyAmite            CountyAnchorage             CountyAnderson 
+                         0                          0                          0                          0 
+              CountyAndrew              CountyAndrews         CountyAndroscoggin             CountyAngelina 
+                       Inf                        Inf                          0                          0 
+        CountyAnne Arundel                CountyAnoka                CountyAnson             CountyAntelope 
+                         0                          0                          0                        Inf 
+              CountyAntrim               CountyApache            CountyAppanoose              CountyAppling 
+                       Inf                          0                          0                          0 
+          CountyAppomattox              CountyAransas             CountyArapahoe               CountyArcher 
+                         0                          0                          0                        Inf 
+           CountyArchuleta               CountyArenac             CountyArkansas            CountyArlington 
+                       Inf                          0                        Inf                          0 
+           CountyArmstrong            CountyAroostook               CountyArthur            CountyAscension 
+                         0                          0                        Inf                        Inf 
+                CountyAshe              CountyAshland               CountyAshley            CountyAshtabula 
+                         0                          0                        Inf                          0 
+              CountyAsotin           CountyAssumption             CountyAtascosa             CountyAtchison 
+                         0                        Inf                          0                          0 
+              CountyAthens             CountyAtkinson             CountyAtlantic                CountyAtoka 
+                       Inf                          0                          0                          0 
+              CountyAttala              CountyAudrain              CountyAudubon             CountyAuglaize 
+                         0                          0                        Inf                          0 
+             CountyAugusta               CountyAurora               CountyAustin              CountyAutauga 
+                         0                          0                        Inf                          0 
+               CountyAvery            CountyAvoyelles                 CountyBaca                CountyBacon 
+                         0                          0                        Inf                          0 
+              CountyBailey                CountyBaker              CountyBaldwin              CountyBallard 
+                         0                        Inf                          0                        Inf 
+           CountyBaltimore       CountyBaltimore City              CountyBamberg              CountyBandera 
+                         0                          0                          0                        Inf 
+               CountyBanks              CountyBannock               CountyBaraga               CountyBarber 
+                       Inf                        Inf                          0                        Inf 
+             CountyBarbour               CountyBarnes           CountyBarnstable             CountyBarnwell 
+                       Inf                          0                          0                          0 
+              CountyBarren               CountyBarron               CountyBarrow                CountyBarry 
+                       Inf                        Inf                          0                        Inf 
+         CountyBartholomew               CountyBarton               CountyBartow              CountyBastrop 
+                         0                          0                          0                        Inf 
+               CountyBates                 CountyBath               CountyBaxter                  CountyBay 
+                         0                          0                          0                          0 
+            CountyBayfield               CountyBaylor               CountyBeadle            CountyBear Lake 
+                         0                        Inf                        Inf                          0 
+            CountyBeaufort           CountyBeauregard               CountyBeaver           CountyBeaverhead 
+                         0                          0                          0                        Inf 
+              CountyBecker              CountyBeckham              CountyBedford         CountyBedford City 
+                       Inf                          0                          0                          0 
+                 CountyBee              CountyBelknap                 CountyBell              CountyBelmont 
+                         0                          0                          0                          0 
+            CountyBeltrami             CountyBen Hill              CountyBenewah           CountyBennington 
+                         0                          0                        Inf                          0 
+              CountyBenson                 CountyBent               CountyBenton               CountyBenzie 
+                         0                        Inf                          0                        Inf 
+              CountyBergen             CountyBerkeley                CountyBerks            CountyBerkshire 
+                         0                        Inf                          0                          0 
+          CountyBernalillo              CountyBerrien               CountyBertie                CountyBexar 
+                       Inf                          0                          0                          0 
+                CountyBibb            CountyBienville             CountyBig Horn            CountyBig Stone 
+                         0                          0                        Inf                          0 
+            CountyBillings              CountyBingham           CountyBlack Hawk            CountyBlackford 
+                         0                        Inf                          0                          0 
+              CountyBladen               CountyBlaine                CountyBlair               CountyBlanco 
+                         0                        Inf                          0                        Inf 
+               CountyBland             CountyBleckley              CountyBledsoe               CountyBlount 
+                         0                          0                          0                          0 
+          CountyBlue Earth                CountyBoise              CountyBolivar            CountyBollinger 
+                         0                          0                          0                        Inf 
+           CountyBon Homme                 CountyBond               CountyBonner           CountyBonneville 
+                       Inf                        Inf                          0                          0 
+               CountyBoone               CountyBorden               CountyBosque              CountyBossier 
+                         0                        Inf                          0                          0 
+           CountyBotetourt            CountyBottineau              CountyBoulder             CountyBoundary 
+                       Inf                        Inf                          0                          0 
+             CountyBourbon                CountyBowie               CountyBowman            CountyBox Butte 
+                         0                          0                        Inf                        Inf 
+           CountyBox Elder                 CountyBoyd                CountyBoyle              CountyBracken 
+                       Inf                          0                          0                        Inf 
+            CountyBradford              CountyBradley               CountyBranch             CountyBrantley 
+                         0                        Inf                          0                          0 
+            CountyBrazoria               CountyBrazos            CountyBreathitt         CountyBreckinridge 
+                         0                          0                          0                          0 
+              CountyBremer              CountyBrevard             CountyBrewster              CountyBriscoe 
+                       Inf                          0                          0                          0 
+             CountyBristol           CountyBroadwater                CountyBronx               CountyBrooke 
+                         0                          0                          0                        Inf 
+           CountyBrookings               CountyBrooks               CountyBroome           CountyBroomfield 
+                       Inf                          0                          0                        Inf 
+             CountyBroward                CountyBrown                CountyBrule            CountyBrunswick 
+                         0                          0                        Inf                          0 
+               CountyBryan             CountyBuchanan           CountyBuckingham                CountyBucks 
+                         0                          0                          0                          0 
+         CountyBuena Vista              CountyBuffalo              CountyBullitt              CountyBulloch 
+                       Inf                          0                        Inf                          0 
+            CountyBuncombe               CountyBureau                CountyBurke             CountyBurleigh 
+                         0                          0                          0                          0 
+            CountyBurleson           CountyBurlington               CountyBurnet              CountyBurnett 
+                         0                          0                          0                          0 
+                CountyBurt               CountyButler                CountyButte                CountyButts 
+                       Inf                          0                        Inf                        Inf 
+            CountyCabarrus               CountyCabell                CountyCache                CountyCaddo 
+                         0                          0                          0                          0 
+           CountyCalaveras            CountyCalcasieu             CountyCaldwell            CountyCaledonia 
+                         0                          0                          0                          0 
+             CountyCalhoun             CountyCallahan             CountyCallaway             CountyCalloway 
+                         0                          0                        Inf                          0 
+             CountyCalumet              CountyCalvert                CountyCamas              CountyCambria 
+                       Inf                        Inf                          0                          0 
+              CountyCamden              CountyCameron                 CountyCamp             CountyCampbell 
+                         0                          0                          0                          0 
+            CountyCanadian              CountyCandler               CountyCannon               CountyCanyon 
+                         0                          0                        Inf                          0 
+      CountyCape Girardeau             CountyCape May               CountyCarbon              CountyCaribou 
+                         0                          0                          0                        Inf 
+            CountyCarlisle              CountyCarlton             CountyCaroline              CountyCarroll 
+                         0                          0                          0                          0 
+              CountyCarson          CountyCarson City               CountyCarter             CountyCarteret 
+                       Inf                          0                          0                          0 
+              CountyCarver              CountyCascade                CountyCasey                 CountyCass 
+                       Inf                          0                          0                          0 
+              CountyCassia               CountyCastro              CountyCaswell            CountyCatahoula 
+                         0                          0                          0                        Inf 
+             CountyCatawba              CountyCatoosa               CountyCatron          CountyCattaraugus 
+                         0                        Inf                          0                        Inf 
+            CountyCavalier               CountyCayuga                CountyCecil                CountyCedar 
+                       Inf                        Inf                        Inf                          0 
+              CountyCentre          CountyCerro Gordo              CountyChaffee             CountyChambers 
+                         0                        Inf                          0                        Inf 
+           CountyChampaign             CountyChariton              CountyCharles         CountyCharles City 
+                         0                        Inf                          0                          0 
+         CountyCharles Mix           CountyCharleston           CountyCharlevoix            CountyCharlotte 
+                       Inf                          0                        Inf                          0 
+     CountyCharlottesville             CountyCharlton                CountyChase              CountyChatham 
+                         0                        Inf                        Inf                          0 
+       CountyChattahoochee            CountyChattooga           CountyChautauqua               CountyChaves 
+                       Inf                          0                          0                        Inf 
+            CountyCheatham            CountyCheboygan               CountyChelan              CountyChemung 
+                       Inf                          0                          0                          0 
+            CountyChenango             CountyCherokee               CountyCherry           CountyChesapeake 
+                         0                          0                        Inf                          0 
+            CountyCheshire              CountyChester         CountyChesterfield             CountyCheyenne 
+                         0                          0                          0                        Inf 
+           CountyChickasaw               CountyChicot            CountyChildress              CountyChilton 
+                         0                          0                        Inf                          0 
+            CountyChippewa              CountyChisago           CountyChittenden              CountyChoctaw 
+                         0                        Inf                          0                          0 
+            CountyChouteau               CountyChowan            CountyChristian            CountyChurchill 
+                       Inf                        Inf                          0                          0 
+              CountyCibola             CountyCimarron               CountyCitrus            CountyClackamas 
+                       Inf                        Inf                          0                          0 
+           CountyClaiborne              CountyClallam                CountyClare            CountyClarendon 
+                         0                        Inf                          0                          0 
+             CountyClarion                CountyClark               CountyClarke              CountyClatsop 
+                       Inf                          0                          0                          0 
+                CountyClay              CountyClayton          CountyClear Creek           CountyClearfield 
+                         0                          0                        Inf                        Inf 
+          CountyClearwater             CountyCleburne             CountyClermont            CountyCleveland 
+                         0                        Inf                          0                          0 
+              CountyClinch              CountyClinton                CountyCloud              CountyCoahoma 
+                         0                          0                        Inf                          0 
+                CountyCoal                 CountyCobb              CountyCochise              CountyCochran 
+                         0                          0                        Inf                        Inf 
+               CountyCocke             CountyCoconino            CountyCodington               CountyCoffee 
+                         0                        Inf                          0                          0 
+              CountyCoffey                 CountyCoke              CountyColbert                 CountyCole 
+                       Inf                        Inf                          0                          0 
+             CountyColeman                CountyColes               CountyColfax             CountyColleton 
+                       Inf                          0                        Inf                          0 
+             CountyCollier               CountyCollin        CountyCollingsworth     CountyColonial Heights 
+                         0                          0                          0                          0 
+            CountyColorado             CountyColquitt             CountyColumbia           CountyColumbiana 
+                       Inf                          0                          0                          0 
+            CountyColumbus               CountyColusa                CountyComal             CountyComanche 
+                         0                        Inf                        Inf                          0 
+              CountyConcho            CountyConcordia              CountyConecuh              CountyConejos 
+                         0                          0                          0                          0 
+        CountyContra Costa             CountyConverse               CountyConway                 CountyCook 
+                         0                        Inf                        Inf                          0 
+               CountyCooke               CountyCooper                 CountyCoos                CountyCoosa 
+                       Inf                          0                          0                        Inf 
+              CountyCopiah             CountyCortland              CountyCoryell            CountyCoshocton 
+                         0                          0                          0                          0 
+              CountyCotton           CountyCottonwood            CountyCovington               CountyCoweta 
+                         0                        Inf                          0                        Inf 
+              CountyCowley              CountyCowlitz                CountyCraig            CountyCraighead 
+                       Inf                          0                        Inf                          0 
+               CountyCrane               CountyCraven             CountyCrawford                CountyCreek 
+                         0                          0                          0                          0 
+            CountyCrenshaw                CountyCrisp           CountyCrittenden             CountyCrockett 
+                       Inf                        Inf                          0                        Inf 
+               CountyCrook               CountyCrosby                CountyCross            CountyCrow Wing 
+                       Inf                          0                        Inf                        Inf 
+             CountyCrowley              CountyCullman             CountyCulpeper           CountyCumberland 
+                         0                          0                        Inf                          0 
+              CountyCuming            CountyCurrituck                CountyCurry               CountyCuster 
+                       Inf                        Inf                        Inf                          0 
+            CountyCuyahoga                 CountyDade              CountyDaggett               CountyDakota 
+                         0                        Inf                          0                          0 
+                CountyDale               CountyDallam               CountyDallas                 CountyDane 
+                         0                        Inf                          0                          0 
+             CountyDaniels             CountyDanville                 CountyDare                CountyDarke 
+                       Inf                          0                        Inf                        Inf 
+          CountyDarlington              CountyDauphin             CountyDavidson                CountyDavie 
+                         0                          0                          0                          0 
+             CountyDaviess                CountyDavis              CountyDavison                CountyDawes 
+                         0                          0                        Inf                        Inf 
+              CountyDawson                  CountyDay              CountyDe Baca              CountyDe Soto 
+                         0                          0                          0                        Inf 
+             CountyDe Witt           CountyDeaf Smith             CountyDearborn              CountyDecatur 
+                         0                        Inf                        Inf                          0 
+          CountyDeer Lodge             CountyDefiance               CountyDeKalb            CountyDel Norte 
+                         0                        Inf                          0                          0 
+            CountyDelaware                CountyDelta               CountyDenali                 CountyDent 
+                         0                          0                          0                          0 
+              CountyDenton               CountyDenver           CountyDes Moines            CountyDeschutes 
+                         0                          0                          0                          0 
+               CountyDesha               CountyDeSoto                CountyDeuel                CountyDewey 
+                         0                          0                        Inf                        Inf 
+              CountyDeWitt              CountyDickens               CountyDickey            CountyDickinson 
+                         0                        Inf                        Inf                        Inf 
+             CountyDickson               CountyDillon               CountyDimmit            CountyDinwiddie 
+                         0                          0                          0                          0 
+CountyDistrict of Columbia               CountyDivide                CountyDixie                CountyDixon 
+                        NA                          0                          0                        Inf 
+           CountyDoddridge                CountyDodge              CountyDolores             CountyDona Ana 
+                       Inf                          0                        Inf                          0 
+            CountyDoniphan               CountyDonley                CountyDooly                 CountyDoor 
+                       Inf                        Inf                        Inf                        Inf 
+          CountyDorchester            CountyDougherty              CountyDouglas                 CountyDrew 
+                         0                          0                          0                          0 
+              CountyDubois              CountyDubuque             CountyDuchesne                CountyDukes 
+                         0                        Inf                          0                          0 
+               CountyDundy              CountyDunklin                 CountyDunn               CountyDuPage 
+                       Inf                          0                          0                          0 
+              CountyDuplin               CountyDurham             CountyDutchess                CountyDuval 
+                         0                          0                          0                          0 
+                CountyDyer                CountyEagle                CountyEarly     CountyEast Baton Rouge 
+                       Inf                        Inf                        Inf                          0 
+        CountyEast Carroll       CountyEast Feliciana             CountyEastland                CountyEaton 
+                       Inf                        Inf                          0                        Inf 
+          CountyEau Claire               CountyEchols                CountyEctor                 CountyEddy 
+                       Inf                          0                          0                        Inf 
+               CountyEdgar            CountyEdgecombe            CountyEdgefield             CountyEdmonson 
+                       Inf                        Inf                          0                          0 
+             CountyEdmunds              CountyEdwards            CountyEffingham            CountyEl Dorado 
+                       Inf                        Inf                        Inf                        Inf 
+             CountyEl Paso               CountyElbert                  CountyElk              CountyElkhart 
+                         0                          0                        Inf                        Inf 
+                CountyElko                CountyEllis            CountyEllsworth               CountyElmore 
+                       Inf                          0                        Inf                          0 
+             CountyEmanuel                CountyEmery                CountyEmmet               CountyEmmons 
+                         0                        Inf                        Inf                          0 
+             CountyEmporia                CountyErath                 CountyErie             CountyEscambia 
+                         0                        Inf                          0                        Inf 
+               CountyEssex               CountyEstill               CountyEtowah               CountyEureka 
+                         0                          0                          0                          0 
+          CountyEvangeline                CountyEvans CountyFairbanks North Star              CountyFairfax 
+                       Inf                          0                          0                          0 
+        CountyFairfax City            CountyFairfield           CountyFall River               CountyFallon 
+                       Inf                          0                        Inf                          0 
+               CountyFalls         CountyFalls Church               CountyFannin            CountyFaribault 
+                       Inf                        Inf                          0                          0 
+               CountyFaulk             CountyFaulkner             CountyFauquier              CountyFayette 
+                         0                          0                        Inf                          0 
+            CountyFentress               CountyFergus                CountyFerry             CountyFillmore 
+                         0                          0                          0                        Inf 
+              CountyFinney               CountyFisher              CountyFlagler             CountyFlathead 
+                         0                        Inf                        Inf                          0 
+             CountyFleming             CountyFlorence                CountyFloyd             CountyFluvanna 
+                         0                          0                          0                          0 
+         CountyFond du Lac                 CountyFord               CountyForest              CountyForrest 
+                       Inf                          0                          0                          0 
+             CountyForsyth            CountyFort Bend               CountyFoster             CountyFountain 
+                         0                          0                          0                          0 
+            CountyFranklin        CountyFranklin City            CountyFrederick       CountyFredericksburg 
+                         0                          0                          0                          0 
+            CountyFreeborn            CountyFreestone              CountyFremont               CountyFresno 
+                         0                          0                          0                        Inf 
+                CountyFrio             CountyFrontier               CountyFulton               CountyFurnas 
+                         0                          0                          0                          0 
+             CountyGadsden                 CountyGage               CountyGaines                CountyGalax 
+                       Inf                          0                        Inf                          0 
+            CountyGallatin               CountyGallia            CountyGalveston               CountyGarden 
+                         0                          0                          0                          0 
+            CountyGarfield              CountyGarland              CountyGarrard              CountyGarrett 
+                         0                          0                        Inf                          0 
+              CountyGarvin                CountyGarza            CountyGasconade               CountyGaston 
+                         0                          0                          0                          0 
+               CountyGates                CountyGeary               CountyGeauga                  CountyGem 
+                       Inf                          0                        Inf                        Inf 
+             CountyGenesee               CountyGeneva               CountyGentry               CountyGeorge 
+                         0                        Inf                        Inf                          0 
+          CountyGeorgetown               CountyGibson                 CountyGila            CountyGilchrist 
+                         0                        Inf                          0                          0 
+               CountyGiles            CountyGillespie              CountyGilliam               CountyGilmer 
+                         0                        Inf                          0                          0 
+              CountyGilpin              CountyGlacier               CountyGlades              CountyGladwin 
+                         0                        Inf                        Inf                          0 
+            CountyGlascock            CountyGlasscock                CountyGlenn           CountyGloucester 
+                       Inf                          0                        Inf                          0 
+               CountyGlynn              CountyGogebic        CountyGolden Valley               CountyGoliad 
+                         0                          0                        Inf                        Inf 
+            CountyGonzales            CountyGoochland              CountyGoodhue              CountyGooding 
+                       Inf                          0                        Inf                        Inf 
+              CountyGordon               CountyGoshen               CountyGosper                 CountyGove 
+                         0                        Inf                          0                        Inf 
+               CountyGrady              CountyGrafton               CountyGraham             CountyGrainger 
+                         0                        Inf                          0                          0 
+               CountyGrand          CountyGrand Forks           CountyGrand Isle       CountyGrand Traverse 
+                       Inf                          0                        Inf                        Inf 
+             CountyGranite                CountyGrant            CountyGranville              CountyGratiot 
+                         0                        Inf                          0                          0 
+              CountyGraves                 CountyGray         CountyGrays Harbor              CountyGrayson 
+                       Inf                          0                          0                          0 
+             CountyGreeley                CountyGreen           CountyGreen Lake           CountyGreenbrier 
+                       Inf                          0                        Inf                        Inf 
+              CountyGreene             CountyGreenlee          CountyGreensville              CountyGreenup 
+                         0                        Inf                        Inf                          0 
+          CountyGreenville            CountyGreenwood                CountyGreer                CountyGregg 
+                         0                        Inf                          0                          0 
+             CountyGregory              CountyGrenada               CountyGriggs               CountyGrimes 
+                         0                        Inf                          0                        Inf 
+              CountyGrundy            CountyGuadalupe             CountyGuernsey             CountyGuilford 
+                         0                        Inf                          0                          0 
+                CountyGulf             CountyGunnison              CountyGuthrie             CountyGwinnett 
+                         0                          0                        Inf                          0 
+              CountyHaakon            CountyHabersham               CountyHaines                 CountyHale 
+                         0                          0                        Inf                          0 
+             CountyHalifax                 CountyHall              CountyHamblen             CountyHamilton 
+                         0                          0                          0                          0 
+              CountyHamlin              CountyHampden            CountyHampshire              CountyHampton 
+                         0                          0                          0                          0 
+             CountyHancock                 CountyHand              CountyHanover             CountyHansford 
+                         0                        Inf                        Inf                          0 
+              CountyHanson             CountyHaralson               CountyHardee             CountyHardeman 
+                         0                          0                        Inf                          0 
+              CountyHardin              CountyHarding                CountyHardy              CountyHarford 
+                       Inf                        Inf                          0                          0 
+              CountyHarlan               CountyHarmon              CountyHarnett               CountyHarney 
+                         0                          0                          0                        Inf 
+              CountyHarper               CountyHarris             CountyHarrison         CountyHarrisonburg 
+                         0                          0                          0                          0 
+                CountyHart             CountyHartford              CountyHartley               CountyHarvey 
+                         0                          0                          0                          0 
+             CountyHaskell               CountyHawaii              CountyHawkins                CountyHayes 
+                         0                        Inf                          0                          0 
+                CountyHays              CountyHaywood                CountyHeard             CountyHemphill 
+                         0                          0                          0                        Inf 
+           CountyHempstead            CountyHenderson            CountyHendricks               CountyHendry 
+                       Inf                          0                          0                          0 
+            CountyHennepin              CountyHenrico                CountyHenry             CountyHerkimer 
+                         0                          0                          0                          0 
+            CountyHernando             CountyHertford            CountyHettinger              CountyHickman 
+                         0                          0                          0                          0 
+             CountyHickory              CountyHidalgo             CountyHighland            CountyHighlands 
+                         0                          0                          0                          0 
+                CountyHill         CountyHillsborough            CountyHillsdale                CountyHinds 
+                         0                          0                          0                          0 
+            CountyHinsdale            CountyHitchcock              CountyHocking              CountyHockley 
+                       Inf                          0                          0                        Inf 
+            CountyHodgeman                 CountyHoke               CountyHolmes                 CountyHolt 
+                       Inf                        Inf                          0                        Inf 
+            CountyHonolulu                 CountyHood           CountyHood River               CountyHooker 
+                       Inf                          0                          0                          0 
+            CountyHopewell              CountyHopkins                CountyHorry           CountyHot Spring 
+                         0                          0                          0                          0 
+         CountyHot Springs             CountyHoughton              CountyHouston               CountyHoward 
+                         0                          0                          0                          0 
+              CountyHowell              CountyHubbard               CountyHudson             CountyHudspeth 
+                         0                        Inf                          0                          0 
+            CountyHuerfano               CountyHughes             CountyHumboldt            CountyHumphreys 
+                         0                          0                        Inf                          0 
+                CountyHunt            CountyHunterdon           CountyHuntingdon           CountyHuntington 
+                         0                        Inf                          0                          0 
+               CountyHuron           CountyHutchinson                 CountyHyde               CountyIberia 
+                       Inf                          0                        Inf                          0 
+           CountyIberville                  CountyIda                CountyIdaho             CountyImperial 
+                         0                        Inf                        Inf                          0 
+        CountyIndependence         CountyIndian River              CountyIndiana               CountyIngham 
+                         0                          0                        Inf                          0 
+                CountyInyo                CountyIonia                CountyIosco                 CountyIowa 
+                       Inf                          0                        Inf                        Inf 
+             CountyIredell                CountyIrion                 CountyIron             CountyIroquois 
+                         0                          0                          0                          0 
+               CountyIrwin             CountyIsabella               CountyIsanti               CountyIsland 
+                         0                          0                          0                        Inf 
+       CountyIsle of Wight               CountyItasca             CountyItawamba                CountyIzard 
+                         0                          0                          0                        Inf 
+                CountyJack              CountyJackson           CountyJames City               CountyJasper 
+                       Inf                          0                          0                          0 
+                 CountyJay           CountyJeff Davis            CountyJefferson      CountyJefferson Davis 
+                       Inf                          0                          0                          0 
+             CountyJenkins             CountyJennings              CountyJerauld               CountyJerome 
+                       Inf                        Inf                          0                          0 
+              CountyJersey            CountyJessamine               CountyJewell             CountyJim Hogg 
+                       Inf                        Inf                        Inf                        Inf 
+           CountyJim Wells           CountyJo Daviess              CountyJohnson             CountyJohnston 
+                       Inf                        Inf                          0                          0 
+               CountyJones            CountyJosephine                 CountyJuab         CountyJudith Basin 
+                         0                          0                        Inf                          0 
+              CountyJuneau              CountyJuniata            CountyKalamazoo             CountyKalkaska 
+                       Inf                        Inf                          0                          0 
+             CountyKanabec              CountyKanawha            CountyKandiyohi                 CountyKane 
+                         0                          0                          0                          0 
+            CountyKankakee               CountyKarnes                CountyKauai              CountyKaufman 
+                         0                        Inf                        Inf                          0 
+                 CountyKay              CountyKearney               CountyKearny                CountyKeith 
+                         0                        Inf                          0                          0 
+              CountyKemper      CountyKenai Peninsula              CountyKendall             CountyKennebec 
+                         0                        Inf                        Inf                          0 
+             CountyKenosha                 CountyKent               CountyKenton               CountyKeokuk 
+                         0                          0                          0                        Inf 
+                CountyKern                 CountyKerr              CountyKershaw    CountyKetchikan Gateway 
+                         0                          0                        Inf                          0 
+            CountyKewaunee             CountyKeweenaw            CountyKeya Paha               CountyKidder 
+                         0                        Inf                          0                          0 
+             CountyKimball               CountyKimble                 CountyKing       CountyKing and Queen 
+                       Inf                          0                          0                          0 
+         CountyKing George         CountyKing William           CountyKingfisher              CountyKingman 
+                       Inf                          0                        Inf                        Inf 
+               CountyKings            CountyKingsbury               CountyKinney                CountyKiowa 
+                         0                        Inf                          0                          0 
+          CountyKit Carson               CountyKitsap             CountyKittitas              CountyKittson 
+                       Inf                          0                        Inf                        Inf 
+             CountyKlamath              CountyKleberg            CountyKlickitat                 CountyKnox 
+                         0                        Inf                        Inf                          0 
+       CountyKodiak Island          CountyKoochiching             CountyKootenai            CountyKosciusko 
+                         0                        Inf                          0                        Inf 
+             CountyKossuth            CountyLa Crosse               CountyLa Paz             CountyLa Plata 
+                       Inf                        Inf                          0                        Inf 
+            CountyLa Salle              CountyLabette        CountyLac qui Parle           CountyLackawanna 
+                         0                        Inf                        Inf                          0 
+             CountyLaclede            CountyLafayette            CountyLafourche             CountyLaGrange 
+                       Inf                          0                          0                          0 
+                CountyLake    CountyLake of the Woods                CountyLamar                 CountyLamb 
+                         0                          0                          0                          0 
+            CountyLamoille              CountyLaMoure             CountyLampasas            CountyLancaster 
+                         0                        Inf                        Inf                          0 
+              CountyLander                 CountyLane             CountyLanglade               CountyLanier 
+                         0                          0                        Inf                          0 
+              CountyLapeer              CountyLaPorte              CountyLaramie              CountyLarimer 
+                       Inf                          0                        Inf                          0 
+               CountyLarue           CountyLas Animas               CountyLassen                CountyLatah 
+                       Inf                          0                          0                        Inf 
+             CountyLatimer           CountyLauderdale               CountyLaurel              CountyLaurens 
+                       Inf                          0                          0                          0 
+              CountyLavaca             CountyLawrence             CountyLe Flore             CountyLe Sueur 
+                         0                          0                          0                        Inf 
+                 CountyLea                CountyLeake          CountyLeavenworth              CountyLebanon 
+                       Inf                        Inf                        Inf                          0 
+                 CountyLee             CountyLeelanau              CountyLeflore               CountyLehigh 
+                         0                        Inf                          0                          0 
+               CountyLemhi              CountyLenawee               CountyLenoir                 CountyLeon 
+                       Inf                        Inf                          0                          0 
+              CountyLeslie              CountyLetcher                 CountyLevy                CountyLewis 
+                         0                        Inf                          0                        Inf 
+     CountyLewis and Clark            CountyLexington              CountyLiberty              CountyLicking 
+                         0                          0                          0                          0 
+           CountyLimestone              CountyLincoln                 CountyLinn             CountyLipscomb 
+                       Inf                          0                          0                        Inf 
+          CountyLitchfield         CountyLittle River             CountyLive Oak           CountyLivingston 
+                         0                        Inf                          0                          0 
+               CountyLlano                CountyLogan                 CountyLong               CountyLonoke 
+                       Inf                          0                        Inf                          0 
+              CountyLorain           CountyLos Alamos          CountyLos Angeles               CountyLoudon 
+                         0                        Inf                          0                          0 
+             CountyLoudoun               CountyLouisa                 CountyLoup                 CountyLove 
+                         0                          0                        Inf                          0 
+             CountyLowndes              CountyLubbock                CountyLucas                 CountyLuce 
+                         0                          0                          0                        Inf 
+             CountyLumpkin                 CountyLuna            CountyLunenburg              CountyLuzerne 
+                         0                          0                          0                          0 
+            CountyLycoming                CountyLyman            CountyLynchburg                 CountyLynn 
+                         0                          0                          0                          0 
+                CountyLyon             CountyMackinac               CountyMacomb                CountyMacon 
+                         0                          0                          0                          0 
+            CountyMacoupin               CountyMadera              CountyMadison              CountyMahaska 
+                         0                          0                          0                          0 
+            CountyMahnomen             CountyMahoning                CountyMajor              CountyMalheur 
+                         0                          0                        Inf                          0 
+            CountyManassas        CountyManassas Park              CountyManatee             CountyManistee 
+                         0                        Inf                          0                          0 
+           CountyManitowoc             CountyMarathon              CountyMarengo             CountyMaricopa 
+                         0                          0                          0                          0 
+              CountyMaries                CountyMarin            CountyMarinette               CountyMarion 
+                       Inf                          0                          0                          0 
+            CountyMariposa             CountyMarlboro            CountyMarquette             CountyMarshall 
+                       Inf                        Inf                          0                          0 
+              CountyMartin         CountyMartinsville                CountyMason               CountyMassac 
+                         0                          0                        Inf                          0 
+           CountyMatagorda    CountyMatanuska-Susitna              CountyMathews                 CountyMaui 
+                         0                          0                          0                        Inf 
+               CountyMaury             CountyMaverick                CountyMayes              CountyMcClain 
+                         0                        Inf                          0                        Inf 
+              CountyMcCone               CountyMcCook            CountyMcCormick            CountyMcCracken 
+                         0                        Inf                          0                          0 
+            CountyMcCreary            CountyMcCulloch            CountyMcCurtain             CountyMcDonald 
+                         0                        Inf                        Inf                          0 
+           CountyMcDonough             CountyMcDowell             CountyMcDuffie              CountyMcHenry 
+                         0                          0                          0                        Inf 
+            CountyMcIntosh               CountyMcKean             CountyMcKenzie             CountyMcKinley 
+                       Inf                          0                        Inf                          0 
+              CountyMcLean             CountyMcLennan               CountyMcLeod               CountyMcMinn 
+                         0                          0                          0                        Inf 
+             CountyMcNairy            CountyMcPherson                CountyMeade              CountyMeagher 
+                         0                        Inf                          0                          0 
+         CountyMecklenburg              CountyMecosta               CountyMedina               CountyMeeker 
+                         0                          0                        Inf                          0 
+               CountyMeigs               CountyMenard            CountyMendocino            CountyMenominee 
+                         0                          0                        Inf                          0 
+              CountyMerced               CountyMercer           CountyMeriwether              CountyMerrick 
+                         0                          0                        Inf                        Inf 
+           CountyMerrimack                 CountyMesa             CountyMetcalfe                CountyMiami 
+                         0                          0                          0                        Inf 
+          CountyMiami-Dade            CountyMiddlesex              CountyMidland              CountyMifflin 
+                         0                          0                          0                          0 
+               CountyMilam              CountyMillard           CountyMille Lacs               CountyMiller 
+                       Inf                          0                          0                          0 
+               CountyMills            CountyMilwaukee                CountyMiner              CountyMineral 
+                       Inf                          0                          0                        Inf 
+               CountyMingo             CountyMinidoka            CountyMinnehaha            CountyMissaukee 
+                         0                          0                          0                        Inf 
+         CountyMississippi             CountyMissoula             CountyMitchell               CountyMobile 
+                         0                          0                          0                          0 
+               CountyModoc               CountyMoffat               CountyMohave             CountyMoniteau 
+                       Inf                        Inf                        Inf                        Inf 
+            CountyMonmouth                 CountyMono               CountyMonona           CountyMonongalia 
+                         0                        Inf                          0                          0 
+              CountyMonroe             CountyMontague             CountyMontcalm             CountyMonterey 
+                         0                          0                          0                        Inf 
+           CountyMontezuma           CountyMontgomery          CountyMontmorency              CountyMontour 
+                       Inf                          0                          0                          0 
+            CountyMontrose                CountyMoody                CountyMoore                 CountyMora 
+                         0                          0                          0                          0 
+           CountyMorehouse               CountyMorgan              CountyMorrill               CountyMorris 
+                       Inf                          0                          0                          0 
+            CountyMorrison               CountyMorrow               CountyMorton               CountyMotley 
+                       Inf                          0                        Inf                          0 
+            CountyMoultrie            CountyMountrail                CountyMower           CountyMuhlenberg 
+                         0                        Inf                          0                          0 
+           CountyMultnomah               CountyMurray            CountyMuscatine             CountyMuscogee 
+                         0                          0                          0                          0 
+            CountyMuskegon            CountyMuskingum             CountyMuskogee          CountyMusselshell 
+                         0                          0                          0                        Inf 
+         CountyNacogdoches                CountyNance            CountyNantucket                 CountyNapa 
+                         0                          0                        Inf                          0 
+                CountyNash               CountyNassau         CountyNatchitoches              CountyNatrona 
+                         0                        Inf                        Inf                          0 
+              CountyNavajo              CountyNavarro               CountyNelson               CountyNemaha 
+                       Inf                          0                          0                        Inf 
+              CountyNeosho              CountyNeshoba                 CountyNess               CountyNevada 
+                         0                          0                        Inf                        Inf 
+          CountyNew Castle          CountyNew Hanover            CountyNew Haven             CountyNew Kent 
+                         0                          0                          0                        Inf 
+          CountyNew London           CountyNew Madrid             CountyNew York              CountyNewaygo 
+                         0                          0                        Inf                          0 
+            CountyNewberry              CountyNewport         CountyNewport News               CountyNewton 
+                         0                          0                          0                          0 
+           CountyNez Perce              CountyNiagara             CountyNicholas             CountyNicollet 
+                         0                          0                          0                          0 
+            CountyNiobrara                CountyNoble               CountyNobles              CountyNodaway 
+                         0                          0                          0                        Inf 
+               CountyNolan                 CountyNome              CountyNorfolk               CountyNorman 
+                         0                          0                          0                          0 
+         CountyNorth Slope          CountyNorthampton       CountyNorthumberland     CountyNorthwest Arctic 
+                         0                          0                          0                          0 
+              CountyNorton             CountyNottoway               CountyNowata              CountyNoxubee 
+                         0                        Inf                        Inf                          0 
+            CountyNuckolls               CountyNueces                  CountyNye              CountyO'Brien 
+                       Inf                          0                        Inf                        Inf 
+             CountyOakland                CountyObion                CountyOcean               CountyOceana 
+                         0                          0                          0                        Inf 
+           CountyOchiltree               CountyOconee               CountyOconto               CountyOgemaw 
+                         0                          0                        Inf                          0 
+                CountyOgle           CountyOglethorpe                 CountyOhio             CountyOkaloosa 
+                         0                          0                        Inf                          0 
+            CountyOkanogan           CountyOkeechobee             CountyOkfuskee             CountyOklahoma 
+                       Inf                        Inf                          0                          0 
+            CountyOkmulgee            CountyOktibbeha               CountyOldham               CountyOliver 
+                         0                          0                        Inf                          0 
+             CountyOlmsted               CountyOneida             CountyOnondaga               CountyOnslow 
+                         0                          0                          0                        Inf 
+             CountyOntario            CountyOntonagon               CountyOrange           CountyOrangeburg 
+                         0                        Inf                          0                        Inf 
+              CountyOregon              CountyOrleans                CountyOsage              CountyOsborne 
+                       Inf                          0                          0                          0 
+             CountyOsceola               CountyOscoda               CountyOswego                CountyOtero 
+                       Inf                          0                          0                        Inf 
+                CountyOtoe               CountyOtsego               CountyOttawa           CountyOtter Tail 
+                       Inf                          0                          0                          0 
+            CountyOuachita                CountyOuray            CountyOutagamie              CountyOverton 
+                         0                          0                          0                          0 
+                CountyOwen               CountyOwyhee               CountyOxford                CountyOzark 
+                       Inf                          0                        Inf                          0 
+             CountyOzaukee              CountyPacific                 CountyPage           CountyPalm Beach 
+                       Inf                        Inf                        Inf                          0 
+           CountyPalo Alto           CountyPalo Pinto              CountyPamlico               CountyPanola 
+                       Inf                          0                        Inf                          0 
+                CountyPark                CountyParke               CountyParker               CountyParmer 
+                         0                          0                        Inf                        Inf 
+               CountyPasco           CountyPasquotank              CountyPassaic              CountyPatrick 
+                         0                        Inf                          0                          0 
+            CountyPaulding               CountyPawnee              CountyPayette                CountyPayne 
+                       Inf                        Inf                        Inf                          0 
+               CountyPeach          CountyPearl River                CountyPecos              CountyPembina 
+                         0                          0                          0                        Inf 
+            CountyPemiscot         CountyPend Oreille               CountyPender            CountyPendleton 
+                         0                        Inf                          0                          0 
+          CountyPennington            CountyPenobscot               CountyPeoria                CountyPepin 
+                         0                          0                          0                        Inf 
+             CountyPerkins           CountyPerquimans                CountyPerry             CountyPershing 
+                       Inf                          0                          0                          0 
+              CountyPerson           CountyPetersburg            CountyPetroleum               CountyPettis 
+                         0                        Inf                        Inf                          0 
+              CountyPhelps         CountyPhiladelphia             CountyPhillips                CountyPiatt 
+                       Inf                          0                        Inf                        Inf 
+            CountyPickaway              CountyPickens              CountyPickett               CountyPierce 
+                         0                          0                          0                          0 
+                CountyPike                 CountyPima                CountyPinal                 CountyPine 
+                         0                          0                          0                          0 
+            CountyPinellas            CountyPipestone          CountyPiscataquis               CountyPitkin 
+                         0                          0                          0                        Inf 
+                CountyPitt            CountyPittsburg         CountyPittsylvania                CountyPiute 
+                         0                          0                          0                          0 
+              CountyPlacer          CountyPlaquemines               CountyPlatte            CountyPleasants 
+                       Inf                          0                        Inf                        Inf 
+              CountyPlumas             CountyPlymouth           CountyPocahontas             CountyPoinsett 
+                       Inf                          0                        Inf                          0 
+       CountyPointe Coupee                 CountyPolk              CountyPondera             CountyPontotoc 
+                         0                          0                        Inf                          0 
+                CountyPope             CountyPoquoson              CountyPortage               CountyPorter 
+                       Inf                        Inf                          0                          0 
+          CountyPortsmouth                CountyPosey         CountyPottawatomie        CountyPottawattamie 
+                         0                        Inf                          0                          0 
+              CountyPotter         CountyPowder River               CountyPowell                CountyPower 
+                         0                          0                        Inf                        Inf 
+           CountyPoweshiek             CountyPowhatan              CountyPrairie                CountyPratt 
+                         0                        Inf                          0                        Inf 
+              CountyPreble             CountyPrentiss             CountyPresidio         CountyPresque Isle 
+                         0                          0                          0                          0 
+             CountyPreston                CountyPrice        CountyPrince Edward        CountyPrince George 
+                         0                        Inf                        Inf                          0 
+     CountyPrince George's       CountyPrince William           CountyProvidence              CountyProwers 
+                         0                          0                          0                          0 
+              CountyPueblo              CountyPulaski           CountyPushmataha               CountyPutnam 
+                         0                          0                          0                          0 
+                CountyQuay         CountyQueen Anne's               CountyQueens              CountyQuitman 
+                       Inf                          0                          0                          0 
+               CountyRabun               CountyRacine              CountyRadford                CountyRains 
+                         0                          0                          0                        Inf 
+             CountyRaleigh                CountyRalls               CountyRamsey              CountyRandall 
+                       Inf                        Inf                          0                          0 
+            CountyRandolph               CountyRankin               CountyRansom              CountyRapides 
+                         0                        Inf                        Inf                          0 
+        CountyRappahannock              CountyRavalli              CountyRawlins                  CountyRay 
+                         0                          0                          0                        Inf 
+              CountyReagan                 CountyReal            CountyRed River           CountyRed Willow 
+                       Inf                          0                          0                        Inf 
+             CountyRedwood               CountyReeves              CountyRefugio                 CountyReno 
+                       Inf                          0                          0                        Inf 
+          CountyRensselaer             CountyRenville             CountyRepublic             CountyReynolds 
+                         0                        Inf                        Inf                          0 
+                CountyRhea                 CountyRice                 CountyRich           CountyRichardson 
+                         0                          0                          0                        Inf 
+            CountyRichland             CountyRichmond        CountyRichmond City                CountyRiley 
+                         0                          0                          0                          0 
+            CountyRinggold           CountyRio Arriba           CountyRio Blanco           CountyRio Grande 
+                       Inf                        Inf                        Inf                        Inf 
+              CountyRipley              CountyRitchie            CountyRiverside                CountyRoane 
+                         0                          0                          0                          0 
+             CountyRoanoke         CountyRoanoke City              CountyRoberts            CountyRobertson 
+                         0                          0                          0                          0 
+             CountyRobeson                 CountyRock          CountyRock Island           CountyRockbridge 
+                         0                          0                          0                        Inf 
+          CountyRockcastle             CountyRockdale           CountyRockingham             CountyRockland 
+                         0                          0                          0                          0 
+            CountyRockwall          CountyRoger Mills               CountyRogers              CountyRolette 
+                       Inf                          0                          0                        Inf 
+               CountyRooks            CountyRoosevelt            CountyRoscommon               CountyRoseau 
+                       Inf                        Inf                          0                          0 
+             CountyRosebud                 CountyRoss                CountyRoutt                CountyRowan 
+                       Inf                          0                        Inf                          0 
+             CountyRunnels                 CountyRush                 CountyRusk              CountyRussell 
+                         0                          0                        Inf                        Inf 
+          CountyRutherford              CountyRutland               CountySabine                  CountySac 
+                         0                        Inf                          0                        Inf 
+          CountySacramento            CountySagadahoc              CountySaginaw             CountySaguache 
+                         0                        Inf                          0                        Inf 
+               CountySalem               CountySaline            CountySalt Lake               CountySaluda 
+                         0                          0                          0                          0 
+             CountySampson        CountySan Augustine           CountySan Benito       CountySan Bernardino 
+                         0                          0                          0                          0 
+           CountySan Diego        CountySan Francisco          CountySan Jacinto          CountySan Joaquin 
+                         0                          0                        Inf                          0 
+            CountySan Juan      CountySan Luis Obispo            CountySan Mateo           CountySan Miguel 
+                       Inf                          0                          0                          0 
+        CountySan Patricio             CountySan Saba              CountySanborn              CountySanders 
+                         0                          0                          0                          0 
+            CountySandoval             CountySandusky             CountySangamon              CountySanilac 
+                       Inf                          0                          0                        Inf 
+             CountySanpete        CountySanta Barbara          CountySanta Clara           CountySanta Cruz 
+                         0                          0                          0                        Inf 
+            CountySanta Fe           CountySanta Rosa             CountySarasota             CountySaratoga 
+                       Inf                          0                          0                          0 
+             CountySargent                CountySarpy                 CountySauk             CountySaunders 
+                       Inf                        Inf                          0                        Inf 
+              CountySawyer          CountySchenectady           CountySchleicher               CountySchley 
+                       Inf                          0                          0                        Inf 
+           CountySchoharie          CountySchoolcraft             CountySchuyler           CountySchuylkill 
+                         0                          0                        Inf                          0 
+              CountyScioto             CountyScotland                CountyScott         CountyScotts Bluff 
+                         0                          0                          0                          0 
+             CountyScreven               CountyScurry               CountySearcy            CountySebastian 
+                         0                        Inf                        Inf                          0 
+            CountySedgwick             CountySeminole               CountySeneca           CountySequatchie 
+                         0                          0                        Inf                        Inf 
+            CountySequoyah               CountySevier               CountySeward          CountyShackelford 
+                         0                          0                          0                          0 
+             CountyShannon                CountySharp               CountyShasta              CountyShawano 
+                         0                          0                        Inf                        Inf 
+             CountyShawnee            CountySheboygan               CountyShelby           CountyShenandoah 
+                         0                          0                          0                          0 
+           CountySherburne             CountySheridan              CountySherman           CountyShiawassee 
+                       Inf                          0                          0                          0 
+            CountyShoshone               CountySibley               CountySierra           CountySilver Bow 
+                       Inf                          0                        Inf                          0 
+             CountySimpson                CountySioux             CountySiskiyou                CountySitka 
+                       Inf                        Inf                          0                          0 
+              CountySkagit CountySkagway Municipality             CountySkamania                CountySlope 
+                         0                          0                        Inf                        Inf 
+               CountySmith                CountySmyth            CountySnohomish               CountySnyder 
+                         0                        Inf                          0                          0 
+             CountySocorro               CountySolano             CountySomerset            CountySomervell 
+                       Inf                          0                          0                        Inf 
+              CountySonoma          CountySouthampton  CountySoutheast Fairbanks             CountySpalding 
+                         0                          0                          0                          0 
+         CountySpartanburg              CountySpencer                CountySpink              CountySpokane 
+                         0                        Inf                          0                          0 
+        CountySpotsylvania          CountySt. Bernard          CountySt. Charles            CountySt. Clair 
+                       Inf                          0                          0                          0 
+           CountySt. Croix          CountySt. Francis         CountySt. Francois            CountySt. James 
+                         0                          0                          0                          0 
+CountySt. John the Baptist            CountySt. Johns           CountySt. Joseph           CountySt. Landry 
+                       Inf                          0                          0                          0 
+        CountySt. Lawrence            CountySt. Louis       CountySt. Louis City            CountySt. Lucie 
+                         0                          0                          0                          0 
+          CountySt. Martin             CountySt. Mary           CountySt. Mary's          CountySt. Tammany 
+                         0                        Inf                        Inf                          0 
+            CountyStafford           CountyStanislaus              CountyStanley               CountyStanly 
+                         0                          0                        Inf                        Inf 
+             CountyStanton                CountyStark               CountyStarke                CountyStarr 
+                         0                          0                          0                          0 
+            CountyStaunton       CountySte. Genevieve              CountyStearns               CountySteele 
+                         0                        Inf                          0                          0 
+            CountyStephens           CountyStephenson             CountySterling              CountySteuben 
+                       Inf                          0                          0                          0 
+             CountyStevens              CountyStewart           CountyStillwater             CountyStoddard 
+                         0                        Inf                        Inf                          0 
+              CountyStokes                CountyStone            CountyStonewall               CountyStorey 
+                         0                          0                          0                        Inf 
+               CountyStory            CountyStrafford             CountyStutsman             CountySublette 
+                       Inf                          0                          0                        Inf 
+             CountySuffolk             CountySullivan                CountySully              CountySummers 
+                         0                          0                          0                          0 
+              CountySummit               CountySumner               CountySumter            CountySunflower 
+                         0                        Inf                          0                        Inf 
+               CountySurry          CountySusquehanna               CountySussex               CountySutter 
+                         0                        Inf                          0                        Inf 
+              CountySutton             CountySuwannee                CountySwain          CountySweet Grass 
+                         0                          0                          0                          0 
+          CountySweetwater                CountySwift              CountySwisher          CountySwitzerland 
+                         0                          0                          0                          0 
+              CountyTalbot            CountyTalladega         CountyTallahatchie           CountyTallapoosa 
+                         0                          0                          0                          0 
+                CountyTama                CountyTaney           CountyTangipahoa                 CountyTaos 
+                       Inf                          0                          0                        Inf 
+             CountyTarrant                 CountyTate             CountyTattnall               CountyTaylor 
+                         0                        Inf                          0                          0 
+            CountyTazewell               CountyTehama              CountyTelfair               CountyTeller 
+                         0                          0                          0                          0 
+              CountyTensas           CountyTerrebonne              CountyTerrell                CountyTerry 
+                         0                          0                          0                        Inf 
+               CountyTeton                CountyTexas               CountyThayer               CountyThomas 
+                       Inf                          0                        Inf                        Inf 
+        CountyThrockmorton             CountyThurston                 CountyTift            CountyTillamook 
+                         0                          0                          0                          0 
+             CountyTillman                CountyTioga               CountyTippah           CountyTippecanoe 
+                       Inf                        Inf                          0                          0 
+              CountyTipton           CountyTishomingo                CountyTitus                 CountyTodd 
+                         0                          0                          0                          0 
+             CountyTolland            CountyTom Green             CountyTompkins               CountyTooele 
+                       Inf                          0                        Inf                          0 
+               CountyToole               CountyToombs             CountyTorrance               CountyTowner 
+                       Inf                          0                          0                          0 
+               CountyTowns               CountyTraill         CountyTransylvania             CountyTraverse 
+                       Inf                        Inf                        Inf                        Inf 
+              CountyTravis                CountyTrego          CountyTrempealeau             CountyTreutlen 
+                         0                        Inf                        Inf                        Inf 
+               CountyTrigg              CountyTrimble              CountyTrinity                CountyTripp 
+                       Inf                          0                        Inf                          0 
+               CountyTroup            CountyTrousdale             CountyTrumbull               CountyTucker 
+                         0                        Inf                          0                        Inf 
+              CountyTulare                CountyTulsa               CountyTunica             CountyTuolumne 
+                         0                          0                        Inf                          0 
+              CountyTurner           CountyTuscaloosa           CountyTuscarawas              CountyTuscola 
+                         0                          0                          0                          0 
+              CountyTwiggs           CountyTwin Falls                CountyTyler              CountyTyrrell 
+                         0                          0                          0                          0 
+               CountyUinta               CountyUintah               CountyUlster             CountyUmatilla 
+                         0                        Inf                          0                        Inf 
+              CountyUnicoi                CountyUnion               CountyUpshur                CountyUpson 
+                         0                          0                          0                          0 
+               CountyUpton                 CountyUtah               CountyUvalde            CountyVal Verde 
+                       Inf                          0                        Inf                          0 
+      CountyValdez-Cordova             CountyValencia               CountyValley            CountyVan Buren 
+                         0                        Inf                        Inf                          0 
+            CountyVan Wert            CountyVan Zandt                CountyVance          CountyVanderburgh 
+                         0                          0                          0                          0 
+             CountyVenango              CountyVentura            CountyVermilion           CountyVermillion 
+                       Inf                        Inf                        Inf                        Inf 
+              CountyVernon             CountyVictoria                 CountyVigo                CountyVilas 
+                         0                          0                          0                          0 
+              CountyVinton       CountyVirginia Beach              CountyVolusia               CountyWabash 
+                         0                          0                          0                        Inf 
+             CountyWabasha            CountyWabaunsee               CountyWadena              CountyWagoner 
+                       Inf                        Inf                          0                          0 
+           CountyWahkiakum                 CountyWake              CountyWakulla                CountyWaldo 
+                         0                          0                          0                          0 
+              CountyWalker          CountyWalla Walla              CountyWallace               CountyWaller 
+                         0                          0                          0                          0 
+             CountyWallowa                CountyWalsh             CountyWalthall               CountyWalton 
+                       Inf                          0                          0                          0 
+            CountyWalworth              CountyWapello                 CountyWard                 CountyWare 
+                         0                          0                          0                          0 
+              CountyWarren              CountyWarrick              CountyWasatch                CountyWasco 
+                         0                          0                        Inf                          0 
+              CountyWaseca             CountyWashakie             CountyWashburn           CountyWashington 
+                       Inf                          0                        Inf                          0 
+             CountyWashita               CountyWashoe            CountyWashtenaw              CountyWatauga 
+                       Inf                          0                          0                          0 
+            CountyWatonwan             CountyWaukesha              CountyWaupaca             CountyWaushara 
+                         0                        Inf                        Inf                          0 
+               CountyWayne           CountyWaynesboro              CountyWeakley                 CountyWebb 
+                         0                          0                        Inf                          0 
+               CountyWeber              CountyWebster                 CountyWeld                CountyWells 
+                         0                          0                          0                        Inf 
+    CountyWest Baton Rouge         CountyWest Carroll       CountyWest Feliciana          CountyWestchester 
+                         0                          0                        Inf                          0 
+        CountyWestmoreland               CountyWeston               CountyWetzel              CountyWexford 
+                         0                        Inf                        Inf                          0 
+             CountyWharton              CountyWhatcom              CountyWheeler                CountyWhite 
+                       Inf                          0                        Inf                          0 
+          CountyWhite Pine            CountyWhiteside            CountyWhitfield              CountyWhitley 
+                       Inf                        Inf                          0                          0 
+             CountyWhitman               CountyWibaux              CountyWichita             CountyWicomico 
+                         0                          0                          0                          0 
+           CountyWilbarger               CountyWilcox               CountyWilkes               CountyWilkin 
+                       Inf                          0                          0                          0 
+           CountyWilkinson                 CountyWill              CountyWillacy             CountyWilliams 
+                         0                          0                        Inf                        Inf 
+        CountyWilliamsburg           CountyWilliamson               CountyWilson           CountyWinchester 
+                         0                          0                        Inf                          0 
+             CountyWindham              CountyWindsor              CountyWinkler                 CountyWinn 
+                         0                        Inf                          0                          0 
+           CountyWinnebago           CountyWinneshiek               CountyWinona              CountyWinston 
+                         0                        Inf                          0                        Inf 
+                CountyWirt                 CountyWise                 CountyWood             CountyWoodbury 
+                       Inf                        Inf                          0                          0 
+            CountyWoodford                CountyWoods              CountyWoodson             CountyWoodward 
+                       Inf                          0                          0                        Inf 
+           CountyWorcester                CountyWorth               CountyWright              CountyWyandot 
+                         0                          0                        Inf                          0 
+           CountyWyandotte              CountyWyoming                CountyWythe               CountyYadkin 
+                         0                        Inf                          0                          0 
+              CountyYakima            CountyYalobusha              CountyYamhill               CountyYancey 
+                         0                        Inf                          0                          0 
+             CountyYankton                CountyYates              CountyYavapai                CountyYazoo 
+                       Inf                        Inf                        Inf                          0 
+                CountyYell      CountyYellow Medicine          CountyYellowstone               CountyYoakum 
+                       Inf                          0                          0                        Inf 
+                CountyYolo                 CountyYork                CountyYoung                 CountyYuba 
+                         0                          0                        Inf                          0 
+                CountyYuma               CountyZapata               CountyZavala                     Urban1 
+                         0                        Inf                          0                        Inf 
+        GroupQuartersFlag1           LowIncomeTracts1               lahunv1share                   PCTGQTRS 
+                       Inf                        Inf                        Inf                        Inf 
+        MedianFamilyIncome                   lawhite1                   lablack1                   laasian1 
+                       Inf                        Inf                        Inf                        Inf 
+                   lahisp1                   lanhopi1                 laomultir1                    laaian1 
+                       Inf                        Inf                        Inf                          0 
+                  lakids10                    lakids1                  TractKids                 laseniors1 
+                       Inf                          0                        Inf                        Inf 
+               laseniors10               TractSeniors                 TractWhite                 TractBlack 
+                       Inf                        Inf                        Inf                          0 
+                TractAsian                 TractNHOPI                  TractAIAN               TractOMultir 
+                         0                          0                        Inf                          0 
+             TractHispanic                  TractHUNV                  TractSNAP                PovertyRate 
+                         0                          0                        Inf                          0 
