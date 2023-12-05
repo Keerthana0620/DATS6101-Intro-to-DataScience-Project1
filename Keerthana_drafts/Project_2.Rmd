@@ -39,11 +39,11 @@ loadPkg("ggplot2")
 ```{r}
 df <- data.frame(read.csv("FoodDesert2015.csv")) 
 head(df)
-summary(df)
+#summary(df)
 ``` 
 
 ############################################################
-# Can we quantify the impact of the "PovertyRate" and "Group Quarters" on the likelihood of a census tract being classified as a food desert?
+# Question 2 : Can we quantify the impact of the "PovertyRate" and "Group Quarters" on the likelihood of a census tract being classified as a food desert?
 ############################################################
 
 
@@ -87,10 +87,13 @@ The p-value is extremely small, indicating strong evidence against the null hypo
 df$LILATracts_1And10 <- factor(df$LILATracts_1And10)
 df$GroupQuartersFlag <- factor(df$GroupQuartersFlag)
 
-model <- glm(LILATracts_1And10 ~ PovertyRate + GroupQuartersFlag, family = "binomial", data = df)
+model <- glm(LILATracts_1And10 ~ PovertyRate + GroupQuartersFlag, family = binomial(link = "logit"), data = df)
 
 summary(model)
 ```
+For a one-unit increase in the PovertyRate, the log-odds of the response variable being 1 increase by 0.055816. The coefficient is highly significant (p-value < 2e-16).
+
+GroupQuartersFlag of 1 is associated with a decrease of 0.643663 in the log-odds of the response variable being 1. The coefficient is significant (p-value = 8e-06).
 
 AIC is low here compared to other models.
 
@@ -102,15 +105,41 @@ xkabledply(model, title = paste("Logistic Regression :", format(formula(model)) 
 
 ```{r growthDecayFactors, results='markup', collapse=F}
 expcoeff = exp(coef(model))
-# expcoeff
-xkabledply( as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
+expcoeff
+#xkabledply(as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
+```
+
+for a one-unit increase in PovertyRate, the odds of the event (typically the event being predicted by the logistic regression) increase by a factor of approximately 1.0574030.
+
+for a one-unit increase in GroupQuartersFlag1, the odds of the event (typically the event being predicted by the logistic regression) decrease by a factor of approximately 0.5253647.
+
+
+```{r}
+#install.packages("car")
+df$Urban <- factor(df$Urban)
+library(car)
+
+# Assuming df is your data frame with predictor variables
+# Replace 'df' with your actual data frame and include only the predictor variables
+
+# Fit a linear regression model (assuming 'response_variable' is your response variable)
+model <- glm(LILATracts_1And10 ~ HUNVFlag + LATractsVehicle_20, data = df, family = binomial(link = "logit"))
+
+# TractWhite+TractBlack+TractAsian+TractNHOPI+TractAIAN+TractOMultir+TractHispanic+lawhite10+lawhite10share+lablack10+lablack10share+laasian10+laasian10share+lanhopi10+lanhopi10share+laaian10+laaian10share+laomultir10+laomultir10share+lahisp10+lahisp10share
+
+# Calculate VIF
+vif_values <- car::vif(model)
+
+# Print VIF values
+print(vif_values)
 ```
 
 ## Model 2: PovertyRate
 
 ```{r model1}
+df$Urban <- factor(df$Urban)
 
-model1 <- glm(LILATracts_1And10 ~ PovertyRate, family = "binomial", data = df)
+model1 <- glm(LILATracts_1And10 ~ PovertyRate, family = binomial(link = "logit"), data = df)
 
 summary(model1)
 ```
@@ -123,51 +152,127 @@ AIC greater than model 1.
 
 ```{r model2}
 
-model2 <- glm(LILATracts_1And10 ~ GroupQuartersFlag, family = "binomial", data = df)
+model2 <- glm(LILATracts_1And10 ~ GroupQuartersFlag, family = binomial(link = "logit"), data = df)
 
 summary(model2)
 ```
 
 coefficients are found significant (small p-values). AIC greater than model 2.
 
+## Model 4: PovertyRate : Urban
+
+```{r model1}
+
+model4 <- glm(LILATracts_1And10 ~ PovertyRate * Urban, family = binomial(link = "logit"), data = df)
+
+summary(model4)
+```
+
+The interaction effect. It represents how the effect of PovertyRate on the log-odds changes when Urban is 1. In this case, the log-odds decrease by 0.039517.
+
+A negative interaction term suggests that the effect of PovertyRate on the log-odds is weakened when Urban is 1.
+
+* When Urban is 0 (not an urban area):
+An increase in PovertyRate by one unit is associated with a larger increase in the log-odds of the response variable being 1.
+
+* When Urban is 1 (urban area):
+
+An increase in PovertyRate by one unit is associated with a smaller increase in the log-odds of the response variable being 1.
+
+In simpler terms, the impact of PovertyRate on the response variable depends on whether the area is urban or not. The negative coefficient indicates that the effect of PovertyRate is somewhat mitigated in urban areas compared to non-urban areas.
+
+## Model 5: PovertyRate : GroupQuartersFlag
+
+```{r model1}
+
+model5 <- glm(LILATracts_1And10 ~ PovertyRate * GroupQuartersFlag, family = binomial(link = "logit"), data = df)
+
+summary(model5)
+```
+
+The interaction effect. It represents how the effect of PovertyRate on the log-odds changes when GroupQuartersFlag is 1. In this case, the log-odds decrease by 0.0314293.
+
+* In areas without group quarters (GroupQuartersFlag is 0), 
+an increase in PovertyRate is associated with a relatively larger increase in the log-odds of the response variable being 1.
+
+* In areas with group quarters (GroupQuartersFlag is 1), 
+the positive impact of PovertyRate on the log-odds is moderated, resulting in a smaller increase in the log-odds.
+
+
+## Model 6: GroupQuartersFlag : Urban
+
+```{r model2}
+
+model6 <- glm(LILATracts_1And10 ~ GroupQuartersFlag * Urban, family = binomial(link = "logit"), data = df)
+
+summary(model6)
+```
+
+In non-urban areas, the presence of group quarters (GroupQuartersFlag1) is not statistically significant in predicting the log-odds of the response variable being 1.
+
+In urban areas, the presence of group quarters (GroupQuartersFlag1) is associated with an increase in the log-odds of the response variable being 1. However, the statistical significance of this effect is not strong based on the p-value.
+
+## Model 7: GroupQuartersFlag : Urban : Povertyrate
+
+```{r model2}
+
+model6 <- glm(LILATracts_1And10 ~ GroupQuartersFlag + Urban + PovertyRate, family = binomial(link = "logit"), data = df)
+
+summary(model6)
+```
+
+
 ############################################################
 # What specific factors most significantly contribute to a tract being classified as a food desert?
 ############################################################
 
 ```{r}
-df_subset <- df[, c('Urban', 'POP2010', 'OHU2010', 'GroupQuartersFlag', 'NUMGQTRS', 'PCTGQTRS', 'LILATracts_Vehicle', 'HUNVFlag', 'LowIncomeTracts', 'PovertyRate', 'MedianFamilyIncome', 'LA1and10', 'LATracts1', 'LATracts10', 'LATractsVehicle_20')]
-
-df_subset
+df_subset = subset(df, select = -c(CensusTract,State,County,LowIncomeTracts))
+df_subset$Urban = as.factor(df_subset$Urban)
+df_subset$LILATracts_halfAnd10 = as.factor(df_subset$LILATracts_halfAnd10)
+df_subset$LILATracts_1And20 = as.factor(df_subset$LILATracts_1And20)
+df_subset$LILATracts_Vehicle = as.factor(df_subset$LILATracts_Vehicle)
+df_subset$HUNVFlag = as.factor(df_subset$HUNVFlag)
+# df_subset$LowIncomeTracts = as.factor(df_subset$LowIncomeTracts)
+df_subset$LA1and10 = as.factor(df_subset$LA1and10)
+df_subset$LAhalfand10 = as.factor(df_subset$LAhalfand10)
+df_subset$LA1and20 = as.factor(df_subset$LA1and20)
+df_subset$LATracts_half = as.factor(df_subset$LATracts_half)
+df_subset$LATracts1 = as.factor(df_subset$LATracts1)
+df_subset$LATracts10 = as.factor(df_subset$LATracts10)
+df_subset$LATracts20 = as.factor(df_subset$LATracts20)
+df_subset$LATractsVehicle_20 = as.factor(df_subset$LATractsVehicle_20)
 
 ```
 
-```{r featureSelect}
 
-#str(df)
-#df_subset = subset(df, select = -c(LILATracts_1And10, CensusTract, State, County))
-df_subset$y = df$LILATracts_1And10
+```{r forward_step_LG}
+# Load necessary library
+library(stats)
 
-#convert some columns into factos as appropriate
-df_subset$Urban = factor(df_subset$Urban)
-#df_subset$LILATracts_halfAnd10 = factor(df_subset$LILATracts_halfAnd10)
-#df_subset$LILATracts_1And20 = factor(df_subset$LILATracts_1And20)
-df_subset$LILATracts_Vehicle = factor(df_subset$LILATracts_Vehicle)
-df_subset$HUNVFlag = factor(df_subset$HUNVFlag)
-df_subset$LowIncomeTracts = factor(df_subset$LowIncomeTracts)
-df_subset$LA1and10 = factor(df_subset$LA1and10)
-#df_subset$LAhalfand10 = factor(df_subset$LAhalfand10)
-#df_subset$LA1and20 = factor(df_subset$LA1and20)
-#df_subset$LATracts_half = factor(df_subset$LATracts_half)
-df_subset$LATracts1 = factor(df_subset$LATracts1)
-df_subset$LATracts10 = factor(df_subset$LATracts10)
-#df_subset$LATracts20 = factor(df_subset$LATracts20)
-df_subset$LATractsVehicle_20 = factor(df_subset$LATractsVehicle_20)
+# Assuming your data is in a dataframe called 'data' and the response variable is 'response'
+# Replace 'response' with your actual response variable name
 
+# Initial model with only the intercept (no predictors)
+initial_model <- glm(LILATracts_1And10 ~ 1, data = df_subset, family = binomial(link = "logit"))
 
-#df_subset$y <- ifelse(df_subset$y == 1,TRUE,FALSE)
-df_subset$y = factor(df_subset$y)
-str(df_subset)
+# Full model with all potential predictors
+full_model <- glm(LILATracts_1And10 ~ ., data = df_subset, family = binomial(link = "logit"))
+
+# Perform stepwise forward selection
+stepwise_model <- step(initial_model, scope = list(lower = initial_model, upper = full_model), direction = "forward")
+
+# View the summary of the selected model
+summary(stepwise_model)
+
 ```
+
+
+
+
+
+########### Trial omit
+
 
 ```{r leaps}
 loadPkg("pROC") 
@@ -189,23 +294,126 @@ MedianFamilyIncome
 LATracts1
 LATractsVehicle_20
 
+## Model glm 1
+
 ```{r}
-model_imp <- glm(LILATracts_1And10 ~ GroupQuartersFlag + PovertyRate + HUNVFlag + MedianFamilyIncome + LATracts1 + LATractsVehicle_20, family = "binomial", data = df)
+model_glm1 <- glm(LILATracts_1And10 ~ GroupQuartersFlag + PovertyRate + MedianFamilyIncome + LATracts1 + HUNVFlag + LATractsVehicle_20, family = binomial(link = "logit"), data = df_subset)
+
+summary(model_glm1)
+
+predict_model <- predict(model_glm1, df_subset, type='response')
+df_subset$pred_model_glm1 <- ifelse(predict_model >= 0.5, 1, 0)
+accuracy <- mean((df_subset$pred_model_glm1)== (df_subset$LILATracts_1And10))
+
+accuracy
+
+```
+
+```{r}
+
+cm = table(df_subset$LILATracts_1And10,model_glm1$fitted.values>.5)
+xkabledply( table(df_subset$LILATracts_1And10,model_glm1$fitted.values>.5), title = "Confusion matrix from Logit Model" )
+round(100*(cm[1,1]+cm[2,2])/sum(cm), digits=1)
+```
+
+The total accuracy (using the default cutoff of 0.5) is `r round(100*(cm[1,1]+cm[2,2])/sum(cm), digits=1)`% which is pretty decent.
+
+Receiver-Operator-Characteristic (ROC) curve and Area-Under-Curve (AUC)
+
+ROC and AUC measures the true positive rate (or sensitivity) against the false positive rate (or specificity). The AUC is always between 0.5 and 1.  
+
+```{r }
+loadPkg("pROC")
+df_demo = df_subset['LILATracts_1And10']
+df_demo$prob1=predict(model_glm1, type = c("response")) # Add new column of predicted probabilities
+h <- roc(LILATracts_1And10~prob1, data=df_demo)
+auc(h)
+plot(h)
+```
+
+## Model glm 2
+
+
+```{r}
+model_glm2 <- glm(LILATracts_1And10 ~ OHU2010 + LA1and20 + LATracts10 + GroupQuartersFlag + HUNVFlag * LATractsVehicle_20 + MedianFamilyIncome * PovertyRate + lalowi1share + lakids1share + lahisp1share + laseniors10share + lawhite1share + lablack1share + laaian1share + laomultir10share, family = binomial(link = "logit"), data = df_subset)
+
+summary(model_glm2)
+
+predict_model <- predict(model_glm2, df_subset, type='response')
+df_subset$pred_model_glm2 <- ifelse(predict_model >= 0.5, 1, 0)
+accuracy <- mean((df_subset$pred_model_glm2)== (df_subset$LILATracts_1And10))
+
+accuracy
+
+```
+
+```{r}
+
+cm = table(df_subset$LILATracts_1And10,model_glm2$fitted.values>.5)
+xkabledply( table(df_subset$LILATracts_1And10,model_glm2$fitted.values>.5), title = "Confusion matrix from Logit Model" )
+round(100*(cm[1,1]+cm[2,2])/sum(cm), digits=1)
+```
+
+The total accuracy (using the default cutoff of 0.5) is `r round(100*(cm[1,1]+cm[2,2])/sum(cm), digits=1)`% which is pretty decent.
+
+Receiver-Operator-Characteristic (ROC) curve and Area-Under-Curve (AUC)
+
+ROC and AUC measures the true positive rate (or sensitivity) against the false positive rate (or specificity). The AUC is always between 0.5 and 1.  
+
+```{r }
+loadPkg("pROC")
+df_demo$prob2=predict(model_glm2, type = c("response")) # Add new column of predicted probabilities
+h <- roc(LILATracts_1And10~prob2, data=df_demo)
+auc(h)
+plot(h)
+```
+
+
+## Model glm 4
+
+
+```{r}
+model_glm4 <- glm(LILATracts_1And10 ~ lahunv1share + Urban + lakids10 + lawhite1 + laseniors10 + lablack1 + laomultir1 + TractAsian + laaian1 + TractHUNV + TractWhite + lakids1 + TractOMultir + GroupQuartersFlag + PovertyRate + TractSNAP, family = binomial(link = "logit"), data = df_subset)
+
+summary(model_glm4)
+
+predict_model <- predict(model_glm4, df_subset, type='response')
+df_subset$pred_model_glm4 <- ifelse(predict_model >= 0.5, 1, 0)
+accuracy <- mean((df_subset$pred_model_glm4)== (df_subset$LILATracts_1And10))
+
+accuracy
+
+```
+
+```{r}
+
+cm = table(df_subset$LILATracts_1And10,model_glm4$fitted.values>.5)
+xkabledply( table(df_subset$LILATracts_1And10,model_glm4$fitted.values>.5), title = "Confusion matrix from Logit Model" )
+round(100*(cm[1,1]+cm[2,2])/sum(cm), digits=1)
+```
+
+The total accuracy (using the default cutoff of 0.5) is `r round(100*(cm[1,1]+cm[2,2])/sum(cm), digits=1)`% which is pretty decent.
+
+Receiver-Operator-Characteristic (ROC) curve and Area-Under-Curve (AUC)
+
+ROC and AUC measures the true positive rate (or sensitivity) against the false positive rate (or specificity). The AUC is always between 0.5 and 1.  
+
+```{r }
+loadPkg("pROC")
+df_demo = df['LILATracts_1And10']
+df_demo$prob4=predict(model_glm4, type = c("response")) # Add new column of predicted probabilities
+h <- roc(LILATracts_1And10~prob4, data=df_demo)
+auc(h)
+plot(h)
+```
+
+```{r}
+model_imp <- glm(LILATracts_1And10 ~ Urban + lahunv1share + lablack1 + lahisp1 + laomultir1 + laaian1 + lakids10 + lakids1 + laseniors10 + TractWhite + TractWhite + TractAsian + TractNHOPI + TractHispanic + TractHUNV + PovertyRate, family = binomial(link = "logit"), data = df)
 
 summary(model_imp)
+
 ```
 
-```{r bestglm, results='markup'}
-# loadPkg("bestglm")
-res.bestglm <- bestglm(Xy = df_subset, family = binomial,
-            IC = "AIC",                 # Information criteria for
-            method = "exhaustive")
-summary(res.bestglm)
-res.bestglm$BestModels
-summary(res.bestglm$BestModels)
-# unloadPkg("bestglm") 
-# unloadPkg("leaps") # leaps is required by bestglm, thus cannot be unloaded before bestglm
-```
 
 ############################################################
 # How does the model's performance vary across different demographic groups?
@@ -226,6 +434,10 @@ summary(model_urbanWhite)
 model_urbanBlack <- glm(LILATracts_1And10 ~ lablack1 + lablack1share + TractBlack, family = "binomial", data = df_Urban)
 summary(model_urbanBlack)
 
+cm = confusionMatrix( predict(kfit, type = "class"), reference = kyphosis[, "Kyphosis"] ) # from caret library
+  # 
+  cmaccu = cm$overall['Accuracy']
+  
 ```
 
 ```{r}
@@ -395,16 +607,17 @@ auc(h7)
 
 ```{r HosmerLemeshow}
 loadPkg("ResourceSelection") # function hoslem.test( ) for logit model evaluation
-admitLogitHoslem = hoslem.test(df_Urban$LILATracts_1And10, fitted(model_urbanWhite)) # Hosmer and Lemeshow test, a chi-squared test
+admitLogitHoslem = hoslem.test(df$LILATracts_1And10, fitted(model_imp)) # Hosmer and Lemeshow test, a chi-squared test
 unloadPkg("ResourceSelection") 
 admitLogitHoslem
 ```
 
 ```{r roc_auc}
 loadPkg("pROC") # receiver operating characteristic curve, gives the diagnostic ability of a binary classifier system as its discrimination threshold is varied. The curve is on sensitivity/recall/true-positive-rate vs false_alarm/false-positive-rate/fall-out.
+df_demo = df
 prob=predict(model_imp, type = "response" )
-df_subset$prob=prob
-h <- roc(y~prob, data=df_subset)
+df_demo$prob=prob
+h <- roc(LILATracts_1And10~prob, data=df_demo)
 auc(h) # area-under-curve prefer 0.8 or higher.
 plot(h)
 # unloadPkg("pROC")
@@ -412,9 +625,17 @@ plot(h)
 
 ```{r McFadden}
 loadPkg("pscl") # use pR2( ) function to calculate McFadden statistics for model eval
-admitLogitpr2 = pR2(model_urbanWhite)
+admitLogitpr2 = pR2(model_imp)
 admitLogitpr2
 unloadPkg("pscl") 
+```
+```{r confusionMatrix, results='markup'}
+loadPkg("ModelMetrics")
+# confusionMatrix(admitLogit)
+conf_matrix =confusionMatrix(actual=model_imp$y,predicted=model_imp$fitted.values)
+unloadPkg("ModelMetrics")
+
+conf_matrix$
 ```
 
 ## Total:
@@ -506,17 +727,68 @@ auc(h7)
 # unloadPkg("pROC")
 ```
 
+## Checking with Final model:
+
+
+```{r}
+model_glm2 <- glm(LILATracts_1And10 ~ OHU2010 + LA1and20 + LATracts10 + LATractsVehicle_20 + GroupQuartersFlag + PovertyRate + HUNVFlag + MedianFamilyIncome + lalowi1share + lakids1share + laaian1share * TractAIAN, family = binomial(link = "logit"), data = df_subset)
+
+# lahisp1share + lawhite1share + lablack1share + laaian1share + laomultir10share + laseniors10share
+# TractNHOPI
+# laasian10 + TractAsian
+# TractHispanic + lahisp1share
+# lawhite1share + TractWhite
+# lablack1 + TractBlack
+# laaian1share + TractAIAN
+# laomultir1 + TractOMultir
+
+
+summary(model_glm2)
+
+predict_model <- predict(model_glm2, df_subset, type='response')
+df_subset$pred_model_glm2 <- ifelse(predict_model >= 0.5, 1, 0)
+accuracy <- mean((df_subset$pred_model_glm2)== (df_subset$LILATracts_1And10))
+
+accuracy
+
+```
+
+```{r}
+
+cm = table(df_subset$LILATracts_1And10,model_glm2$fitted.values>.5)
+xkabledply( table(df_subset$LILATracts_1And10,model_glm2$fitted.values>.5), title = "Confusion matrix from Logit Model" )
+round(100*(cm[1,1]+cm[2,2])/sum(cm), digits=1)
+```
+
+The total accuracy (using the default cutoff of 0.5) is `r round(100*(cm[1,1]+cm[2,2])/sum(cm), digits=1)`% which is pretty decent.
+
+Receiver-Operator-Characteristic (ROC) curve and Area-Under-Curve (AUC)
+
+ROC and AUC measures the true positive rate (or sensitivity) against the false positive rate (or specificity). The AUC is always between 0.5 and 1.  
+
+```{r }
+loadPkg("pROC")
+df_demo$prob2=predict(model_glm2, type = c("response")) # Add new column of predicted probabilities
+h <- roc(LILATracts_1And10~prob2, data=df_demo)
+auc(h)
+plot(h)
+```
+
+
+
+
+
 
 ############################################################
 # Correlation
 ############################################################
 
 ```{r}
-#df <- data.frame(read.csv("FoodDesert2015.csv")) 
+# df <- data.frame(read.csv("FoodDesert2015.csv")) 
 #df_corr = subset(df, select = -c(CensusTract, State, County))
-df_subset <- df[, c('LILATracts_1And10', 'Urban', 'POP2010', 'OHU2010', 'GroupQuartersFlag', 'NUMGQTRS', 'PCTGQTRS', 'LILATracts_Vehicle', 'HUNVFlag', 'LowIncomeTracts', 'PovertyRate', 'MedianFamilyIncome', 'LA1and10', 'LATracts1', 'LATracts10', 'LATractsVehicle_20')]
+df_corr <- subset(df, select = c(TractWhite,TractBlack,TractAsian,TractNHOPI,TractAIAN,TractOMultir,TractHispanic,lawhite10,lawhite10share,lablack10,lablack10share,laasian10,laasian10share,lanhopi10,lanhopi10share,laaian10,laaian10share,laomultir10,laomultir10share,lahisp10,lahisp10share, lawhite1,lawhite1share,lablack1,lablack1share,laasian1,laasian1share,lanhopi1,lanhopi1share,laaian1,laaian1share,laomultir1,laomultir1share,lahisp1,lahisp1share))
 
-correlation_matrix <- cor(df_subset)
+correlation_matrix <- cor(df_corr)
 
 # Print the correlation matrix
 print(correlation_matrix)
@@ -531,3 +803,26 @@ corrplot(mtcarscor, method = "number")
 ```
 
 
+```{r}
+
+library(ggplot2)
+library(dplyr)
+df %>%
+  filter(LILATracts_1And10 == 1) %>%
+  ggplot(aes(x = laomultir1)) +
+  geom_histogram(bins = 50,fill = "skyblue", color="darkred") +
+  geom_density(alpha = 0.5,fill= "red", color="darkred") +
+  labs(title = "Percentage of total population who does not have vehicles in food desert")
+
+```
+
+```{r}
+qqnorm(df$lawhite1, main="Q-Q plot of Baseball player heights") 
+qqline(df$lawhite1)
+#shapiro.test(df$lawhite1) # Shapiro-Wilk test for normality
+ks.test(df$lawhite1,pnorm) # Kolmogorov-Smirnov Tests against normal distribution
+```
+
+```{r}
+mlbclean = outlierKD2(df, laomultir1, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
