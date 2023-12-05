@@ -1,0 +1,1895 @@
+
+Call:
+glm(formula = as.formula(formula_str), family = binomial(link = "logit"), 
+    data = data)
+
+Coefficients: (1 not defined because of singularities)
+                            Estimate Std. Error   z value Pr(>|z|)    
+(Intercept)                -5.83e+15   5.54e+07 -1.05e+08   <2e-16 ***
+StateAlaska                 1.90e+15   3.97e+07  4.79e+07   <2e-16 ***
+StateArizona               -3.47e+14   1.97e+07 -1.76e+07   <2e-16 ***
+StateArkansas               2.25e+14   4.99e+06  4.51e+07   <2e-16 ***
+StateCalifornia            -2.34e+14   5.38e+06 -4.34e+07   <2e-16 ***
+StateColorado              -1.09e+13   4.68e+06 -2.33e+06   <2e-16 ***
+StateConnecticut            1.86e+14   9.07e+06  2.05e+07   <2e-16 ***
+StateDelaware               2.29e+14   1.04e+07  2.21e+07   <2e-16 ***
+StateDistrict of Columbia  -4.98e+14   5.57e+07 -8.94e+06   <2e-16 ***
+StateFlorida               -1.01e+14   4.12e+06 -2.45e+07   <2e-16 ***
+StateGeorgia                5.29e+13   4.00e+06  1.32e+07   <2e-16 ***
+StateHawaii                -4.00e+24   8.53e+17 -4.68e+06   <2e-16 ***
+StateIdaho                  2.66e+13   1.15e+07  2.31e+06   <2e-16 ***
+StateIllinois              -3.34e+13   3.94e+06 -8.47e+06   <2e-16 ***
+StateIndiana               -6.05e+13   3.83e+06 -1.58e+07   <2e-16 ***
+StateIowa                  -6.64e+13   4.43e+06 -1.50e+07   <2e-16 ***
+StateKansas                -9.55e+13   5.15e+06 -1.86e+07   <2e-16 ***
+StateKentucky              -1.18e+14   4.03e+06 -2.93e+07   <2e-16 ***
+StateLouisiana             -7.07e+13   5.16e+06 -1.37e+07   <2e-16 ***
+StateMaine                  1.73e+14   6.55e+06  2.64e+07   <2e-16 ***
+StateMaryland              -1.48e+13   5.02e+06 -2.95e+06   <2e-16 ***
+StateMassachusetts         -1.15e+14   4.96e+06 -2.32e+07   <2e-16 ***
+StateMichigan              -1.42e+14   4.37e+06 -3.24e+07   <2e-16 ***
+StateMinnesota              1.75e+14   5.41e+06  3.23e+07   <2e-16 ***
+StateMississippi            2.53e+13   5.06e+06  4.99e+06   <2e-16 ***
+StateMissouri              -1.37e+12   4.07e+06 -3.37e+05   <2e-16 ***
+StateMontana                3.27e+14   9.36e+06  3.49e+07   <2e-16 ***
+StateNebraska              -1.05e+14   5.17e+06 -2.03e+07   <2e-16 ***
+StateNevada                 1.46e+14   6.54e+06  2.23e+07   <2e-16 ***
+StateNew Hampshire         -5.49e+13   7.38e+06 -7.44e+06   <2e-16 ***
+StateNew Jersey            -2.89e+14   4.96e+06 -5.84e+07   <2e-16 ***
+StateNew Mexico            -4.34e+14   1.15e+07 -3.76e+07   <2e-16 ***
+StateNew York              -1.40e+14   4.00e+06 -3.50e+07   <2e-16 ***
+StateNorth Carolina        -3.92e+13   4.51e+06 -8.69e+06   <2e-16 ***
+StateNorth Dakota           2.97e+13   8.78e+06  3.39e+06   <2e-16 ***
+StateOhio                  -2.40e+13   3.68e+06 -6.51e+06   <2e-16 ***
+StateOklahoma               6.24e+13   6.12e+06  1.02e+07   <2e-16 ***
+StateOregon                -4.79e+13   5.01e+06 -9.57e+06   <2e-16 ***
+StatePennsylvania          -2.52e+14   3.86e+06 -6.54e+07   <2e-16 ***
+StateRhode Island          -1.18e+13   9.12e+06 -1.30e+06   <2e-16 ***
+StateSouth Carolina        -1.66e+14   5.73e+06 -2.89e+07   <2e-16 ***
+StateSouth Dakota           4.95e+13   8.98e+06  5.51e+06   <2e-16 ***
+StateTennessee             -2.67e+13   3.86e+06 -6.92e+06   <2e-16 ***
+StateTexas                 -4.44e+12   3.89e+06 -1.14e+06   <2e-16 ***
+StateUtah                   1.43e+14   9.50e+06  1.51e+07   <2e-16 ***
+StateVermont                7.59e+13   9.62e+06  7.89e+06   <2e-16 ***
+StateVirginia              -9.69e+13   5.04e+06 -1.92e+07   <2e-16 ***
+StateWashington            -2.03e+14   6.01e+06 -3.37e+07   <2e-16 ***
+StateWest Virginia         -2.02e+14   5.82e+06 -3.48e+07   <2e-16 ***
+StateWisconsin             -6.18e+13   5.01e+06 -1.23e+07   <2e-16 ***
+StateWyoming                9.03e+13   1.06e+07  8.51e+06   <2e-16 ***
+CountyAbbeville             4.16e+14   6.49e+07  6.41e+06   <2e-16 ***
+CountyAcadia               -6.56e+14   5.94e+07 -1.10e+07   <2e-16 ***
+CountyAccomack             -7.10e+14   6.19e+07 -1.15e+07   <2e-16 ***
+CountyAda                  -4.78e+14   5.72e+07 -8.37e+06   <2e-16 ***
+CountyAdair                -6.48e+14   5.77e+07 -1.12e+07   <2e-16 ***
+CountyAdams                -3.08e+14   5.56e+07 -5.54e+06   <2e-16 ***
+CountyAddison               3.06e+15   6.00e+07  5.10e+07   <2e-16 ***
+CountyAiken                -4.17e+14   5.70e+07 -7.32e+06   <2e-16 ***
+CountyAitkin               -6.39e+14   6.31e+07 -1.01e+07   <2e-16 ***
+CountyAlachua              -1.43e+14   5.62e+07 -2.55e+06   <2e-16 ***
+CountyAlamance             -1.23e+13   5.67e+07 -2.16e+05   <2e-16 ***
+CountyAlameda              -1.51e+15   5.56e+07 -2.71e+07   <2e-16 ***
+CountyAlamosa              -1.38e+14   6.48e+07 -2.12e+06   <2e-16 ***
+CountyAlbany               -3.90e+14   5.59e+07 -6.98e+06   <2e-16 ***
+CountyAlbemarle            -4.76e+14   5.73e+07 -8.30e+06   <2e-16 ***
+CountyAlcona               -1.89e+15   6.48e+07 -2.91e+07   <2e-16 ***
+CountyAlcorn               -5.62e+14   6.10e+07 -9.20e+06   <2e-16 ***
+CountyAleutians West       -1.93e+15   7.76e+07 -2.49e+07   <2e-16 ***
+CountyAlexander             1.61e+14   5.93e+07  2.71e+06   <2e-16 ***
+CountyAlexandria           -7.40e+14   5.66e+07 -1.31e+07   <2e-16 ***
+CountyAlfalfa               8.92e+14   6.78e+07  1.32e+07   <2e-16 ***
+CountyAlger                 2.01e+14   6.76e+07  2.97e+06   <2e-16 ***
+CountyAllamakee            -6.69e+14   6.30e+07 -1.06e+07   <2e-16 ***
+CountyAllegan               1.81e+14   5.70e+07  3.18e+06   <2e-16 ***
+CountyAllegany             -3.66e+14   5.68e+07 -6.44e+06   <2e-16 ***
+CountyAlleghany            -9.28e+14   6.03e+07 -1.54e+07   <2e-16 ***
+CountyAllegheny            -3.68e+14   5.55e+07 -6.64e+06   <2e-16 ***
+CountyAllen                -2.39e+14   5.57e+07 -4.29e+06   <2e-16 ***
+CountyAllendale            -1.54e+15   7.31e+07 -2.10e+07   <2e-16 ***
+CountyAlpena               -5.38e+14   5.94e+07 -9.06e+06   <2e-16 ***
+CountyAlpine                4.72e+14   8.71e+07  5.42e+06   <2e-16 ***
+CountyAmador                5.63e+12   5.99e+07  9.40e+04   <2e-16 ***
+CountyAmelia                8.60e+14   7.30e+07  1.18e+07   <2e-16 ***
+CountyAmherst              -2.84e+14   6.10e+07 -4.65e+06   <2e-16 ***
+CountyAmite                -9.28e+14   8.71e+07 -1.07e+07   <2e-16 ***
+CountyAnchorage            -2.50e+15   3.98e+07 -6.28e+07   <2e-16 ***
+CountyAnderson             -4.21e+14   5.60e+07 -7.51e+06   <2e-16 ***
+CountyAndrew                1.89e+15   6.48e+07  2.91e+07   <2e-16 ***
+CountyAndrews               1.88e+15   6.48e+07  2.90e+07   <2e-16 ***
+CountyAndroscoggin         -1.13e+15   5.73e+07 -1.97e+07   <2e-16 ***
+CountyAngelina             -2.07e+14   5.79e+07 -3.57e+06   <2e-16 ***
+CountyAnne Arundel         -3.36e+14   5.59e+07 -6.01e+06   <2e-16 ***
+CountyAnoka                -6.88e+14   5.60e+07 -1.23e+07   <2e-16 ***
+CountyAnson                -7.52e+14   6.77e+07 -1.11e+07   <2e-16 ***
+CountyAntelope              4.37e+14   6.77e+07  6.45e+06   <2e-16 ***
+CountyAntrim                6.13e+14   6.10e+07  1.00e+07   <2e-16 ***
+CountyApache               -4.27e+14   6.78e+07 -6.30e+06   <2e-16 ***
+CountyAppanoose            -1.61e+15   6.48e+07 -2.49e+07   <2e-16 ***
+CountyAppling              -9.18e+14   6.48e+07 -1.42e+07   <2e-16 ***
+CountyAppomattox           -1.87e+15   6.77e+07 -2.76e+07   <2e-16 ***
+CountyAransas              -5.56e+14   6.48e+07 -8.59e+06   <2e-16 ***
+CountyArapahoe             -4.27e+14   5.57e+07 -7.66e+06   <2e-16 ***
+CountyArcher                3.03e+15   6.76e+07  4.48e+07   <2e-16 ***
+CountyArchuleta             8.43e+14   6.48e+07  1.30e+07   <2e-16 ***
+CountyArenac               -1.42e+14   6.76e+07 -2.10e+06   <2e-16 ***
+CountyArkansas              1.22e+15   6.10e+07  2.00e+07   <2e-16 ***
+CountyArlington            -2.60e+14   5.62e+07 -4.62e+06   <2e-16 ***
+CountyArmstrong            -4.25e+14   5.76e+07 -7.39e+06   <2e-16 ***
+CountyAroostook            -3.21e+14   5.75e+07 -5.58e+06   <2e-16 ***
+CountyArthur                9.13e+14   8.71e+07  1.05e+07   <2e-16 ***
+CountyAscension             5.48e+13   5.83e+07  9.39e+05   <2e-16 ***
+CountyAshe                 -8.14e+14   6.77e+07 -1.20e+07   <2e-16 ***
+CountyAshland              -2.05e+14   5.78e+07 -3.55e+06   <2e-16 ***
+CountyAshley                1.88e+14   6.19e+07  3.05e+06   <2e-16 ***
+CountyAshtabula            -4.87e+14   5.75e+07 -8.48e+06   <2e-16 ***
+CountyAsotin               -1.77e+15   6.20e+07 -2.85e+07   <2e-16 ***
+CountyAssumption            2.52e+15   7.30e+07  3.46e+07   <2e-16 ***
+CountyAtascosa             -6.10e+14   6.10e+07 -1.00e+07   <2e-16 ***
+CountyAtchison             -1.08e+15   6.18e+07 -1.75e+07   <2e-16 ***
+CountyAthens                5.09e+13   5.90e+07  8.64e+05   <2e-16 ***
+CountyAtkinson             -1.93e+15   7.30e+07 -2.65e+07   <2e-16 ***
+CountyAtlantic             -3.95e+13   5.62e+07 -7.03e+05   <2e-16 ***
+CountyAtoka                -1.21e+15   6.49e+07 -1.86e+07   <2e-16 ***
+CountyAttala               -1.90e+14   6.49e+07 -2.92e+06   <2e-16 ***
+CountyAudrain              -2.93e+14   6.18e+07 -4.74e+06   <2e-16 ***
+CountyAudubon               3.53e+15   6.76e+07  5.22e+07   <2e-16 ***
+CountyAuglaize             -1.35e+14   5.93e+07 -2.27e+06   <2e-16 ***
+CountyAugusta              -7.83e+14   5.85e+07 -1.34e+07   <2e-16 ***
+CountyAurora               -1.90e+15   8.74e+07 -2.18e+07   <2e-16 ***
+CountyAustin                1.20e+15   6.18e+07  1.94e+07   <2e-16 ***
+CountyAutauga              -4.44e+14   5.94e+07 -7.47e+06   <2e-16 ***
+CountyAvery                -9.88e+14   6.48e+07 -1.52e+07   <2e-16 ***
+CountyAvoyelles            -7.34e+14   6.49e+07 -1.13e+07   <2e-16 ***
+CountyBaca                  6.75e+14   7.30e+07  9.25e+06   <2e-16 ***
+CountyBacon                -1.35e+15   6.76e+07 -1.99e+07   <2e-16 ***
+CountyBailey               -4.11e+15   8.70e+07 -4.72e+07   <2e-16 ***
+CountyBaker                 7.89e+13   5.90e+07  1.34e+06   <2e-16 ***
+CountyBaldwin              -3.22e+14   5.65e+07 -5.69e+06   <2e-16 ***
+CountyBallard               3.80e+14   6.76e+07  5.61e+06   <2e-16 ***
+CountyBaltimore            -4.81e+14   5.57e+07 -8.63e+06   <2e-16 ***
+CountyBaltimore City       -4.63e+14   5.57e+07 -8.32e+06   <2e-16 ***
+CountyBamberg              -2.39e+15   7.31e+07 -3.26e+07   <2e-16 ***
+CountyBandera               1.08e+15   6.30e+07  1.71e+07   <2e-16 ***
+CountyBanks                 2.90e+15   6.76e+07  4.29e+07   <2e-16 ***
+CountyBannock               8.43e+13   5.84e+07  1.44e+06   <2e-16 ***
+CountyBaraga               -3.79e+14   8.71e+07 -4.36e+06   <2e-16 ***
+CountyBarber                2.87e+15   7.30e+07  3.93e+07   <2e-16 ***
+CountyBarbour               1.03e+14   5.93e+07  1.74e+06   <2e-16 ***
+CountyBarnes               -9.30e+14   6.52e+07 -1.43e+07   <2e-16 ***
+CountyBarnstable           -1.35e+14   5.62e+07 -2.41e+06   <2e-16 ***
+CountyBarnwell             -1.52e+15   6.49e+07 -2.34e+07   <2e-16 ***
+CountyBarren                4.56e+14   5.98e+07  7.63e+06   <2e-16 ***
+CountyBarron                6.62e+14   5.96e+07  1.11e+07   <2e-16 ***
+CountyBarrow               -3.92e+13   5.76e+07 -6.79e+05   <2e-16 ***
+CountyBarry                 4.10e+13   5.76e+07  7.12e+05   <2e-16 ***
+CountyBartholomew          -1.78e+14   5.81e+07 -3.07e+06   <2e-16 ***
+CountyBarton               -3.91e+14   5.90e+07 -6.62e+06   <2e-16 ***
+CountyBartow               -3.91e+14   5.83e+07 -6.71e+06   <2e-16 ***
+CountyBastrop               6.75e+14   5.98e+07  1.13e+07   <2e-16 ***
+CountyBates                -7.32e+13   6.48e+07 -1.13e+06   <2e-16 ***
+CountyBath                 -1.91e+14   6.48e+07 -2.95e+06   <2e-16 ***
+CountyBaxter               -2.48e+14   5.98e+07 -4.14e+06   <2e-16 ***
+CountyBay                  -3.28e+14   5.60e+07 -5.86e+06   <2e-16 ***
+CountyBayfield             -1.49e+15   6.29e+07 -2.36e+07   <2e-16 ***
+CountyBaylor                5.18e+14   8.70e+07  5.95e+06   <2e-16 ***
+CountyBeadle                5.92e+13   6.23e+07  9.49e+05   <2e-16 ***
+CountyBear Lake            -7.69e+13   7.38e+07 -1.04e+06   <2e-16 ***
+CountyBeaufort             -2.31e+14   5.63e+07 -4.10e+06   <2e-16 ***
+CountyBeauregard           -7.64e+14   6.19e+07 -1.23e+07   <2e-16 ***
+CountyBeaver               -9.81e+13   5.63e+07 -1.74e+06   <2e-16 ***
+CountyBeaverhead            2.28e+15   6.81e+07  3.35e+07   <2e-16 ***
+CountyBecker                1.69e+15   5.98e+07  2.83e+07   <2e-16 ***
+CountyBeckham              -3.69e+14   6.49e+07 -5.69e+06   <2e-16 ***
+CountyBedford              -4.41e+14   5.65e+07 -7.81e+06   <2e-16 ***
+CountyBedford City         -6.86e+14   8.71e+07 -7.87e+06   <2e-16 ***
+CountyBee                  -1.35e+15   6.09e+07 -2.21e+07   <2e-16 ***
+CountyBelknap              -5.46e+14   5.86e+07 -9.32e+06   <2e-16 ***
+CountyBell                 -1.69e+14   5.60e+07 -3.02e+06   <2e-16 ***
+CountyBelmont              -7.05e+14   5.76e+07 -1.22e+07   <2e-16 ***
+CountyBeltrami             -4.88e+14   5.99e+07 -8.16e+06   <2e-16 ***
+CountyBen Hill             -1.00e+14   8.70e+07 -1.15e+06   <2e-16 ***
+CountyBenewah               1.34e+15   7.38e+07  1.82e+07   <2e-16 ***
+CountyBennington           -6.93e+14   5.96e+07 -1.16e+07   <2e-16 ***
+CountyBenson               -6.39e+14   8.74e+07 -7.31e+06   <2e-16 ***
+CountyBent                  3.83e+15   8.71e+07  4.40e+07   <2e-16 ***
+CountyBenton               -2.77e+14   5.57e+07 -4.98e+06   <2e-16 ***
+CountyBenzie                3.07e+15   6.30e+07  4.87e+07   <2e-16 ***
+CountyBergen               -1.36e+14   5.57e+07 -2.44e+06   <2e-16 ***
+CountyBerkeley              4.90e+12   5.62e+07  8.72e+04   <2e-16 ***
+CountyBerks                -3.92e+14   5.59e+07 -7.01e+06   <2e-16 ***
+CountyBerkshire            -1.56e+14   5.66e+07 -2.75e+06   <2e-16 ***
+CountyBernalillo            1.13e+14   5.67e+07  1.99e+06   <2e-16 ***
+CountyBerrien              -9.12e+13   5.63e+07 -1.62e+06   <2e-16 ***
+CountyBertie               -3.58e+14   7.30e+07 -4.91e+06   <2e-16 ***
+CountyBexar                -3.77e+14   5.55e+07 -6.78e+06   <2e-16 ***
+CountyBibb                 -2.70e+14   5.65e+07 -4.78e+06   <2e-16 ***
+CountyBienville            -2.28e+15   8.71e+07 -2.62e+07   <2e-16 ***
+CountyBig Horn              1.95e+15   6.07e+07  3.21e+07   <2e-16 ***
+CountyBig Stone            -2.50e+15   7.30e+07 -3.42e+07   <2e-16 ***
+CountyBillings             -7.07e+13   8.74e+07 -8.10e+05   <2e-16 ***
+CountyBingham               2.40e+15   6.19e+07  3.87e+07   <2e-16 ***
+CountyBlack Hawk           -3.48e+14   5.67e+07 -6.14e+06   <2e-16 ***
+CountyBlackford            -1.65e+15   6.76e+07 -2.44e+07   <2e-16 ***
+CountyBladen               -6.14e+14   6.31e+07 -9.73e+06   <2e-16 ***
+CountyBlaine                4.61e+14   5.91e+07  7.80e+06   <2e-16 ***
+CountyBlair                -4.20e+14   5.69e+07 -7.39e+06   <2e-16 ***
+CountyBlanco                2.13e+15   7.30e+07  2.92e+07   <2e-16 ***
+CountyBland                -4.00e+14   8.71e+07 -4.59e+06   <2e-16 ***
+CountyBleckley             -8.95e+13   6.76e+07 -1.32e+06   <2e-16 ***
+CountyBledsoe              -2.43e+15   7.30e+07 -3.32e+07   <2e-16 ***
+CountyBlount               -7.18e+14   5.66e+07 -1.27e+07   <2e-16 ***
+CountyBlue Earth           -6.62e+14   5.82e+07 -1.14e+07   <2e-16 ***
+CountyBoise                -5.44e+15   8.78e+07 -6.20e+07   <2e-16 ***
+CountyBolivar              -1.35e+15   6.49e+07 -2.09e+07   <2e-16 ***
+CountyBollinger             5.11e+14   6.76e+07  7.56e+06   <2e-16 ***
+CountyBon Homme             2.17e+15   7.34e+07  2.96e+07   <2e-16 ***
+CountyBond                  8.57e+14   6.76e+07  1.27e+07   <2e-16 ***
+CountyBonner               -6.87e+14   6.13e+07 -1.12e+07   <2e-16 ***
+CountyBonneville           -4.75e+14   5.84e+07 -8.12e+06   <2e-16 ***
+CountyBoone                -2.52e+14   5.58e+07 -4.51e+06   <2e-16 ***
+CountyBorden                2.56e+14   8.70e+07  2.94e+06   <2e-16 ***
+CountyBosque               -4.44e+14   6.09e+07 -7.29e+06   <2e-16 ***
+CountyBossier              -8.07e+14   5.74e+07 -1.41e+07   <2e-16 ***
+CountyBotetourt             1.70e+14   6.10e+07  2.79e+06   <2e-16 ***
+CountyBottineau             9.63e+14   6.80e+07  1.42e+07   <2e-16 ***
+CountyBoulder              -5.81e+14   5.61e+07 -1.04e+07   <2e-16 ***
+CountyBoundary             -6.23e+14   7.38e+07 -8.44e+06   <2e-16 ***
+CountyBourbon              -1.56e+15   5.98e+07 -2.61e+07   <2e-16 ***
+CountyBowie                -7.68e+14   5.78e+07 -1.33e+07   <2e-16 ***
+CountyBowman                2.59e+15   7.34e+07  3.53e+07   <2e-16 ***
+CountyBox Butte             5.50e+14   6.77e+07  8.13e+06   <2e-16 ***
+CountyBox Elder             2.81e+14   5.96e+07  4.72e+06   <2e-16 ***
+CountyBoyd                 -1.95e+14   5.85e+07 -3.34e+06   <2e-16 ***
+CountyBoyle                -9.81e+14   6.18e+07 -1.59e+07   <2e-16 ***
+CountyBracken               6.50e+14   8.70e+07  7.47e+06   <2e-16 ***
+CountyBradford             -4.54e+14   5.79e+07 -7.84e+06   <2e-16 ***
+CountyBradley               2.98e+13   5.73e+07  5.19e+05   <2e-16 ***
+CountyBranch               -3.15e+14   5.94e+07 -5.31e+06   <2e-16 ***
+CountyBrantley             -3.76e+14   6.76e+07 -5.56e+06   <2e-16 ***
+CountyBrazoria             -5.59e+14   5.62e+07 -9.94e+06   <2e-16 ***
+CountyBrazos               -9.60e+13   5.64e+07 -1.70e+06   <2e-16 ***
+CountyBreathitt            -3.73e+15   8.70e+07 -4.29e+07   <2e-16 ***
+CountyBreckinridge         -1.09e+15   6.76e+07 -1.61e+07   <2e-16 ***
+CountyBremer                3.08e+15   6.03e+07  5.11e+07   <2e-16 ***
+CountyBrevard              -2.21e+14   5.58e+07 -3.96e+06   <2e-16 ***
+CountyBrewster             -1.15e+15   6.76e+07 -1.70e+07   <2e-16 ***
+CountyBriscoe              -1.94e+15   8.70e+07 -2.23e+07   <2e-16 ***
+CountyBristol              -3.01e+14   5.58e+07 -5.39e+06   <2e-16 ***
+CountyBroadwater           -2.39e+14   7.34e+07 -3.25e+06   <2e-16 ***
+CountyBronx                -7.48e+14   5.56e+07 -1.35e+07   <2e-16 ***
+CountyBrooke                2.47e+15   6.32e+07  3.90e+07   <2e-16 ***
+CountyBrookings             2.36e+15   6.35e+07  3.72e+07   <2e-16 ***
+CountyBrooks               -1.03e+15   6.18e+07 -1.66e+07   <2e-16 ***
+CountyBroome               -1.99e+14   5.62e+07 -3.55e+06   <2e-16 ***
+CountyBroomfield            1.32e+15   5.78e+07  2.28e+07   <2e-16 ***
+CountyBroward              -2.95e+14   5.55e+07 -5.31e+06   <2e-16 ***
+CountyBrown                -2.53e+14   5.57e+07 -4.54e+06   <2e-16 ***
+CountyBrule                 2.02e+15   7.34e+07  2.76e+07   <2e-16 ***
+CountyBrunswick            -6.24e+14   5.68e+07 -1.10e+07   <2e-16 ***
+CountyBryan                -5.32e+14   5.78e+07 -9.21e+06   <2e-16 ***
+CountyBuchanan             -4.63e+14   5.66e+07 -8.18e+06   <2e-16 ***
+CountyBuckingham           -6.86e+14   8.71e+07 -7.88e+06   <2e-16 ***
+CountyBucks                -1.60e+14   5.57e+07 -2.88e+06   <2e-16 ***
+CountyBuena Vista           2.88e+15   6.18e+07  4.65e+07   <2e-16 ***
+CountyBuffalo              -6.09e+14   5.78e+07 -1.05e+07   <2e-16 ***
+CountyBullitt               3.16e+14   5.76e+07  5.48e+06   <2e-16 ***
+CountyBulloch              -7.77e+14   5.90e+07 -1.32e+07   <2e-16 ***
+CountyBuncombe             -3.99e+14   5.62e+07 -7.11e+06   <2e-16 ***
+CountyBureau               -3.98e+14   6.03e+07 -6.60e+06   <2e-16 ***
+CountyBurke                -2.10e+14   5.79e+07 -3.63e+06   <2e-16 ***
+CountyBurleigh             -4.94e+14   5.80e+07 -8.51e+06   <2e-16 ***
+CountyBurleson             -4.57e+14   6.30e+07 -7.25e+06   <2e-16 ***
+CountyBurlington           -1.26e+14   5.59e+07 -2.25e+06   <2e-16 ***
+CountyBurnet               -1.67e+15   6.03e+07 -2.77e+07   <2e-16 ***
+CountyBurnett              -4.83e+14   6.16e+07 -7.84e+06   <2e-16 ***
+CountyBurt                  2.34e+15   6.77e+07  3.46e+07   <2e-16 ***
+CountyButler               -3.44e+14   5.56e+07 -6.18e+06   <2e-16 ***
+CountyButte                 1.61e+14   5.63e+07  2.86e+06   <2e-16 ***
+CountyButts                 4.77e+14   6.76e+07  7.05e+06   <2e-16 ***
+CountyCabarrus             -3.57e+14   5.66e+07 -6.31e+06   <2e-16 ***
+CountyCabell               -5.84e+14   5.71e+07 -1.02e+07   <2e-16 ***
+CountyCache                -1.07e+15   5.76e+07 -1.87e+07   <2e-16 ***
+CountyCaddo                -8.34e+13   5.63e+07 -1.48e+06   <2e-16 ***
+CountyCalaveras            -1.78e+13   5.99e+07 -2.98e+05   <2e-16 ***
+CountyCalcasieu            -4.35e+14   5.65e+07 -7.70e+06   <2e-16 ***
+CountyCaldwell             -3.73e+14   5.68e+07 -6.56e+06   <2e-16 ***
+CountyCaledonia            -6.14e+14   6.00e+07 -1.02e+07   <2e-16 ***
+CountyCalhoun              -1.14e+14   5.58e+07 -2.04e+06   <2e-16 ***
+CountyCallahan             -9.57e+14   6.76e+07 -1.42e+07   <2e-16 ***
+CountyCallaway              1.51e+15   6.03e+07  2.50e+07   <2e-16 ***
+CountyCalloway             -1.61e+15   5.98e+07 -2.70e+07   <2e-16 ***
+CountyCalumet               2.48e+15   5.88e+07  4.21e+07   <2e-16 ***
+CountyCalvert               5.11e+13   5.77e+07  8.86e+05   <2e-16 ***
+CountyCamas                -2.70e+14   8.77e+07 -3.07e+06   <2e-16 ***
+CountyCambria              -1.99e+14   5.66e+07 -3.52e+06   <2e-16 ***
+CountyCamden               -4.12e+14   5.57e+07 -7.39e+06   <2e-16 ***
+CountyCameron              -3.47e+14   5.59e+07 -6.20e+06   <2e-16 ***
+CountyCamp                 -2.32e+14   6.76e+07 -3.43e+06   <2e-16 ***
+CountyCampbell             -1.27e+14   5.62e+07 -2.26e+06   <2e-16 ***
+CountyCanadian             -5.58e+14   5.70e+07 -9.80e+06   <2e-16 ***
+CountyCandler              -2.09e+15   7.30e+07 -2.86e+07   <2e-16 ***
+CountyCannon                1.61e+14   7.30e+07  2.20e+06   <2e-16 ***
+CountyCanyon               -2.28e+14   5.78e+07 -3.95e+06   <2e-16 ***
+CountyCape Girardeau       -1.08e+15   5.81e+07 -1.85e+07   <2e-16 ***
+CountyCape May             -1.88e+14   5.70e+07 -3.29e+06   <2e-16 ***
+CountyCarbon               -1.38e+13   5.71e+07 -2.41e+05   <2e-16 ***
+CountyCaribou               1.63e+15   7.38e+07  2.22e+07   <2e-16 ***
+CountyCarlisle             -1.37e+15   7.30e+07 -1.87e+07   <2e-16 ***
+CountyCarlton              -4.44e+14   6.10e+07 -7.28e+06   <2e-16 ***
+CountyCaroline             -8.95e+13   5.85e+07 -1.53e+06   <2e-16 ***
+CountyCarroll              -2.06e+14   5.58e+07 -3.70e+06   <2e-16 ***
+CountyCarson                2.37e+15   7.30e+07  3.25e+07   <2e-16 ***
+CountyCarson City          -9.96e+14   5.85e+07 -1.70e+07   <2e-16 ***
+CountyCarter               -3.83e+14   5.66e+07 -6.78e+06   <2e-16 ***
+CountyCarteret             -6.43e+14   5.67e+07 -1.13e+07   <2e-16 ***
+CountyCarver                2.95e+14   5.76e+07  5.13e+06   <2e-16 ***
+CountyCascade              -8.89e+14   5.78e+07 -1.54e+07   <2e-16 ***
+CountyCasey                -1.76e+15   7.30e+07 -2.42e+07   <2e-16 ***
+CountyCass                 -3.37e+14   5.58e+07 -6.03e+06   <2e-16 ***
+CountyCassia               -6.09e+14   6.28e+07 -9.70e+06   <2e-16 ***
+CountyCastro               -1.15e+15   6.76e+07 -1.70e+07   <2e-16 ***
+CountyCaswell              -4.02e+14   7.30e+07 -5.51e+06   <2e-16 ***
+CountyCatahoula             3.44e+14   7.30e+07  4.72e+06   <2e-16 ***
+CountyCatawba              -4.32e+13   5.68e+07 -7.61e+05   <2e-16 ***
+CountyCatoosa               2.05e+15   5.90e+07  3.47e+07   <2e-16 ***
+CountyCatron               -4.76e+15   8.80e+07 -5.41e+07   <2e-16 ***
+CountyCattaraugus           1.75e+14   5.77e+07  3.02e+06   <2e-16 ***
+CountyCavalier              2.03e+15   7.34e+07  2.76e+07   <2e-16 ***
+CountyCayuga                1.20e+12   5.74e+07  2.08e+04   <2e-16 ***
+CountyCecil                 7.57e+14   5.78e+07  1.31e+07   <2e-16 ***
+CountyCedar                -1.69e+14   5.93e+07 -2.85e+06   <2e-16 ***
+CountyCentre               -1.31e+13   5.70e+07 -2.31e+05   <2e-16 ***
+CountyCerro Gordo           1.41e+14   5.90e+07  2.40e+06   <2e-16 ***
+CountyChaffee              -1.39e+14   6.31e+07 -2.21e+06   <2e-16 ***
+CountyChambers              7.75e+13   5.90e+07  1.31e+06   <2e-16 ***
+CountyChampaign            -3.75e+14   5.62e+07 -6.68e+06   <2e-16 ***
+CountyChariton              3.54e+14   6.76e+07  5.24e+06   <2e-16 ***
+CountyCharles              -3.83e+14   5.69e+07 -6.74e+06   <2e-16 ***
+CountyCharles City         -1.38e+15   6.77e+07 -2.03e+07   <2e-16 ***
+CountyCharles Mix           3.58e+14   7.34e+07  4.88e+06   <2e-16 ***
+CountyCharleston           -2.56e+14   5.61e+07 -4.57e+06   <2e-16 ***
+CountyCharlevoix            1.31e+15   5.85e+07  2.24e+07   <2e-16 ***
+CountyCharlotte            -1.72e+14   5.65e+07 -3.05e+06   <2e-16 ***
+CountyCharlottesville      -1.40e+14   5.88e+07 -2.37e+06   <2e-16 ***
+CountyCharlton              2.86e+15   8.71e+07  3.28e+07   <2e-16 ***
+CountyChase                 2.75e+14   7.30e+07  3.77e+06   <2e-16 ***
+CountyChatham              -3.06e+14   5.59e+07 -5.47e+06   <2e-16 ***
+CountyChattahoochee         4.33e+14   6.48e+07  6.68e+06   <2e-16 ***
+CountyChattooga            -3.85e+14   6.18e+07 -6.23e+06   <2e-16 ***
+CountyChautauqua           -4.10e+14   5.67e+07 -7.24e+06   <2e-16 ***
+CountyChaves                3.55e+14   5.89e+07  6.02e+06   <2e-16 ***
+CountyCheatham              5.67e+14   6.03e+07  9.40e+06   <2e-16 ***
+CountyCheboygan            -4.21e+14   6.10e+07 -6.91e+06   <2e-16 ***
+CountyChelan               -3.99e+14   5.84e+07 -6.84e+06   <2e-16 ***
+CountyChemung              -3.67e+14   5.74e+07 -6.39e+06   <2e-16 ***
+CountyChenango             -9.79e+14   5.87e+07 -1.67e+07   <2e-16 ***
+CountyCherokee             -1.53e+14   5.59e+07 -2.73e+06   <2e-16 ***
+CountyCherry                1.74e+15   7.30e+07  2.39e+07   <2e-16 ***
+CountyChesapeake           -2.20e+14   5.65e+07 -3.88e+06   <2e-16 ***
+CountyCheshire             -3.99e+13   5.84e+07 -6.83e+05   <2e-16 ***
+CountyChester              -1.53e+14   5.58e+07 -2.75e+06   <2e-16 ***
+CountyChesterfield         -1.23e+14   5.61e+07 -2.20e+06   <2e-16 ***
+CountyCheyenne              1.40e+15   6.30e+07  2.22e+07   <2e-16 ***
+CountyChickasaw            -4.10e+14   6.03e+07 -6.80e+06   <2e-16 ***
+CountyChicot               -2.42e+15   8.71e+07 -2.78e+07   <2e-16 ***
+CountyChildress             1.67e+15   7.30e+07  2.29e+07   <2e-16 ***
+CountyChilton              -8.61e+14   6.03e+07 -1.43e+07   <2e-16 ***
+CountyChippewa             -2.36e+14   5.67e+07 -4.17e+06   <2e-16 ***
+CountyChisago               1.47e+15   6.04e+07  2.44e+07   <2e-16 ***
+CountyChittenden           -1.13e+15   5.72e+07 -1.98e+07   <2e-16 ***
+CountyChoctaw              -1.78e+14   6.09e+07 -2.91e+06   <2e-16 ***
+CountyChouteau              6.78e+13   8.74e+07  7.75e+05   <2e-16 ***
+CountyChowan                2.05e+15   7.30e+07  2.82e+07   <2e-16 ***
+CountyChristian            -4.57e+14   5.64e+07 -8.11e+06   <2e-16 ***
+CountyChurchill            -4.14e+14   6.11e+07 -6.78e+06   <2e-16 ***
+CountyCibola                3.38e+14   6.57e+07  5.15e+06   <2e-16 ***
+CountyCimarron              4.01e+14   7.31e+07  5.49e+06   <2e-16 ***
+CountyCitrus               -5.28e+14   5.71e+07 -9.24e+06   <2e-16 ***
+CountyClackamas            -1.84e+14   5.60e+07 -3.29e+06   <2e-16 ***
+CountyClaiborne            -7.40e+14   5.84e+07 -1.27e+07   <2e-16 ***
+CountyClallam               1.63e+14   5.77e+07  2.83e+06   <2e-16 ***
+CountyClare                -8.90e+14   5.98e+07 -1.49e+07   <2e-16 ***
+CountyClarendon            -1.23e+15   6.31e+07 -1.94e+07   <2e-16 ***
+CountyClarion               3.13e+14   6.03e+07  5.20e+06   <2e-16 ***
+CountyClark                -4.28e+14   5.56e+07 -7.70e+06   <2e-16 ***
+CountyClarke               -1.64e+14   5.65e+07 -2.91e+06   <2e-16 ***
+CountyClatsop              -5.04e+14   5.91e+07 -8.53e+06   <2e-16 ***
+CountyClay                 -4.26e+14   5.57e+07 -7.65e+06   <2e-16 ***
+CountyClayton              -6.73e+13   5.62e+07 -1.20e+06   <2e-16 ***
+CountyClear Creek           3.23e+15   6.77e+07  4.77e+07   <2e-16 ***
+CountyClearfield            4.07e+14   5.77e+07  7.05e+06   <2e-16 ***
+CountyClearwater           -5.03e+12   6.50e+07 -7.74e+04   <2e-16 ***
+CountyCleburne              2.03e+14   5.93e+07  3.42e+06   <2e-16 ***
+CountyClermont             -4.95e+14   5.65e+07 -8.77e+06   <2e-16 ***
+CountyCleveland            -4.10e+14   5.60e+07 -7.32e+06   <2e-16 ***
+CountyClinch               -1.90e+15   7.30e+07 -2.61e+07   <2e-16 ***
+CountyClinton              -3.56e+14   5.59e+07 -6.38e+06   <2e-16 ***
+CountyCloud                 2.98e+14   6.49e+07  4.59e+06   <2e-16 ***
+CountyCoahoma              -8.51e+14   6.19e+07 -1.37e+07   <2e-16 ***
+CountyCoal                 -4.07e+15   8.71e+07 -4.67e+07   <2e-16 ***
+CountyCobb                 -3.23e+14   5.58e+07 -5.78e+06   <2e-16 ***
+CountyCochise               2.20e+14   6.01e+07  3.67e+06   <2e-16 ***
+CountyCochran               5.19e+14   8.70e+07  5.96e+06   <2e-16 ***
+CountyCocke                -6.22e+14   6.09e+07 -1.02e+07   <2e-16 ***
+CountyCoconino              3.59e+14   6.05e+07  5.94e+06   <2e-16 ***
+CountyCodington            -9.37e+14   6.14e+07 -1.53e+07   <2e-16 ***
+CountyCoffee               -1.73e+12   5.67e+07 -3.05e+04   <2e-16 ***
+CountyCoffey                2.69e+14   6.77e+07  3.98e+06   <2e-16 ***
+CountyCoke                  4.32e+13   7.30e+07  5.92e+05   <2e-16 ***
+CountyColbert              -6.88e+14   5.85e+07 -1.18e+07   <2e-16 ***
+CountyCole                 -4.88e+14   5.82e+07 -8.38e+06   <2e-16 ***
+CountyColeman               2.28e+15   6.76e+07  3.38e+07   <2e-16 ***
+CountyColes                -7.20e+14   5.90e+07 -1.22e+07   <2e-16 ***
+CountyColfax                3.61e+14   6.32e+07  5.72e+06   <2e-16 ***
+CountyColleton             -1.19e+15   6.04e+07 -1.96e+07   <2e-16 ***
+CountyCollier              -3.52e+14   5.60e+07 -6.28e+06   <2e-16 ***
+CountyCollin               -3.63e+14   5.57e+07 -6.51e+06   <2e-16 ***
+CountyCollingsworth        -3.52e+15   8.70e+07 -4.05e+07   <2e-16 ***
+CountyColonial Heights     -1.43e+15   6.31e+07 -2.27e+07   <2e-16 ***
+CountyColorado              2.13e+15   6.30e+07  3.37e+07   <2e-16 ***
+CountyColquitt             -7.43e+14   6.10e+07 -1.22e+07   <2e-16 ***
+CountyColumbia             -1.48e+14   5.58e+07 -2.65e+06   <2e-16 ***
+CountyColumbiana           -6.45e+14   5.72e+07 -1.13e+07   <2e-16 ***
+CountyColumbus             -5.44e+14   5.94e+07 -9.16e+06   <2e-16 ***
+CountyColusa                8.77e+14   6.31e+07  1.39e+07   <2e-16 ***
+CountyComal                 2.40e+14   5.72e+07  4.20e+06   <2e-16 ***
+CountyComanche             -2.83e+14   5.67e+07 -5.00e+06   <2e-16 ***
+CountyConcho               -7.48e+14   8.71e+07 -8.59e+06   <2e-16 ***
+CountyConcordia            -4.33e+14   7.30e+07 -5.93e+06   <2e-16 ***
+CountyConecuh              -3.64e+14   6.48e+07 -5.62e+06   <2e-16 ***
+CountyConejos              -2.26e+15   7.30e+07 -3.09e+07   <2e-16 ***
+CountyContra Costa         -2.22e+14   5.57e+07 -3.98e+06   <2e-16 ***
+CountyConverse              2.28e+15   6.55e+07  3.48e+07   <2e-16 ***
+CountyConway                1.58e+14   6.31e+07  2.51e+06   <2e-16 ***
+CountyCook                 -4.27e+14   5.54e+07 -7.69e+06   <2e-16 ***
+CountyCooke                 1.39e+14   6.03e+07  2.30e+06   <2e-16 ***
+CountyCooper               -1.39e+15   6.30e+07 -2.21e+07   <2e-16 ***
+CountyCoos                 -9.70e+13   5.74e+07 -1.69e+06   <2e-16 ***
+CountyCoosa                 5.34e+14   7.30e+07  7.31e+06   <2e-16 ***
+CountyCopiah               -1.09e+15   6.31e+07 -1.72e+07   <2e-16 ***
+CountyCortland             -1.66e+15   5.87e+07 -2.84e+07   <2e-16 ***
+CountyCoryell              -1.32e+14   5.75e+07 -2.30e+06   <2e-16 ***
+CountyCoshocton            -1.07e+15   6.30e+07 -1.70e+07   <2e-16 ***
+CountyCotton               -1.69e+15   8.71e+07 -1.94e+07   <2e-16 ***
+CountyCottonwood            4.30e+14   6.49e+07  6.64e+06   <2e-16 ***
+CountyCovington            -8.47e+13   5.74e+07 -1.48e+06   <2e-16 ***
+CountyCoweta                3.00e+13   5.75e+07  5.22e+05   <2e-16 ***
+CountyCowley                7.11e+14   5.94e+07  1.20e+07   <2e-16 ***
+CountyCowlitz              -4.70e+14   5.72e+07 -8.21e+06   <2e-16 ***
+CountyCraig                 8.52e+14   6.19e+07  1.38e+07   <2e-16 ***
+CountyCraighead            -1.23e+15   5.80e+07 -2.12e+07   <2e-16 ***
+CountyCrane                -8.72e+14   8.70e+07 -1.00e+07   <2e-16 ***
+CountyCraven               -3.49e+14   5.75e+07 -6.08e+06   <2e-16 ***
+CountyCrawford             -1.76e+14   5.59e+07 -3.15e+06   <2e-16 ***
+CountyCreek                -1.77e+14   5.75e+07 -3.08e+06   <2e-16 ***
+CountyCrenshaw              1.51e+15   6.30e+07  2.39e+07   <2e-16 ***
+CountyCrisp                 2.67e+14   6.48e+07  4.12e+06   <2e-16 ***
+CountyCrittenden           -5.05e+14   5.76e+07 -8.78e+06   <2e-16 ***
+CountyCrockett              4.14e+14   6.30e+07  6.57e+06   <2e-16 ***
+CountyCrook                 3.92e+14   6.19e+07  6.33e+06   <2e-16 ***
+CountyCrosby               -3.95e+14   6.76e+07 -5.84e+06   <2e-16 ***
+CountyCross                 1.26e+15   6.48e+07  1.94e+07   <2e-16 ***
+CountyCrow Wing             1.21e+14   5.80e+07  2.09e+06   <2e-16 ***
+CountyCrowley              -5.28e+15   8.71e+07 -6.06e+07   <2e-16 ***
+CountyCullman              -3.00e+14   5.79e+07 -5.18e+06   <2e-16 ***
+CountyCulpeper              3.15e+14   6.04e+07  5.22e+06   <2e-16 ***
+CountyCumberland           -3.24e+14   5.56e+07 -5.82e+06   <2e-16 ***
+CountyCuming                3.67e+15   6.77e+07  5.42e+07   <2e-16 ***
+CountyCurrituck             2.82e+14   6.10e+07  4.62e+06   <2e-16 ***
+CountyCurry                 1.46e+14   5.81e+07  2.51e+06   <2e-16 ***
+CountyCuster               -2.32e+14   5.78e+07 -4.02e+06   <2e-16 ***
+CountyCuyahoga             -3.89e+14   5.55e+07 -7.02e+06   <2e-16 ***
+CountyDade                  1.89e+14   6.18e+07  3.06e+06   <2e-16 ***
+CountyDaggett              -3.65e+14   8.74e+07 -4.17e+06   <2e-16 ***
+CountyDakota               -7.87e+14   5.59e+07 -1.41e+07   <2e-16 ***
+CountyDale                 -9.17e+14   5.87e+07 -1.56e+07   <2e-16 ***
+CountyDallam                1.80e+15   7.30e+07  2.46e+07   <2e-16 ***
+CountyDallas               -3.97e+14   5.55e+07 -7.15e+06   <2e-16 ***
+CountyDane                 -2.46e+14   5.56e+07 -4.43e+06   <2e-16 ***
+CountyDaniels               3.36e+13   8.74e+07  3.84e+05   <2e-16 ***
+CountyDanville             -1.14e+15   5.81e+07 -1.96e+07   <2e-16 ***
+CountyDare                  2.02e+14   5.90e+07  3.42e+06   <2e-16 ***
+CountyDarke                 3.69e+14   5.90e+07  6.27e+06   <2e-16 ***
+CountyDarlington           -5.81e+14   5.91e+07 -9.83e+06   <2e-16 ***
+CountyDauphin              -9.09e+14   5.61e+07 -1.62e+07   <2e-16 ***
+CountyDavidson             -3.10e+14   5.56e+07 -5.57e+06   <2e-16 ***
+CountyDavie                -8.76e+14   6.10e+07 -1.44e+07   <2e-16 ***
+CountyDaviess              -3.25e+14   5.67e+07 -5.74e+06   <2e-16 ***
+CountyDavis                -2.52e+14   5.68e+07 -4.44e+06   <2e-16 ***
+CountyDavison               2.29e+15   6.52e+07  3.51e+07   <2e-16 ***
+CountyDawes                 4.89e+14   7.30e+07  6.70e+06   <2e-16 ***
+CountyDawson               -1.14e+14   5.77e+07 -1.98e+06   <2e-16 ***
+CountyDay                  -3.76e+14   6.81e+07 -5.52e+06   <2e-16 ***
+CountyDe Baca              -4.07e+15   8.77e+07 -4.64e+07   <2e-16 ***
+CountyDe Soto               3.63e+14   7.30e+07  4.97e+06   <2e-16 ***
+CountyDe Witt              -6.39e+14   6.30e+07 -1.01e+07   <2e-16 ***
+CountyDeaf Smith            1.48e+14   6.48e+07  2.29e+06   <2e-16 ***
+CountyDearborn              1.39e+15   5.98e+07  2.32e+07   <2e-16 ***
+CountyDecatur              -4.27e+14   5.74e+07 -7.44e+06   <2e-16 ***
+CountyDeer Lodge           -2.05e+15   6.81e+07 -3.00e+07   <2e-16 ***
+CountyDefiance              1.06e+15   5.97e+07  1.78e+07   <2e-16 ***
+CountyDeKalb               -2.85e+14   5.56e+07 -5.12e+06   <2e-16 ***
+CountyDel Norte            -4.93e+13   6.19e+07 -7.96e+05   <2e-16 ***
+CountyDelaware             -3.12e+14   5.56e+07 -5.61e+06   <2e-16 ***
+CountyDelta                -8.06e+14   5.74e+07 -1.41e+07   <2e-16 ***
+CountyDenali               -2.28e+15   7.75e+07 -2.94e+07   <2e-16 ***
+CountyDent                 -7.54e+13   6.48e+07 -1.16e+06   <2e-16 ***
+CountyDenton               -3.31e+14   5.57e+07 -5.95e+06   <2e-16 ***
+CountyDenver               -3.34e+14   5.58e+07 -5.99e+06   <2e-16 ***
+CountyDes Moines           -1.15e+15   5.94e+07 -1.94e+07   <2e-16 ***
+CountyDeschutes            -2.88e+14   5.72e+07 -5.04e+06   <2e-16 ***
+CountyDesha                -9.25e+14   6.77e+07 -1.37e+07   <2e-16 ***
+CountyDeSoto               -2.89e+14   5.64e+07 -5.13e+06   <2e-16 ***
+CountyDeuel                 1.50e+15   6.78e+07  2.21e+07   <2e-16 ***
+CountyDewey                 1.57e+15   6.49e+07  2.42e+07   <2e-16 ***
+CountyDeWitt               -9.09e+14   6.30e+07 -1.44e+07   <2e-16 ***
+CountyDickens               3.36e+13   8.70e+07  3.86e+05   <2e-16 ***
+CountyDickey                7.87e+14   6.81e+07  1.16e+07   <2e-16 ***
+CountyDickinson             4.53e+14   5.76e+07  7.86e+06   <2e-16 ***
+CountyDickson              -6.66e+14   5.93e+07 -1.12e+07   <2e-16 ***
+CountyDillon               -1.25e+14   6.49e+07 -1.92e+06   <2e-16 ***
+CountyDimmit               -1.71e+15   8.71e+07 -1.96e+07   <2e-16 ***
+CountyDinwiddie            -1.20e+15   6.10e+07 -1.97e+07   <2e-16 ***
+CountyDistrict of Columbia        NA         NA        NA       NA    
+CountyDivide               -1.62e+14   8.74e+07 -1.86e+06   <2e-16 ***
+CountyDixie                -2.23e+15   6.76e+07 -3.29e+07   <2e-16 ***
+CountyDixon                 1.23e+15   7.30e+07  1.69e+07   <2e-16 ***
+CountyDoddridge             2.37e+15   7.31e+07  3.24e+07   <2e-16 ***
+CountyDodge                -6.91e+14   5.63e+07 -1.23e+07   <2e-16 ***
+CountyDolores               2.50e+15   8.71e+07  2.87e+07   <2e-16 ***
+CountyDona Ana             -2.42e+14   5.75e+07 -4.20e+06   <2e-16 ***
+CountyDoniphan              1.68e+14   7.30e+07  2.30e+06   <2e-16 ***
+CountyDonley                2.85e+15   7.30e+07  3.91e+07   <2e-16 ***
+CountyDooly                 2.92e+14   7.30e+07  4.01e+06   <2e-16 ***
+CountyDoor                  3.64e+13   5.96e+07  6.10e+05   <2e-16 ***
+CountyDorchester           -1.75e+14   5.68e+07 -3.08e+06   <2e-16 ***
+CountyDougherty            -3.41e+14   5.75e+07 -5.93e+06   <2e-16 ***
+CountyDouglas              -2.99e+14   5.55e+07 -5.39e+06   <2e-16 ***
+CountyDrew                 -4.31e+14   6.48e+07 -6.65e+06   <2e-16 ***
+CountyDubois               -5.78e+14   6.09e+07 -9.49e+06   <2e-16 ***
+CountyDubuque               1.50e+14   5.71e+07  2.63e+06   <2e-16 ***
+CountyDuchesne             -6.26e+14   6.82e+07 -9.18e+06   <2e-16 ***
+CountyDukes                -5.16e+14   6.49e+07 -7.96e+06   <2e-16 ***
+CountyDundy                 1.50e+14   8.71e+07  1.72e+06   <2e-16 ***
+CountyDunklin              -2.62e+14   6.09e+07 -4.29e+06   <2e-16 ***
+CountyDunn                 -2.79e+14   5.96e+07 -4.68e+06   <2e-16 ***
+CountyDuPage               -5.46e+14   5.56e+07 -9.82e+06   <2e-16 ***
+CountyDuplin               -2.55e+15   6.19e+07 -4.13e+07   <2e-16 ***
+CountyDurham               -4.46e+14   5.62e+07 -7.95e+06   <2e-16 ***
+CountyDutchess             -4.26e+14   5.60e+07 -7.61e+06   <2e-16 ***
+CountyDuval                -1.62e+14   5.57e+07 -2.91e+06   <2e-16 ***
+CountyDyer                  9.80e+14   6.30e+07  1.56e+07   <2e-16 ***
+CountyEagle                 2.61e+14   5.85e+07  4.47e+06   <2e-16 ***
+CountyEarly                 2.30e+14   8.70e+07  2.64e+06   <2e-16 ***
+CountyEast Baton Rouge     -3.86e+14   5.60e+07 -6.89e+06   <2e-16 ***
+CountyEast Carroll          1.54e+15   7.30e+07  2.12e+07   <2e-16 ***
+CountyEast Feliciana        3.10e+15   6.77e+07  4.58e+07   <2e-16 ***
+CountyEastland             -4.14e+14   6.30e+07 -6.57e+06   <2e-16 ***
+CountyEaton                 1.33e+15   5.70e+07  2.33e+07   <2e-16 ***
+CountyEau Claire            6.93e+13   5.74e+07  1.21e+06   <2e-16 ***
+CountyEchols               -1.71e+15   7.30e+07 -2.35e+07   <2e-16 ***
+CountyEctor                -3.52e+14   5.68e+07 -6.20e+06   <2e-16 ***
+CountyEddy                  5.71e+14   5.93e+07  9.64e+06   <2e-16 ***
+CountyEdgar                 1.22e+15   6.30e+07  1.94e+07   <2e-16 ***
+CountyEdgecombe             1.47e+14   5.90e+07  2.49e+06   <2e-16 ***
+CountyEdgefield            -9.36e+14   6.20e+07 -1.51e+07   <2e-16 ***
+CountyEdmonson             -6.95e+14   6.76e+07 -1.03e+07   <2e-16 ***
+CountyEdmunds               9.54e+14   7.34e+07  1.30e+07   <2e-16 ***
+CountyEdwards               3.02e+14   6.18e+07  4.89e+06   <2e-16 ***
+CountyEffingham             2.08e+14   5.76e+07  3.61e+06   <2e-16 ***
+CountyEl Dorado             2.07e+14   5.66e+07  3.65e+06   <2e-16 ***
+CountyEl Paso              -3.03e+14   5.56e+07 -5.45e+06   <2e-16 ***
+CountyElbert               -1.95e+14   5.98e+07 -3.26e+06   <2e-16 ***
+CountyElk                   9.95e+13   5.93e+07  1.68e+06   <2e-16 ***
+CountyElkhart               3.12e+13   5.67e+07  5.51e+05   <2e-16 ***
+CountyElko                  2.00e+15   5.89e+07  3.39e+07   <2e-16 ***
+CountyEllis                -2.67e+14   5.64e+07 -4.74e+06   <2e-16 ***
+CountyEllsworth             1.51e+15   7.30e+07  2.06e+07   <2e-16 ***
+CountyElmore               -2.33e+14   5.80e+07 -4.01e+06   <2e-16 ***
+CountyEmanuel              -3.65e+14   6.76e+07 -5.40e+06   <2e-16 ***
+CountyEmery                 1.17e+12   6.82e+07  1.72e+04   <2e-16 ***
+CountyEmmet                 2.03e+15   5.87e+07  3.45e+07   <2e-16 ***
+CountyEmmons               -1.60e+15   8.74e+07 -1.83e+07   <2e-16 ***
+CountyEmporia              -2.44e+15   7.30e+07 -3.35e+07   <2e-16 ***
+CountyErath                 1.14e+14   6.03e+07  1.89e+06   <2e-16 ***
+CountyErie                 -3.33e+14   5.55e+07 -5.99e+06   <2e-16 ***
+CountyEscambia              1.55e+14   5.60e+07  2.77e+06   <2e-16 ***
+CountyEssex                -2.10e+14   5.56e+07 -3.78e+06   <2e-16 ***
+CountyEstill               -2.82e+15   6.76e+07 -4.17e+07   <2e-16 ***
+CountyEtowah               -6.04e+14   5.70e+07 -1.06e+07   <2e-16 ***
+CountyEureka               -1.17e+15   8.72e+07 -1.34e+07   <2e-16 ***
+CountyEvangeline            3.46e+14   6.31e+07  5.49e+06   <2e-16 ***
+CountyEvans                -1.07e+15   6.76e+07 -1.58e+07   <2e-16 ***
+CountyFairbanks North Star -2.92e+15   4.21e+07 -6.94e+07   <2e-16 ***
+CountyFairfax              -3.31e+14   5.57e+07 -5.95e+06   <2e-16 ***
+CountyFairfax City          3.88e+14   6.31e+07  6.15e+06   <2e-16 ***
+CountyFairfield            -5.86e+14   5.60e+07 -1.05e+07   <2e-16 ***
+CountyFall River            5.64e+14   7.34e+07  7.68e+06   <2e-16 ***
+CountyFallon               -2.91e+14   8.74e+07 -3.33e+06   <2e-16 ***
+CountyFalls                 5.31e+14   6.48e+07  8.19e+06   <2e-16 ***
+CountyFalls Church          9.27e+14   6.77e+07  1.37e+07   <2e-16 ***
+CountyFannin               -8.85e+14   5.82e+07 -1.52e+07   <2e-16 ***
+CountyFaribault            -1.38e+15   6.19e+07 -2.24e+07   <2e-16 ***
+CountyFaulk                -6.71e+14   8.74e+07 -7.68e+06   <2e-16 ***
+CountyFaulkner             -9.34e+14   5.72e+07 -1.63e+07   <2e-16 ***
+CountyFauquier              2.41e+14   5.80e+07  4.15e+06   <2e-16 ***
+CountyFayette              -2.02e+14   5.56e+07 -3.63e+06   <2e-16 ***
+CountyFentress             -2.14e+15   6.48e+07 -3.31e+07   <2e-16 ***
+CountyFergus               -6.90e+14   7.35e+07 -9.40e+06   <2e-16 ***
+CountyFerry                -6.31e+14   6.78e+07 -9.32e+06   <2e-16 ***
+CountyFillmore              2.95e+14   6.18e+07  4.76e+06   <2e-16 ***
+CountyFinney               -7.22e+14   5.88e+07 -1.23e+07   <2e-16 ***
+CountyFisher                3.31e+14   7.29e+07  4.53e+06   <2e-16 ***
+CountyFlagler               4.55e+13   5.75e+07  7.90e+05   <2e-16 ***
+CountyFlathead             -4.22e+14   5.81e+07 -7.26e+06   <2e-16 ***
+CountyFleming              -1.08e+15   6.76e+07 -1.60e+07   <2e-16 ***
+CountyFlorence             -1.06e+14   5.74e+07 -1.85e+06   <2e-16 ***
+CountyFloyd                -5.25e+14   5.62e+07 -9.33e+06   <2e-16 ***
+CountyFluvanna             -7.55e+14   6.49e+07 -1.16e+07   <2e-16 ***
+CountyFond du Lac           1.08e+15   5.74e+07  1.88e+07   <2e-16 ***
+CountyFord                 -4.40e+14   5.87e+07 -7.50e+06   <2e-16 ***
+CountyForest               -7.22e+14   6.17e+07 -1.17e+07   <2e-16 ***
+CountyForrest              -4.16e+14   5.82e+07 -7.16e+06   <2e-16 ***
+CountyForsyth              -4.55e+14   5.57e+07 -8.16e+06   <2e-16 ***
+CountyFort Bend            -3.40e+14   5.60e+07 -6.08e+06   <2e-16 ***
+CountyFoster               -1.39e+13   8.74e+07 -1.59e+05   <2e-16 ***
+CountyFountain             -9.75e+14   6.30e+07 -1.55e+07   <2e-16 ***
+CountyFranklin             -3.60e+14   5.55e+07 -6.50e+06   <2e-16 ***
+CountyFranklin City        -1.69e+15   8.71e+07 -1.94e+07   <2e-16 ***
+CountyFrederick            -4.40e+14   5.60e+07 -7.85e+06   <2e-16 ***
+CountyFredericksburg       -1.04e+15   6.19e+07 -1.68e+07   <2e-16 ***
+CountyFreeborn             -3.36e+14   6.04e+07 -5.56e+06   <2e-16 ***
+CountyFreestone            -4.29e+13   6.09e+07 -7.04e+05   <2e-16 ***
+CountyFremont              -9.79e+13   5.68e+07 -1.72e+06   <2e-16 ***
+CountyFresno                1.60e+13   5.57e+07  2.88e+05   <2e-16 ***
+CountyFrio                 -9.82e+14   6.76e+07 -1.45e+07   <2e-16 ***
+CountyFrontier             -3.04e+15   8.71e+07 -3.49e+07   <2e-16 ***
+CountyFulton               -3.78e+14   5.56e+07 -6.80e+06   <2e-16 ***
+CountyFurnas               -8.86e+14   8.71e+07 -1.02e+07   <2e-16 ***
+CountyGadsden               1.82e+15   6.48e+07  2.81e+07   <2e-16 ***
+CountyGage                 -7.05e+14   6.10e+07 -1.16e+07   <2e-16 ***
+CountyGaines                9.61e+13   6.76e+07  1.42e+06   <2e-16 ***
+CountyGalax                -4.70e+15   7.30e+07 -6.44e+07   <2e-16 ***
+CountyGallatin             -7.96e+14   5.74e+07 -1.39e+07   <2e-16 ***
+CountyGallia               -2.36e+14   7.29e+07 -3.23e+06   <2e-16 ***
+CountyGalveston            -4.39e+14   5.61e+07 -7.83e+06   <2e-16 ***
+CountyGarden               -2.58e+15   8.71e+07 -2.96e+07   <2e-16 ***
+CountyGarfield             -6.64e+14   5.70e+07 -1.16e+07   <2e-16 ***
+CountyGarland              -4.24e+14   5.77e+07 -7.35e+06   <2e-16 ***
+CountyGarrard               4.47e+14   6.48e+07  6.90e+06   <2e-16 ***
+CountyGarrett              -8.16e+13   6.49e+07 -1.26e+06   <2e-16 ***
+CountyGarvin               -6.21e+14   6.04e+07 -1.03e+07   <2e-16 ***
+CountyGarza                -1.47e+15   8.71e+07 -1.69e+07   <2e-16 ***
+CountyGasconade            -7.39e+14   6.30e+07 -1.17e+07   <2e-16 ***
+CountyGaston               -3.20e+14   5.61e+07 -5.70e+06   <2e-16 ***
+CountyGates                 1.15e+14   6.77e+07  1.69e+06   <2e-16 ***
+CountyGeary                -5.81e+14   6.10e+07 -9.52e+06   <2e-16 ***
+CountyGeauga                2.58e+15   5.84e+07  4.41e+07   <2e-16 ***
+CountyGem                   2.30e+15   6.85e+07  3.35e+07   <2e-16 ***
+CountyGenesee              -1.54e+14   5.57e+07 -2.76e+06   <2e-16 ***
+CountyGeneva                2.53e+14   6.18e+07  4.09e+06   <2e-16 ***
+CountyGentry                2.88e+15   7.30e+07  3.94e+07   <2e-16 ***
+CountyGeorge               -6.13e+14   6.49e+07 -9.45e+06   <2e-16 ***
+CountyGeorgetown           -3.80e+13   5.91e+07 -6.43e+05   <2e-16 ***
+CountyGibson                1.61e+13   5.73e+07  2.81e+05   <2e-16 ***
+CountyGila                 -2.24e+14   6.16e+07 -3.64e+06   <2e-16 ***
+CountyGilchrist            -9.13e+14   6.76e+07 -1.35e+07   <2e-16 ***
+CountyGiles                -1.93e+15   5.93e+07 -3.26e+07   <2e-16 ***
+CountyGillespie             2.25e+15   6.30e+07  3.57e+07   <2e-16 ***
+CountyGilliam              -2.64e+14   8.71e+07 -3.04e+06   <2e-16 ***
+CountyGilmer               -1.37e+15   6.30e+07 -2.18e+07   <2e-16 ***
+CountyGilpin               -6.20e+14   8.71e+07 -7.12e+06   <2e-16 ***
+CountyGlacier               2.88e+15   6.56e+07  4.38e+07   <2e-16 ***
+CountyGlades                4.26e+13   6.48e+07  6.58e+05   <2e-16 ***
+CountyGladwin              -3.24e+14   6.03e+07 -5.38e+06   <2e-16 ***
+CountyGlascock              2.16e+15   8.70e+07  2.48e+07   <2e-16 ***
+CountyGlasscock            -3.98e+14   8.70e+07 -4.58e+06   <2e-16 ***
+CountyGlenn                 2.60e+14   6.19e+07  4.20e+06   <2e-16 ***
+CountyGloucester           -5.13e+13   5.62e+07 -9.14e+05   <2e-16 ***
+CountyGlynn                -3.61e+14   5.85e+07 -6.17e+06   <2e-16 ***
+CountyGogebic              -8.35e+14   6.30e+07 -1.32e+07   <2e-16 ***
+CountyGolden Valley         8.98e+14   7.32e+07  1.23e+07   <2e-16 ***
+CountyGoliad                1.25e+15   7.30e+07  1.71e+07   <2e-16 ***
+CountyGonzales              1.42e+14   6.30e+07  2.26e+06   <2e-16 ***
+CountyGoochland            -1.45e+14   6.31e+07 -2.29e+06   <2e-16 ***
+CountyGoodhue               2.43e+15   5.94e+07  4.09e+07   <2e-16 ***
+CountyGooding               4.06e+14   7.38e+07  5.51e+06   <2e-16 ***
+CountyGordon               -4.49e+14   6.03e+07 -7.45e+06   <2e-16 ***
+CountyGoshen                3.08e+13   6.55e+07  4.69e+05   <2e-16 ***
+CountyGosper               -1.04e+15   8.71e+07 -1.20e+07   <2e-16 ***
+CountyGove                  2.42e+15   7.30e+07  3.31e+07   <2e-16 ***
+CountyGrady                -5.01e+14   5.83e+07 -8.59e+06   <2e-16 ***
+CountyGrafton               3.29e+14   5.81e+07  5.66e+06   <2e-16 ***
+CountyGraham               -3.00e+14   6.01e+07 -5.00e+06   <2e-16 ***
+CountyGrainger             -1.62e+15   6.30e+07 -2.57e+07   <2e-16 ***
+CountyGrand                 3.65e+15   6.31e+07  5.78e+07   <2e-16 ***
+CountyGrand Forks          -5.78e+14   5.83e+07 -9.92e+06   <2e-16 ***
+CountyGrand Isle            2.13e+15   7.35e+07  2.89e+07   <2e-16 ***
+CountyGrand Traverse        4.65e+14   5.79e+07  8.03e+06   <2e-16 ***
+CountyGranite              -6.43e+14   8.74e+07 -7.35e+06   <2e-16 ***
+CountyGrant                 3.56e+14   5.59e+07  6.38e+06   <2e-16 ***
+CountyGranville            -7.73e+14   5.87e+07 -1.32e+07   <2e-16 ***
+CountyGratiot              -2.17e+14   6.03e+07 -3.60e+06   <2e-16 ***
+CountyGraves                3.26e+14   6.09e+07  5.35e+06   <2e-16 ***
+CountyGray                 -3.52e+14   5.97e+07 -5.89e+06   <2e-16 ***
+CountyGrays Harbor         -1.61e+14   5.84e+07 -2.75e+06   <2e-16 ***
+CountyGrayson              -8.18e+13   5.66e+07 -1.44e+06   <2e-16 ***
+CountyGreeley               1.16e+14   7.30e+07  1.59e+06   <2e-16 ***
+CountyGreen                -3.96e+13   5.92e+07 -6.69e+05   <2e-16 ***
+CountyGreen Lake            7.20e+14   6.74e+07  1.07e+07   <2e-16 ***
+CountyGreenbrier            7.46e+14   6.20e+07  1.20e+07   <2e-16 ***
+CountyGreene               -3.68e+14   5.56e+07 -6.62e+06   <2e-16 ***
+CountyGreenlee              2.41e+14   7.03e+07  3.44e+06   <2e-16 ***
+CountyGreensville           1.65e+14   8.72e+07  1.90e+06   <2e-16 ***
+CountyGreenup              -4.42e+14   6.03e+07 -7.33e+06   <2e-16 ***
+CountyGreenville           -1.60e+14   5.60e+07 -2.86e+06   <2e-16 ***
+CountyGreenwood             9.19e+13   5.83e+07  1.58e+06   <2e-16 ***
+CountyGreer                -1.04e+15   8.72e+07 -1.19e+07   <2e-16 ***
+CountyGregg                -1.85e+14   5.72e+07 -3.24e+06   <2e-16 ***
+CountyGregory              -2.89e+13   7.34e+07 -3.94e+05   <2e-16 ***
+CountyGrenada               1.98e+14   6.31e+07  3.14e+06   <2e-16 ***
+CountyGriggs               -3.89e+14   8.74e+07 -4.45e+06   <2e-16 ***
+CountyGrimes                5.58e+13   6.30e+07  8.85e+05   <2e-16 ***
+CountyGrundy               -1.21e+13   5.74e+07 -2.11e+05   <2e-16 ***
+CountyGuadalupe             9.45e+14   5.69e+07  1.66e+07   <2e-16 ***
+CountyGuernsey             -5.21e+14   5.97e+07 -8.72e+06   <2e-16 ***
+CountyGuilford             -1.42e+14   5.58e+07 -2.54e+06   <2e-16 ***
+CountyGulf                 -1.99e+14   7.30e+07 -2.72e+06   <2e-16 ***
+CountyGunnison             -1.14e+15   6.48e+07 -1.75e+07   <2e-16 ***
+CountyGuthrie               2.14e+14   6.76e+07  3.16e+06   <2e-16 ***
+CountyGwinnett             -3.61e+14   5.58e+07 -6.47e+06   <2e-16 ***
+CountyHaakon               -1.17e+14   8.74e+07 -1.34e+06   <2e-16 ***
+CountyHabersham            -4.91e+14   6.03e+07 -8.14e+06   <2e-16 ***
+CountyHaines                2.94e+15   7.75e+07  3.80e+07   <2e-16 ***
+CountyHale                 -6.62e+14   5.90e+07 -1.12e+07   <2e-16 ***
+CountyHalifax              -5.46e+14   5.98e+07 -9.14e+06   <2e-16 ***
+CountyHall                 -7.54e+12   5.63e+07 -1.34e+05   <2e-16 ***
+CountyHamblen              -3.26e+13   5.98e+07 -5.45e+05   <2e-16 ***
+CountyHamilton             -3.20e+14   5.55e+07 -5.77e+06   <2e-16 ***
+CountyHamlin               -1.18e+15   7.34e+07 -1.61e+07   <2e-16 ***
+CountyHampden              -4.63e+14   5.59e+07 -8.28e+06   <2e-16 ***
+CountyHampshire            -2.96e+14   5.69e+07 -5.21e+06   <2e-16 ***
+CountyHampton              -5.02e+14   5.68e+07 -8.83e+06   <2e-16 ***
+CountyHancock              -3.72e+14   5.60e+07 -6.64e+06   <2e-16 ***
+CountyHand                  2.34e+15   7.34e+07  3.19e+07   <2e-16 ***
+CountyHanover               2.00e+15   5.72e+07  3.50e+07   <2e-16 ***
+CountyHansford             -7.63e+14   7.30e+07 -1.05e+07   <2e-16 ***
+CountyHanson               -5.92e+12   8.74e+07 -6.77e+04   <2e-16 ***
+CountyHaralson             -2.70e+14   6.30e+07 -4.28e+06   <2e-16 ***
+CountyHardee                7.97e+14   6.48e+07  1.23e+07   <2e-16 ***
+CountyHardeman             -1.01e+14   6.30e+07 -1.61e+06   <2e-16 ***
+CountyHardin                1.61e+13   5.62e+07  2.86e+05   <2e-16 ***
+CountyHarding               2.00e+15   7.32e+07  2.73e+07   <2e-16 ***
+CountyHardy                -5.30e+13   6.78e+07 -7.82e+05   <2e-16 ***
+CountyHarford              -6.39e+14   5.62e+07 -1.14e+07   <2e-16 ***
+CountyHarlan               -1.27e+15   6.48e+07 -1.97e+07   <2e-16 ***
+CountyHarmon               -3.53e+15   8.72e+07 -4.05e+07   <2e-16 ***
+CountyHarnett              -2.71e+14   5.71e+07 -4.74e+06   <2e-16 ***
+CountyHarney                1.37e+15   7.30e+07  1.88e+07   <2e-16 ***
+CountyHarper               -7.54e+14   6.30e+07 -1.20e+07   <2e-16 ***
+CountyHarris               -3.07e+14   5.55e+07 -5.54e+06   <2e-16 ***
+CountyHarrison             -1.81e+14   5.58e+07 -3.25e+06   <2e-16 ***
+CountyHarrisonburg         -1.42e+15   5.91e+07 -2.40e+07   <2e-16 ***
+CountyHart                 -1.04e+15   6.03e+07 -1.72e+07   <2e-16 ***
+CountyHartford             -6.52e+14   5.62e+07 -1.16e+07   <2e-16 ***
+CountyHartley              -8.81e+14   8.71e+07 -1.01e+07   <2e-16 ***
+CountyHarvey               -2.12e+14   6.19e+07 -3.43e+06   <2e-16 ***
+CountyHaskell              -8.40e+14   6.30e+07 -1.33e+07   <2e-16 ***
+CountyHawaii                4.00e+24   8.53e+17  4.68e+06   <2e-16 ***
+CountyHawkins              -2.30e+14   5.87e+07 -3.92e+06   <2e-16 ***
+CountyHayes                -5.15e+14   8.71e+07 -5.92e+06   <2e-16 ***
+CountyHays                 -5.71e+14   5.71e+07 -1.00e+07   <2e-16 ***
+CountyHaywood              -1.32e+14   5.75e+07 -2.30e+06   <2e-16 ***
+CountyHeard                -9.84e+13   6.76e+07 -1.46e+06   <2e-16 ***
+CountyHemphill              4.60e+14   8.70e+07  5.29e+06   <2e-16 ***
+CountyHempstead             1.64e+15   6.77e+07  2.42e+07   <2e-16 ***
+CountyHenderson            -3.24e+14   5.61e+07 -5.78e+06   <2e-16 ***
+CountyHendricks            -2.80e+13   5.73e+07 -4.88e+05   <2e-16 ***
+CountyHendry               -1.50e+15   6.10e+07 -2.46e+07   <2e-16 ***
+CountyHennepin             -7.21e+14   5.57e+07 -1.30e+07   <2e-16 ***
+CountyHenrico              -6.93e+14   5.62e+07 -1.23e+07   <2e-16 ***
+CountyHenry                -3.08e+14   5.58e+07 -5.52e+06   <2e-16 ***
+CountyHerkimer             -1.82e+14   5.75e+07 -3.16e+06   <2e-16 ***
+CountyHernando             -6.68e+13   5.65e+07 -1.18e+06   <2e-16 ***
+CountyHertford             -4.24e+15   8.71e+07 -4.87e+07   <2e-16 ***
+CountyHettinger            -1.27e+15   7.34e+07 -1.74e+07   <2e-16 ***
+CountyHickman              -1.11e+15   6.30e+07 -1.76e+07   <2e-16 ***
+CountyHickory              -3.82e+14   6.76e+07 -5.64e+06   <2e-16 ***
+CountyHidalgo              -2.26e+14   5.59e+07 -4.04e+06   <2e-16 ***
+CountyHighland             -6.54e+14   6.09e+07 -1.07e+07   <2e-16 ***
+CountyHighlands            -1.58e+13   5.72e+07 -2.77e+05   <2e-16 ***
+CountyHill                 -1.09e+15   5.78e+07 -1.88e+07   <2e-16 ***
+CountyHillsborough         -2.74e+14   5.55e+07 -4.94e+06   <2e-16 ***
+CountyHillsdale            -2.64e+14   5.98e+07 -4.42e+06   <2e-16 ***
+CountyHinds                -4.82e+14   5.63e+07 -8.57e+06   <2e-16 ***
+CountyHinsdale              9.88e+14   8.71e+07  1.14e+07   <2e-16 ***
+CountyHitchcock            -3.50e+15   8.71e+07 -4.02e+07   <2e-16 ***
+CountyHocking              -5.94e+14   6.30e+07 -9.43e+06   <2e-16 ***
+CountyHockley               1.73e+15   6.09e+07  2.83e+07   <2e-16 ***
+CountyHodgeman              2.32e+14   8.71e+07  2.66e+06   <2e-16 ***
+CountyHoke                  1.09e+15   6.19e+07  1.76e+07   <2e-16 ***
+CountyHolmes               -8.71e+14   6.30e+07 -1.38e+07   <2e-16 ***
+CountyHolt                  6.17e+14   6.18e+07  9.98e+06   <2e-16 ***
+CountyHonolulu              4.00e+24   8.53e+17  4.68e+06   <2e-16 ***
+CountyHood                 -9.94e+14   5.93e+07 -1.68e+07   <2e-16 ***
+CountyHood River           -4.76e+14   6.48e+07 -7.33e+06   <2e-16 ***
+CountyHooker               -3.01e+15   8.71e+07 -3.46e+07   <2e-16 ***
+CountyHopewell             -4.61e+14   6.19e+07 -7.45e+06   <2e-16 ***
+CountyHopkins              -8.58e+13   5.76e+07 -1.49e+06   <2e-16 ***
+CountyHorry                -1.56e+14   5.62e+07 -2.78e+06   <2e-16 ***
+CountyHot Spring           -9.92e+13   6.10e+07 -1.63e+06   <2e-16 ***
+CountyHot Springs          -2.69e+15   7.36e+07 -3.66e+07   <2e-16 ***
+CountyHoughton             -3.26e+14   5.90e+07 -5.53e+06   <2e-16 ***
+CountyHouston              -1.30e+14   5.61e+07 -2.32e+06   <2e-16 ***
+CountyHoward               -2.55e+14   5.59e+07 -4.57e+06   <2e-16 ***
+CountyHowell               -6.84e+14   6.18e+07 -1.11e+07   <2e-16 ***
+CountyHubbard               2.04e+14   6.10e+07  3.35e+06   <2e-16 ***
+CountyHudson               -1.40e+15   5.57e+07 -2.52e+07   <2e-16 ***
+CountyHudspeth             -3.62e+15   8.71e+07 -4.15e+07   <2e-16 ***
+CountyHuerfano             -1.93e+15   7.30e+07 -2.65e+07   <2e-16 ***
+CountyHughes               -2.96e+14   5.99e+07 -4.94e+06   <2e-16 ***
+CountyHumboldt              2.66e+14   5.65e+07  4.71e+06   <2e-16 ***
+CountyHumphreys            -8.60e+14   6.18e+07 -1.39e+07   <2e-16 ***
+CountyHunt                 -1.06e+14   5.76e+07 -1.84e+06   <2e-16 ***
+CountyHunterdon             1.53e+15   5.70e+07  2.69e+07   <2e-16 ***
+CountyHuntingdon           -4.11e+14   5.90e+07 -6.97e+06   <2e-16 ***
+CountyHuntington           -9.07e+13   6.03e+07 -1.50e+06   <2e-16 ***
+CountyHuron                 4.40e+14   5.72e+07  7.69e+06   <2e-16 ***
+CountyHutchinson           -4.99e+14   5.94e+07 -8.41e+06   <2e-16 ***
+CountyHyde                  2.01e+15   7.30e+07  2.75e+07   <2e-16 ***
+CountyIberia               -7.79e+14   5.91e+07 -1.32e+07   <2e-16 ***
+CountyIberville            -8.44e+14   6.19e+07 -1.36e+07   <2e-16 ***
+CountyIda                   1.03e+15   6.76e+07  1.52e+07   <2e-16 ***
+CountyIdaho                 1.90e+15   6.40e+07  2.97e+07   <2e-16 ***
+CountyImperial             -7.23e+13   5.70e+07 -1.27e+06   <2e-16 ***
+CountyIndependence         -7.49e+14   6.10e+07 -1.23e+07   <2e-16 ***
+CountyIndian River         -1.55e+14   5.69e+07 -2.72e+06   <2e-16 ***
+CountyIndiana               1.36e+14   5.84e+07  2.32e+06   <2e-16 ***
+CountyIngham               -2.55e+14   5.60e+07 -4.54e+06   <2e-16 ***
+CountyInyo                  1.30e+15   6.31e+07  2.06e+07   <2e-16 ***
+CountyIonia                -6.35e+14   5.85e+07 -1.09e+07   <2e-16 ***
+CountyIosco                 1.11e+14   6.10e+07  1.82e+06   <2e-16 ***
+CountyIowa                  8.66e+13   5.92e+07  1.46e+06   <2e-16 ***
+CountyIredell              -2.82e+14   5.65e+07 -4.99e+06   <2e-16 ***
+CountyIrion                -1.76e+15   8.70e+07 -2.03e+07   <2e-16 ***
+CountyIron                 -2.46e+14   5.79e+07 -4.24e+06   <2e-16 ***
+CountyIroquois             -1.33e+15   6.03e+07 -2.20e+07   <2e-16 ***
+CountyIrwin                -1.93e+15   7.30e+07 -2.65e+07   <2e-16 ***
+CountyIsabella             -9.39e+13   5.81e+07 -1.62e+06   <2e-16 ***
+CountyIsanti               -9.80e+12   6.04e+07 -1.62e+05   <2e-16 ***
+CountyIsland                2.78e+14   5.75e+07  4.84e+06   <2e-16 ***
+CountyIsle of Wight        -9.27e+14   6.04e+07 -1.54e+07   <2e-16 ***
+CountyItasca               -2.31e+14   5.94e+07 -3.89e+06   <2e-16 ***
+CountyItawamba             -3.93e+14   6.31e+07 -6.23e+06   <2e-16 ***
+CountyIzard                 1.70e+14   6.48e+07  2.63e+06   <2e-16 ***
+CountyJack                  1.41e+14   6.76e+07  2.09e+06   <2e-16 ***
+CountyJackson              -3.11e+14   5.55e+07 -5.61e+06   <2e-16 ***
+CountyJames City           -4.77e+14   5.94e+07 -8.03e+06   <2e-16 ***
+CountyJasper               -2.49e+14   5.61e+07 -4.44e+06   <2e-16 ***
+CountyJay                   2.38e+15   6.30e+07  3.77e+07   <2e-16 ***
+CountyJeff Davis           -8.24e+14   6.76e+07 -1.22e+07   <2e-16 ***
+CountyJefferson            -3.33e+14   5.54e+07 -6.01e+06   <2e-16 ***
+CountyJefferson Davis      -1.14e+15   6.31e+07 -1.81e+07   <2e-16 ***
+CountyJenkins               1.51e+14   8.70e+07  1.74e+06   <2e-16 ***
+CountyJennings              1.30e+15   6.30e+07  2.07e+07   <2e-16 ***
+CountyJerauld              -2.81e+15   8.74e+07 -3.21e+07   <2e-16 ***
+CountyJerome               -7.04e+14   6.40e+07 -1.10e+07   <2e-16 ***
+CountyJersey                2.93e+15   6.18e+07  4.74e+07   <2e-16 ***
+CountyJessamine             5.87e+13   5.98e+07  9.82e+05   <2e-16 ***
+CountyJewell                3.54e+14   7.30e+07  4.85e+06   <2e-16 ***
+CountyJim Hogg              1.07e+15   8.70e+07  1.23e+07   <2e-16 ***
+CountyJim Wells             8.74e+14   6.31e+07  1.39e+07   <2e-16 ***
+CountyJo Daviess            7.01e+14   6.30e+07  1.11e+07   <2e-16 ***
+CountyJohnson              -2.06e+14   5.56e+07 -3.71e+06   <2e-16 ***
+CountyJohnston             -8.29e+14   5.69e+07 -1.46e+07   <2e-16 ***
+CountyJones                -7.20e+13   5.66e+07 -1.27e+06   <2e-16 ***
+CountyJosephine            -4.86e+14   5.81e+07 -8.37e+06   <2e-16 ***
+CountyJuab                  3.65e+14   7.35e+07  4.97e+06   <2e-16 ***
+CountyJudith Basin         -1.37e+15   8.74e+07 -1.57e+07   <2e-16 ***
+CountyJuneau                4.11e+14   4.90e+07  8.39e+06   <2e-16 ***
+CountyJuniata               1.07e+15   6.76e+07  1.58e+07   <2e-16 ***
+CountyKalamazoo            -5.85e+13   5.62e+07 -1.04e+06   <2e-16 ***
+CountyKalkaska             -8.90e+14   6.48e+07 -1.37e+07   <2e-16 ***
+CountyKanabec              -5.93e+14   6.49e+07 -9.15e+06   <2e-16 ***
+CountyKanawha              -1.46e+14   5.66e+07 -2.58e+06   <2e-16 ***
+CountyKandiyohi            -2.01e+14   5.91e+07 -3.41e+06   <2e-16 ***
+CountyKane                 -9.15e+14   5.59e+07 -1.64e+07   <2e-16 ***
+CountyKankakee             -4.78e+14   5.70e+07 -8.39e+06   <2e-16 ***
+CountyKarnes                9.30e+14   6.76e+07  1.37e+07   <2e-16 ***
+CountyKauai                 4.00e+24   8.53e+17  4.68e+06   <2e-16 ***
+CountyKaufman              -7.49e+13   5.78e+07 -1.30e+06   <2e-16 ***
+CountyKay                  -4.10e+14   5.99e+07 -6.84e+06   <2e-16 ***
+CountyKearney               1.63e+15   7.30e+07  2.23e+07   <2e-16 ***
+CountyKearny               -4.06e+15   8.72e+07 -4.66e+07   <2e-16 ***
+CountyKeith                -9.14e+14   6.77e+07 -1.35e+07   <2e-16 ***
+CountyKemper               -2.95e+15   8.71e+07 -3.39e+07   <2e-16 ***
+CountyKenai Peninsula       2.76e+12   4.42e+07  6.25e+04   <2e-16 ***
+CountyKendall               1.85e+15   5.79e+07  3.19e+07   <2e-16 ***
+CountyKennebec             -1.10e+15   5.70e+07 -1.94e+07   <2e-16 ***
+CountyKenosha              -6.52e+14   5.64e+07 -1.16e+07   <2e-16 ***
+CountyKent                 -2.74e+14   5.57e+07 -4.92e+06   <2e-16 ***
+CountyKenton               -2.09e+14   5.64e+07 -3.70e+06   <2e-16 ***
+CountyKeokuk                9.67e+14   6.48e+07  1.49e+07   <2e-16 ***
+CountyKern                 -2.25e+14   5.58e+07 -4.04e+06   <2e-16 ***
+CountyKerr                 -2.99e+14   5.93e+07 -5.04e+06   <2e-16 ***
+CountyKershaw               1.42e+14   5.86e+07  2.43e+06   <2e-16 ***
+CountyKetchikan Gateway    -3.06e+15   5.13e+07 -5.96e+07   <2e-16 ***
+CountyKewaunee             -1.06e+15   6.46e+07 -1.64e+07   <2e-16 ***
+CountyKeweenaw              2.65e+15   7.30e+07  3.63e+07   <2e-16 ***
+CountyKeya Paha            -4.83e+13   8.71e+07 -5.55e+05   <2e-16 ***
+CountyKidder               -2.95e+15   8.74e+07 -3.38e+07   <2e-16 ***
+CountyKimball               6.73e+14   8.71e+07  7.73e+06   <2e-16 ***
+CountyKimble               -8.28e+14   7.30e+07 -1.13e+07   <2e-16 ***
+CountyKing                 -1.47e+14   5.57e+07 -2.64e+06   <2e-16 ***
+CountyKing and Queen       -3.97e+15   8.71e+07 -4.56e+07   <2e-16 ***
+CountyKing George           2.73e+15   6.31e+07  4.33e+07   <2e-16 ***
+CountyKing William         -9.15e+13   6.49e+07 -1.41e+06   <2e-16 ***
+CountyKingfisher            1.86e+15   6.49e+07  2.87e+07   <2e-16 ***
+CountyKingman               5.60e+14   6.77e+07  8.28e+06   <2e-16 ***
+CountyKings                -3.79e+14   5.55e+07 -6.84e+06   <2e-16 ***
+CountyKingsbury             8.63e+14   7.34e+07  1.18e+07   <2e-16 ***
+CountyKinney               -8.91e+14   8.70e+07 -1.02e+07   <2e-16 ***
+CountyKiowa                -6.13e+14   6.49e+07 -9.45e+06   <2e-16 ***
+CountyKit Carson            8.68e+14   6.77e+07  1.28e+07   <2e-16 ***
+CountyKitsap               -2.50e+14   5.63e+07 -4.43e+06   <2e-16 ***
+CountyKittitas              5.58e+13   6.04e+07  9.24e+05   <2e-16 ***
+CountyKittson               6.11e+13   7.30e+07  8.36e+05   <2e-16 ***
+CountyKlamath              -4.58e+14   5.75e+07 -7.98e+06   <2e-16 ***
+CountyKleberg               1.19e+15   6.18e+07  1.92e+07   <2e-16 ***
+CountyKlickitat             2.01e+15   6.78e+07  2.96e+07   <2e-16 ***
+CountyKnox                 -2.85e+14   5.56e+07 -5.12e+06   <2e-16 ***
+CountyKodiak Island        -2.08e+15   5.13e+07 -4.06e+07   <2e-16 ***
+CountyKoochiching           1.35e+15   6.77e+07  1.99e+07   <2e-16 ***
+CountyKootenai             -8.46e+14   5.81e+07 -1.46e+07   <2e-16 ***
+CountyKosciusko             6.49e+14   5.77e+07  1.12e+07   <2e-16 ***
+CountyKossuth               8.53e+14   6.18e+07  1.38e+07   <2e-16 ***
+CountyLa Crosse             8.38e+13   5.68e+07  1.48e+06   <2e-16 ***
+CountyLa Paz               -1.20e+15   6.48e+07 -1.86e+07   <2e-16 ***
+CountyLa Plata              1.07e+15   5.94e+07  1.80e+07   <2e-16 ***
+CountyLa Salle             -3.34e+14   5.68e+07 -5.88e+06   <2e-16 ***
+CountyLabette               2.83e+13   6.04e+07  4.69e+05   <2e-16 ***
+CountyLac qui Parle         3.31e+14   6.77e+07  4.89e+06   <2e-16 ***
+CountyLackawanna           -3.17e+14   5.61e+07 -5.65e+06   <2e-16 ***
+CountyLaclede               7.59e+14   6.18e+07  1.23e+07   <2e-16 ***
+CountyLafayette            -2.32e+14   5.61e+07 -4.14e+06   <2e-16 ***
+CountyLafourche            -4.64e+14   5.75e+07 -8.06e+06   <2e-16 ***
+CountyLaGrange             -3.35e+14   7.29e+07 -4.59e+06   <2e-16 ***
+CountyLake                 -3.36e+14   5.55e+07 -6.06e+06   <2e-16 ***
+CountyLake of the Woods    -2.97e+14   7.30e+07 -4.07e+06   <2e-16 ***
+CountyLamar                -4.97e+14   5.72e+07 -8.69e+06   <2e-16 ***
+CountyLamb                 -1.01e+15   6.30e+07 -1.60e+07   <2e-16 ***
+CountyLamoille             -3.15e+14   6.16e+07 -5.12e+06   <2e-16 ***
+CountyLaMoure               1.86e+15   7.34e+07  2.53e+07   <2e-16 ***
+CountyLampasas              1.35e+15   6.30e+07  2.15e+07   <2e-16 ***
+CountyLancaster            -2.22e+14   5.56e+07 -3.98e+06   <2e-16 ***
+CountyLander               -5.02e+14   8.72e+07 -5.76e+06   <2e-16 ***
+CountyLane                 -3.20e+14   5.60e+07 -5.72e+06   <2e-16 ***
+CountyLanglade              4.98e+14   6.16e+07  8.08e+06   <2e-16 ***
+CountyLanier               -1.97e+15   7.30e+07 -2.70e+07   <2e-16 ***
+CountyLapeer                6.40e+13   5.73e+07  1.12e+06   <2e-16 ***
+CountyLaPorte              -1.57e+14   5.71e+07 -2.75e+06   <2e-16 ***
+CountyLaramie               1.08e+14   5.83e+07  1.86e+06   <2e-16 ***
+CountyLarimer              -3.52e+14   5.60e+07 -6.28e+06   <2e-16 ***
+CountyLarue                 1.79e+14   6.48e+07  2.77e+06   <2e-16 ***
+CountyLas Animas           -1.39e+14   6.19e+07 -2.24e+06   <2e-16 ***
+CountyLassen               -2.94e+14   6.04e+07 -4.87e+06   <2e-16 ***
+CountyLatah                 1.39e+15   6.19e+07  2.24e+07   <2e-16 ***
+CountyLatimer               2.13e+15   6.78e+07  3.14e+07   <2e-16 ***
+CountyLauderdale           -5.20e+14   5.64e+07 -9.21e+06   <2e-16 ***
+CountyLaurel               -3.30e+14   5.90e+07 -5.59e+06   <2e-16 ***
+CountyLaurens              -3.90e+14   5.73e+07 -6.80e+06   <2e-16 ***
+CountyLavaca               -1.09e+15   6.18e+07 -1.77e+07   <2e-16 ***
+CountyLawrence             -7.20e+13   5.58e+07 -1.29e+06   <2e-16 ***
+CountyLe Flore             -3.84e+14   5.95e+07 -6.45e+06   <2e-16 ***
+CountyLe Sueur              3.00e+14   6.19e+07  4.84e+06   <2e-16 ***
+CountyLea                   3.74e+14   5.86e+07  6.38e+06   <2e-16 ***
+CountyLeake                 1.86e+15   6.77e+07  2.75e+07   <2e-16 ***
+CountyLeavenworth           1.70e+14   5.83e+07  2.91e+06   <2e-16 ***
+CountyLebanon              -2.47e+14   5.67e+07 -4.36e+06   <2e-16 ***
+CountyLee                  -5.17e+13   5.56e+07 -9.31e+05   <2e-16 ***
+CountyLeelanau              1.87e+15   6.18e+07  3.03e+07   <2e-16 ***
+CountyLeflore              -4.26e+14   6.31e+07 -6.75e+06   <2e-16 ***
+CountyLehigh               -2.57e+12   5.60e+07 -4.60e+04   <2e-16 ***
+CountyLemhi                 1.16e+15   6.85e+07  1.70e+07   <2e-16 ***
+CountyLenawee               3.92e+14   5.74e+07  6.82e+06   <2e-16 ***
+CountyLenoir               -7.72e+14   5.85e+07 -1.32e+07   <2e-16 ***
+CountyLeon                 -1.08e+14   5.60e+07 -1.93e+06   <2e-16 ***
+CountyLeslie               -4.52e+15   7.30e+07 -6.19e+07   <2e-16 ***
+CountyLetcher               2.63e+14   7.30e+07  3.60e+06   <2e-16 ***
+CountyLevy                 -1.60e+15   6.18e+07 -2.59e+07   <2e-16 ***
+CountyLewis                 1.90e+14   5.65e+07  3.37e+06   <2e-16 ***
+CountyLewis and Clark      -8.04e+14   5.89e+07 -1.37e+07   <2e-16 ***
+CountyLexington            -6.42e+12   5.61e+07 -1.14e+05   <2e-16 ***
+CountyLiberty              -3.38e+13   5.69e+07 -5.93e+05   <2e-16 ***
+CountyLicking              -3.26e+14   5.67e+07 -5.74e+06   <2e-16 ***
+CountyLimestone             3.79e+12   5.73e+07  6.61e+04   <2e-16 ***
+CountyLincoln              -1.52e+14   5.56e+07 -2.73e+06   <2e-16 ***
+CountyLinn                 -4.47e+14   5.60e+07 -7.99e+06   <2e-16 ***
+CountyLipscomb              1.03e+15   7.30e+07  1.41e+07   <2e-16 ***
+CountyLitchfield           -4.35e+14   5.68e+07 -7.66e+06   <2e-16 ***
+CountyLittle River          3.29e+15   6.48e+07  5.08e+07   <2e-16 ***
+CountyLive Oak             -8.22e+14   6.48e+07 -1.27e+07   <2e-16 ***
+CountyLivingston           -2.67e+14   5.58e+07 -4.79e+06   <2e-16 ***
+CountyLlano                 8.02e+14   6.30e+07  1.27e+07   <2e-16 ***
+CountyLogan                -5.61e+13   5.62e+07 -9.97e+05   <2e-16 ***
+CountyLong                  2.31e+15   7.30e+07  3.16e+07   <2e-16 ***
+CountyLonoke               -4.34e+14   5.81e+07 -7.46e+06   <2e-16 ***
+CountyLorain               -3.75e+14   5.60e+07 -6.69e+06   <2e-16 ***
+CountyLos Alamos            1.36e+15   6.57e+07  2.08e+07   <2e-16 ***
+CountyLos Angeles          -2.21e+14   5.55e+07 -3.98e+06   <2e-16 ***
+CountyLoudon               -2.73e+14   5.98e+07 -4.57e+06   <2e-16 ***
+CountyLoudoun              -4.94e+14   5.62e+07 -8.80e+06   <2e-16 ***
+CountyLouisa               -5.32e+14   6.03e+07 -8.83e+06   <2e-16 ***
+CountyLoup                  8.00e+14   8.71e+07  9.19e+06   <2e-16 ***
+CountyLove                 -4.20e+14   6.78e+07 -6.20e+06   <2e-16 ***
+CountyLowndes              -3.29e+14   5.65e+07 -5.83e+06   <2e-16 ***
+CountyLubbock              -1.61e+14   5.61e+07 -2.88e+06   <2e-16 ***
+CountyLucas                -3.93e+14   5.57e+07 -7.05e+06   <2e-16 ***
+CountyLuce                  1.46e+15   6.76e+07  2.16e+07   <2e-16 ***
+CountyLumpkin              -1.38e+15   6.48e+07 -2.13e+07   <2e-16 ***
+CountyLuna                 -1.48e+14   6.39e+07 -2.32e+06   <2e-16 ***
+CountyLunenburg            -4.18e+15   7.30e+07 -5.73e+07   <2e-16 ***
+CountyLuzerne              -3.59e+14   5.58e+07 -6.43e+06   <2e-16 ***
+CountyLycoming             -1.75e+14   5.71e+07 -3.06e+06   <2e-16 ***
+CountyLyman                -1.96e+15   8.74e+07 -2.24e+07   <2e-16 ***
+CountyLynchburg            -2.06e+13   5.85e+07 -3.51e+05   <2e-16 ***
+CountyLynn                 -2.72e+14   7.30e+07 -3.73e+06   <2e-16 ***
+CountyLyon                 -2.79e+14   5.67e+07 -4.91e+06   <2e-16 ***
+CountyMackinac             -1.13e+14   6.30e+07 -1.79e+06   <2e-16 ***
+CountyMacomb               -4.17e+14   5.56e+07 -7.49e+06   <2e-16 ***
+CountyMacon                -4.09e+14   5.62e+07 -7.29e+06   <2e-16 ***
+CountyMacoupin             -3.16e+13   5.90e+07 -5.36e+05   <2e-16 ***
+CountyMadera               -1.20e+15   5.73e+07 -2.10e+07   <2e-16 ***
+CountyMadison              -3.61e+14   5.55e+07 -6.50e+06   <2e-16 ***
+CountyMahaska              -6.84e+14   6.10e+07 -1.12e+07   <2e-16 ***
+CountyMahnomen             -4.30e+15   8.71e+07 -4.93e+07   <2e-16 ***
+CountyMahoning             -4.50e+14   5.61e+07 -8.03e+06   <2e-16 ***
+CountyMajor                 1.45e+14   6.78e+07  2.14e+06   <2e-16 ***
+CountyMalheur              -2.86e+14   6.03e+07 -4.74e+06   <2e-16 ***
+CountyManassas             -3.72e+14   6.10e+07 -6.10e+06   <2e-16 ***
+CountyManassas Park         1.11e+15   7.30e+07  1.51e+07   <2e-16 ***
+CountyManatee              -4.10e+14   5.60e+07 -7.33e+06   <2e-16 ***
+CountyManistee             -1.42e+15   5.98e+07 -2.37e+07   <2e-16 ***
+CountyManitowoc            -3.28e+14   5.73e+07 -5.72e+06   <2e-16 ***
+CountyMarathon             -1.24e+14   5.68e+07 -2.19e+06   <2e-16 ***
+CountyMarengo              -6.57e+14   6.48e+07 -1.01e+07   <2e-16 ***
+CountyMaricopa             -3.76e+13   5.87e+07 -6.41e+05   <2e-16 ***
+CountyMaries                4.99e+14   6.76e+07  7.38e+06   <2e-16 ***
+CountyMarin                -3.02e+14   5.63e+07 -5.37e+06   <2e-16 ***
+CountyMarinette            -2.45e+14   5.88e+07 -4.16e+06   <2e-16 ***
+CountyMarion               -3.21e+14   5.55e+07 -5.79e+06   <2e-16 ***
+CountyMariposa              1.10e+14   6.19e+07  1.77e+06   <2e-16 ***
+CountyMarlboro              2.46e+15   6.77e+07  3.63e+07   <2e-16 ***
+CountyMarquette            -1.77e+14   5.68e+07 -3.11e+06   <2e-16 ***
+CountyMarshall             -4.55e+14   5.59e+07 -8.15e+06   <2e-16 ***
+CountyMartin               -3.07e+14   5.63e+07 -5.46e+06   <2e-16 ***
+CountyMartinsville         -6.23e+14   6.31e+07 -9.87e+06   <2e-16 ***
+CountyMason                 3.69e+13   5.66e+07  6.53e+05   <2e-16 ***
+CountyMassac               -1.76e+14   6.48e+07 -2.72e+06   <2e-16 ***
+CountyMatagorda            -3.39e+14   6.09e+07 -5.56e+06   <2e-16 ***
+CountyMatanuska-Susitna    -1.88e+15   4.13e+07 -4.54e+07   <2e-16 ***
+CountyMathews              -6.81e+13   7.30e+07 -9.32e+05   <2e-16 ***
+CountyMaui                  4.00e+24   8.53e+17  4.68e+06   <2e-16 ***
+CountyMaury                -4.01e+14   5.78e+07 -6.94e+06   <2e-16 ***
+CountyMaverick              1.44e+14   6.04e+07  2.38e+06   <2e-16 ***
+CountyMayes                -4.61e+14   6.11e+07 -7.55e+06   <2e-16 ***
+CountyMcClain               9.36e+14   6.20e+07  1.51e+07   <2e-16 ***
+CountyMcCone               -2.11e+14   8.74e+07 -2.41e+06   <2e-16 ***
+CountyMcCook                1.71e+15   7.34e+07  2.34e+07   <2e-16 ***
+CountyMcCormick            -2.42e+15   7.31e+07 -3.31e+07   <2e-16 ***
+CountyMcCracken            -3.33e+14   5.81e+07 -5.73e+06   <2e-16 ***
+CountyMcCreary             -4.15e+15   8.70e+07 -4.77e+07   <2e-16 ***
+CountyMcCulloch             1.75e+15   7.30e+07  2.40e+07   <2e-16 ***
+CountyMcCurtain             3.41e+14   6.04e+07  5.65e+06   <2e-16 ***
+CountyMcDonald             -2.90e+14   6.48e+07 -4.48e+06   <2e-16 ***
+CountyMcDonough            -4.10e+14   5.93e+07 -6.90e+06   <2e-16 ***
+CountyMcDowell             -3.23e+14   5.98e+07 -5.40e+06   <2e-16 ***
+CountyMcDuffie             -1.27e+15   6.76e+07 -1.88e+07   <2e-16 ***
+CountyMcHenry               1.26e+15   5.62e+07  2.24e+07   <2e-16 ***
+CountyMcIntosh              1.64e+14   5.90e+07  2.78e+06   <2e-16 ***
+CountyMcKean               -4.28e+14   5.87e+07 -7.29e+06   <2e-16 ***
+CountyMcKenzie              1.83e+15   6.81e+07  2.68e+07   <2e-16 ***
+CountyMcKinley             -2.68e+14   6.43e+07 -4.17e+06   <2e-16 ***
+CountyMcLean               -3.00e+14   5.64e+07 -5.32e+06   <2e-16 ***
+CountyMcLennan             -2.67e+14   5.64e+07 -4.74e+06   <2e-16 ***
+CountyMcLeod               -8.73e+14   6.10e+07 -1.43e+07   <2e-16 ***
+CountyMcMinn                1.29e+14   6.03e+07  2.15e+06   <2e-16 ***
+CountyMcNairy              -2.95e+15   6.48e+07 -4.55e+07   <2e-16 ***
+CountyMcPherson             1.18e+15   5.98e+07  1.97e+07   <2e-16 ***
+CountyMeade                -2.72e+13   5.83e+07 -4.67e+05   <2e-16 ***
+CountyMeagher              -2.45e+15   8.75e+07 -2.80e+07   <2e-16 ***
+CountyMecklenburg          -2.77e+14   5.56e+07 -4.97e+06   <2e-16 ***
+CountyMecosta              -4.45e+14   6.03e+07 -7.38e+06   <2e-16 ***
+CountyMedina                1.81e+15   5.63e+07  3.22e+07   <2e-16 ***
+CountyMeeker               -5.31e+14   6.31e+07 -8.41e+06   <2e-16 ***
+CountyMeigs                -1.02e+15   6.09e+07 -1.68e+07   <2e-16 ***
+CountyMenard               -2.73e+14   6.48e+07 -4.22e+06   <2e-16 ***
+CountyMendocino             3.78e+14   5.77e+07  6.55e+06   <2e-16 ***
+CountyMenominee            -1.65e+14   6.18e+07 -2.67e+06   <2e-16 ***
+CountyMerced               -1.67e+12   5.64e+07 -2.96e+04   <2e-16 ***
+CountyMercer               -1.20e+14   5.57e+07 -2.16e+06   <2e-16 ***
+CountyMeriwether            3.41e+15   8.71e+07  3.92e+07   <2e-16 ***
+CountyMerrick               6.86e+14   6.77e+07  1.01e+07   <2e-16 ***
+CountyMerrimack            -1.69e+14   5.70e+07 -2.96e+06   <2e-16 ***
+CountyMesa                 -8.88e+13   5.69e+07 -1.56e+06   <2e-16 ***
+CountyMetcalfe             -4.27e+15   8.70e+07 -4.91e+07   <2e-16 ***
+CountyMiami                 1.29e+12   5.64e+07  2.28e+04   <2e-16 ***
+CountyMiami-Dade           -6.92e+14   5.56e+07 -1.24e+07   <2e-16 ***
+CountyMiddlesex            -4.83e+14   5.55e+07 -8.70e+06   <2e-16 ***
+CountyMidland              -2.45e+14   5.63e+07 -4.35e+06   <2e-16 ***
+CountyMifflin              -8.85e+14   5.98e+07 -1.48e+07   <2e-16 ***
+CountyMilam                 1.11e+15   6.18e+07  1.79e+07   <2e-16 ***
+CountyMillard              -2.00e+14   6.82e+07 -2.93e+06   <2e-16 ***
+CountyMille Lacs           -4.05e+14   6.10e+07 -6.63e+06   <2e-16 ***
+CountyMiller               -2.65e+15   5.76e+07 -4.59e+07   <2e-16 ***
+CountyMills                 3.00e+15   6.09e+07  4.92e+07   <2e-16 ***
+CountyMilwaukee            -5.40e+14   5.54e+07 -9.76e+06   <2e-16 ***
+CountyMiner                -8.45e+14   8.74e+07 -9.67e+06   <2e-16 ***
+CountyMineral               1.89e+15   6.19e+07  3.05e+07   <2e-16 ***
+CountyMingo                -4.44e+13   7.31e+07 -6.08e+05   <2e-16 ***
+CountyMinidoka             -1.71e+14   6.40e+07 -2.68e+06   <2e-16 ***
+CountyMinnehaha            -4.96e+14   5.69e+07 -8.70e+06   <2e-16 ***
+CountyMissaukee             1.05e+14   6.76e+07  1.55e+06   <2e-16 ***
+CountyMississippi          -3.32e+14   5.90e+07 -5.63e+06   <2e-16 ***
+CountyMissoula             -7.12e+14   5.80e+07 -1.23e+07   <2e-16 ***
+CountyMitchell             -2.14e+14   5.89e+07 -3.63e+06   <2e-16 ***
+CountyMobile               -4.53e+14   5.58e+07 -8.12e+06   <2e-16 ***
+CountyModoc                 7.29e+14   6.49e+07  1.12e+07   <2e-16 ***
+CountyMoffat                1.56e+15   6.48e+07  2.40e+07   <2e-16 ***
+CountyMohave                2.79e+14   5.97e+07  4.67e+06   <2e-16 ***
+CountyMoniteau              2.20e+15   6.76e+07  3.26e+07   <2e-16 ***
+CountyMonmouth             -3.34e+14   5.58e+07 -5.99e+06   <2e-16 ***
+CountyMono                  1.01e+15   6.77e+07  1.49e+07   <2e-16 ***
+CountyMonona               -1.21e+15   6.48e+07 -1.86e+07   <2e-16 ***
+CountyMonongalia           -2.97e+14   5.73e+07 -5.18e+06   <2e-16 ***
+CountyMonroe               -2.83e+14   5.55e+07 -5.11e+06   <2e-16 ***
+CountyMontague             -2.19e+14   6.18e+07 -3.54e+06   <2e-16 ***
+CountyMontcalm             -2.53e+14   5.87e+07 -4.31e+06   <2e-16 ***
+CountyMonterey              1.11e+14   5.60e+07  1.99e+06   <2e-16 ***
+CountyMontezuma             1.54e+14   6.19e+07  2.49e+06   <2e-16 ***
+CountyMontgomery           -3.55e+14   5.54e+07 -6.41e+06   <2e-16 ***
+CountyMontmorency          -2.06e+14   6.30e+07 -3.27e+06   <2e-16 ***
+CountyMontour              -2.23e+15   7.29e+07 -3.05e+07   <2e-16 ***
+CountyMontrose             -1.30e+13   5.94e+07 -2.19e+05   <2e-16 ***
+CountyMoody                -1.38e+15   8.74e+07 -1.58e+07   <2e-16 ***
+CountyMoore                -5.39e+14   5.72e+07 -9.42e+06   <2e-16 ***
+CountyMora                 -1.65e+15   8.77e+07 -1.88e+07   <2e-16 ***
+CountyMorehouse             3.57e+14   6.19e+07  5.76e+06   <2e-16 ***
+CountyMorgan               -2.49e+14   5.59e+07 -4.46e+06   <2e-16 ***
+CountyMorrill              -2.60e+15   8.71e+07 -2.98e+07   <2e-16 ***
+CountyMorris               -1.10e+14   5.59e+07 -1.96e+06   <2e-16 ***
+CountyMorrison              5.09e+14   6.10e+07  8.35e+06   <2e-16 ***
+CountyMorrow               -6.98e+14   6.09e+07 -1.15e+07   <2e-16 ***
+CountyMorton                1.01e+14   6.21e+07  1.62e+06   <2e-16 ***
+CountyMotley               -3.65e+15   8.70e+07 -4.19e+07   <2e-16 ***
+CountyMoultrie             -1.60e+15   6.76e+07 -2.37e+07   <2e-16 ***
+CountyMountrail             2.93e+14   6.81e+07  4.29e+06   <2e-16 ***
+CountyMower                -3.64e+14   5.91e+07 -6.16e+06   <2e-16 ***
+CountyMuhlenberg           -4.06e+14   6.03e+07 -6.74e+06   <2e-16 ***
+CountyMultnomah            -3.85e+14   5.57e+07 -6.91e+06   <2e-16 ***
+CountyMurray               -1.95e+14   5.84e+07 -3.33e+06   <2e-16 ***
+CountyMuscatine            -7.90e+14   5.94e+07 -1.33e+07   <2e-16 ***
+CountyMuscogee             -6.28e+14   5.63e+07 -1.11e+07   <2e-16 ***
+CountyMuskegon             -4.59e+13   5.67e+07 -8.09e+05   <2e-16 ***
+CountyMuskingum            -2.27e+14   5.77e+07 -3.93e+06   <2e-16 ***
+CountyMuskogee             -2.53e+13   5.82e+07 -4.35e+05   <2e-16 ***
+CountyMusselshell           1.95e+15   7.34e+07  2.66e+07   <2e-16 ***
+CountyNacogdoches          -7.76e+14   5.90e+07 -1.32e+07   <2e-16 ***
+CountyNance                -1.08e+15   8.71e+07 -1.25e+07   <2e-16 ***
+CountyNantucket             2.31e+15   6.19e+07  3.73e+07   <2e-16 ***
+CountyNapa                 -8.40e+14   5.66e+07 -1.48e+07   <2e-16 ***
+CountyNash                 -3.77e+14   5.79e+07 -6.51e+06   <2e-16 ***
+CountyNassau                4.26e+14   5.56e+07  7.67e+06   <2e-16 ***
+CountyNatchitoches          8.30e+13   6.10e+07  1.36e+06   <2e-16 ***
+CountyNatrona              -7.59e+14   5.87e+07 -1.29e+07   <2e-16 ***
+CountyNavajo                2.56e+14   6.09e+07  4.21e+06   <2e-16 ***
+CountyNavarro              -2.86e+14   5.93e+07 -4.81e+06   <2e-16 ***
+CountyNelson               -4.12e+14   5.87e+07 -7.01e+06   <2e-16 ***
+CountyNemaha                1.55e+15   6.30e+07  2.45e+07   <2e-16 ***
+CountyNeosho               -1.19e+15   6.31e+07 -1.89e+07   <2e-16 ***
+CountyNeshoba              -1.15e+15   6.19e+07 -1.85e+07   <2e-16 ***
+CountyNess                  2.69e+15   7.30e+07  3.68e+07   <2e-16 ***
+CountyNevada                2.05e+14   5.73e+07  3.57e+06   <2e-16 ***
+CountyNew Castle           -5.96e+14   5.66e+07 -1.05e+07   <2e-16 ***
+CountyNew Hanover          -3.87e+14   5.64e+07 -6.86e+06   <2e-16 ***
+CountyNew Haven            -4.94e+14   5.62e+07 -8.78e+06   <2e-16 ***
+CountyNew Kent              2.91e+15   6.77e+07  4.30e+07   <2e-16 ***
+CountyNew London           -3.74e+14   5.67e+07 -6.60e+06   <2e-16 ***
+CountyNew Madrid           -1.83e+15   6.76e+07 -2.71e+07   <2e-16 ***
+CountyNew York              2.04e+14   5.57e+07  3.67e+06   <2e-16 ***
+CountyNewaygo              -2.26e+14   5.98e+07 -3.78e+06   <2e-16 ***
+CountyNewberry             -8.37e+14   6.11e+07 -1.37e+07   <2e-16 ***
+CountyNewport              -4.53e+14   5.78e+07 -7.83e+06   <2e-16 ***
+CountyNewport News         -4.56e+14   5.64e+07 -8.07e+06   <2e-16 ***
+CountyNewton               -2.85e+14   5.65e+07 -5.04e+06   <2e-16 ***
+CountyNez Perce            -4.35e+14   6.03e+07 -7.21e+06   <2e-16 ***
+CountyNiagara              -5.81e+14   5.61e+07 -1.04e+07   <2e-16 ***
+CountyNicholas             -7.63e+14   6.10e+07 -1.25e+07   <2e-16 ***
+CountyNicollet             -4.08e+14   6.10e+07 -6.69e+06   <2e-16 ***
+CountyNiobrara             -1.66e+14   8.76e+07 -1.90e+06   <2e-16 ***
+CountyNoble                -6.32e+14   5.79e+07 -1.09e+07   <2e-16 ***
+CountyNobles               -3.20e+14   6.19e+07 -5.18e+06   <2e-16 ***
+CountyNodaway               1.30e+14   6.30e+07  2.07e+06   <2e-16 ***
+CountyNolan                -1.38e+15   6.30e+07 -2.19e+07   <2e-16 ***
+CountyNome                 -9.79e+14   7.80e+07 -1.26e+07   <2e-16 ***
+CountyNorfolk              -2.83e+14   5.57e+07 -5.09e+06   <2e-16 ***
+CountyNorman               -6.08e+13   6.77e+07 -8.99e+05   <2e-16 ***
+CountyNorth Slope          -4.26e+14   6.15e+07 -6.93e+06   <2e-16 ***
+CountyNorthampton          -1.55e+14   5.60e+07 -2.77e+06   <2e-16 ***
+CountyNorthumberland       -2.40e+14   5.71e+07 -4.21e+06   <2e-16 ***
+CountyNorthwest Arctic     -2.77e+15   7.83e+07 -3.54e+07   <2e-16 ***
+CountyNorton               -7.49e+14   7.30e+07 -1.03e+07   <2e-16 ***
+CountyNottoway              1.38e+15   8.71e+07  1.59e+07   <2e-16 ***
+CountyNowata                1.06e+15   6.49e+07  1.63e+07   <2e-16 ***
+CountyNoxubee              -4.62e+15   8.71e+07 -5.30e+07   <2e-16 ***
+CountyNuckolls              2.04e+15   7.30e+07  2.80e+07   <2e-16 ***
+CountyNueces               -3.65e+14   5.60e+07 -6.52e+06   <2e-16 ***
+CountyNye                   1.01e+15   5.95e+07  1.70e+07   <2e-16 ***
+CountyO'Brien               3.54e+14   6.48e+07  5.46e+06   <2e-16 ***
+CountyOakland              -2.82e+14   5.56e+07 -5.07e+06   <2e-16 ***
+CountyObion                -5.46e+14   5.93e+07 -9.21e+06   <2e-16 ***
+CountyOcean                -2.01e+14   5.59e+07 -3.59e+06   <2e-16 ***
+CountyOceana                8.11e+14   6.10e+07  1.33e+07   <2e-16 ***
+CountyOchiltree            -1.82e+15   6.76e+07 -2.69e+07   <2e-16 ***
+CountyOconee               -2.34e+14   5.78e+07 -4.04e+06   <2e-16 ***
+CountyOconto                1.34e+14   5.91e+07  2.27e+06   <2e-16 ***
+CountyOgemaw               -4.34e+13   6.10e+07 -7.11e+05   <2e-16 ***
+CountyOgle                 -3.72e+14   5.90e+07 -6.30e+06   <2e-16 ***
+CountyOglethorpe           -7.53e+13   6.48e+07 -1.16e+06   <2e-16 ***
+CountyOhio                  1.01e+14   5.71e+07  1.77e+06   <2e-16 ***
+CountyOkaloosa             -1.35e+14   5.65e+07 -2.39e+06   <2e-16 ***
+CountyOkanogan              3.28e+14   5.95e+07  5.52e+06   <2e-16 ***
+CountyOkeechobee            3.81e+14   5.93e+07  6.43e+06   <2e-16 ***
+CountyOkfuskee             -8.13e+14   6.77e+07 -1.20e+07   <2e-16 ***
+CountyOklahoma             -4.12e+14   5.58e+07 -7.38e+06   <2e-16 ***
+CountyOkmulgee             -5.56e+14   6.04e+07 -9.20e+06   <2e-16 ***
+CountyOktibbeha            -8.27e+14   6.19e+07 -1.33e+07   <2e-16 ***
+CountyOldham                1.89e+15   5.83e+07  3.25e+07   <2e-16 ***
+CountyOliver               -1.26e+15   8.74e+07 -1.44e+07   <2e-16 ***
+CountyOlmsted              -5.47e+14   5.67e+07 -9.63e+06   <2e-16 ***
+CountyOneida               -5.15e+14   5.59e+07 -9.23e+06   <2e-16 ***
+CountyOnondaga             -3.84e+14   5.57e+07 -6.89e+06   <2e-16 ***
+CountyOnslow                8.40e+13   5.69e+07  1.48e+06   <2e-16 ***
+CountyOntario              -4.57e+14   5.72e+07 -7.99e+06   <2e-16 ***
+CountyOntonagon             4.67e+13   6.48e+07  7.21e+05   <2e-16 ***
+CountyOrange               -2.73e+14   5.55e+07 -4.92e+06   <2e-16 ***
+CountyOrangeburg            3.30e+14   5.88e+07  5.61e+06   <2e-16 ***
+CountyOregon                2.62e+15   6.76e+07  3.88e+07   <2e-16 ***
+CountyOrleans              -3.06e+14   5.57e+07 -5.49e+06   <2e-16 ***
+CountyOsage                -5.64e+13   5.75e+07 -9.81e+05   <2e-16 ***
+CountyOsborne              -2.79e+14   8.71e+07 -3.21e+06   <2e-16 ***
+CountyOsceola               1.06e+14   5.63e+07  1.89e+06   <2e-16 ***
+CountyOscoda               -2.09e+15   6.76e+07 -3.09e+07   <2e-16 ***
+CountyOswego               -6.38e+14   5.71e+07 -1.12e+07   <2e-16 ***
+CountyOtero                 2.31e+14   5.78e+07  3.99e+06   <2e-16 ***
+CountyOtoe                  3.46e+15   6.31e+07  5.48e+07   <2e-16 ***
+CountyOtsego               -1.39e+13   5.76e+07 -2.41e+05   <2e-16 ***
+CountyOttawa               -3.30e+14   5.60e+07 -5.89e+06   <2e-16 ***
+CountyOtter Tail           -1.04e+14   5.78e+07 -1.80e+06   <2e-16 ***
+CountyOuachita             -5.02e+14   5.66e+07 -8.87e+06   <2e-16 ***
+CountyOuray                -1.80e+14   8.71e+07 -2.07e+06   <2e-16 ***
+CountyOutagamie            -3.60e+14   5.62e+07 -6.41e+06   <2e-16 ***
+CountyOverton              -7.46e+14   6.09e+07 -1.22e+07   <2e-16 ***
+CountyOwen                  8.04e+14   6.02e+07  1.33e+07   <2e-16 ***
+CountyOwyhee               -1.04e+13   6.85e+07 -1.51e+05   <2e-16 ***
+CountyOxford                2.31e+14   5.83e+07  3.96e+06   <2e-16 ***
+CountyOzark                -3.85e+15   8.71e+07 -4.42e+07   <2e-16 ***
+CountyOzaukee               1.90e+15   5.76e+07  3.30e+07   <2e-16 ***
+CountyPacific               8.18e+12   6.20e+07  1.32e+05   <2e-16 ***
+CountyPage                  2.44e+14   5.90e+07  4.13e+06   <2e-16 ***
+CountyPalm Beach           -3.16e+14   5.56e+07 -5.69e+06   <2e-16 ***
+CountyPalo Alto             3.12e+15   6.48e+07  4.82e+07   <2e-16 ***
+CountyPalo Pinto           -9.87e+13   5.98e+07 -1.65e+06   <2e-16 ***
+CountyPamlico               2.00e+15   6.77e+07  2.95e+07   <2e-16 ***
+CountyPanola               -1.37e+15   6.30e+07 -2.17e+07   <2e-16 ***
+CountyPark                 -1.52e+14   5.81e+07 -2.61e+06   <2e-16 ***
+CountyParke                -5.51e+14   6.48e+07 -8.51e+06   <2e-16 ***
+CountyParker                1.60e+15   5.75e+07  2.77e+07   <2e-16 ***
+CountyParmer                6.32e+14   7.30e+07  8.66e+06   <2e-16 ***
+CountyPasco                -2.47e+14   5.58e+07 -4.44e+06   <2e-16 ***
+CountyPasquotank            3.49e+15   6.48e+07  5.38e+07   <2e-16 ***
+CountyPassaic              -1.78e+14   5.59e+07 -3.19e+06   <2e-16 ***
+CountyPatrick              -1.62e+15   6.49e+07 -2.49e+07   <2e-16 ***
+CountyPaulding              9.35e+14   5.71e+07  1.64e+07   <2e-16 ***
+CountyPawnee                4.98e+14   6.03e+07  8.25e+06   <2e-16 ***
+CountyPayette               1.40e+15   6.57e+07  2.14e+07   <2e-16 ***
+CountyPayne                -5.30e+14   5.82e+07 -9.10e+06   <2e-16 ***
+CountyPeach                -3.81e+14   6.76e+07 -5.63e+06   <2e-16 ***
+CountyPearl River          -4.62e+14   6.19e+07 -7.46e+06   <2e-16 ***
+CountyPecos                -3.60e+14   6.76e+07 -5.33e+06   <2e-16 ***
+CountyPembina               9.60e+14   6.35e+07  1.51e+07   <2e-16 ***
+CountyPemiscot             -1.53e+14   6.30e+07 -2.42e+06   <2e-16 ***
+CountyPend Oreille          1.46e+14   6.32e+07  2.31e+06   <2e-16 ***
+CountyPender               -2.76e+14   5.87e+07 -4.70e+06   <2e-16 ***
+CountyPendleton            -2.32e+14   6.18e+07 -3.75e+06   <2e-16 ***
+CountyPennington           -4.96e+14   5.72e+07 -8.67e+06   <2e-16 ***
+CountyPenobscot            -6.01e+14   5.66e+07 -1.06e+07   <2e-16 ***
+CountyPeoria               -6.92e+14   5.63e+07 -1.23e+07   <2e-16 ***
+CountyPepin                 2.56e+15   7.28e+07  3.51e+07   <2e-16 ***
+CountyPerkins               1.30e+15   7.30e+07  1.79e+07   <2e-16 ***
+CountyPerquimans           -4.39e+15   8.71e+07 -5.04e+07   <2e-16 ***
+CountyPerry                -3.01e+14   5.65e+07 -5.33e+06   <2e-16 ***
+CountyPershing             -1.51e+15   8.72e+07 -1.73e+07   <2e-16 ***
+CountyPerson               -5.31e+14   6.48e+07 -8.19e+06   <2e-16 ***
+CountyPetersburg            3.12e+14   6.19e+07  5.05e+06   <2e-16 ***
+CountyPetroleum             1.00e+14   8.74e+07  1.15e+06   <2e-16 ***
+CountyPettis               -9.05e+14   5.98e+07 -1.51e+07   <2e-16 ***
+CountyPhelps                1.08e+15   5.87e+07  1.84e+07   <2e-16 ***
+CountyPhiladelphia         -2.37e+14   5.55e+07 -4.27e+06   <2e-16 ***
+CountyPhillips              3.09e+14   6.09e+07  5.08e+06   <2e-16 ***
+CountyPiatt                 3.32e+15   6.48e+07  5.12e+07   <2e-16 ***
+CountyPickaway             -8.28e+14   5.84e+07 -1.42e+07   <2e-16 ***
+CountyPickens              -2.92e+14   5.66e+07 -5.15e+06   <2e-16 ***
+CountyPickett              -4.49e+15   8.70e+07 -5.16e+07   <2e-16 ***
+CountyPierce               -1.95e+14   5.57e+07 -3.50e+06   <2e-16 ***
+CountyPike                 -1.40e+14   5.61e+07 -2.49e+06   <2e-16 ***
+CountyPima                 -1.07e+14   5.88e+07 -1.82e+06   <2e-16 ***
+CountyPinal                -9.72e+12   5.93e+07 -1.64e+05   <2e-16 ***
+CountyPine                 -3.95e+14   6.04e+07 -6.54e+06   <2e-16 ***
+CountyPinellas             -3.18e+14   5.56e+07 -5.72e+06   <2e-16 ***
+CountyPipestone            -1.79e+15   6.31e+07 -2.83e+07   <2e-16 ***
+CountyPiscataquis          -3.10e+14   6.12e+07 -5.07e+06   <2e-16 ***
+CountyPitkin                2.30e+15   6.48e+07  3.54e+07   <2e-16 ***
+CountyPitt                 -4.30e+14   5.69e+07 -7.56e+06   <2e-16 ***
+CountyPittsburg            -5.64e+14   5.92e+07 -9.53e+06   <2e-16 ***
+CountyPittsylvania         -1.23e+14   5.91e+07 -2.08e+06   <2e-16 ***
+CountyPiute                -1.45e+15   8.74e+07 -1.66e+07   <2e-16 ***
+CountyPlacer                7.73e+13   5.60e+07  1.38e+06   <2e-16 ***
+CountyPlaquemines          -9.27e+14   6.19e+07 -1.50e+07   <2e-16 ***
+CountyPlatte                1.91e+13   5.68e+07  3.36e+05   <2e-16 ***
+CountyPleasants             2.70e+15   7.31e+07  3.69e+07   <2e-16 ***
+CountyPlumas                7.21e+14   6.19e+07  1.17e+07   <2e-16 ***
+CountyPlymouth             -3.84e+14   5.59e+07 -6.88e+06   <2e-16 ***
+CountyPocahontas            2.12e+15   6.18e+07  3.42e+07   <2e-16 ***
+CountyPoinsett             -1.28e+15   6.31e+07 -2.04e+07   <2e-16 ***
+CountyPointe Coupee        -6.10e+14   6.31e+07 -9.67e+06   <2e-16 ***
+CountyPolk                 -3.52e+14   5.55e+07 -6.35e+06   <2e-16 ***
+CountyPondera               1.33e+13   8.74e+07  1.53e+05   <2e-16 ***
+CountyPontotoc             -9.20e+14   5.83e+07 -1.58e+07   <2e-16 ***
+CountyPope                  2.32e+15   5.78e+07  4.01e+07   <2e-16 ***
+CountyPoquoson              1.96e+15   6.77e+07  2.89e+07   <2e-16 ***
+CountyPortage              -1.78e+14   5.61e+07 -3.18e+06   <2e-16 ***
+CountyPorter               -1.67e+14   5.67e+07 -2.94e+06   <2e-16 ***
+CountyPortsmouth           -5.40e+14   5.68e+07 -9.50e+06   <2e-16 ***
+CountyPosey                 1.62e+15   6.09e+07  2.66e+07   <2e-16 ***
+CountyPottawatomie         -5.73e+14   5.76e+07 -9.94e+06   <2e-16 ***
+CountyPottawattamie        -6.91e+14   5.69e+07 -1.21e+07   <2e-16 ***
+CountyPotter               -3.83e+14   5.65e+07 -6.78e+06   <2e-16 ***
+CountyPowder River         -5.55e+14   8.74e+07 -6.35e+06   <2e-16 ***
+CountyPowell                2.82e+15   6.78e+07  4.16e+07   <2e-16 ***
+CountyPower                 2.24e+15   7.38e+07  3.03e+07   <2e-16 ***
+CountyPoweshiek            -6.63e+14   6.30e+07 -1.05e+07   <2e-16 ***
+CountyPowhatan              2.40e+15   6.31e+07  3.80e+07   <2e-16 ***
+CountyPrairie              -5.84e+13   6.48e+07 -9.01e+05   <2e-16 ***
+CountyPratt                 2.39e+15   6.77e+07  3.53e+07   <2e-16 ***
+CountyPreble               -8.99e+14   5.90e+07 -1.53e+07   <2e-16 ***
+CountyPrentiss             -1.06e+14   6.49e+07 -1.63e+06   <2e-16 ***
+CountyPresidio             -3.62e+15   8.70e+07 -4.16e+07   <2e-16 ***
+CountyPresque Isle         -4.98e+14   6.18e+07 -8.06e+06   <2e-16 ***
+CountyPreston              -1.15e+15   6.04e+07 -1.90e+07   <2e-16 ***
+CountyPrice                 7.08e+13   6.28e+07  1.13e+06   <2e-16 ***
+CountyPrince Edward         2.37e+15   7.30e+07  3.25e+07   <2e-16 ***
+CountyPrince George        -2.13e+14   6.19e+07 -3.44e+06   <2e-16 ***
+CountyPrince George's      -3.75e+14   5.57e+07 -6.73e+06   <2e-16 ***
+CountyPrince William       -9.02e+13   5.60e+07 -1.61e+06   <2e-16 ***
+CountyProvidence           -4.85e+14   5.63e+07 -8.61e+06   <2e-16 ***
+CountyProwers              -2.92e+14   6.31e+07 -4.64e+06   <2e-16 ***
+CountyPueblo               -4.39e+14   5.64e+07 -7.79e+06   <2e-16 ***
+CountyPulaski              -4.04e+14   5.58e+07 -7.25e+06   <2e-16 ***
+CountyPushmataha           -1.40e+15   7.31e+07 -1.91e+07   <2e-16 ***
+CountyPutnam               -2.76e+14   5.59e+07 -4.93e+06   <2e-16 ***
+CountyQuay                  1.18e+15   6.85e+07  1.72e+07   <2e-16 ***
+CountyQueen Anne's         -3.79e+13   5.91e+07 -6.41e+05   <2e-16 ***
+CountyQueens               -4.33e+14   5.55e+07 -7.81e+06   <2e-16 ***
+CountyQuitman              -4.73e+15   8.71e+07 -5.43e+07   <2e-16 ***
+CountyRabun                -2.21e+14   6.30e+07 -3.51e+06   <2e-16 ***
+CountyRacine               -1.02e+14   5.62e+07 -1.81e+06   <2e-16 ***
+CountyRadford              -4.88e+14   6.77e+07 -7.21e+06   <2e-16 ***
+CountyRains                 2.34e+15   7.30e+07  3.21e+07   <2e-16 ***
+CountyRaleigh               1.34e+14   5.95e+07  2.25e+06   <2e-16 ***
+CountyRalls                 1.69e+14   7.30e+07  2.32e+06   <2e-16 ***
+CountyRamsey               -7.80e+14   5.58e+07 -1.40e+07   <2e-16 ***
+CountyRandall              -2.11e+14   5.68e+07 -3.71e+06   <2e-16 ***
+CountyRandolph             -5.85e+13   5.60e+07 -1.04e+06   <2e-16 ***
+CountyRankin                3.47e+13   5.71e+07  6.08e+05   <2e-16 ***
+CountyRansom                2.08e+15   6.81e+07  3.05e+07   <2e-16 ***
+CountyRapides              -8.54e+14   5.70e+07 -1.50e+07   <2e-16 ***
+CountyRappahannock         -4.50e+15   8.72e+07 -5.17e+07   <2e-16 ***
+CountyRavalli              -1.26e+15   6.04e+07 -2.09e+07   <2e-16 ***
+CountyRawlins              -2.99e+13   8.71e+07 -3.43e+05   <2e-16 ***
+CountyRay                   2.55e+15   6.76e+07  3.78e+07   <2e-16 ***
+CountyReagan                1.01e+15   8.70e+07  1.17e+07   <2e-16 ***
+CountyReal                 -4.93e+15   8.72e+07 -5.65e+07   <2e-16 ***
+CountyRed River            -5.26e+14   6.76e+07 -7.78e+06   <2e-16 ***
+CountyRed Willow            1.85e+15   6.77e+07  2.74e+07   <2e-16 ***
+CountyRedwood               5.36e+14   6.19e+07  8.66e+06   <2e-16 ***
+CountyReeves               -5.97e+14   7.30e+07 -8.18e+06   <2e-16 ***
+CountyRefugio              -8.89e+13   7.29e+07 -1.22e+06   <2e-16 ***
+CountyReno                  3.25e+14   5.81e+07  5.59e+06   <2e-16 ***
+CountyRensselaer           -2.87e+14   5.64e+07 -5.09e+06   <2e-16 ***
+CountyRenville              8.91e+14   6.19e+07  1.44e+07   <2e-16 ***
+CountyRepublic              2.12e+14   6.77e+07  3.14e+06   <2e-16 ***
+CountyReynolds             -4.61e+15   8.70e+07 -5.30e+07   <2e-16 ***
+CountyRhea                 -1.29e+14   6.30e+07 -2.04e+06   <2e-16 ***
+CountyRice                 -5.60e+14   5.81e+07 -9.64e+06   <2e-16 ***
+CountyRich                 -2.03e+15   8.75e+07 -2.32e+07   <2e-16 ***
+CountyRichardson            8.59e+14   6.77e+07  1.27e+07   <2e-16 ***
+CountyRichland             -2.50e+14   5.57e+07 -4.49e+06   <2e-16 ***
+CountyRichmond             -3.58e+14   5.57e+07 -6.44e+06   <2e-16 ***
+CountyRichmond City        -4.03e+14   5.63e+07 -7.17e+06   <2e-16 ***
+CountyRiley                -1.74e+14   5.91e+07 -2.94e+06   <2e-16 ***
+CountyRinggold              5.40e+13   7.30e+07  7.40e+05   <2e-16 ***
+CountyRio Arriba            1.98e+14   6.13e+07  3.24e+06   <2e-16 ***
+CountyRio Blanco            3.00e+15   7.30e+07  4.10e+07   <2e-16 ***
+CountyRio Grande            5.08e+14   7.30e+07  6.96e+06   <2e-16 ***
+CountyRipley               -1.10e+14   5.93e+07 -1.86e+06   <2e-16 ***
+CountyRitchie              -3.67e+15   8.71e+07 -4.22e+07   <2e-16 ***
+CountyRiverside            -1.30e+14   5.56e+07 -2.34e+06   <2e-16 ***
+CountyRoane                -3.04e+14   5.87e+07 -5.18e+06   <2e-16 ***
+CountyRoanoke              -1.92e+14   5.78e+07 -3.32e+06   <2e-16 ***
+CountyRoanoke City         -7.13e+13   5.74e+07 -1.24e+06   <2e-16 ***
+CountyRoberts              -1.34e+14   6.50e+07 -2.05e+06   <2e-16 ***
+CountyRobertson            -3.06e+14   5.77e+07 -5.29e+06   <2e-16 ***
+CountyRobeson              -5.08e+14   5.77e+07 -8.81e+06   <2e-16 ***
+CountyRock                 -2.09e+14   5.63e+07 -3.71e+06   <2e-16 ***
+CountyRock Island          -5.94e+14   5.65e+07 -1.05e+07   <2e-16 ***
+CountyRockbridge            6.68e+14   6.49e+07  1.03e+07   <2e-16 ***
+CountyRockcastle           -2.73e+15   6.76e+07 -4.04e+07   <2e-16 ***
+CountyRockdale             -5.51e+13   5.83e+07 -9.45e+05   <2e-16 ***
+CountyRockingham           -2.41e+14   5.60e+07 -4.30e+06   <2e-16 ***
+CountyRockland             -4.99e+14   5.61e+07 -8.91e+06   <2e-16 ***
+CountyRockwall              2.46e+15   5.90e+07  4.16e+07   <2e-16 ***
+CountyRoger Mills          -1.88e+15   8.72e+07 -2.16e+07   <2e-16 ***
+CountyRogers               -7.05e+14   5.71e+07 -1.23e+07   <2e-16 ***
+CountyRolette               4.47e+14   6.85e+07  6.53e+06   <2e-16 ***
+CountyRooks                 7.91e+14   7.30e+07  1.08e+07   <2e-16 ***
+CountyRoosevelt             2.06e+14   6.15e+07  3.36e+06   <2e-16 ***
+CountyRoscommon            -9.50e+14   5.98e+07 -1.59e+07   <2e-16 ***
+CountyRoseau               -1.09e+15   6.31e+07 -1.73e+07   <2e-16 ***
+CountyRosebud               2.15e+15   6.53e+07  3.28e+07   <2e-16 ***
+CountyRoss                 -9.43e+14   5.82e+07 -1.62e+07   <2e-16 ***
+CountyRoutt                 2.48e+15   6.03e+07  4.10e+07   <2e-16 ***
+CountyRowan                -1.97e+14   5.67e+07 -3.48e+06   <2e-16 ***
+CountyRunnels              -6.26e+14   6.48e+07 -9.67e+06   <2e-16 ***
+CountyRush                 -6.96e+14   6.18e+07 -1.13e+07   <2e-16 ***
+CountyRusk                  3.52e+14   5.78e+07  6.09e+06   <2e-16 ***
+CountyRussell               2.52e+12   5.76e+07  4.37e+04   <2e-16 ***
+CountyRutherford           -1.39e+14   5.61e+07 -2.49e+06   <2e-16 ***
+CountyRutland               1.10e+14   5.84e+07  1.89e+06   <2e-16 ***
+CountySabine               -5.42e+14   6.09e+07 -8.90e+06   <2e-16 ***
+CountySac                   2.71e+14   6.48e+07  4.18e+06   <2e-16 ***
+CountySacramento           -5.16e+13   5.57e+07 -9.27e+05   <2e-16 ***
+CountySagadahoc             5.07e+14   6.05e+07  8.38e+06   <2e-16 ***
+CountySaginaw              -2.66e+14   5.63e+07 -4.72e+06   <2e-16 ***
+CountySaguache              4.20e+14   7.30e+07  5.75e+06   <2e-16 ***
+CountySalem                -2.40e+14   5.69e+07 -4.21e+06   <2e-16 ***
+CountySaline               -1.88e+14   5.62e+07 -3.35e+06   <2e-16 ***
+CountySalt Lake            -5.61e+14   5.63e+07 -9.98e+06   <2e-16 ***
+CountySaluda               -3.02e+15   6.77e+07 -4.46e+07   <2e-16 ***
+CountySampson              -1.57e+14   6.19e+07 -2.54e+06   <2e-16 ***
+CountySan Augustine        -1.04e+15   6.76e+07 -1.54e+07   <2e-16 ***
+CountySan Benito           -7.27e+14   5.91e+07 -1.23e+07   <2e-16 ***
+CountySan Bernardino       -1.11e+14   5.56e+07 -2.00e+06   <2e-16 ***
+CountySan Diego            -9.13e+13   5.56e+07 -1.64e+06   <2e-16 ***
+CountySan Francisco        -6.42e+13   5.58e+07 -1.15e+06   <2e-16 ***
+CountySan Jacinto           5.41e+14   7.30e+07  7.41e+06   <2e-16 ***
+CountySan Joaquin          -8.12e+14   5.58e+07 -1.45e+07   <2e-16 ***
+CountySan Juan              8.55e+13   5.72e+07  1.50e+06   <2e-16 ***
+CountySan Luis Obispo      -1.37e+14   5.63e+07 -2.44e+06   <2e-16 ***
+CountySan Mateo            -1.61e+14   5.58e+07 -2.89e+06   <2e-16 ***
+CountySan Miguel           -2.99e+14   5.97e+07 -5.01e+06   <2e-16 ***
+CountySan Patricio         -2.06e+14   5.81e+07 -3.56e+06   <2e-16 ***
+CountySan Saba             -1.36e+15   7.30e+07 -1.87e+07   <2e-16 ***
+CountySanborn              -2.49e+15   8.74e+07 -2.85e+07   <2e-16 ***
+CountySanders              -1.66e+15   7.34e+07 -2.25e+07   <2e-16 ***
+CountySandoval              3.22e+14   5.81e+07  5.55e+06   <2e-16 ***
+CountySandusky             -1.09e+15   5.80e+07 -1.88e+07   <2e-16 ***
+CountySangamon             -6.65e+14   5.62e+07 -1.18e+07   <2e-16 ***
+CountySanilac               5.96e+13   5.87e+07  1.01e+06   <2e-16 ***
+CountySanpete              -6.38e+14   6.36e+07 -1.00e+07   <2e-16 ***
+CountySanta Barbara        -1.94e+14   5.60e+07 -3.47e+06   <2e-16 ***
+CountySanta Clara          -1.88e+14   5.56e+07 -3.38e+06   <2e-16 ***
+CountySanta Cruz            1.16e+14   5.63e+07  2.06e+06   <2e-16 ***
+CountySanta Fe              3.16e+14   5.73e+07  5.53e+06   <2e-16 ***
+CountySanta Rosa           -4.90e+13   5.71e+07 -8.59e+05   <2e-16 ***
+CountySarasota             -4.49e+14   5.59e+07 -8.03e+06   <2e-16 ***
+CountySaratoga             -4.92e+14   5.63e+07 -8.74e+06   <2e-16 ***
+CountySargent               2.55e+15   7.34e+07  3.48e+07   <2e-16 ***
+CountySarpy                 6.17e+13   5.64e+07  1.09e+06   <2e-16 ***
+CountySauk                 -2.27e+14   5.83e+07 -3.90e+06   <2e-16 ***
+CountySaunders              2.26e+12   6.31e+07  3.58e+04   <2e-16 ***
+CountySawyer                1.28e+15   6.28e+07  2.03e+07   <2e-16 ***
+CountySchenectady          -4.91e+14   5.65e+07 -8.69e+06   <2e-16 ***
+CountySchleicher           -3.77e+15   8.70e+07 -4.34e+07   <2e-16 ***
+CountySchley                3.41e+14   7.30e+07  4.68e+06   <2e-16 ***
+CountySchoharie            -5.84e+14   6.09e+07 -9.58e+06   <2e-16 ***
+CountySchoolcraft          -7.35e+14   6.76e+07 -1.09e+07   <2e-16 ***
+CountySchuyler              4.94e+13   6.02e+07  8.20e+05   <2e-16 ***
+CountySchuylkill           -4.10e+14   5.66e+07 -7.25e+06   <2e-16 ***
+CountyScioto               -2.77e+14   5.77e+07 -4.79e+06   <2e-16 ***
+CountyScotland             -9.24e+14   6.09e+07 -1.52e+07   <2e-16 ***
+CountyScott                -4.51e+14   5.57e+07 -8.08e+06   <2e-16 ***
+CountyScotts Bluff         -4.70e+14   5.91e+07 -7.96e+06   <2e-16 ***
+CountyScreven              -1.16e+15   6.76e+07 -1.72e+07   <2e-16 ***
+CountyScurry                2.74e+15   6.76e+07  4.06e+07   <2e-16 ***
+CountySearcy                5.31e+14   6.77e+07  7.84e+06   <2e-16 ***
+CountySebastian            -7.77e+14   5.70e+07 -1.36e+07   <2e-16 ***
+CountySedgwick             -2.78e+14   5.59e+07 -4.98e+06   <2e-16 ***
+CountySeminole             -2.09e+14   5.58e+07 -3.75e+06   <2e-16 ***
+CountySeneca                1.12e+14   5.73e+07  1.96e+06   <2e-16 ***
+CountySequatchie            4.33e+14   8.70e+07  4.97e+06   <2e-16 ***
+CountySequoyah             -1.06e+15   6.11e+07 -1.73e+07   <2e-16 ***
+CountySevier               -5.93e+14   5.69e+07 -1.04e+07   <2e-16 ***
+CountySeward               -3.42e+14   5.98e+07 -5.73e+06   <2e-16 ***
+CountyShackelford          -2.09e+13   8.70e+07 -2.41e+05   <2e-16 ***
+CountyShannon              -4.65e+14   7.30e+07 -6.37e+06   <2e-16 ***
+CountySharp                -1.21e+15   6.77e+07 -1.79e+07   <2e-16 ***
+CountyShasta                3.18e+14   5.65e+07  5.63e+06   <2e-16 ***
+CountyShawano               2.75e+14   5.88e+07  4.67e+06   <2e-16 ***
+CountyShawnee              -2.57e+14   5.66e+07 -4.54e+06   <2e-16 ***
+CountySheboygan            -6.55e+14   5.68e+07 -1.15e+07   <2e-16 ***
+CountyShelby               -4.66e+14   5.55e+07 -8.39e+06   <2e-16 ***
+CountyShenandoah           -2.94e+14   6.04e+07 -4.88e+06   <2e-16 ***
+CountySherburne             2.31e+15   5.91e+07  3.92e+07   <2e-16 ***
+CountySheridan             -3.92e+14   5.88e+07 -6.67e+06   <2e-16 ***
+CountySherman              -6.59e+13   6.47e+07 -1.02e+06   <2e-16 ***
+CountyShiawassee           -5.16e+14   5.85e+07 -8.82e+06   <2e-16 ***
+CountyShoshone              1.11e+15   6.85e+07  1.62e+07   <2e-16 ***
+CountySibley               -1.72e+15   6.49e+07 -2.64e+07   <2e-16 ***
+CountySierra                9.04e+14   6.53e+07  1.39e+07   <2e-16 ***
+CountySilver Bow           -7.92e+14   6.15e+07 -1.29e+07   <2e-16 ***
+CountySimpson               5.31e+14   6.09e+07  8.72e+06   <2e-16 ***
+CountySioux                 1.71e+14   5.98e+07  2.86e+06   <2e-16 ***
+CountySiskiyou             -1.31e+14   5.86e+07 -2.24e+06   <2e-16 ***
+CountySitka                -2.66e+15   7.76e+07 -3.44e+07   <2e-16 ***
+CountySkagit               -3.78e+13   5.69e+07 -6.64e+05   <2e-16 ***
+CountySkagway Municipality -7.74e+14   7.75e+07 -9.99e+06   <2e-16 ***
+CountySkamania              9.57e+14   6.32e+07  1.52e+07   <2e-16 ***
+CountySlope                 8.36e+13   8.74e+07  9.57e+05   <2e-16 ***
+CountySmith                -4.94e+14   5.62e+07 -8.78e+06   <2e-16 ***
+CountySmyth                 1.44e+13   6.49e+07  2.23e+05   <2e-16 ***
+CountySnohomish            -5.85e+13   5.58e+07 -1.05e+06   <2e-16 ***
+CountySnyder               -1.45e+15   6.18e+07 -2.35e+07   <2e-16 ***
+CountySocorro               2.68e+15   6.57e+07  4.08e+07   <2e-16 ***
+CountySolano               -8.21e+13   5.60e+07 -1.47e+06   <2e-16 ***
+CountySomerset             -3.58e+14   5.58e+07 -6.41e+06   <2e-16 ***
+CountySomervell             2.83e+15   7.30e+07  3.88e+07   <2e-16 ***
+CountySonoma               -1.60e+14   5.59e+07 -2.86e+06   <2e-16 ***
+CountySouthampton          -8.30e+13   6.49e+07 -1.28e+06   <2e-16 ***
+CountySoutheast Fairbanks  -2.29e+15   7.75e+07 -2.95e+07   <2e-16 ***
+CountySpalding             -2.57e+14   5.93e+07 -4.33e+06   <2e-16 ***
+CountySpartanburg          -2.05e+14   5.63e+07 -3.63e+06   <2e-16 ***
+CountySpencer               9.09e+14   5.97e+07  1.52e+07   <2e-16 ***
+CountySpink                -2.59e+14   6.81e+07 -3.80e+06   <2e-16 ***
+CountySpokane              -4.84e+14   5.60e+07 -8.65e+06   <2e-16 ***
+CountySpotsylvania          1.20e+14   5.68e+07  2.12e+06   <2e-16 ***
+CountySt. Bernard          -7.55e+14   5.83e+07 -1.29e+07   <2e-16 ***
+CountySt. Charles          -1.66e+14   5.59e+07 -2.98e+06   <2e-16 ***
+CountySt. Clair            -3.72e+14   5.58e+07 -6.67e+06   <2e-16 ***
+CountySt. Croix            -2.29e+14   5.83e+07 -3.94e+06   <2e-16 ***
+CountySt. Francis          -7.98e+14   6.77e+07 -1.18e+07   <2e-16 ***
+CountySt. Francois         -2.79e+14   5.90e+07 -4.72e+06   <2e-16 ***
+CountySt. James            -4.63e+14   6.31e+07 -7.34e+06   <2e-16 ***
+CountySt. John the Baptist  1.86e+14   6.04e+07  3.08e+06   <2e-16 ***
+CountySt. Johns            -3.49e+14   5.66e+07 -6.16e+06   <2e-16 ***
+CountySt. Joseph           -2.77e+14   5.59e+07 -4.96e+06   <2e-16 ***
+CountySt. Landry           -5.47e+13   5.82e+07 -9.41e+05   <2e-16 ***
+CountySt. Lawrence         -2.44e+14   5.72e+07 -4.26e+06   <2e-16 ***
+CountySt. Louis            -4.69e+14   5.56e+07 -8.44e+06   <2e-16 ***
+CountySt. Louis City       -2.56e+15   5.58e+07 -4.59e+07   <2e-16 ***
+CountySt. Lucie            -2.32e+14   5.64e+07 -4.11e+06   <2e-16 ***
+CountySt. Martin           -3.12e+14   5.98e+07 -5.22e+06   <2e-16 ***
+CountySt. Mary              9.56e+13   5.88e+07  1.63e+06   <2e-16 ***
+CountySt. Mary's            1.32e+15   5.83e+07  2.26e+07   <2e-16 ***
+CountySt. Tammany          -3.01e+14   5.65e+07 -5.32e+06   <2e-16 ***
+CountyStafford             -1.62e+14   5.69e+07 -2.85e+06   <2e-16 ***
+CountyStanislaus           -1.98e+14   5.60e+07 -3.53e+06   <2e-16 ***
+CountyStanley               2.58e+14   8.74e+07  2.95e+06   <2e-16 ***
+CountyStanly                2.57e+14   5.87e+07  4.38e+06   <2e-16 ***
+CountyStanton              -3.60e+14   6.76e+07 -5.33e+06   <2e-16 ***
+CountyStark                -7.53e+14   5.58e+07 -1.35e+07   <2e-16 ***
+CountyStarke               -9.90e+14   6.09e+07 -1.62e+07   <2e-16 ***
+CountyStarr                -2.14e+14   5.98e+07 -3.59e+06   <2e-16 ***
+CountyStaunton             -1.59e+15   6.19e+07 -2.56e+07   <2e-16 ***
+CountySte. Genevieve        3.25e+14   6.48e+07  5.02e+06   <2e-16 ***
+CountyStearns              -5.78e+14   5.69e+07 -1.02e+07   <2e-16 ***
+CountySteele               -1.24e+15   5.98e+07 -2.07e+07   <2e-16 ***
+CountyStephens              1.43e+14   5.77e+07  2.48e+06   <2e-16 ***
+CountyStephenson           -9.81e+14   5.87e+07 -1.67e+07   <2e-16 ***
+CountySterling             -4.09e+14   8.70e+07 -4.70e+06   <2e-16 ***
+CountySteuben              -4.97e+14   5.66e+07 -8.77e+06   <2e-16 ***
+CountyStevens              -4.65e+14   5.81e+07 -8.01e+06   <2e-16 ***
+CountyStewart               3.25e+15   6.30e+07  5.15e+07   <2e-16 ***
+CountyStillwater            1.24e+15   6.81e+07  1.82e+07   <2e-16 ***
+CountyStoddard             -5.33e+14   6.03e+07 -8.84e+06   <2e-16 ***
+CountyStokes               -3.11e+14   6.03e+07 -5.16e+06   <2e-16 ***
+CountyStone                -1.94e+14   5.90e+07 -3.29e+06   <2e-16 ***
+CountyStonewall            -2.18e+14   8.70e+07 -2.50e+06   <2e-16 ***
+CountyStorey                1.82e+14   8.72e+07  2.09e+06   <2e-16 ***
+CountyStory                 6.05e+13   5.76e+07  1.05e+06   <2e-16 ***
+CountyStrafford            -5.29e+14   5.74e+07 -9.21e+06   <2e-16 ***
+CountyStutsman             -5.19e+14   6.23e+07 -8.33e+06   <2e-16 ***
+CountySublette              1.87e+15   7.36e+07  2.54e+07   <2e-16 ***
+CountySuffolk              -4.24e+14   5.55e+07 -7.63e+06   <2e-16 ***
+CountySullivan             -2.20e+14   5.59e+07 -3.93e+06   <2e-16 ***
+CountySully                -1.19e+15   8.74e+07 -1.36e+07   <2e-16 ***
+CountySummers              -1.91e+14   6.77e+07 -2.83e+06   <2e-16 ***
+CountySummit               -4.37e+14   5.57e+07 -7.86e+06   <2e-16 ***
+CountySumner                7.82e+12   5.63e+07  1.39e+05   <2e-16 ***
+CountySumter               -4.29e+14   5.65e+07 -7.60e+06   <2e-16 ***
+CountySunflower             4.42e+13   7.30e+07  6.05e+05   <2e-16 ***
+CountySurry                -1.17e+14   5.75e+07 -2.04e+06   <2e-16 ***
+CountySusquehanna           1.27e+15   5.90e+07  2.16e+07   <2e-16 ***
+CountySussex               -4.88e+14   5.61e+07 -8.70e+06   <2e-16 ***
+CountySutter                4.72e+14   5.74e+07  8.23e+06   <2e-16 ***
+CountySutton               -1.54e+15   8.70e+07 -1.77e+07   <2e-16 ***
+CountySuwannee             -3.11e+14   6.18e+07 -5.02e+06   <2e-16 ***
+CountySwain                -1.47e+15   6.48e+07 -2.27e+07   <2e-16 ***
+CountySweet Grass          -3.87e+14   8.74e+07 -4.43e+06   <2e-16 ***
+CountySweetwater           -1.64e+14   5.98e+07 -2.74e+06   <2e-16 ***
+CountySwift                -4.37e+14   6.49e+07 -6.74e+06   <2e-16 ***
+CountySwisher              -1.42e+15   6.76e+07 -2.10e+07   <2e-16 ***
+CountySwitzerland          -1.14e+15   6.76e+07 -1.68e+07   <2e-16 ***
+CountyTalbot               -1.21e+13   5.90e+07 -2.05e+05   <2e-16 ***
+CountyTalladega            -1.98e+14   5.78e+07 -3.43e+06   <2e-16 ***
+CountyTallahatchie         -4.79e+15   8.71e+07 -5.50e+07   <2e-16 ***
+CountyTallapoosa           -8.03e+14   6.10e+07 -1.32e+07   <2e-16 ***
+CountyTama                  1.90e+14   6.18e+07  3.07e+06   <2e-16 ***
+CountyTaney                -3.49e+14   5.98e+07 -5.84e+06   <2e-16 ***
+CountyTangipahoa           -2.09e+14   5.82e+07 -3.59e+06   <2e-16 ***
+CountyTaos                  1.02e+15   6.57e+07  1.56e+07   <2e-16 ***
+CountyTarrant              -3.77e+14   5.55e+07 -6.79e+06   <2e-16 ***
+CountyTate                  3.40e+14   6.31e+07  5.38e+06   <2e-16 ***
+CountyTattnall             -1.79e+15   6.76e+07 -2.64e+07   <2e-16 ***
+CountyTaylor               -4.09e+14   5.61e+07 -7.30e+06   <2e-16 ***
+CountyTazewell             -5.39e+14   5.66e+07 -9.51e+06   <2e-16 ***
+CountyTehama               -1.05e+14   5.91e+07 -1.78e+06   <2e-16 ***
+CountyTelfair              -6.99e+14   7.30e+07 -9.57e+06   <2e-16 ***
+CountyTeller               -8.99e+14   6.19e+07 -1.45e+07   <2e-16 ***
+CountyTensas               -3.79e+15   8.71e+07 -4.35e+07   <2e-16 ***
+CountyTerrebonne           -2.61e+14   5.83e+07 -4.47e+06   <2e-16 ***
+CountyTerrell              -1.78e+15   7.30e+07 -2.44e+07   <2e-16 ***
+CountyTerry                 1.40e+15   7.30e+07  1.92e+07   <2e-16 ***
+CountyTeton                 1.75e+15   6.06e+07  2.88e+07   <2e-16 ***
+CountyTexas                -8.60e+14   5.98e+07 -1.44e+07   <2e-16 ***
+CountyThayer                2.43e+15   7.30e+07  3.33e+07   <2e-16 ***
+CountyThomas                3.87e+13   5.93e+07  6.53e+05   <2e-16 ***
+CountyThrockmorton         -1.61e+15   8.70e+07 -1.85e+07   <2e-16 ***
+CountyThurston             -2.86e+14   5.64e+07 -5.08e+06   <2e-16 ***
+CountyTift                 -2.13e+14   6.10e+07 -3.49e+06   <2e-16 ***
+CountyTillamook            -5.79e+14   6.03e+07 -9.59e+06   <2e-16 ***
+CountyTillman               5.45e+14   6.49e+07  8.39e+06   <2e-16 ***
+CountyTioga                 1.68e+14   5.75e+07  2.92e+06   <2e-16 ***
+CountyTippah               -2.58e+15   7.30e+07 -3.53e+07   <2e-16 ***
+CountyTippecanoe           -3.43e+14   5.66e+07 -6.07e+06   <2e-16 ***
+CountyTipton               -5.12e+14   5.77e+07 -8.87e+06   <2e-16 ***
+CountyTishomingo           -9.34e+14   6.49e+07 -1.44e+07   <2e-16 ***
+CountyTitus                -3.99e+14   6.03e+07 -6.62e+06   <2e-16 ***
+CountyTodd                 -2.30e+14   5.98e+07 -3.85e+06   <2e-16 ***
+CountyTolland               8.88e+14   5.75e+07  1.54e+07   <2e-16 ***
+CountyTom Green            -1.36e+14   5.71e+07 -2.38e+06   <2e-16 ***
+CountyTompkins              3.11e+14   5.79e+07  5.37e+06   <2e-16 ***
+CountyTooele               -1.13e+15   6.04e+07 -1.87e+07   <2e-16 ***
+CountyToole                 1.77e+15   7.35e+07  2.41e+07   <2e-16 ***
+CountyToombs               -5.79e+13   6.30e+07 -9.18e+05   <2e-16 ***
+CountyTorrance             -2.69e+14   6.85e+07 -3.93e+06   <2e-16 ***
+CountyTowner               -1.70e+14   8.74e+07 -1.95e+06   <2e-16 ***
+CountyTowns                 7.75e+13   6.76e+07  1.15e+06   <2e-16 ***
+CountyTraill                2.71e+15   6.52e+07  4.16e+07   <2e-16 ***
+CountyTransylvania          1.32e+15   6.31e+07  2.10e+07   <2e-16 ***
+CountyTraverse              1.88e+15   7.30e+07  2.58e+07   <2e-16 ***
+CountyTravis               -3.36e+14   5.56e+07 -6.05e+06   <2e-16 ***
+CountyTrego                 6.51e+14   8.71e+07  7.48e+06   <2e-16 ***
+CountyTrempealeau           2.87e+15   6.01e+07  4.77e+07   <2e-16 ***
+CountyTreutlen              1.58e+15   7.30e+07  2.16e+07   <2e-16 ***
+CountyTrigg                 2.83e+15   6.48e+07  4.37e+07   <2e-16 ***
+CountyTrimble              -4.68e+15   8.70e+07 -5.37e+07   <2e-16 ***
+CountyTrinity               3.31e+14   5.98e+07  5.53e+06   <2e-16 ***
+CountyTripp                -1.00e+15   7.34e+07 -1.37e+07   <2e-16 ***
+CountyTroup                -6.38e+14   5.87e+07 -1.09e+07   <2e-16 ***
+CountyTrousdale             2.37e+14   7.30e+07  3.25e+06   <2e-16 ***
+CountyTrumbull             -3.80e+14   5.62e+07 -6.76e+06   <2e-16 ***
+CountyTucker                3.55e+15   6.77e+07  5.23e+07   <2e-16 ***
+CountyTulare               -2.28e+13   5.61e+07 -4.06e+05   <2e-16 ***
+CountyTulsa                -3.96e+14   5.59e+07 -7.10e+06   <2e-16 ***
+CountyTunica                9.29e+14   6.77e+07  1.37e+07   <2e-16 ***
+CountyTuolumne             -5.91e+14   5.99e+07 -9.87e+06   <2e-16 ***
+CountyTurner               -1.54e+14   6.49e+07 -2.38e+06   <2e-16 ***
+CountyTuscaloosa           -4.47e+14   5.64e+07 -7.93e+06   <2e-16 ***
+CountyTuscarawas           -3.52e+14   5.75e+07 -6.12e+06   <2e-16 ***
+CountyTuscola              -2.33e+14   5.87e+07 -3.96e+06   <2e-16 ***
+CountyTwiggs               -2.38e+14   8.70e+07 -2.74e+06   <2e-16 ***
+CountyTwin Falls           -3.69e+14   5.93e+07 -6.22e+06   <2e-16 ***
+CountyTyler                -2.28e+15   6.09e+07 -3.75e+07   <2e-16 ***
+CountyTyrrell              -5.34e+15   8.71e+07 -6.13e+07   <2e-16 ***
+CountyUinta                -1.13e+14   6.83e+07 -1.65e+06   <2e-16 ***
+CountyUintah                4.79e+14   6.24e+07  7.67e+06   <2e-16 ***
+CountyUlster               -2.50e+14   5.65e+07 -4.43e+06   <2e-16 ***
+CountyUmatilla              2.31e+14   5.88e+07  3.93e+06   <2e-16 ***
+CountyUnicoi               -1.87e+14   6.48e+07 -2.89e+06   <2e-16 ***
+CountyUnion                -1.26e+14   5.56e+07 -2.26e+06   <2e-16 ***
+CountyUpshur               -2.72e+14   5.85e+07 -4.65e+06   <2e-16 ***
+CountyUpson                -1.29e+14   6.30e+07 -2.04e+06   <2e-16 ***
+CountyUpton                 2.44e+14   7.29e+07  3.34e+06   <2e-16 ***
+CountyUtah                 -8.13e+14   5.64e+07 -1.44e+07   <2e-16 ***
+CountyUvalde                1.58e+15   6.76e+07  2.34e+07   <2e-16 ***
+CountyVal Verde            -2.27e+14   5.94e+07 -3.83e+06   <2e-16 ***
+CountyValdez-Cordova       -1.41e+15   5.49e+07 -2.56e+07   <2e-16 ***
+CountyValencia              1.12e+15   5.89e+07  1.89e+07   <2e-16 ***
+CountyValley                1.27e+15   6.05e+07  2.10e+07   <2e-16 ***
+CountyVan Buren            -3.05e+14   5.72e+07 -5.33e+06   <2e-16 ***
+CountyVan Wert             -8.40e+14   5.97e+07 -1.41e+07   <2e-16 ***
+CountyVan Zandt            -5.83e+14   5.93e+07 -9.83e+06   <2e-16 ***
+CountyVance                -4.70e+14   5.98e+07 -7.85e+06   <2e-16 ***
+CountyVanderburgh          -4.98e+14   5.62e+07 -8.85e+06   <2e-16 ***
+CountyVenango               1.71e+14   5.80e+07  2.94e+06   <2e-16 ***
+CountyVentura               3.57e+13   5.58e+07  6.41e+05   <2e-16 ***
+CountyVermilion             2.55e+13   5.66e+07  4.50e+05   <2e-16 ***
+CountyVermillion            1.04e+15   6.30e+07  1.65e+07   <2e-16 ***
+CountyVernon               -2.42e+13   5.72e+07 -4.23e+05   <2e-16 ***
+CountyVictoria             -6.52e+14   5.73e+07 -1.14e+07   <2e-16 ***
+CountyVigo                 -2.76e+14   5.70e+07 -4.84e+06   <2e-16 ***
+CountyVilas                -1.60e+15   6.46e+07 -2.48e+07   <2e-16 ***
+CountyVinton               -1.35e+15   8.70e+07 -1.55e+07   <2e-16 ***
+CountyVirginia Beach       -4.34e+14   5.59e+07 -7.77e+06   <2e-16 ***
+CountyVolusia              -2.81e+14   5.58e+07 -5.04e+06   <2e-16 ***
+CountyWabash                2.83e+15   5.90e+07  4.81e+07   <2e-16 ***
+CountyWabasha               4.26e+14   6.19e+07  6.88e+06   <2e-16 ***
+CountyWabaunsee             1.05e+15   7.30e+07  1.44e+07   <2e-16 ***
+CountyWadena               -1.76e+15   6.77e+07 -2.60e+07   <2e-16 ***
+CountyWagoner              -3.97e+14   5.74e+07 -6.92e+06   <2e-16 ***
+CountyWahkiakum            -4.62e+15   8.73e+07 -5.30e+07   <2e-16 ***
+CountyWake                 -2.43e+14   5.57e+07 -4.36e+06   <2e-16 ***
+CountyWakulla              -5.80e+14   6.48e+07 -8.95e+06   <2e-16 ***
+CountyWaldo                -6.15e+14   6.12e+07 -1.01e+07   <2e-16 ***
+CountyWalker               -3.02e+13   5.65e+07 -5.34e+05   <2e-16 ***
+CountyWalla Walla          -6.33e+14   5.88e+07 -1.08e+07   <2e-16 ***
+CountyWallace              -1.66e+15   8.71e+07 -1.90e+07   <2e-16 ***
+CountyWaller               -9.84e+14   6.18e+07 -1.59e+07   <2e-16 ***
+CountyWallowa               1.84e+15   7.30e+07  2.52e+07   <2e-16 ***
+CountyWalsh                -1.62e+15   6.23e+07 -2.60e+07   <2e-16 ***
+CountyWalthall             -2.07e+15   6.77e+07 -3.06e+07   <2e-16 ***
+CountyWalton               -1.43e+14   5.71e+07 -2.51e+06   <2e-16 ***
+CountyWalworth             -3.30e+14   5.70e+07 -5.79e+06   <2e-16 ***
+CountyWapello              -9.10e+14   5.98e+07 -1.52e+07   <2e-16 ***
+CountyWard                 -1.35e+15   5.82e+07 -2.32e+07   <2e-16 ***
+CountyWare                 -2.65e+14   6.30e+07 -4.21e+06   <2e-16 ***
+CountyWarren               -6.44e+13   5.56e+07 -1.16e+06   <2e-16 ***
+CountyWarrick              -4.01e+14   5.90e+07 -6.80e+06   <2e-16 ***
+CountyWasatch               2.04e+15   6.54e+07  3.12e+07   <2e-16 ***
+CountyWasco                -1.30e+15   6.19e+07 -2.10e+07   <2e-16 ***
+CountyWaseca                6.93e+14   6.31e+07  1.10e+07   <2e-16 ***
+CountyWashakie             -7.13e+14   6.83e+07 -1.04e+07   <2e-16 ***
+CountyWashburn              7.63e+14   6.28e+07  1.22e+07   <2e-16 ***
+CountyWashington           -3.61e+14   5.54e+07 -6.51e+06   <2e-16 ***
+CountyWashita               1.17e+15   6.49e+07  1.80e+07   <2e-16 ***
+CountyWashoe               -4.53e+14   5.60e+07 -8.09e+06   <2e-16 ***
+CountyWashtenaw            -2.28e+14   5.59e+07 -4.09e+06   <2e-16 ***
+CountyWatauga              -9.91e+14   5.88e+07 -1.69e+07   <2e-16 ***
+CountyWatonwan             -1.60e+15   6.77e+07 -2.36e+07   <2e-16 ***
+CountyWaukesha              1.86e+15   5.57e+07  3.34e+07   <2e-16 ***
+CountyWaupaca               3.80e+14   5.88e+07  6.46e+06   <2e-16 ***
+CountyWaushara             -3.84e+13   6.16e+07 -6.23e+05   <2e-16 ***
+CountyWayne                -3.45e+14   5.55e+07 -6.21e+06   <2e-16 ***
+CountyWaynesboro           -5.10e+14   6.31e+07 -8.08e+06   <2e-16 ***
+CountyWeakley               8.26e+14   6.03e+07  1.37e+07   <2e-16 ***
+CountyWebb                 -3.97e+14   5.62e+07 -7.07e+06   <2e-16 ***
+CountyWeber                -4.59e+14   5.69e+07 -8.07e+06   <2e-16 ***
+CountyWebster              -2.02e+14   5.65e+07 -3.59e+06   <2e-16 ***
+CountyWeld                 -2.52e+14   5.60e+07 -4.49e+06   <2e-16 ***
+CountyWells                 3.40e+14   5.98e+07  5.69e+06   <2e-16 ***
+CountyWest Baton Rouge     -4.28e+14   6.49e+07 -6.61e+06   <2e-16 ***
+CountyWest Carroll         -2.64e+15   6.77e+07 -3.91e+07   <2e-16 ***
+CountyWest Feliciana        4.57e+14   6.77e+07  6.75e+06   <2e-16 ***
+CountyWestchester          -8.90e+14   5.56e+07 -1.60e+07   <2e-16 ***
+CountyWestmoreland         -2.65e+14   5.58e+07 -4.74e+06   <2e-16 ***
+CountyWeston                1.06e+15   7.36e+07  1.44e+07   <2e-16 ***
+CountyWetzel                2.51e+15   7.31e+07  3.43e+07   <2e-16 ***
+CountyWexford              -1.14e+15   6.10e+07 -1.87e+07   <2e-16 ***
+CountyWharton               2.51e+14   5.98e+07  4.20e+06   <2e-16 ***
+CountyWhatcom              -6.17e+13   5.69e+07 -1.08e+06   <2e-16 ***
+CountyWheeler               8.53e+14   6.47e+07  1.32e+07   <2e-16 ***
+CountyWhite                -3.11e+14   5.67e+07 -5.48e+06   <2e-16 ***
+CountyWhite Pine            2.35e+14   6.78e+07  3.47e+06   <2e-16 ***
+CountyWhiteside             3.30e+14   5.76e+07  5.72e+06   <2e-16 ***
+CountyWhitfield            -4.78e+14   5.78e+07 -8.28e+06   <2e-16 ***
+CountyWhitley              -8.77e+14   5.87e+07 -1.50e+07   <2e-16 ***
+CountyWhitman              -3.38e+14   5.95e+07 -5.68e+06   <2e-16 ***
+CountyWibaux               -1.41e+15   8.74e+07 -1.62e+07   <2e-16 ***
+CountyWichita              -1.95e+14   5.66e+07 -3.44e+06   <2e-16 ***
+CountyWicomico             -2.12e+14   5.78e+07 -3.66e+06   <2e-16 ***
+CountyWilbarger             1.68e+15   6.48e+07  2.59e+07   <2e-16 ***
+CountyWilcox               -1.71e+15   7.30e+07 -2.34e+07   <2e-16 ***
+CountyWilkes               -1.76e+15   5.90e+07 -2.98e+07   <2e-16 ***
+CountyWilkin               -1.16e+15   7.30e+07 -1.59e+07   <2e-16 ***
+CountyWilkinson            -1.85e+14   7.29e+07 -2.54e+06   <2e-16 ***
+CountyWill                 -3.13e+14   5.57e+07 -5.62e+06   <2e-16 ***
+CountyWillacy               2.43e+14   6.30e+07  3.86e+06   <2e-16 ***
+CountyWilliams              1.86e+15   5.80e+07  3.22e+07   <2e-16 ***
+CountyWilliamsburg         -6.06e+14   6.18e+07 -9.80e+06   <2e-16 ***
+CountyWilliamson           -2.20e+14   5.57e+07 -3.94e+06   <2e-16 ***
+CountyWilson                3.50e+12   5.61e+07  6.23e+04   <2e-16 ***
+CountyWinchester           -1.59e+15   6.31e+07 -2.51e+07   <2e-16 ***
+CountyWindham              -6.10e+14   5.68e+07 -1.07e+07   <2e-16 ***
+CountyWindsor               7.22e+14   5.87e+07  1.23e+07   <2e-16 ***
+CountyWinkler              -4.39e+14   7.30e+07 -6.01e+06   <2e-16 ***
+CountyWinn                 -5.53e+14   6.77e+07 -8.17e+06   <2e-16 ***
+CountyWinnebago            -4.34e+14   5.56e+07 -7.80e+06   <2e-16 ***
+CountyWinneshiek            2.06e+15   6.30e+07  3.27e+07   <2e-16 ***
+CountyWinona               -1.61e+15   5.94e+07 -2.72e+07   <2e-16 ***
+CountyWinston               4.08e+13   6.03e+07  6.78e+05   <2e-16 ***
+CountyWirt                  8.05e+14   7.31e+07  1.10e+07   <2e-16 ***
+CountyWise                  2.06e+14   5.80e+07  3.54e+06   <2e-16 ***
+CountyWood                 -2.98e+14   5.58e+07 -5.33e+06   <2e-16 ***
+CountyWoodbury             -1.22e+14   5.70e+07 -2.15e+06   <2e-16 ***
+CountyWoodford              2.75e+15   5.80e+07  4.74e+07   <2e-16 ***
+CountyWoods                -7.60e+14   6.78e+07 -1.12e+07   <2e-16 ***
+CountyWoodson              -3.00e+15   8.71e+07 -3.45e+07   <2e-16 ***
+CountyWoodward              1.92e+15   6.32e+07  3.04e+07   <2e-16 ***
+CountyWorcester            -4.85e+14   5.57e+07 -8.70e+06   <2e-16 ***
+CountyWorth                -8.23e+14   6.02e+07 -1.37e+07   <2e-16 ***
+CountyWright                3.51e+13   5.70e+07  6.16e+05   <2e-16 ***
+CountyWyandot              -9.99e+14   6.30e+07 -1.59e+07   <2e-16 ***
+CountyWyandotte            -1.82e+14   5.62e+07 -3.23e+06   <2e-16 ***
+CountyWyoming               1.74e+14   5.77e+07  3.02e+06   <2e-16 ***
+CountyWythe                -6.47e+14   6.19e+07 -1.05e+07   <2e-16 ***
+CountyYadkin               -9.10e+14   6.10e+07 -1.49e+07   <2e-16 ***
+CountyYakima               -1.31e+14   5.65e+07 -2.32e+06   <2e-16 ***
+CountyYalobusha             6.52e+14   6.77e+07  9.63e+06   <2e-16 ***
+CountyYamhill              -1.68e+14   5.78e+07 -2.91e+06   <2e-16 ***
+CountyYancey               -1.96e+15   6.48e+07 -3.02e+07   <2e-16 ***
+CountyYankton               9.69e+14   6.35e+07  1.53e+07   <2e-16 ***
+CountyYates                 2.25e+15   7.30e+07  3.08e+07   <2e-16 ***
+CountyYavapai               7.14e+13   5.97e+07  1.20e+06   <2e-16 ***
+CountyYazoo                -1.08e+15   6.49e+07 -1.67e+07   <2e-16 ***
+CountyYell                  1.41e+14   6.19e+07  2.29e+06   <2e-16 ***
+CountyYellow Medicine      -1.18e+15   6.49e+07 -1.82e+07   <2e-16 ***
+CountyYellowstone          -7.10e+14   5.73e+07 -1.24e+07   <2e-16 ***
+CountyYoakum                1.73e+15   7.30e+07  2.36e+07   <2e-16 ***
+CountyYolo                 -5.08e+14   5.65e+07 -8.99e+06   <2e-16 ***
+CountyYork                 -2.47e+14   5.56e+07 -4.44e+06   <2e-16 ***
+CountyYoung                 1.39e+15   6.48e+07  2.15e+07   <2e-16 ***
+CountyYuba                 -2.57e+14   5.88e+07 -4.36e+06   <2e-16 ***
+CountyYuma                 -2.33e+14   5.91e+07 -3.94e+06   <2e-16 ***
+CountyZapata                1.98e+15   6.77e+07  2.92e+07   <2e-16 ***
+CountyZavala               -5.15e+14   8.71e+07 -5.91e+06   <2e-16 ***
+Urban1                      1.83e+15   9.21e+05  1.99e+09   <2e-16 ***
+GroupQuartersFlag1          1.75e+14   5.27e+06  3.32e+07   <2e-16 ***
+LowIncomeTracts1            4.28e+15   8.54e+05  5.02e+09   <2e-16 ***
+lahunv1share                1.62e+16   2.33e+07  6.94e+08   <2e-16 ***
+PCTGQTRS                    8.88e+13   5.09e+06  1.75e+07   <2e-16 ***
+MedianFamilyIncome          1.25e+09   1.27e+01  9.86e+07   <2e-16 ***
+lawhite1                    2.24e+11   1.01e+03  2.21e+08   <2e-16 ***
+lablack1                    3.43e+11   1.35e+03  2.54e+08   <2e-16 ***
+laasian1                    2.71e+11   2.58e+03  1.05e+08   <2e-16 ***
+lahisp1                     7.24e+10   1.63e+03  4.44e+07   <2e-16 ***
+lanhopi1                    3.42e+11   1.79e+04  1.91e+07   <2e-16 ***
+laomultir1                  4.55e+11   3.82e+03  1.19e+08   <2e-16 ***
+laaian1                    -4.26e+10   7.43e+03 -5.74e+06   <2e-16 ***
+lakids10                    1.48e+12   8.11e+03  1.82e+08   <2e-16 ***
+lakids1                    -4.38e+11   3.04e+03 -1.44e+08   <2e-16 ***
+TractKids                   7.56e+10   1.65e+03  4.59e+07   <2e-16 ***
+laseniors1                  1.33e+11   2.95e+03  4.52e+07   <2e-16 ***
+laseniors10                 4.83e+12   1.12e+04  4.30e+08   <2e-16 ***
+TractSeniors                1.25e+10   1.52e+03  8.23e+06   <2e-16 ***
+TractWhite                  1.16e+10   5.28e+02  2.20e+07   <2e-16 ***
+TractBlack                 -1.60e+10   7.28e+02 -2.19e+07   <2e-16 ***
+TractAsian                 -4.75e+10   8.97e+02 -5.29e+07   <2e-16 ***
+TractNHOPI                 -9.73e+10   9.90e+03 -9.82e+06   <2e-16 ***
+TractAIAN                   2.04e+11   5.79e+03  3.52e+07   <2e-16 ***
+TractOMultir               -6.87e+10   1.87e+03 -3.68e+07   <2e-16 ***
+TractHispanic              -8.91e+09   8.92e+02 -9.99e+06   <2e-16 ***
+TractHUNV                  -7.92e+11   2.04e+03 -3.89e+08   <2e-16 ***
+TractSNAP                   3.47e+11   2.80e+03  1.24e+08   <2e-16 ***
+PovertyRate                -6.58e+12   3.71e+04 -1.77e+08   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance:  43179  on 67542  degrees of freedom
+Residual deviance: 175388  on 65668  degrees of freedom
+  (5321 observations deleted due to missingness)
+AIC: 179138
+
+Number of Fisher Scoring iterations: 25
+

@@ -1,0 +1,8 @@
+       (Intercept)   LowIncomeTracts1       lahunv1share             Urban1           lakids10           lawhite1 
+        0.0000e+00                Inf         5.6307e+23         2.9661e+32         1.3158e+00         1.0061e+00 
+       laseniors10           lablack1         laomultir1           laasian1         TractAsian            laaian1 
+        1.3911e+00         1.0079e+00         1.0105e+00         1.0325e+00         9.9782e-01         1.0073e+00 
+         TractHUNV         TractWhite            lakids1       TractOMultir GroupQuartersFlag1        PovertyRate 
+        9.9615e-01         1.0002e+00         9.9630e-01         9.9967e-01         6.3374e+00         9.8168e-01 
+         TractSNAP 
+        1.0014e+00 

@@ -1,0 +1,527 @@
+---
+title: "Food_Desert_Analysis_2"
+author: "Team 1"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    number_sections: false
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+## Data Loading and Preprocessing
+```{r init, include=F}
+library(tidyverse)
+library(ezids)
+library(usmap)
+library(ModelMetrics)
+library(pROC) 
+library(ggplot2)
+loadPkg("ISLR")
+loadPkg("tree") 
+```
+
+
+```{r setup, include=FALSE}
+# Some of common RMD options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+knitr::opts_chunk$set(warning = F, message = F)
+# Can globally set option for number display format.
+options(scientific=T, digits = 5) 
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r read_data}
+# Loading data
+data <- read.csv("food_access_research_atlas.csv")
+
+```
+
+# Summary of the dataset:
+
+```{r code1.1, echo=TRUE}
+str(data)
+head(data)
+summary(data)
+```
+
+
+```{r facotorise_data_prepare_for_model}
+model_lila_1_10_var = c("State","County","Urban","GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "PovertyRate")
+data$State  <- as.factor(data$State)
+data$County  <- as.factor(data$County)
+data$Urban <- as.factor(data$Urban)
+data$GroupQuartersFlag <- as.factor(data$GroupQuartersFlag)
+data$LILATracts_1And10 <-  as.factor(data$LILATracts_1And10)
+data$LowIncomeTracts <- as.factor(data$LowIncomeTracts)
+data$HUNVFlag= as.factor(data$HUNVFlag)
+data$LATracts1 = as.factor(data$LATracts1)
+data$LATractsVehicle_20 = as.factor(data$LATractsVehicle_20)
+data <- ezids::outlierKD2(data, lahunv1share ,qqplt= TRUE, boxplt= TRUE, rm = TRUE)
+
+
+``` 
+
+```{r selected_var_hist}
+
+
+
+plotHistograms <- function(data, variables) {
+  # Check if the variables are in the dataframe
+  missing_vars <- setdiff(variables, names(data))
+  if (length(missing_vars) > 0) {
+    stop("The following variables are not in the dataframe: ", paste(missing_vars, collapse = ", "))
+  }
+
+  # Create histograms for each variable
+  for (var in variables) {
+    if (is.numeric(data[[var]])) {
+      print(ggplot(data, aes_string(x = var)) + geom_histogram(bins = 30) + 
+              ggtitle(paste("Histogram of", var)) +
+              xlab(var) + ylab("Frequency"))
+    } else {
+      warning(paste("Variable", var, "is not numeric. Histograms require numeric variables."))
+    }
+  }
+}
+
+# Usage example
+#variables_to_plot <- c("variable1", "variable2", "variable3") # Replace with your variable names
+plotHistograms(data, model_lila_1_10_var)
+
+```
+```{r}
+library(psych)
+
+# Specify the column names you want to include in the pair plot
+#selected_columns <- c("colName1", "colName2", "colName3", "colName4", "colName5", "colName6") # Replace with your actual column names
+
+# Use pairs.panels with column names
+pairs.panels(data[model_lila_1_10_var], 
+             method = "spearman", # correlation method
+             hist.col = "#00AFBB",
+             density = FALSE,  # show density plots
+             ellipses = FALSE # show correlation ellipses
+            )
+
+```  
+
+```{r remove_outliers}
+variables_to_check <- c("lahunv1share", "MedianFamilyIncome", "PCTGQTRS") 
+removeOutliers <- lapply(variables_to_check, function(var){
+    # Ensure ezids package is available
+  if (!requireNamespace("ezids", quietly = TRUE)) {
+      stop("The 'ezids' package is not installed. Please install it using install.packages('ezids').")
+  }
+  
+  
+  if (is.numeric(var)) { # Check if the variable is numeric
+      # Construct the formula and call outlierKD2 using eval
+      
+      data <- ezids::outlierKD2(data, x, qqplt = TRUE, boxplt = TRUE, rm = TRUE)
+  } else {
+      warning(paste("Variable", var, "is not numeric. Skipping outlier removal for this variable."))
+  }
+    
+    
+  return(data)
+})
+
+# Usage example
+#variables_to_check <- c("lahunv1share", "MedianFamilyIncome", "PCTGQTRS") # Replace with your variables#
+#data_cleaned <- removeOutliers(data, variables_to_check)
+
+
+removeOutliers[[2]]
+
+```
+
+```{r logistic_reg_all}
+# Create the formula for the glm model
+formula_str <- paste("LILATracts_1And10 ~", paste(model_lila_1_10_var, collapse = " + "))
+
+# Fit the GLM model
+LILATracts_1And10_logit1 <- glm(as.formula(formula_str), data = data, family = binomial(link = "logit"))
+
+
+```
+
+```{r logistic_reg_all_analysis_1}
+options(max.print = 1e6)
+sum_LILATracts_1And10_logit1 = summary(LILATracts_1And10_logit1)
+#sum_LILATracts_1And10_logit1
+capture.output(sum_LILATracts_1And10_logit1, file = "models/glm_1_logit_lila1_10_summary.txt")
+options(max.print = .Options$max.print)
+```
+
+```{r save_model}
+saveRDS(LILATracts_1And10_logit1, file = "glm_1_logit_lila1_10.rds")
+
+```
+
+```{r check_model}
+str(LILATracts_1And10_logit1$fitted.values)
+summary(LILATracts_1And10_logit1$fitted.values)
+complete_cases <- complete.cases(data[model_lila_1_10_var])
+sum(complete_cases)
+sapply(data[model_lila_1_10_var], function(x) sum(is.na(x)))
+cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+```
+
+```{r logistic_reg_all_analysis_2}
+
+factors_LILATracts_1And10_logit1 = exp(coef(LILATracts_1And10_logit1))
+factors_LILATracts_1And10_logit1
+options(max.print = 1e6)
+capture.output(factors_LILATracts_1And10_logit1, file = "models/glm_1_logit_lila1_10_factors.txt")
+
+```
+
+
+All of the coefficients are statistically significant at the $\alpha$ level of 0.05.  
+
+## Accuracy and confusion matrix  
+```{r}
+
+cm = table(cleaned_data$LILATracts_1And10,LILATracts_1And10_logit1$fitted.values>.5)
+xkabledply( table(cleaned_data$LILATracts_1And10,LILATracts_1And10_logit1$fitted.values>.5), title = "Confusion matrix from Logit Model" )
+```
+
+The total accuracy (using the default cutoff of 0.5) is `r round(100*(cm[1,1]+cm[2,2])/sum(cm), digits=1)`% which is pretty decent.
+
+## Receiver-Operator-Characteristic (ROC) curve and Area-Under-Curve (AUC)
+
+ROC and AUC measures the true positive rate (or sensitivity) against the false positive rate (or specificity). The AUC is always between 0.5 and 1.  
+
+```{r }
+
+cleaned_data$prob=predict(LILATracts_1And10_logit1, type = c("response")) # Add new column of predicted probabilities
+h <- roc(LILATracts_1And10~prob, data=cleaned_data)
+auc(h)
+plot(h)
+```
+
+We have here the area-under-curve of `r auc(h)`.  This indicates a decent model fit.
+
+##################### STOP here
+
+# Question 6: Coefficient Interpretation
+**Interpret the value of the `age` cofficient with respect to changes on the logit scale and on the odds scale.**
+
+`Age` is negatively related to probability of survival. For every one unit increase in `age`, the log odds [logit(p)} changes by `r coef(titan_logit1)["age"]`, or the odds [p/q] of surviving changes by a factor of `r factors_titan_logit1['age']`. 
+
+# Question 7: Adding More Features
+**Can we improve the model from Q5? Let us also throw in `sex` as a predictor too. How’s the model now?  Comment on deviance tests for model comparisons, statistical significant of coefficients, accuracy/confusion matrix, ROC/AUC, ...**
+
+```{r}
+titan_logit2 <- glm(survived ~ age + sex + pclass, data = titanic, binomial(link = "logit"))
+summary(titan_logit2)
+exp(coef(titan_logit2))
+```
+
+All of the coefficients are statistically significant again at the $\alpha$ level of 0.05. The effects are similar. The new variable `sex` is proven to have a large effect on survival, with female a much higher survival rate.  
+
+## Deviance test for model comparison
+
+```{r}
+dev_chi2 = LILATracts_1And10_logit1$deviance - LILATracts_1And10_logit1$deviance
+pchisq(dev_chi2,df=LILATracts_1And10_logit1$df.residual-titan_logit2$df.residual,lower.tail=FALSE)
+```
+
+The change in deviance with the addition of `sex` is statistically significant meaning that we reject the reduced model (without `sex`) in favor of the full model (with `sex`).
+
+## Accuracy and confusion matrix  
+```{r}
+cm2 = table(titanic$survived,titan_logit2$fitted.values>.5)
+xkabledply( cm2, title = "Confusion matrix from Logit Model" )
+```
+
+The total accuracy (using the default cutoff of 0.5) is `r round(100*(cm2[1,1]+cm2[2,2])/sum(cm2), digits=1)`% which is pretty decent and better than the model without `sex`.
+
+## Receiver-Operator-Characteristic (ROC) curve and Area-Under-Curve (AUC)
+
+```{r}
+titanic$prob=predict(titan_logit2, type = c("response")) # Add new column of predicted probabilities
+h <- roc(survived~prob, data=titanic)
+auc(h)
+plot(h)
+```
+
+We have here the area-under-curve of `r auc(h)`, which indicates a very good model, and furthermore a better model than the one without `sex`.
+
+# Question 8: Binary Predictions Part I
+**Use the cutoff of 0.5 to convert predicted probabilities to binary predictions.  Find the confusion matrix and calculate the false positive rate (FPR) and the false negative rate (FNR).**
+
+```{r}
+cm2
+FPR = cm2[1,2]/(cm2[1,1]+cm2[1,2])
+FPR
+FNR = cm2[2,1]/(cm2[2,1]+cm2[2,2])
+FNR
+```
+
+# Question 9: Binary Predictions Part II
+**Now use the cutoff of 0.38 (the proportion of survivors in the data) to convert predicted probabilities to binary predictions.  Find the confusion matrix and calculate the false positive rate and the false negative rate.  How do the FPR and FNR compare to the FPR and FNR from Q8?  Which cutoff would you use?**
+
+```{r}
+cm2b = table(titanic$survived,titan_logit2$fitted.values>.38)
+cm2b
+FPR = cm2b[1,2]/(cm2b[1,1]+cm2b[1,2])
+FPR
+FNR = cm2b[2,1]/(cm2b[2,1]+cm2b[2,2])
+FNR
+```
+
+The cutoff of 0.5 gives a lower false positive rate, but a much higher false negative rate than the cutoff of .38.  I woudl prefer sacrificing a bit of FPR error for a large decrease in FNR error -- i.e. choose .38.
+
+
+# Stepwise forward feature selection
+
+```{r forward_step_LG}
+# Load necessary library
+library(stats)
+model_lila_1_10_var_stepwise = c("Urban","GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "PovertyRate")
+
+# Assuming your data is in a dataframe called 'data' and the response variable is 'response'
+# Replace 'response' with your actual response variable name
+
+formula_str_2 <- paste("LILATracts_1And10 ~", paste(model_lila_1_10_var_stepwise, collapse = " + "))
+
+# Fit the GLM model
+# Initial model with only the intercept (no predictors)
+initial_logit2_model <- glm(LILATracts_1And10 ~ 1, data = cleaned_data, family = binomial(link = "logit"))
+
+# Full model with all potential predictors
+full_logit2_model <- glm(as.formula(formula_str_2), data = cleaned_data, family = binomial(link = "logit"))
+
+# Perform stepwise forward selection
+stepwise_model <- step(initial_logit2_model, scope = list(lower = initial_logit2_model, upper = full_logit2_model), direction = "forward")
+
+# View the summary of the selected model
+summary(stepwise_model)
+
+```
+```{r save_step_forward_model}
+sum_LILATracts_1And10_stepwise_logit2 = summary(stepwise_model)
+capture.output(sum_LILATracts_1And10_stepwise_logit2, file = "models/glm_2_stepwise_logit_lila1_10_summary.txt")
+```
+
+```{r logistic_reg_all_analysis_stepwise_forward}
+
+factors_LILATracts_1And10_logit2 = exp(coef(stepwise_model))
+factors_LILATracts_1And10_logit2
+options(max.print = 1e6)
+capture.output(factors_LILATracts_1And10_logit2, file = "models/glm_2_stepwise_logit_lila1_10_factors.txt")
+
+```
+
+# Random Forest for poverty Rate
+
+## Iris dataset  
+
+Follow this example if interested: <https://stackoverflow.com/questions/47494113/rpart-regression-tree-interpretation>
+
+
+
+
+# Regression Tree
+
+Original source: <https://www2.stat.duke.edu/~rcs46/lectures_2017/08-trees/08-tree-regression.pdf>, by Rebecca C. Steorts, Duke University  
+(Other helpful resource: http://gsp.humboldt.edu/OLM/R/05_04_CART.html )   
+
+We are using the baseball players salary dataframe from library `ISLR` as demo. The `Salary` data, if we just look at that with say years or other numerical variables, it shows homoscedasticity issue. It is useful to use a log scale transform on Salary that way. Let us use `Years` and `Hits` to model `Salary`.  
+
+```{r}
+
+
+# remove NA values
+# put salary on log scale and fit reg. tree
+#treefit <- tree(log(Salary) ~ Years + Hits, data=Hitters)
+#summary(treefit)
+```
+
+The generic plot function will produce a tree graph, although not very nice looking.
+
+```{r}
+plot(treefit) 
+text(treefit,cex=0.75)
+```
+
+Note that the library `rpart` can also analyse regression tree. The result is mainly the same, and we already saw how it worked with other libraries such as `rattle` with `fancyRpartPlot`. You can compare the two. 
+
+Trees also give you a sense of **feature importance** in the results. The first split is considered on the most important feature/variable, and so forth.
+```{r data_prep_pov_rate}
+model_pov_rate_columns =  c("LILATracts_1And10","State","County","Urban","GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "")
+```
+
+```{r}
+# treefitRpart <- rpart(log(Salary) ~ Years + Hits, data=Hitters) # only 7 terminal/leaf  nodes, c.f. 8 from the tree function above
+# treefitRpart <- rpart(log(Salary) ~ Years + Hits, data=Hitters, control = list(maxdepth = 8) ) # still only 7 terminal/leaf nodes. cp =0.01 is default (cost complexity)
+treefitRpart <- rpart(log(Salary) ~ Years + Hits, data=Hitters, control = list(maxdepth = 8, cp=0.009) ) # 8 terminal/leaf nodes, but slightly different than the nodes from the tree function above. 
+#treefit <- tree(log(Salary) ~ Years + Hits, data=Hitters)
+summary(treefitRpart)
+
+formula_str <- paste("PovertyRate ~", paste(model_lila_1_10_var, collapse = " + "))
+
+# Fit the GLM model
+LILATracts_1And10_logit1 <- glm(as.formula(formula_str), data = data, family = binomial(link = "logit"))
+# summary(treefit)
+```
+
+```{r}
+fancyRpartPlot(treefitRpart)
+# For boring plot, use codes below instead
+plot(treefitRpart) 
+text(treefitRpart,cex=1) # cex control font size
+plot(treefit) 
+text(treefit,cex=0.75)
+```
+
+The two methods using `tree` and `rpart` resulted in slightly different trees. We can try different settings and adjust. I tried these:   
+
+~~~~
+treefitRpart <- rpart(log(Salary) ~ Years+Hits, data=Hitters)  
+# only 7 terminal/leaf  nodes, c.f. 8 from the tree function above  
+
+treefitRpart <- rpart(log(Salary) ~ Years+Hits, data=Hitters, control=list(maxdepth=8) )   
+# still only 7 terminal/leaf nodes. cp =0.01 is default (cost complexity)  
+ 
+treefitRpart <- rpart(log(Salary) ~ Years+Hits, data=Hitters, control=list(maxdepth=8, cp=0.009) )   
+# 8 terminal/leaf nodes, but but slightly different than the nodes from the tree function above.  
+~~~~
+
+Despite of the differences, let us simply stick with the `tree` library and follow the original author's example here.  
+
+We can "prune" the tree to reduce variance. A plot can be made after prunning, showing the effects in terms of deviance or other statistics. There are other optional parameters to use for prunning. Let us look at the simplest case.
+
+
+```{r}
+my.tree = tree(Salary  ~ Years + Hits, data=Hitters) # Fits tree 
+prune.tree(my.tree,best=5) # Returns best pruned tree 
+prune.tree(my.tree,best=5, newdata=Hitters)  # no test data set, so use training data
+my.tree.seq = prune.tree(my.tree) # Sequence of pruned 
+# tree sizes/errors
+plot(my.tree.seq) # Plots error/deviance vs size of tree (# of terminal nodes being used.)
+my.tree.seq$dev # Vector of error
+# rates for prunings, in order
+opt.trees = which(my.tree.seq$dev == min(my.tree.seq$dev)) 
+# Positions of
+# optimal (with respect to error) trees 
+min(my.tree.seq$size[opt.trees])
+# Size of smallest optimal tree
+```
+
+The graph shows the result with different number of terminal/leaf nodes on the x (tree size), and the deviance value of the model on the y. The scale on the top tells us what is the improvement of the deviance with each increase of the leaf size. We will continue the discussion of this with the next deviance vs size chart.
+
+
+
+```{r, results="markup"}
+fold <- floor(runif(nrow(Hitters),1,11)) 
+  Hitters$fold <- fold
+## the test set is just the first fold 
+test.set <- Hitters[Hitters$fold == 1,] 
+##exclude the first fold from the data here 
+train.set <- Hitters[Hitters$fold != 1,] 
+my.tree <- tree(log(Salary) ~ Years + Hits,data=train.set, mindev=0.001)
+# Return best pruned tree with 5 leaves, 
+# evaluating error on training data 
+prune.tree(my.tree, best=5)
+```
+
+We can, and should, evaluate the model on the test set.
+
+```{r}
+# Ditto, but evaluates on test.set
+prune.tree(my.tree,best=5,newdata=test.set)
+```
+
+A similar deviance vs tree size chart is shown here. 
+
+```{r}
+# Sequence of pruned tree sizes/errors
+my.tree.seq = prune.tree(my.tree) 
+plot(my.tree.seq) # error versus plot size
+# Vector of error rates 
+# for prunings, in order 
+deviance1 <- my.tree.seq$dev
+deviance1
+```
+
+## Deviance (Regression Trees)
+
+With number of terminal nodes increased from 1 to 2, the deviance decreased by 81 (see number on top of chart), and the deviance decreased by 0.25 with increasing size from 26 to 27. Our test set only has `r length(test.set$Salary)` rows/observations (and `r length(test.set)` columns/variables, although we are only using 2 variables for the tree model). The degree of freedom is `r length(test.set$Salary)` - 1 = `r (length(test.set$Salary)-1)`.   
+
+
+```{r}
+pchisq( deviance1[ length(deviance1) ], length(test.set$Salary)-1 , lower.tail = F )
+pchisq( deviance1[ length(deviance1)-6 ], length(test.set$Salary)-7 , lower.tail = F )
+```  
+The **null deviance** (= `r round(deviance1[23],digits=1)`) for the null model (with one one terminal/leaf node) will have `r (length(test.set$Salary)-1)` degree of freedom (df). Typically, there are two typical questions we can ask.  
+
+1. For a particular model, does the deviance show that data support the model as a good fit?  
+To this end, we can calculate the p-value from chisq distribution, with the null hypothesis stating the error terms are statistically zero, or the model and the actual data are statistically similar.  
+
+~~~  
+# For the null model with only one leaf node,  
+# df = `r length(test.set$Salary)`-1  
+pchisq( devNullModel, df=`r length(test.set$Salary)-1` , lower.tail = F ) # area of the right tail  
+# = `r pchisq( deviance1[ length(deviance1) ], length(test.set$Salary)-1 , lower.tail = F )`  
+# extremely small p, reject null, 
+# the (null) model does not look like actual data.  
+#  
+#  
+# For the model with 7 leaf nodes,  
+# df = `r length(test.set$Salary)-7`  
+pchisq( dev7model, `r length(test.set$Salary)-7` , lower.tail = F )   
+# = `r pchisq( deviance1[ length(deviance1)-6 ], length(test.set$Salary)-7 , lower.tail = F )`  
+# still very small p, reject null, 
+# this model still does not quite look like actual data.  
+#  
+~~~  
+
+We can use the deviance info this way for other models too, such as logistic regression, for example.  
+
+2. If we ask, decrease df by one with an extra leaf nodes, how much the deviance improved? Is it significant?  
+Say we first find the deviances for the 6-leaf and 8-leaf models. The way deviance is defined, they are on log scales. So the difference between the two deviances is related to the ratio of log-likelihood of the two models. We can therefore calculate the p-value of the difference using chisq again, with df = 2 this time, representing the change in df between the 6-leaf and the 8-leaf models.    
+
+~~~  
+pchisq( dev6model - dev8model , df=2 , lower.tail = F ) 
+# = `r pchisq( deviance1[ length(deviance1)-5 ] - deviance1[ length(deviance1)-7 ] , df=2 , lower.tail = F ) `
+# It is greater than 0.05, so we conclude the two models 
+# are not significantly different based on the test data set. 
+#
+~~~  
+
+Now, let's try between 2-node, 3-node, and the 4-node models:
+
+~~~  
+# 3-leaf and 4-leaf model difference, 
+pchisq( dev3model - dev4model , df=1 , lower.tail = F ) 
+# = `r pchisq( deviance1[ length(deviance1)-2 ] - deviance1[ length(deviance1)-3 ] , df=1 , lower.tail = F ) `
+# It is less than 0.05!!  The 4-node model improved much from the 
+# 3-leaf and is considered a better model (supported by the test set). 
+#
+# 4-leaf and 5-leaf model difference, 
+pchisq( dev4model - dev5model , df=1 , lower.tail = F ) 
+# = `r pchisq( deviance1[ length(deviance1)-3 ] - deviance1[ length(deviance1)-4 ] , df=1 , lower.tail = F )  `
+# It is just over than 0.05, border line case. Maybe we can 
+# include this 5-node model and be content (from this test set). 
+#
+~~~  
+
+```{r}
+unloadPkg("rattle") 
+unloadPkg("rpart.plot")
+unloadPkg("ISLR")
+unloadPkg("tree") 
+```
+
