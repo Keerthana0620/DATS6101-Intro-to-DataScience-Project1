@@ -21,6 +21,8 @@ library(usmap)
 library(ModelMetrics)
 library(pROC) 
 library(ggplot2)
+loadPkg("ISLR")
+loadPkg("tree") 
 ```
 
 
@@ -339,15 +341,12 @@ Original source: <https://www2.stat.duke.edu/~rcs46/lectures_2017/08-trees/08-tr
 We are using the baseball players salary dataframe from library `ISLR` as demo. The `Salary` data, if we just look at that with say years or other numerical variables, it shows homoscedasticity issue. It is useful to use a log scale transform on Salary that way. Let us use `Years` and `Hits` to model `Salary`.  
 
 ```{r}
-loadPkg("ISLR")
-loadPkg("tree") 
-attach(Hitters)
+
+
 # remove NA values
-Hitters <- na.omit(Hitters) 
-Salary <- na.omit(Salary)
 # put salary on log scale and fit reg. tree
-treefit <- tree(log(Salary) ~ Years + Hits, data=Hitters)
-summary(treefit)
+#treefit <- tree(log(Salary) ~ Years + Hits, data=Hitters)
+#summary(treefit)
 ```
 
 The generic plot function will produce a tree graph, although not very nice looking.
