@@ -103,8 +103,11 @@ All the coefficients are found significant (small p-values). Poverty rate have p
 xkabledply(model, title = paste("Logistic Regression :", format(formula(model)) ))
 ```
 
+##########################################3
+##########################################
+
 ```{r growthDecayFactors, results='markup', collapse=F}
-expcoeff = exp(coef(model))
+expcoeff = exp(coef(model10))
 expcoeff
 #xkabledply(as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
 ```
@@ -221,6 +224,141 @@ model6 <- glm(LILATracts_1And10 ~ GroupQuartersFlag + Urban + PovertyRate, famil
 summary(model6)
 ```
 
+## Model 8: PovertyRate ~ GroupQuarters
+
+```{r model}
+
+model8 <- lm(PovertyRate ~ GroupQuartersFlag, data = df)
+
+summary(model8)
+```
+
+
+- How is Groupquarters associated with Poverty rate:
+
+```{r code8, include=FALSE}
+
+# data_outliers <- ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+data_outliers <- df
+GroupQuarters_Poverty <- data_outliers[data_outliers$GroupQuartersFlag == 1, c("GroupQuartersFlag", "PovertyRate")]
+NonGroupQuarters_Poverty <- data_outliers[data_outliers$GroupQuartersFlag == 0, c("GroupQuartersFlag", "PovertyRate")]
+
+```
+
+```{r code9, echo=TRUE}
+
+data2 = data.frame()
+Percentage_GroupQuarters_Poverty = sum(GroupQuarters_Poverty$PovertyRate)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+Percentage_NonGroupQuarters_Poverty = sum(NonGroupQuarters_Poverty$PovertyRate)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+data2 <- rbind(data2, Percentage_GroupQuarters_Poverty)
+data2 <- rbind(data2, Percentage_NonGroupQuarters_Poverty)
+GroupQuartersFlag = c(1,0)
+data2 <- cbind(data2, GroupQuartersFlag)
+colnames(data2) <- c('Percentage', 'GroupQuartersFlag')
+
+library(ggplot2)
+ggplot(data2, aes(x = factor(GroupQuartersFlag), y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("0" = "pink", "1" = "lightblue")) +
+  labs(title = "Percentage of Poverty in group quarters",
+       fill = "GroupQuartersFlag") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+## Model 9: PovertyRate ~ medianFamilyIncome : Urban
+
+```{r model}
+
+model9 <- lm(PovertyRate ~ MedianFamilyIncome * Urban, data = df)
+summary(model9)
+```
+
+
+```{r}
+
+ggplot(df, aes(x = MedianFamilyIncome, y = PovertyRate, color)) +
+  geom_point() +
+  labs(x = "Median Family Income", y = "Poverty Rate") +
+  theme_minimal()
+
+ggplot(df, aes(x = factor(Urban), y = MedianFamilyIncome, fill = factor(Urban))) +
+  geom_boxplot() +
+  labs(x = "Urban", y = "Median Family Income", title = "Box Plot of Median Family Income by Urban/Rural") +
+  theme_minimal()
+
+```
+
+```{r}
+data_outliers <- ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
+
+## Model 10: PovertyRate ~ TractSNAP
+
+```{r model}
+
+model10 <- lm(PovertyRate ~ TractSNAP, data = df)
+summary(model10)
+#df$TractSNAP
+```
+
+```{r}
+
+ggplot(df, aes(x = TractSNAP, y = PovertyRate, color = 'g')) +
+  geom_point() +
+  labs(x = "TractSNAP", y = "Poverty Rate") +
+  theme_minimal()
+```
+
+## Model 11: PovertyRate ~ LowIncomeTracts
+
+```{r model}
+df$LowIncomeTracts = as.factor(df$LowIncomeTracts)
+model11 <- lm(PovertyRate ~ LowIncomeTracts, data = df)
+summary(model11)
+#df$TractSNAP
+```
+
+```{r code8, include=FALSE}
+
+# data_outliers <- ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+data_outliers <- df
+LowIncomeTracts_Poverty <- data_outliers[data_outliers$LowIncomeTracts == 1, c("LowIncomeTracts", "PovertyRate")]
+NonLowIncomeTracts_Poverty <- data_outliers[data_outliers$LowIncomeTracts == 0, c("LowIncomeTracts", "PovertyRate")]
+
+```
+
+```{r code9, echo=TRUE}
+
+data2 = data.frame()
+Percentage_LowIncomeTracts_Poverty = sum(LowIncomeTracts_Poverty$PovertyRate)/(sum(nrow(LowIncomeTracts_Poverty)+ nrow(NonLowIncomeTracts_Poverty)))*100
+Percentage_NonLowIncomeTracts_Poverty = sum(NonLowIncomeTracts_Poverty$PovertyRate)/(sum(nrow(LowIncomeTracts_Poverty)+ nrow(NonLowIncomeTracts_Poverty)))*100
+data2 <- rbind(data2, Percentage_LowIncomeTracts_Poverty)
+data2 <- rbind(data2, Percentage_NonLowIncomeTracts_Poverty)
+LowIncomeTracts = c(1,0)
+data2 <- cbind(data2, LowIncomeTracts)
+colnames(data2) <- c('Percentage', 'LowIncomeTracts')
+
+library(ggplot2)
+ggplot(data2, aes(x = factor(LowIncomeTracts), y = Percentage, fill = factor(LowIncomeTracts))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("0" = "lightgreen", "1" = "lightblue")) +
+  labs(title = "Percentage of Poverty in LowIncomeTracts",
+       fill = "LowIncomeTracts") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+## Model 12: PovertyRate ~ LILATracts_1And10
+
+```{r model}
+
+model12 <- lm(PovertyRate ~ LILATracts_1And10, data = df)
+summary(model12)
+#df$TractSNAP
+```
 
 ############################################################
 # What specific factors most significantly contribute to a tract being classified as a food desert?
