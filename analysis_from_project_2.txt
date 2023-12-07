@@ -1,0 +1,7 @@
+we got very good AUC and roc curve, also good predictions in the first model with state and county and every other variable i mentioned
+but the AIC is much higher than your basic model, which meant that my first model is very bad
+even though the logistic regression said all variables are significant
+the odds ratio gave 0s and inf indicating the small variables are useless and some variabels gives perfect separation.
+this perfect separation may because the lila is derived from lowincome. multicolinearity problem.
+if lila is derived from lowincome we can't use it, its like giving the answers for an exam
+
