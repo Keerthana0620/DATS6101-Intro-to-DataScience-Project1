@@ -1,0 +1,8 @@
+       (Intercept)       lahunv1share MedianFamilyIncome             Urban1        laseniors10         laomultir1 
+        6.8092e-03         4.6501e+35         9.9995e-01         5.2867e+01         1.0107e+00         1.0014e+00 
+         TractHUNV          TractSNAP      TractHispanic            lakids1         TractWhite           lablack1 
+        9.9155e-01         1.0033e+00         9.9966e-01         9.9895e-01         1.0004e+00         1.0006e+00 
+GroupQuartersFlag1        PovertyRate            lahisp1          TractAIAN         laseniors1       TractSeniors 
+        1.1605e-01         1.0167e+00         1.0006e+00         1.0007e+00         9.9891e-01         1.0004e+00 
+      TractOMultir          TractKids         TractBlack           lakids10 
+        1.0004e+00         9.9964e-01         1.0001e+00         1.0009e+00 

@@ -1,0 +1,1661 @@
+Call:
+rpart(formula = formula_obj_3, data = trainData, control = list(maxdepth = 7, 
+    cp = 1e-04))
+  n= 54034 
+
+           CP nsplit rel error  xerror      xstd
+1  0.51017569      0   1.00000 1.00004 0.0099835
+2  0.17173323      1   0.48982 0.48990 0.0062718
+3  0.03229165      2   0.31809 0.31822 0.0039114
+4  0.02140181      3   0.28580 0.28606 0.0031432
+5  0.02102556      4   0.26440 0.25800 0.0031675
+6  0.00698880      5   0.24337 0.24445 0.0031419
+7  0.00656681      6   0.23638 0.23698 0.0031291
+8  0.00537156      7   0.22982 0.23065 0.0029818
+9  0.00531345      8   0.22444 0.22616 0.0027552
+10 0.00450332      9   0.21913 0.22052 0.0026057
+11 0.00370832     10   0.21463 0.21639 0.0025977
+12 0.00283300     12   0.20721 0.21370 0.0025873
+13 0.00186620     13   0.20438 0.20901 0.0025474
+14 0.00178875     14   0.20251 0.20665 0.0025078
+15 0.00142380     15   0.20072 0.20388 0.0024425
+16 0.00138000     17   0.19788 0.20172 0.0024215
+17 0.00134937     18   0.19650 0.20094 0.0024165
+18 0.00129103     19   0.19515 0.20012 0.0024081
+19 0.00114529     20   0.19386 0.19853 0.0024079
+20 0.00113192     21   0.19271 0.19714 0.0024022
+21 0.00099372     22   0.19158 0.19602 0.0024003
+22 0.00094108     23   0.19058 0.19515 0.0023991
+23 0.00090966     24   0.18964 0.19414 0.0023900
+24 0.00080840     25   0.18873 0.19331 0.0023925
+25 0.00074582     26   0.18793 0.19258 0.0024003
+26 0.00066630     27   0.18718 0.19166 0.0023866
+27 0.00065994     28   0.18651 0.19126 0.0023881
+28 0.00059364     29   0.18585 0.19166 0.0024118
+29 0.00056722     30   0.18526 0.19159 0.0024733
+30 0.00056403     32   0.18413 0.19110 0.0024664
+31 0.00054390     33   0.18356 0.19087 0.0024646
+32 0.00053131     34   0.18302 0.19074 0.0024642
+33 0.00045962     35   0.18249 0.19019 0.0024679
+34 0.00041339     36   0.18203 0.18892 0.0024567
+35 0.00040161     38   0.18120 0.18852 0.0024642
+36 0.00039932     39   0.18080 0.18830 0.0024635
+37 0.00039746     40   0.18040 0.18830 0.0024635
+38 0.00039588     41   0.18000 0.18832 0.0024636
+39 0.00039037     42   0.17961 0.18818 0.0024603
+40 0.00038241     43   0.17922 0.18801 0.0024474
+41 0.00036146     44   0.17883 0.18758 0.0024462
+42 0.00036031     46   0.17811 0.18744 0.0024474
+43 0.00035404     47   0.17775 0.18739 0.0024467
+44 0.00033175     48   0.17740 0.18710 0.0024462
+45 0.00033041     49   0.17706 0.18687 0.0024417
+46 0.00030986     50   0.17673 0.18686 0.0024465
+47 0.00027208     51   0.17642 0.18664 0.0024450
+48 0.00025394     52   0.17615 0.18647 0.0024323
+49 0.00025176     53   0.17590 0.18634 0.0024349
+50 0.00024437     54   0.17565 0.18615 0.0024340
+51 0.00023388     56   0.17516 0.18603 0.0024326
+52 0.00022936     57   0.17492 0.18587 0.0024315
+53 0.00022813     58   0.17469 0.18585 0.0024315
+54 0.00022192     59   0.17447 0.18579 0.0024313
+55 0.00020808     60   0.17424 0.18582 0.0024390
+56 0.00020130     61   0.17404 0.18519 0.0024229
+57 0.00020067     62   0.17383 0.18516 0.0024230
+58 0.00019707     63   0.17363 0.18509 0.0024229
+59 0.00018502     64   0.17344 0.18513 0.0024235
+60 0.00018222     65   0.17325 0.18511 0.0024268
+61 0.00018104     66   0.17307 0.18502 0.0024258
+62 0.00016745     67   0.17289 0.18491 0.0024285
+63 0.00015750     68   0.17272 0.18476 0.0024418
+64 0.00015280     69   0.17256 0.18453 0.0024399
+65 0.00014931     70   0.17241 0.18439 0.0024384
+66 0.00014531     71   0.17226 0.18430 0.0024381
+67 0.00014207     72   0.17212 0.18429 0.0024376
+68 0.00013734     73   0.17197 0.18421 0.0024385
+69 0.00013207     74   0.17184 0.18410 0.0024387
+70 0.00012067     75   0.17170 0.18406 0.0024387
+71 0.00011975     76   0.17158 0.18404 0.0024389
+72 0.00011889     77   0.17146 0.18403 0.0024389
+73 0.00011873     78   0.17134 0.18403 0.0024390
+74 0.00011589     79   0.17123 0.18395 0.0024389
+75 0.00011407     80   0.17111 0.18391 0.0024389
+76 0.00011278     81   0.17100 0.18392 0.0024389
+77 0.00011087     82   0.17088 0.18387 0.0024390
+78 0.00010409     83   0.17077 0.18385 0.0024363
+79 0.00010165     84   0.17067 0.18382 0.0024365
+80 0.00010000     85   0.17057 0.18382 0.0024366
+
+Variable importance
+MedianFamilyIncome    LowIncomeTracts          TractSNAP          TractHUNV  LILATracts_1And10         TractBlack 
+                33                 27                 13                  8                  7                  5 
+         TractKids         TractWhite       TractSeniors 
+                 2                  1                  1 
+
+Node number 1: 54034 observations,    complexity param=0.51018
+  mean=15.894, MSE=159.27 
+  left son=2 (32401 obs) right son=3 (21633 obs)
+  Primary splits:
+      LowIncomeTracts    splits as  LR, improve=0.51018, (0 missing)
+      MedianFamilyIncome < 47628      to the right, improve=0.44988, (0 missing)
+      TractSNAP          < 207.5      to the left,  improve=0.26516, (0 missing)
+      TractHUNV          < 123.5      to the left,  improve=0.18492, (0 missing)
+      TractBlack         < 509.5      to the left,  improve=0.11147, (0 missing)
+  Surrogate splits:
+      MedianFamilyIncome < 54594      to the right, agree=0.877, adj=0.693, (0 split)
+      TractSNAP          < 216.5      to the left,  agree=0.764, adj=0.410, (0 split)
+      TractHUNV          < 135.5      to the left,  agree=0.716, adj=0.290, (0 split)
+      LILATracts_1And10  splits as  LR, agree=0.698, adj=0.245, (0 split)
+      TractBlack         < 581.5      to the left,  agree=0.676, adj=0.191, (0 split)
+
+Node number 2: 32401 observations,    complexity param=0.021402
+  mean=8.5285, MSE=23.658 
+  left son=4 (16489 obs) right son=5 (15912 obs)
+  Primary splits:
+      TractSNAP          < 93.5       to the left,  improve=0.240280, (0 missing)
+      MedianFamilyIncome < 78604      to the right, improve=0.234560, (0 missing)
+      TractHUNV          < 39.5       to the left,  improve=0.082895, (0 missing)
+      laasian1           < 34.152     to the right, improve=0.046102, (0 missing)
+      TractKids          < 28.5       to the left,  improve=0.045908, (0 missing)
+  Surrogate splits:
+      MedianFamilyIncome < 80599      to the right, agree=0.715, adj=0.419, (0 split)
+      TractHUNV          < 44.5       to the left,  agree=0.666, adj=0.321, (0 split)
+      TractKids          < 845.5      to the left,  agree=0.628, adj=0.243, (0 split)
+      TractAIAN          < 11.5       to the left,  agree=0.627, adj=0.241, (0 split)
+      TractWhite         < 3162.5     to the left,  agree=0.627, adj=0.240, (0 split)
+
+Node number 3: 21633 observations,    complexity param=0.17173
+  mean=26.926, MSE=159.43 
+  left son=6 (16693 obs) right son=7 (4940 obs)
+  Primary splits:
+      MedianFamilyIncome < 33768      to the right, improve=0.428520, (0 missing)
+      TractSeniors       < 277.5      to the right, improve=0.103860, (0 missing)
+      TractWhite         < 1127.5     to the right, improve=0.085242, (0 missing)
+      TractSNAP          < 371.5      to the left,  improve=0.073533, (0 missing)
+      TractHUNV          < 159.5      to the left,  improve=0.070147, (0 missing)
+  Surrogate splits:
+      TractWhite < 346.5      to the right, agree=0.784, adj=0.055, (0 split)
+      TractSNAP  < 713.5      to the left,  agree=0.779, adj=0.031, (0 split)
+      TractAsian < 1.5        to the right, agree=0.777, adj=0.022, (0 split)
+      PCTGQTRS   < 0.89703    to the left,  agree=0.775, adj=0.013, (0 split)
+      TractKids  < 22.5       to the right, agree=0.774, adj=0.010, (0 split)
+
+Node number 4: 16489 observations,    complexity param=0.0037083
+  mean=6.1863, MSE=17.114 
+  left son=8 (8716 obs) right son=9 (7773 obs)
+  Primary splits:
+      MedianFamilyIncome < 91540      to the right, improve=0.110140, (0 missing)
+      TractSNAP          < 31.5       to the left,  improve=0.105780, (0 missing)
+      TractKids          < 10.5       to the left,  improve=0.063770, (0 missing)
+      TractSeniors       < 5.5        to the left,  improve=0.056863, (0 missing)
+      TractHUNV          < 0.5        to the left,  improve=0.053501, (0 missing)
+  Surrogate splits:
+      TractAsian < 54.5       to the right, agree=0.710, adj=0.384, (0 split)
+      TractSNAP  < 44.5       to the left,  agree=0.644, adj=0.244, (0 split)
+      Urban      splits as  RL, agree=0.639, adj=0.233, (0 split)
+      laasian1   < 27.01      to the right, agree=0.631, adj=0.216, (0 split)
+      TractKids  < 644.5      to the right, agree=0.625, adj=0.205, (0 split)
+
+Node number 5: 15912 observations,    complexity param=0.0069888
+  mean=10.956, MSE=18.865 
+  left son=10 (7655 obs) right son=11 (8257 obs)
+  Primary splits:
+      MedianFamilyIncome < 68864      to the right, improve=0.200370, (0 missing)
+      TractSNAP          < 195.5      to the left,  improve=0.093856, (0 missing)
+      laasian1           < 32         to the right, improve=0.046182, (0 missing)
+      TractWhite         < 4224       to the right, improve=0.044635, (0 missing)
+      TractAsian         < 42.5       to the right, improve=0.036159, (0 missing)
+  Surrogate splits:
+      TractAsian   < 54.5       to the right, agree=0.679, adj=0.334, (0 split)
+      laasian1     < 32.022     to the right, agree=0.620, adj=0.210, (0 split)
+      TractSNAP    < 165.5      to the left,  agree=0.609, adj=0.188, (0 split)
+      Urban        splits as  RL, agree=0.597, adj=0.163, (0 split)
+      lahunv1share < 0.010702   to the left,  agree=0.592, adj=0.151, (0 split)
+
+Node number 6: 16693 observations,    complexity param=0.021026
+  mean=22.43, MSE=73.607 
+  left son=12 (12158 obs) right son=13 (4535 obs)
+  Primary splits:
+      MedianFamilyIncome < 41558      to the right, improve=0.147270, (0 missing)
+      TractSNAP          < 296.5      to the left,  improve=0.050905, (0 missing)
+      TractHUNV          < 137.5      to the left,  improve=0.036828, (0 missing)
+      TractSeniors       < 308.5      to the right, improve=0.034034, (0 missing)
+      PCTGQTRS           < 0.076617   to the left,  improve=0.031429, (0 missing)
+  Surrogate splits:
+      TractSNAP     < 612.5      to the left,  agree=0.734, adj=0.022, (0 split)
+      TractHispanic < 6855.5     to the left,  agree=0.729, adj=0.001, (0 split)
+      laaian1       < 2552.9     to the left,  agree=0.729, adj=0.001, (0 split)
+      TractOMultir  < 4609.5     to the left,  agree=0.729, adj=0.001, (0 split)
+      TractSeniors  < 0.5        to the right, agree=0.729, adj=0.001, (0 split)
+
+Node number 7: 4940 observations,    complexity param=0.032292
+  mean=42.12, MSE=150.26 
+  left son=14 (3749 obs) right son=15 (1191 obs)
+  Primary splits:
+      MedianFamilyIncome < 23092      to the right, improve=0.37440, (0 missing)
+      TractKids          < 117.5      to the right, improve=0.13458, (0 missing)
+      PCTGQTRS           < 0.44652    to the left,  improve=0.13259, (0 missing)
+      TractSeniors       < 58.5       to the right, improve=0.12306, (0 missing)
+      TractSNAP          < 34.5       to the right, improve=0.11669, (0 missing)
+  Surrogate splits:
+      TractKids         < 168.5      to the right, agree=0.785, adj=0.107, (0 split)
+      TractSeniors      < 49.5       to the right, agree=0.780, adj=0.089, (0 split)
+      TractSNAP         < 48.5       to the right, agree=0.780, adj=0.087, (0 split)
+      PCTGQTRS          < 0.43179    to the left,  agree=0.780, adj=0.086, (0 split)
+      GroupQuartersFlag splits as  LR, agree=0.777, adj=0.074, (0 split)
+
+Node number 8: 8716 observations,    complexity param=0.00099372
+  mean=4.8898, MSE=11.17 
+  left son=16 (7556 obs) right son=17 (1160 obs)
+  Primary splits:
+      TractKids  < 431.5      to the right, improve=0.087844, (0 missing)
+      laasian1   < 0.00038145 to the right, improve=0.074713, (0 missing)
+      laseniors1 < 0.2082     to the right, improve=0.074653, (0 missing)
+      lakids1    < 3.0187     to the right, improve=0.073222, (0 missing)
+      lahisp1    < 1.9232e-06 to the right, improve=0.072527, (0 missing)
+  Surrogate splits:
+      TractWhite    < 1635.5     to the right, agree=0.891, adj=0.178, (0 split)
+      TractOMultir  < 25.5       to the right, agree=0.879, adj=0.094, (0 split)
+      TractAsian    < 17.5       to the right, agree=0.877, adj=0.072, (0 split)
+      TractSeniors  < 97.5       to the right, agree=0.875, adj=0.060, (0 split)
+      TractHispanic < 26.5       to the right, agree=0.873, adj=0.046, (0 split)
+
+Node number 9: 7773 observations,    complexity param=0.0037083
+  mean=7.6402, MSE=19.78 
+  left son=18 (555 obs) right son=19 (7218 obs)
+  Primary splits:
+      MedianFamilyIncome < 21042      to the left,  improve=0.21300, (0 missing)
+      TractKids          < 34.5       to the left,  improve=0.19555, (0 missing)
+      TractSNAP          < 0.5        to the left,  improve=0.18799, (0 missing)
+      TractSeniors       < 13.5       to the left,  improve=0.17365, (0 missing)
+      TractWhite         < 41         to the left,  improve=0.15150, (0 missing)
+  Surrogate splits:
+      TractKids    < 26.5       to the left,  agree=0.988, adj=0.832, (0 split)
+      TractSeniors < 20.5       to the left,  agree=0.984, adj=0.780, (0 split)
+      TractSNAP    < 0.5        to the left,  agree=0.983, adj=0.755, (0 split)
+      TractWhite   < 31.5       to the left,  agree=0.978, adj=0.690, (0 split)
+      TractOMultir < 4.5        to the left,  agree=0.977, adj=0.681, (0 split)
+
+Node number 10: 7655 observations,    complexity param=0.00094108
+  mean=8.9364, MSE=16.027 
+  left son=20 (3312 obs) right son=21 (4343 obs)
+  Primary splits:
+      MedianFamilyIncome < 83129      to the right, improve=0.066014, (0 missing)
+      TractWhite         < 4171.5     to the right, improve=0.062001, (0 missing)
+      TractSNAP          < 205.5      to the left,  improve=0.057427, (0 missing)
+      TractKids          < 990.5      to the right, improve=0.050919, (0 missing)
+      laasian1           < 12.507     to the right, improve=0.044093, (0 missing)
+  Surrogate splits:
+      TractAsian < 169.5      to the right, agree=0.630, adj=0.146, (0 split)
+      laasian1   < 66.547     to the right, agree=0.604, adj=0.085, (0 split)
+      TractSNAP  < 129.5      to the left,  agree=0.584, adj=0.038, (0 split)
+      TractHUNV  < 328.5      to the right, agree=0.583, adj=0.036, (0 split)
+      TractWhite < 6104.5     to the right, agree=0.580, adj=0.030, (0 split)
+
+Node number 11: 8257 observations,    complexity param=0.0011453
+  mean=12.828, MSE=14.211 
+  left son=22 (4587 obs) right son=23 (3670 obs)
+  Primary splits:
+      MedianFamilyIncome < 58879      to the right, improve=0.083999, (0 missing)
+      TractSNAP          < 197.5      to the left,  improve=0.057250, (0 missing)
+      TractHUNV          < 79.5       to the left,  improve=0.015792, (0 missing)
+      TractWhite         < 3148.5     to the right, improve=0.011832, (0 missing)
+      TractBlack         < 190.5      to the left,  improve=0.011108, (0 missing)
+  Surrogate splits:
+      TractAsian   < 13.5       to the right, agree=0.593, adj=0.083, (0 split)
+      TractSNAP    < 225.5      to the left,  agree=0.586, adj=0.068, (0 split)
+      lakids10     < 0.0040369  to the left,  agree=0.577, adj=0.049, (0 split)
+      lahunv1share < 0.030824   to the left,  agree=0.577, adj=0.049, (0 split)
+      laseniors10  < 0.0019337  to the left,  agree=0.577, adj=0.047, (0 split)
+
+Node number 12: 12158 observations,    complexity param=0.0053716
+  mean=20.419, MSE=65.182 
+  left son=24 (11562 obs) right son=25 (596 obs)
+  Primary splits:
+      TractKids          < 260.5      to the right, improve=0.058334, (0 missing)
+      PCTGQTRS           < 0.10556    to the left,  improve=0.053635, (0 missing)
+      MedianFamilyIncome < 48330      to the right, improve=0.037274, (0 missing)
+      TractSeniors       < 196.5      to the right, improve=0.031397, (0 missing)
+      TractSNAP          < 282.5      to the left,  improve=0.027707, (0 missing)
+  Surrogate splits:
+      PCTGQTRS           < 0.61285    to the left,  agree=0.955, adj=0.072, (0 split)
+      TractSNAP          < 14.5       to the right, agree=0.954, adj=0.060, (0 split)
+      GroupQuartersFlag  splits as  LR, agree=0.954, adj=0.059, (0 split)
+      MedianFamilyIncome < 107500     to the left,  agree=0.953, adj=0.032, (0 split)
+      TractSeniors       < 68.5       to the right, agree=0.952, adj=0.012, (0 split)
+
+Node number 13: 4535 observations,    complexity param=0.0017887
+  mean=27.82, MSE=56.293 
+  left son=26 (1945 obs) right son=27 (2590 obs)
+  Primary splits:
+      MedianFamilyIncome < 38414      to the right, improve=0.060301, (0 missing)
+      TractHUNV          < 137.5      to the left,  improve=0.044573, (0 missing)
+      TractSNAP          < 172.5      to the left,  improve=0.029067, (0 missing)
+      laseniors1         < 235.66     to the right, improve=0.028050, (0 missing)
+      lawhite1           < 1381.3     to the right, improve=0.025896, (0 missing)
+  Surrogate splits:
+      laseniors1  < 440.03     to the right, agree=0.584, adj=0.031, (0 split)
+      TractHUNV   < 72.5       to the left,  agree=0.584, adj=0.031, (0 split)
+      lawhite1    < 1505.3     to the right, agree=0.583, adj=0.028, (0 split)
+      lakids10    < 0.79765    to the right, agree=0.581, adj=0.023, (0 split)
+      laseniors10 < 0.086892   to the right, agree=0.580, adj=0.020, (0 split)
+
+Node number 14: 3749 observations,    complexity param=0.0053134
+  mean=37.893, MSE=68.372 
+  left son=28 (2131 obs) right son=29 (1618 obs)
+  Primary splits:
+      MedianFamilyIncome < 28703      to the right, improve=0.178400, (0 missing)
+      TractSeniors       < 263.5      to the right, improve=0.031399, (0 missing)
+      PCTGQTRS           < 0.23711    to the left,  improve=0.020874, (0 missing)
+      TractWhite         < 658        to the right, improve=0.014773, (0 missing)
+      TractHUNV          < 99.5       to the left,  improve=0.013886, (0 missing)
+  Surrogate splits:
+      TractSeniors < 177.5      to the right, agree=0.589, adj=0.048, (0 split)
+      TractSNAP    < 722.5      to the left,  agree=0.584, adj=0.035, (0 split)
+      TractWhite   < 177.5      to the right, agree=0.583, adj=0.033, (0 split)
+      TractAsian   < 1.5        to the right, agree=0.575, adj=0.014, (0 split)
+      TractOMultir < 39.5       to the right, agree=0.574, adj=0.014, (0 split)
+
+Node number 15: 1191 observations,    complexity param=0.0065668
+  mean=55.428, MSE=174.68 
+  left son=30 (928 obs) right son=31 (263 obs)
+  Primary splits:
+      MedianFamilyIncome < 14798      to the right, improve=0.27165, (0 missing)
+      PCTGQTRS           < 0.52935    to the left,  improve=0.17027, (0 missing)
+      TractSeniors       < 58.5       to the right, improve=0.16780, (0 missing)
+      TractKids          < 114.5      to the right, improve=0.16749, (0 missing)
+      TractSNAP          < 64         to the right, improve=0.16645, (0 missing)
+  Surrogate splits:
+      TractKids    < 102.5      to the right, agree=0.868, adj=0.403, (0 split)
+      TractSNAP    < 61         to the right, agree=0.864, adj=0.384, (0 split)
+      TractSeniors < 53.5       to the right, agree=0.855, adj=0.342, (0 split)
+      TractHUNV    < 17.5       to the right, agree=0.854, adj=0.338, (0 split)
+      PCTGQTRS     < 0.51375    to the left,  agree=0.852, adj=0.331, (0 split)
+
+Node number 16: 7556 observations,    complexity param=0.00040161
+  mean=4.5017, MSE=8.7128 
+  left son=32 (4746 obs) right son=33 (2810 obs)
+  Primary splits:
+      TractSNAP          < 41.5       to the left,  improve=0.052501, (0 missing)
+      MedianFamilyIncome < 110660     to the right, improve=0.052103, (0 missing)
+      TractHispanic      < 339.5      to the left,  improve=0.044194, (0 missing)
+      TractHUNV          < 53.5       to the left,  improve=0.041875, (0 missing)
+      lablack1           < 0.0023078  to the right, improve=0.041604, (0 missing)
+  Surrogate splits:
+      MedianFamilyIncome < 102120     to the right, agree=0.657, adj=0.078, (0 split)
+      TractBlack         < 487.5      to the left,  agree=0.645, adj=0.045, (0 split)
+      lablack1           < 403.86     to the left,  agree=0.637, adj=0.023, (0 split)
+      TractHispanic      < 1150.5     to the left,  agree=0.636, adj=0.022, (0 split)
+      TractOMultir       < 656.5      to the left,  agree=0.636, adj=0.021, (0 split)
+
+Node number 17: 1160 observations,    complexity param=0.00039746
+  mean=7.4179, MSE=19.802 
+  left son=34 (604 obs) right son=35 (556 obs)
+  Primary splits:
+      TractHUNV    < 52.5       to the left,  improve=0.148920, (0 missing)
+      TractSNAP    < 31.5       to the left,  improve=0.089375, (0 missing)
+      TractOMultir < 57.5       to the left,  improve=0.084356, (0 missing)
+      laseniors1   < 25.091     to the right, improve=0.083856, (0 missing)
+      lakids1      < 51.902     to the right, improve=0.081148, (0 missing)
+  Surrogate splits:
+      lawhite1   < 0.074378   to the right, agree=0.791, adj=0.563, (0 split)
+      lahisp1    < 0.27604    to the right, agree=0.790, adj=0.561, (0 split)
+      laomultir1 < 0.094629   to the right, agree=0.789, adj=0.559, (0 split)
+      laseniors1 < 0.024895   to the right, agree=0.789, adj=0.559, (0 split)
+      lakids1    < 0.019026   to the right, agree=0.785, adj=0.552, (0 split)
+
+Node number 18: 555 observations
+  mean=0.23784, MSE=3.3038 
+
+Node number 19: 7218 observations,    complexity param=0.00138
+  mean=8.2093, MSE=16.51 
+  left son=38 (4704 obs) right son=39 (2514 obs)
+  Primary splits:
+      MedianFamilyIncome < 69766      to the right, improve=0.099664, (0 missing)
+      TractWhite         < 2604.5     to the right, improve=0.054240, (0 missing)
+      laasian1           < 7          to the right, improve=0.041629, (0 missing)
+      lawhite1           < 2636.1     to the right, improve=0.035546, (0 missing)
+      TractKids          < 745.5      to the right, improve=0.034236, (0 missing)
+  Surrogate splits:
+      TractAsian    < 12.5       to the right, agree=0.705, adj=0.152, (0 split)
+      laseniors10   < 0.60533    to the left,  agree=0.697, adj=0.129, (0 split)
+      lakids10      < 0.0074212  to the left,  agree=0.696, adj=0.127, (0 split)
+      TractBlack    < 5.5        to the right, agree=0.670, adj=0.051, (0 split)
+      TractHispanic < 22.5       to the right, agree=0.667, adj=0.044, (0 split)
+
+Node number 20: 3312 observations,    complexity param=0.0006663
+  mean=7.7585, MSE=14.971 
+  left son=40 (2528 obs) right son=41 (784 obs)
+  Primary splits:
+      TractKids < 866.5      to the right, improve=0.115650, (0 missing)
+      lakids1   < 59.291     to the right, improve=0.091133, (0 missing)
+      laasian1  < 3.2602     to the right, improve=0.088972, (0 missing)
+      TractHUNV < 160.5      to the left,  improve=0.087162, (0 missing)
+      lawhite1  < 220.24     to the right, improve=0.084564, (0 missing)
+  Surrogate splits:
+      TractWhite < 3304       to the right, agree=0.816, adj=0.222, (0 split)
+      TractHUNV  < 326.5      to the left,  agree=0.797, adj=0.142, (0 split)
+      laseniors1 < 0.00053073 to the right, agree=0.778, adj=0.061, (0 split)
+      lakids1    < 0.014777   to the right, agree=0.777, adj=0.057, (0 split)
+      lawhite1   < 0.12524    to the right, agree=0.777, adj=0.056, (0 split)
+
+Node number 21: 4343 observations,    complexity param=0.00039037
+  mean=9.8346, MSE=14.968 
+  left son=42 (2955 obs) right son=43 (1388 obs)
+  Primary splits:
+      TractSNAP  < 199.5      to the left,  improve=0.051682, (0 missing)
+      TractWhite < 3270       to the right, improve=0.040680, (0 missing)
+      TractHUNV  < 154.5      to the left,  improve=0.037418, (0 missing)
+      lawhite1   < 2122.7     to the right, improve=0.033163, (0 missing)
+      lakids1    < 123.96     to the right, improve=0.031428, (0 missing)
+  Surrogate splits:
+      TractKids  < 1799.5     to the left,  agree=0.718, adj=0.117, (0 split)
+      TractWhite < 6270       to the left,  agree=0.710, adj=0.092, (0 split)
+      lakids1    < 1598.2     to the left,  agree=0.702, adj=0.068, (0 split)
+      TractHUNV  < 214.5      to the left,  agree=0.691, adj=0.035, (0 split)
+      TractBlack < 2304       to the left,  agree=0.691, adj=0.033, (0 split)
+
+Node number 22: 4587 observations,    complexity param=0.00033041
+  mean=11.85, MSE=13.665 
+  left son=44 (2696 obs) right son=45 (1891 obs)
+  Primary splits:
+      TractSNAP          < 200.5      to the left,  improve=0.045365, (0 missing)
+      TractHUNV          < 106.5      to the left,  improve=0.021898, (0 missing)
+      TractOMultir       < 180.5      to the left,  improve=0.021143, (0 missing)
+      TractHispanic      < 246        to the left,  improve=0.018262, (0 missing)
+      MedianFamilyIncome < 64451      to the right, improve=0.017538, (0 missing)
+  Surrogate splits:
+      TractKids    < 1197.5     to the left,  agree=0.697, adj=0.265, (0 split)
+      TractWhite   < 4682.5     to the left,  agree=0.690, adj=0.249, (0 split)
+      TractHUNV    < 118.5      to the left,  agree=0.664, adj=0.185, (0 split)
+      TractSeniors < 731.5      to the left,  agree=0.651, adj=0.152, (0 split)
+      lakids1      < 1191.3     to the left,  agree=0.645, adj=0.139, (0 split)
+
+Node number 23: 3670 observations,    complexity param=0.00022192
+  mean=14.049, MSE=12.208 
+  left son=46 (1964 obs) right son=47 (1706 obs)
+  Primary splits:
+      TractSNAP          < 228.5      to the left,  improve=0.042628, (0 missing)
+      MedianFamilyIncome < 53658      to the right, improve=0.036294, (0 missing)
+      TractHUNV          < 118.5      to the left,  improve=0.014010, (0 missing)
+      TractSeniors       < 1500       to the right, improve=0.013022, (0 missing)
+      TractBlack         < 735.5      to the left,  improve=0.010605, (0 missing)
+  Surrogate splits:
+      TractKids    < 998.5      to the left,  agree=0.731, adj=0.422, (0 split)
+      TractWhite   < 3751.5     to the left,  agree=0.715, adj=0.386, (0 split)
+      TractHUNV    < 90.5       to the left,  agree=0.666, adj=0.281, (0 split)
+      TractSeniors < 668.5      to the left,  agree=0.664, adj=0.277, (0 split)
+      lakids1      < 990.23     to the left,  agree=0.621, adj=0.185, (0 split)
+
+Node number 24: 11562 observations,    complexity param=0.0045033
+  mean=19.976, MSE=51.42 
+  left son=48 (7016 obs) right son=49 (4546 obs)
+  Primary splits:
+      MedianFamilyIncome < 48348      to the right, improve=0.065190, (0 missing)
+      TractSNAP          < 282.5      to the left,  improve=0.053169, (0 missing)
+      TractHUNV          < 82.5       to the left,  improve=0.023240, (0 missing)
+      PCTGQTRS           < 0.042096   to the left,  improve=0.019107, (0 missing)
+      TractBlack         < 77.5       to the left,  improve=0.014158, (0 missing)
+  Surrogate splits:
+      TractSNAP     < 380.5      to the left,  agree=0.624, adj=0.044, (0 split)
+      TractAsian    < 8.5        to the right, agree=0.615, adj=0.020, (0 split)
+      TractHispanic < 3926.5     to the left,  agree=0.613, adj=0.016, (0 split)
+      TractAIAN     < 200.5      to the left,  agree=0.610, adj=0.007, (0 split)
+      laaian1       < 342.28     to the left,  agree=0.609, adj=0.006, (0 split)
+
+Node number 25: 596 observations,    complexity param=0.002833
+  mean=29.007, MSE=254.59 
+  left son=50 (507 obs) right son=51 (89 obs)
+  Primary splits:
+      TractWhite < 3144       to the left,  improve=0.160680, (0 missing)
+      TractAsian < 54.5       to the left,  improve=0.157000, (0 missing)
+      PCTGQTRS   < 0.058924   to the left,  improve=0.156190, (0 missing)
+      TractBlack < 40         to the left,  improve=0.126330, (0 missing)
+      laseniors1 < 49.461     to the right, improve=0.094935, (0 missing)
+  Surrogate splits:
+      lawhite1      < 2001       to the left,  agree=0.861, adj=0.067, (0 split)
+      TractSeniors  < 2613.5     to the left,  agree=0.859, adj=0.056, (0 split)
+      TractHispanic < 1051.5     to the left,  agree=0.857, adj=0.045, (0 split)
+      laseniors1    < 1457.6     to the left,  agree=0.854, adj=0.022, (0 split)
+      TractAsian    < 1617.5     to the left,  agree=0.854, adj=0.022, (0 split)
+
+Node number 26: 1945 observations,    complexity param=0.00065994
+  mean=25.694, MSE=51.26 
+  left son=52 (961 obs) right son=53 (984 obs)
+  Primary splits:
+      TractHUNV    < 138.5      to the left,  improve=0.056966, (0 missing)
+      TractSNAP    < 199.5      to the left,  improve=0.048273, (0 missing)
+      lawhite1     < 1363.2     to the right, improve=0.033850, (0 missing)
+      laseniors1   < 226.43     to the right, improve=0.032716, (0 missing)
+      TractSeniors < 17         to the left,  improve=0.031671, (0 missing)
+  Surrogate splits:
+      TractSNAP  < 325.5      to the left,  agree=0.690, adj=0.373, (0 split)
+      lawhite1   < 533.11     to the right, agree=0.665, adj=0.322, (0 split)
+      lakids1    < 0.0036098  to the right, agree=0.661, adj=0.313, (0 split)
+      lahisp1    < 0.013483   to the right, agree=0.658, adj=0.308, (0 split)
+      laomultir1 < 0.034332   to the right, agree=0.658, adj=0.307, (0 split)
+
+Node number 27: 2590 observations,    complexity param=0.00056403
+  mean=29.417, MSE=54.13 
+  left son=54 (1424 obs) right son=55 (1166 obs)
+  Primary splits:
+      MedianFamilyIncome < 35936      to the right, improve=0.034624, (0 missing)
+      TractKids          < 169        to the right, improve=0.029042, (0 missing)
+      TractHUNV          < 137.5      to the left,  improve=0.026984, (0 missing)
+      PCTGQTRS           < 0.063923   to the left,  improve=0.024407, (0 missing)
+      TractSeniors       < 1030       to the right, improve=0.022395, (0 missing)
+  Surrogate splits:
+      TractSNAP     < 606.5      to the left,  agree=0.563, adj=0.029, (0 split)
+      TractWhite    < 967        to the right, agree=0.559, adj=0.020, (0 split)
+      TractHispanic < 4673.5     to the left,  agree=0.558, adj=0.018, (0 split)
+      TractAIAN     < 115.5      to the left,  agree=0.557, adj=0.015, (0 split)
+      TractKids     < 2160.5     to the left,  agree=0.554, adj=0.010, (0 split)
+
+Node number 28: 2131 observations,    complexity param=0.00059364
+  mean=34.85, MSE=54.273 
+  left son=56 (1387 obs) right son=57 (744 obs)
+  Primary splits:
+      MedianFamilyIncome < 30679      to the right, improve=0.044174, (0 missing)
+      TractSeniors       < 593.5      to the right, improve=0.023622, (0 missing)
+      TractKids          < 198        to the right, improve=0.018840, (0 missing)
+      PCTGQTRS           < 0.161      to the left,  improve=0.018689, (0 missing)
+      TractHUNV          < 7          to the left,  improve=0.017646, (0 missing)
+  Surrogate splits:
+      TractWhite    < 12.5       to the right, agree=0.655, adj=0.011, (0 split)
+      TractOMultir  < 3339.5     to the left,  agree=0.654, adj=0.008, (0 split)
+      TractAIAN     < 0.5        to the right, agree=0.653, adj=0.007, (0 split)
+      TractSNAP     < 1019.5     to the left,  agree=0.653, adj=0.007, (0 split)
+      TractHispanic < 4.5        to the right, agree=0.652, adj=0.004, (0 split)
+
+Node number 29: 1618 observations,    complexity param=0.0008084
+  mean=41.901, MSE=58.678 
+  left son=58 (947 obs) right son=59 (671 obs)
+  Primary splits:
+      MedianFamilyIncome < 25936      to the right, improve=0.073280, (0 missing)
+      PCTGQTRS           < 0.38985    to the left,  improve=0.038757, (0 missing)
+      laasian1           < 63.448     to the left,  improve=0.028795, (0 missing)
+      TractWhite         < 5007.5     to the left,  improve=0.024185, (0 missing)
+      TractSeniors       < 264        to the right, improve=0.023643, (0 missing)
+  Surrogate splits:
+      PCTGQTRS          < 0.47786    to the left,  agree=0.594, adj=0.021, (0 split)
+      TractSeniors      < 95.5       to the right, agree=0.593, adj=0.019, (0 split)
+      TractWhite        < 86.5       to the right, agree=0.591, adj=0.013, (0 split)
+      TractKids         < 268.5      to the right, agree=0.590, adj=0.012, (0 split)
+      GroupQuartersFlag splits as  LR, agree=0.590, adj=0.010, (0 split)
+
+Node number 30: 928 observations,    complexity param=0.00090966
+  mean=51.76, MSE=73.794 
+  left son=60 (637 obs) right son=61 (291 obs)
+  Primary splits:
+      MedianFamilyIncome < 19236      to the right, improve=0.114320, (0 missing)
+      PCTGQTRS           < 0.12123    to the left,  improve=0.049761, (0 missing)
+      TractWhite         < 5044       to the left,  improve=0.048159, (0 missing)
+      TractKids          < 108        to the right, improve=0.047386, (0 missing)
+      TractSNAP          < 40.5       to the right, improve=0.031408, (0 missing)
+  Surrogate splits:
+      PCTGQTRS      < 0.31293    to the left,  agree=0.699, adj=0.041, (0 split)
+      TractSeniors  < 10.5       to the right, agree=0.691, adj=0.014, (0 split)
+      TractOMultir  < 8          to the right, agree=0.689, adj=0.007, (0 split)
+      TractHispanic < 5.5        to the right, agree=0.689, adj=0.007, (0 split)
+      TractSNAP     < 21         to the right, agree=0.689, adj=0.007, (0 split)
+
+Node number 31: 263 observations,    complexity param=0.0018662
+  mean=68.367, MSE=315.77 
+  left son=62 (241 obs) right son=63 (22 obs)
+  Primary splits:
+      TractSeniors       < 0.5        to the right, improve=0.193390, (0 missing)
+      laseniors1         < 1.2596     to the right, improve=0.072859, (0 missing)
+      PCTGQTRS           < 0.99811    to the left,  improve=0.062534, (0 missing)
+      MedianFamilyIncome < 10477      to the right, improve=0.044029, (0 missing)
+      lablack1           < 38.041     to the right, improve=0.040632, (0 missing)
+  Surrogate splits:
+      lawhite1 < 3331.5     to the left,  agree=0.92, adj=0.045, (0 split)
+
+Node number 32: 4746 observations,    complexity param=0.00018104
+  mean=3.9813, MSE=7.4463 
+  left son=64 (3131 obs) right son=65 (1615 obs)
+  Primary splits:
+      TractHispanic      < 319.5      to the left,  improve=0.044087, (0 missing)
+      TractOMultir       < 183.5      to the left,  improve=0.040027, (0 missing)
+      MedianFamilyIncome < 109560     to the right, improve=0.039739, (0 missing)
+      lablack1           < 0.0029055  to the right, improve=0.037651, (0 missing)
+      laseniors1         < 0.2082     to the right, improve=0.037642, (0 missing)
+  Surrogate splits:
+      TractOMultir < 210.5      to the left,  agree=0.878, adj=0.640, (0 split)
+      TractAIAN    < 15.5       to the left,  agree=0.756, adj=0.284, (0 split)
+      lahisp1      < 239.22     to the left,  agree=0.747, adj=0.256, (0 split)
+      TractNHOPI   < 4.5        to the left,  agree=0.744, adj=0.246, (0 split)
+      laomultir1   < 151.19     to the left,  agree=0.714, adj=0.161, (0 split)
+
+Node number 33: 2810 observations,    complexity param=0.00025176
+  mean=5.3807, MSE=9.6218 
+  left son=66 (2021 obs) right son=67 (789 obs)
+  Primary splits:
+      TractKids  < 843.5      to the right, improve=0.080139, (0 missing)
+      lakids1    < 94.587     to the right, improve=0.062781, (0 missing)
+      laasian1   < 4.5428     to the right, improve=0.058641, (0 missing)
+      lawhite1   < 284.47     to the right, improve=0.056826, (0 missing)
+      laseniors1 < 36.668     to the right, improve=0.056282, (0 missing)
+  Surrogate splits:
+      TractWhite    < 3014.5     to the right, agree=0.801, adj=0.292, (0 split)
+      TractOMultir  < 64.5       to the right, agree=0.736, adj=0.061, (0 split)
+      TractHUNV     < 281.5      to the left,  agree=0.733, adj=0.048, (0 split)
+      TractAsian    < 23.5       to the right, agree=0.731, adj=0.042, (0 split)
+      TractHispanic < 62.5       to the right, agree=0.731, adj=0.042, (0 split)
+
+Node number 34: 604 observations
+  mean=5.7704, MSE=14.957 
+
+Node number 35: 556 observations
+  mean=9.2077, MSE=18.913 
+
+Node number 38: 4704 observations,    complexity param=0.00039588
+  mean=7.2716, MSE=14.019 
+  left son=76 (3037 obs) right son=77 (1667 obs)
+  Primary splits:
+      lawhite1   < 244.61     to the right, improve=0.051665, (0 missing)
+      laseniors1 < 0.4341     to the right, improve=0.050084, (0 missing)
+      lablack1   < 0.16893    to the right, improve=0.048379, (0 missing)
+      lakids1    < 0.85594    to the right, improve=0.048368, (0 missing)
+      lahisp1    < 0.0014813  to the right, improve=0.048107, (0 missing)
+  Surrogate splits:
+      lakids1    < 54.683     to the right, agree=0.972, adj=0.920, (0 split)
+      laseniors1 < 30.673     to the right, agree=0.969, adj=0.911, (0 split)
+      laomultir1 < 4.8261     to the right, agree=0.942, adj=0.837, (0 split)
+      lahisp1    < 4.8619     to the right, agree=0.941, adj=0.834, (0 split)
+      laasian1   < 0.912      to the right, agree=0.931, adj=0.805, (0 split)
+
+Node number 39: 2514 observations,    complexity param=0.00022936
+  mean=9.964, MSE=16.446 
+  left son=78 (1416 obs) right son=79 (1098 obs)
+  Primary splits:
+      MedianFamilyIncome < 61737      to the right, improve=0.047741, (0 missing)
+      TractWhite         < 2836.5     to the right, improve=0.033259, (0 missing)
+      TractSNAP          < 61.5       to the left,  improve=0.033134, (0 missing)
+      TractOMultir       < 348        to the left,  improve=0.030305, (0 missing)
+      TractHispanic      < 515        to the left,  improve=0.029450, (0 missing)
+  Surrogate splits:
+      TractKids   < 409.5      to the right, agree=0.602, adj=0.089, (0 split)
+      TractAsian  < 6.5        to the right, agree=0.598, adj=0.079, (0 split)
+      TractWhite  < 1805.5     to the right, agree=0.587, adj=0.054, (0 split)
+      laseniors10 < 211.08     to the left,  agree=0.580, adj=0.038, (0 split)
+      lakids10    < 200.9      to the left,  agree=0.578, adj=0.035, (0 split)
+
+Node number 40: 2528 observations,    complexity param=0.00020067
+  mean=7.0258, MSE=11.718 
+  left son=80 (2061 obs) right son=81 (467 obs)
+  Primary splits:
+      TractSNAP          < 211.5      to the left,  improve=0.058301, (0 missing)
+      TractWhite         < 4850       to the right, improve=0.037964, (0 missing)
+      MedianFamilyIncome < 90811      to the right, improve=0.036070, (0 missing)
+      TractHUNV          < 126.5      to the left,  improve=0.035889, (0 missing)
+      TractOMultir       < 190.5      to the left,  improve=0.032713, (0 missing)
+  Surrogate splits:
+      TractHUNV     < 388        to the left,  agree=0.819, adj=0.021, (0 split)
+      TractOMultir  < 2160.5     to the left,  agree=0.818, adj=0.015, (0 split)
+      lakids1       < 3128.9     to the left,  agree=0.818, adj=0.013, (0 split)
+      TractHispanic < 4512       to the left,  agree=0.818, adj=0.013, (0 split)
+      TractKids     < 7403       to the left,  agree=0.817, adj=0.011, (0 split)
+
+Node number 41: 784 observations,    complexity param=0.00014207
+  mean=10.121, MSE=18.148 
+  left son=82 (529 obs) right son=83 (255 obs)
+  Primary splits:
+      TractKids  < 501.5      to the right, improve=0.085936, (0 missing)
+      TractSNAP  < 157.5      to the left,  improve=0.085098, (0 missing)
+      TractHUNV  < 160.5      to the left,  improve=0.081679, (0 missing)
+      lakids1    < 95.191     to the right, improve=0.061819, (0 missing)
+      laseniors1 < 75.023     to the right, improve=0.058661, (0 missing)
+  Surrogate splits:
+      TractSeniors       < 238.5      to the right, agree=0.733, adj=0.180, (0 split)
+      TractHUNV          < 441.5      to the left,  agree=0.730, adj=0.169, (0 split)
+      MedianFamilyIncome < 126010     to the left,  agree=0.717, adj=0.129, (0 split)
+      TractWhite         < 1878       to the right, agree=0.698, adj=0.071, (0 split)
+      TractAsian         < 11.5       to the right, agree=0.686, adj=0.035, (0 split)
+
+Node number 42: 2955 observations,    complexity param=0.00038241
+  mean=9.2318, MSE=13.907 
+  left son=84 (1848 obs) right son=85 (1107 obs)
+  Primary splits:
+      TractWhite < 3273       to the right, improve=0.080083, (0 missing)
+      TractKids  < 864.5      to the right, improve=0.046729, (0 missing)
+      lakids1    < 123.89     to the right, improve=0.043818, (0 missing)
+      lawhite1   < 2716.6     to the right, improve=0.043795, (0 missing)
+      laseniors1 < 64.991     to the right, improve=0.038204, (0 missing)
+  Surrogate splits:
+      TractKids    < 840.5      to the right, agree=0.801, adj=0.468, (0 split)
+      TractSeniors < 494.5      to the right, agree=0.747, adj=0.323, (0 split)
+      lawhite1     < 197.84     to the right, agree=0.725, adj=0.265, (0 split)
+      lakids1      < 9.4037     to the right, agree=0.717, adj=0.244, (0 split)
+      lahisp1      < 1.4788     to the right, agree=0.716, adj=0.243, (0 split)
+
+Node number 43: 1388 observations,    complexity param=0.00018222
+  mean=11.118, MSE=14.805 
+  left son=86 (760 obs) right son=87 (628 obs)
+  Primary splits:
+      TractWhite < 4603.5     to the right, improve=0.076314, (0 missing)
+      TractKids  < 1337.5     to the right, improve=0.046161, (0 missing)
+      lawhite1   < 3471.8     to the right, improve=0.045125, (0 missing)
+      lakids1    < 184.17     to the right, improve=0.036106, (0 missing)
+      laomultir1 < 4.8249     to the right, improve=0.035372, (0 missing)
+  Surrogate splits:
+      TractKids    < 1277.5     to the right, agree=0.761, adj=0.471, (0 split)
+      lawhite1     < 1875.7     to the right, agree=0.720, adj=0.381, (0 split)
+      TractSeniors < 663.5      to the right, agree=0.705, adj=0.347, (0 split)
+      laseniors1   < 304.06     to the right, agree=0.695, adj=0.326, (0 split)
+      lakids1      < 245.12     to the right, agree=0.694, adj=0.323, (0 split)
+
+Node number 44: 2696 observations,    complexity param=0.00018502
+  mean=11.191, MSE=13.117 
+  left son=88 (1531 obs) right son=89 (1165 obs)
+  Primary splits:
+      TractWhite    < 3161.5     to the right, improve=0.045027, (0 missing)
+      TractSeniors  < 720.5      to the right, improve=0.027631, (0 missing)
+      lawhite1      < 2470.5     to the right, improve=0.022755, (0 missing)
+      TractKids     < 603.5      to the right, improve=0.021216, (0 missing)
+      TractHispanic < 1085       to the left,  improve=0.020606, (0 missing)
+  Surrogate splits:
+      TractKids    < 775.5      to the right, agree=0.792, adj=0.518, (0 split)
+      TractSeniors < 517.5      to the right, agree=0.763, adj=0.451, (0 split)
+      lawhite1     < 2696.4     to the right, agree=0.684, adj=0.270, (0 split)
+      lakids1      < 612.18     to the right, agree=0.661, adj=0.216, (0 split)
+      laseniors1   < 122.73     to the right, agree=0.641, adj=0.169, (0 split)
+
+Node number 45: 1891 observations,    complexity param=0.00012067
+  mean=12.79, MSE=12.942 
+  left son=90 (1204 obs) right son=91 (687 obs)
+  Primary splits:
+      TractWhite < 4010.5     to the right, improve=0.042433, (0 missing)
+      TractSNAP  < 360.5      to the left,  improve=0.023975, (0 missing)
+      lawhite1   < 3293.8     to the right, improve=0.022184, (0 missing)
+      TractHUNV  < 130.5      to the left,  improve=0.020832, (0 missing)
+      TractKids  < 905.5      to the right, improve=0.016795, (0 missing)
+  Surrogate splits:
+      TractKids    < 958.5      to the right, agree=0.767, adj=0.358, (0 split)
+      TractSeniors < 554.5      to the right, agree=0.740, adj=0.284, (0 split)
+      lawhite1     < 479.11     to the right, agree=0.707, adj=0.194, (0 split)
+      laseniors1   < 187.06     to the right, agree=0.695, adj=0.162, (0 split)
+      lakids1      < 54.213     to the right, agree=0.694, adj=0.157, (0 split)
+
+Node number 46: 1964 observations,    complexity param=0.00011873
+  mean=13.377, MSE=12.739 
+  left son=92 (628 obs) right son=93 (1336 obs)
+  Primary splits:
+      TractWhite         < 3567       to the right, improve=0.040840, (0 missing)
+      TractSeniors       < 892.5      to the right, improve=0.033522, (0 missing)
+      MedianFamilyIncome < 53758      to the right, improve=0.027485, (0 missing)
+      lawhite1           < 2613.1     to the right, improve=0.024916, (0 missing)
+      laseniors1         < 696.5      to the right, improve=0.020595, (0 missing)
+  Surrogate splits:
+      lawhite1     < 3471.3     to the right, agree=0.832, adj=0.476, (0 split)
+      TractKids    < 961.5      to the right, agree=0.794, adj=0.357, (0 split)
+      TractSeniors < 704.5      to the right, agree=0.779, adj=0.309, (0 split)
+      lakids1      < 852.98     to the right, agree=0.772, adj=0.287, (0 split)
+      laseniors1   < 572.53     to the right, agree=0.766, adj=0.268, (0 split)
+
+Node number 47: 1706 observations
+  mean=14.823, MSE=10.477 
+
+Node number 48: 7016 observations,    complexity param=0.0014238
+  mean=18.502, MSE=50.741 
+  left son=96 (4776 obs) right son=97 (2240 obs)
+  Primary splits:
+      TractSNAP          < 282.5      to the left,  improve=0.031914, (0 missing)
+      MedianFamilyIncome < 86453      to the left,  improve=0.031143, (0 missing)
+      PCTGQTRS           < 0.042096   to the left,  improve=0.025718, (0 missing)
+      TractHUNV          < 84.5       to the left,  improve=0.016097, (0 missing)
+      TractBlack         < 53.5       to the left,  improve=0.013695, (0 missing)
+  Surrogate splits:
+      TractKids    < 1300.5     to the left,  agree=0.728, adj=0.148, (0 split)
+      TractWhite   < 4295.5     to the left,  agree=0.719, adj=0.120, (0 split)
+      TractHUNV    < 248.5      to the left,  agree=0.710, adj=0.092, (0 split)
+      TractSeniors < 781.5      to the left,  agree=0.709, adj=0.088, (0 split)
+      TractBlack   < 2143       to the left,  agree=0.703, adj=0.070, (0 split)
+
+Node number 49: 4546 observations,    complexity param=0.0011319
+  mean=22.251, MSE=43.943 
+  left son=98 (2290 obs) right son=99 (2256 obs)
+  Primary splits:
+      TractSNAP    < 282.5      to the left,  improve=0.048766, (0 missing)
+      TractHUNV    < 89.5       to the left,  improve=0.038453, (0 missing)
+      TractBlack   < 505        to the left,  improve=0.030476, (0 missing)
+      TractSeniors < 17         to the left,  improve=0.019245, (0 missing)
+      PCTGQTRS     < 0.003399   to the left,  improve=0.015405, (0 missing)
+  Surrogate splits:
+      TractKids    < 922.5      to the left,  agree=0.709, adj=0.414, (0 split)
+      TractHUNV    < 115.5      to the left,  agree=0.681, adj=0.358, (0 split)
+      TractWhite   < 2949.5     to the left,  agree=0.661, adj=0.317, (0 split)
+      TractSeniors < 499.5      to the left,  agree=0.654, adj=0.304, (0 split)
+      TractBlack   < 489.5      to the left,  agree=0.608, adj=0.211, (0 split)
+
+Node number 50: 507 observations,    complexity param=0.001291
+  mean=26.328, MSE=181.28 
+  left son=100 (146 obs) right son=101 (361 obs)
+  Primary splits:
+      TractBlack < 50.5       to the left,  improve=0.120890, (0 missing)
+      PCTGQTRS   < 0.061567   to the left,  improve=0.111970, (0 missing)
+      TractAsian < 54.5       to the left,  improve=0.093078, (0 missing)
+      laseniors1 < 49.461     to the right, improve=0.084069, (0 missing)
+      TractWhite < 1650.5     to the left,  improve=0.063873, (0 missing)
+  Surrogate splits:
+      laseniors1  < 46.282     to the right, agree=0.805, adj=0.322, (0 split)
+      Urban       splits as  LR, agree=0.797, adj=0.295, (0 split)
+      lakids1     < 30.317     to the right, agree=0.781, adj=0.240, (0 split)
+      laseniors10 < 0.10541    to the right, agree=0.775, adj=0.219, (0 split)
+      lakids10    < 0.54346    to the right, agree=0.773, adj=0.212, (0 split)
+
+Node number 51: 89 observations,    complexity param=0.0013494
+  mean=44.273, MSE=398.31 
+  left son=102 (13 obs) right son=103 (76 obs)
+  Primary splits:
+      TractSeniors < 446        to the right, improve=0.32759, (0 missing)
+      TractAsian   < 56.5       to the left,  improve=0.24612, (0 missing)
+      laseniors1   < 238.58     to the right, improve=0.24178, (0 missing)
+      PCTGQTRS     < 0.041853   to the left,  improve=0.17982, (0 missing)
+      TractOMultir < 63.5       to the left,  improve=0.17080, (0 missing)
+  Surrogate splits:
+      laseniors1   < 96.059     to the right, agree=0.933, adj=0.538, (0 split)
+      TractAsian   < 48         to the left,  agree=0.921, adj=0.462, (0 split)
+      TractOMultir < 57.5       to the left,  agree=0.910, adj=0.385, (0 split)
+      TractKids    < 24         to the left,  agree=0.888, adj=0.231, (0 split)
+      TractBlack   < 40         to the left,  agree=0.888, adj=0.231, (0 split)
+
+Node number 52: 961 observations,    complexity param=0.00033175
+  mean=23.965, MSE=48.668 
+  left son=104 (105 obs) right son=105 (856 obs)
+  Primary splits:
+      TractHUNV     < 23.5       to the left,  improve=0.061045, (0 missing)
+      TractSNAP     < 121.5      to the left,  improve=0.057002, (0 missing)
+      TractOMultir  < 288        to the left,  improve=0.052527, (0 missing)
+      TractSeniors  < 17         to the left,  improve=0.051270, (0 missing)
+      TractHispanic < 468.5      to the left,  improve=0.037783, (0 missing)
+  Surrogate splits:
+      TractSNAP         < 49.5       to the left,  agree=0.906, adj=0.143, (0 split)
+      TractSeniors      < 33         to the left,  agree=0.905, adj=0.133, (0 split)
+      PCTGQTRS          < 0.25468    to the right, agree=0.896, adj=0.048, (0 split)
+      GroupQuartersFlag splits as  RL, agree=0.895, adj=0.038, (0 split)
+      TractHispanic     < 5          to the left,  agree=0.893, adj=0.019, (0 split)
+
+Node number 53: 984 observations,    complexity param=0.00025394
+  mean=27.383, MSE=48.018 
+  left son=106 (968 obs) right son=107 (16 obs)
+  Primary splits:
+      TractSeniors  < 103.5      to the right, improve=0.046253, (0 missing)
+      TractWhite    < 1789.5     to the right, improve=0.037286, (0 missing)
+      TractKids     < 186.5      to the right, improve=0.034680, (0 missing)
+      TractAsian    < 6.5        to the right, improve=0.031343, (0 missing)
+      TractHispanic < 13.5       to the right, improve=0.028212, (0 missing)
+  Surrogate splits:
+      GroupQuartersFlag splits as  LR, agree=0.985, adj=0.062, (0 split)
+
+Node number 54: 1424 observations,    complexity param=0.00041339
+  mean=28.178, MSE=49.766 
+  left son=108 (160 obs) right son=109 (1264 obs)
+  Primary splits:
+      TractHUNV  < 46.5       to the left,  improve=0.045798, (0 missing)
+      TractBlack < 144.5      to the left,  improve=0.032365, (0 missing)
+      TractSNAP  < 174.5      to the left,  improve=0.031261, (0 missing)
+      TractKids  < 172.5      to the right, improve=0.025509, (0 missing)
+      PCTGQTRS   < 0.043324   to the left,  improve=0.024943, (0 missing)
+  Surrogate splits:
+      TractSNAP     < 46.5       to the left,  agree=0.896, adj=0.075, (0 split)
+      TractSeniors  < 20         to the left,  agree=0.893, adj=0.044, (0 split)
+      laseniors10   < 148.95     to the right, agree=0.892, adj=0.038, (0 split)
+      TractHispanic < 5.5        to the left,  agree=0.890, adj=0.025, (0 split)
+      TractBlack    < 1.5        to the left,  agree=0.890, adj=0.019, (0 split)
+
+Node number 55: 1166 observations,    complexity param=0.00035404
+  mean=30.93, MSE=55.295 
+  left son=110 (1153 obs) right son=111 (13 obs)
+  Primary splits:
+      TractKids    < 138.5      to the right, improve=0.047258, (0 missing)
+      PCTGQTRS     < 0.10501    to the left,  improve=0.032585, (0 missing)
+      TractSeniors < 1028.5     to the right, improve=0.032200, (0 missing)
+      laasian1     < 252.36     to the left,  improve=0.027114, (0 missing)
+      laseniors1   < 201.88     to the right, improve=0.019663, (0 missing)
+  Surrogate splits:
+      PCTGQTRS     < 0.75955    to the left,  agree=0.99, adj=0.077, (0 split)
+      TractSeniors < 52         to the right, agree=0.99, adj=0.077, (0 split)
+
+Node number 56: 1387 observations,    complexity param=0.00024437
+  mean=33.716, MSE=50.203 
+  left son=112 (241 obs) right son=113 (1146 obs)
+  Primary splits:
+      TractSeniors < 594.5      to the right, improve=0.026107, (0 missing)
+      TractKids    < 106        to the right, improve=0.022629, (0 missing)
+      TractWhite   < 629        to the right, improve=0.017413, (0 missing)
+      PCTGQTRS     < 0.058048   to the left,  improve=0.016545, (0 missing)
+      TractHUNV    < 67.5       to the left,  improve=0.016180, (0 missing)
+  Surrogate splits:
+      TractWhite < 3855       to the right, agree=0.855, adj=0.166, (0 split)
+      laseniors1 < 528.61     to the right, agree=0.842, adj=0.091, (0 split)
+      TractSNAP  < 826        to the right, agree=0.836, adj=0.058, (0 split)
+      TractBlack < 4636.5     to the right, agree=0.835, adj=0.050, (0 split)
+      lawhite1   < 3256.9     to the right, agree=0.833, adj=0.041, (0 split)
+
+Node number 57: 744 observations,    complexity param=0.00016745
+  mean=36.964, MSE=54.995 
+  left son=114 (714 obs) right son=115 (30 obs)
+  Primary splits:
+      PCTGQTRS     < 0.19601    to the left,  improve=0.035220, (0 missing)
+      TractHUNV    < 101.5      to the left,  improve=0.023470, (0 missing)
+      TractWhite   < 4118.5     to the left,  improve=0.021722, (0 missing)
+      TractSeniors < 442        to the right, improve=0.019476, (0 missing)
+      TractKids    < 1460.5     to the left,  improve=0.017941, (0 missing)
+  Surrogate splits:
+      GroupQuartersFlag splits as  LR, agree=0.964, adj=0.100, (0 split)
+      TractSeniors      < 18.5       to the right, agree=0.964, adj=0.100, (0 split)
+      TractKids         < 101        to the right, agree=0.962, adj=0.067, (0 split)
+      TractSNAP         < 42         to the right, agree=0.962, adj=0.067, (0 split)
+
+Node number 58: 947 observations,    complexity param=0.00036146
+  mean=40.155, MSE=54.861 
+  left son=116 (919 obs) right son=117 (28 obs)
+  Primary splits:
+      PCTGQTRS     < 0.20646    to the left,  improve=0.056953, (0 missing)
+      TractWhite   < 4949.5     to the left,  improve=0.042262, (0 missing)
+      TractSeniors < 268.5      to the right, improve=0.022469, (0 missing)
+      TractKids    < 237        to the right, improve=0.018870, (0 missing)
+      laasian1     < 43.117     to the left,  improve=0.018690, (0 missing)
+
+Node number 59: 671 observations,    complexity param=0.00019707
+  mean=44.364, MSE=53.697 
+  left son=118 (663 obs) right son=119 (8 obs)
+  Primary splits:
+      laasian1     < 54.632     to the left,  improve=0.047071, (0 missing)
+      TractKids    < 117        to the right, improve=0.038676, (0 missing)
+      PCTGQTRS     < 0.43429    to the left,  improve=0.029873, (0 missing)
+      TractSeniors < 293        to the right, improve=0.018911, (0 missing)
+      TractAsian   < 167        to the left,  improve=0.016432, (0 missing)
+
+Node number 60: 637 observations,    complexity param=0.00027208
+  mean=49.797, MSE=64.569 
+  left son=120 (596 obs) right son=121 (41 obs)
+  Primary splits:
+      PCTGQTRS           < 0.13699    to the left,  improve=0.056931, (0 missing)
+      MedianFamilyIncome < 21593      to the right, improve=0.050818, (0 missing)
+      TractSeniors       < 397        to the right, improve=0.030568, (0 missing)
+      TractSNAP          < 73         to the right, improve=0.027031, (0 missing)
+      TractKids          < 119.5      to the right, improve=0.026664, (0 missing)
+  Surrogate splits:
+      GroupQuartersFlag splits as  LR, agree=0.942, adj=0.098, (0 split)
+      TractKids         < 116.5      to the right, agree=0.942, adj=0.098, (0 split)
+      TractSeniors      < 12.5       to the right, agree=0.939, adj=0.049, (0 split)
+      laasian1          < 121.47     to the left,  agree=0.937, adj=0.024, (0 split)
+      TractSNAP         < 28.5       to the right, agree=0.937, adj=0.024, (0 split)
+
+Node number 61: 291 observations,    complexity param=0.00023388
+  mean=56.058, MSE=67.085 
+  left son=122 (283 obs) right son=123 (8 obs)
+  Primary splits:
+      TractKids          < 107.5      to the right, improve=0.103100, (0 missing)
+      TractWhite         < 4787       to the left,  improve=0.099502, (0 missing)
+      MedianFamilyIncome < 16220      to the right, improve=0.036125, (0 missing)
+      lahisp1            < 14.575     to the right, improve=0.034876, (0 missing)
+      laseniors1         < 2.1341     to the right, improve=0.033388, (0 missing)
+  Surrogate splits:
+      PCTGQTRS          < 0.77379    to the left,  agree=0.979, adj=0.250, (0 split)
+      TractSNAP         < 16.5       to the right, agree=0.979, adj=0.250, (0 split)
+      GroupQuartersFlag splits as  LR, agree=0.976, adj=0.125, (0 split)
+      TractBlack        < 7.5        to the right, agree=0.976, adj=0.125, (0 split)
+
+Node number 62: 241 observations,    complexity param=0.00056722
+  mean=66.006, MSE=264.62 
+  left son=124 (7 obs) right son=125 (234 obs)
+  Primary splits:
+      TractBlack    < 1.5        to the left,  improve=0.073876, (0 missing)
+      laseniors1    < 63.5       to the right, improve=0.073708, (0 missing)
+      TractHispanic < 5.5        to the left,  improve=0.053095, (0 missing)
+      laaian1       < 2.8097     to the right, improve=0.052839, (0 missing)
+      lawhite1      < 1709.2     to the right, improve=0.048831, (0 missing)
+  Surrogate splits:
+      TractOMultir  < 0.5        to the left,  agree=0.983, adj=0.429, (0 split)
+      TractHispanic < 0.5        to the left,  agree=0.975, adj=0.143, (0 split)
+
+Node number 63: 22 observations
+  mean=94.232, MSE=146.11 
+
+Node number 64: 3131 observations
+  mean=3.5698, MSE=6.0069 
+
+Node number 65: 1615 observations,    complexity param=0.00013207
+  mean=4.7791, MSE=9.2722 
+  left son=130 (860 obs) right son=131 (755 obs)
+  Primary splits:
+      TractKids          < 1055.5     to the right, improve=0.075905, (0 missing)
+      MedianFamilyIncome < 113710     to the right, improve=0.047911, (0 missing)
+      laasian1           < 3.1414     to the right, improve=0.047785, (0 missing)
+      lablack1           < 0.58555    to the right, improve=0.046798, (0 missing)
+      lakids1            < 13.165     to the right, improve=0.045075, (0 missing)
+  Surrogate splits:
+      TractWhite < 3633.5     to the right, agree=0.798, adj=0.567, (0 split)
+      laasian1   < 45.168     to the right, agree=0.664, adj=0.282, (0 split)
+      lakids1    < 97.278     to the right, agree=0.662, adj=0.277, (0 split)
+      lawhite1   < 47.076     to the right, agree=0.649, adj=0.249, (0 split)
+      lablack1   < 0.10149    to the right, agree=0.646, adj=0.244, (0 split)
+
+Node number 66: 2021 observations,    complexity param=0.00010165
+  mean=4.832, MSE=7.406 
+  left son=132 (1269 obs) right son=133 (752 obs)
+  Primary splits:
+      TractOMultir       < 266.5      to the left,  improve=0.058450, (0 missing)
+      TractHispanic      < 335.5      to the left,  improve=0.054841, (0 missing)
+      TractNHOPI         < 7.5        to the left,  improve=0.044898, (0 missing)
+      TractAIAN          < 16.5       to the left,  improve=0.041004, (0 missing)
+      MedianFamilyIncome < 117630     to the right, improve=0.038631, (0 missing)
+  Surrogate splits:
+      TractHispanic < 466.5      to the left,  agree=0.868, adj=0.646, (0 split)
+      TractNHOPI    < 4.5        to the left,  agree=0.783, adj=0.416, (0 split)
+      TractAIAN     < 18.5       to the left,  agree=0.759, adj=0.352, (0 split)
+      TractAsian    < 364.5      to the left,  agree=0.746, adj=0.318, (0 split)
+      laomultir1    < 184.11     to the left,  agree=0.720, adj=0.249, (0 split)
+
+Node number 67: 789 observations
+  mean=6.7861, MSE=12.551 
+
+Node number 76: 3037 observations,    complexity param=0.00011975
+  mean=6.6411, MSE=11.842 
+  left son=152 (2113 obs) right son=153 (924 obs)
+  Primary splits:
+      TractWhite         < 2492.5     to the right, improve=0.028657, (0 missing)
+      TractKids          < 782.5      to the right, improve=0.022988, (0 missing)
+      MedianFamilyIncome < 81054      to the right, improve=0.022561, (0 missing)
+      TractHispanic      < 259.5      to the left,  improve=0.022435, (0 missing)
+      lakids1            < 756.93     to the right, improve=0.021499, (0 missing)
+  Surrogate splits:
+      TractKids     < 567.5      to the right, agree=0.859, adj=0.536, (0 split)
+      TractSeniors  < 346.5      to the right, agree=0.783, adj=0.287, (0 split)
+      TractOMultir  < 35.5       to the right, agree=0.734, adj=0.126, (0 split)
+      TractAsian    < 9.5        to the right, agree=0.725, adj=0.095, (0 split)
+      TractHispanic < 25.5       to the right, agree=0.720, adj=0.080, (0 split)
+
+Node number 77: 1667 observations,    complexity param=0.0001575
+  mean=8.4203, MSE=15.941 
+  left son=154 (788 obs) right son=155 (879 obs)
+  Primary splits:
+      TractHUNV     < 54.5       to the left,  improve=0.051009, (0 missing)
+      PCTGQTRS      < 0.0036273  to the left,  improve=0.027435, (0 missing)
+      TractHispanic < 313.5      to the left,  improve=0.027147, (0 missing)
+      TractOMultir  < 151.5      to the left,  improve=0.026522, (0 missing)
+      TractSNAP     < 55.5       to the left,  improve=0.024577, (0 missing)
+  Surrogate splits:
+      lawhite1     < 0.00086334 to the right, agree=0.592, adj=0.137, (0 split)
+      lakids1      < 0.00035884 to the right, agree=0.591, adj=0.135, (0 split)
+      lahisp1      < 0.00041615 to the right, agree=0.590, adj=0.133, (0 split)
+      TractSeniors < 406.5      to the left,  agree=0.589, adj=0.131, (0 split)
+      laseniors1   < 0.00041518 to the right, agree=0.588, adj=0.129, (0 split)
+
+Node number 78: 1416 observations,    complexity param=0.00011589
+  mean=9.1837, MSE=14.861 
+  left son=156 (1157 obs) right son=157 (259 obs)
+  Primary splits:
+      TractOMultir  < 348        to the left,  improve=0.047398, (0 missing)
+      TractHispanic < 180.5      to the left,  improve=0.045333, (0 missing)
+      lawhite1      < 2899.7     to the right, improve=0.037122, (0 missing)
+      laseniors1    < 439.5      to the right, improve=0.035859, (0 missing)
+      TractWhite    < 2797.5     to the right, improve=0.032658, (0 missing)
+  Surrogate splits:
+      TractHispanic < 590.5      to the left,  agree=0.965, adj=0.807, (0 split)
+      TractAsian    < 165.5      to the left,  agree=0.877, adj=0.328, (0 split)
+      TractNHOPI    < 7.5        to the left,  agree=0.856, adj=0.212, (0 split)
+      laomultir1    < 319.09     to the left,  agree=0.851, adj=0.185, (0 split)
+      lahisp1       < 460.54     to the left,  agree=0.850, adj=0.178, (0 split)
+
+Node number 79: 1098 observations,    complexity param=0.00014931
+  mean=10.97, MSE=16.693 
+  left son=158 (414 obs) right son=159 (684 obs)
+  Primary splits:
+      TractSNAP     < 55.5       to the left,  improve=0.070106, (0 missing)
+      TractSeniors  < 1426       to the right, improve=0.049276, (0 missing)
+      TractKids     < 52         to the left,  improve=0.045019, (0 missing)
+      TractHispanic < 837.5      to the left,  improve=0.030480, (0 missing)
+      laseniors1    < 1168.2     to the right, improve=0.029828, (0 missing)
+  Surrogate splits:
+      TractKids    < 315.5      to the left,  agree=0.681, adj=0.155, (0 split)
+      TractWhite   < 1359.5     to the left,  agree=0.666, adj=0.114, (0 split)
+      TractSeniors < 166        to the left,  agree=0.654, adj=0.082, (0 split)
+      TractHUNV    < 13.5       to the left,  agree=0.645, adj=0.058, (0 split)
+      TractBlack   < 2.5        to the left,  agree=0.643, adj=0.053, (0 split)
+
+Node number 80: 2061 observations,    complexity param=0.00013734
+  mean=6.6323, MSE=10.572 
+  left son=160 (1046 obs) right son=161 (1015 obs)
+  Primary splits:
+      TractWhite         < 4722.5     to the right, improve=0.054247, (0 missing)
+      TractKids          < 1384.5     to the right, improve=0.045442, (0 missing)
+      lawhite1           < 2660.2     to the right, improve=0.035828, (0 missing)
+      lakids1            < 873.58     to the right, improve=0.034110, (0 missing)
+      MedianFamilyIncome < 90159      to the right, improve=0.033837, (0 missing)
+  Surrogate splits:
+      TractKids    < 1382.5     to the right, agree=0.749, adj=0.490, (0 split)
+      lawhite1     < 2405.8     to the right, agree=0.711, adj=0.413, (0 split)
+      TractSeniors < 693.5      to the right, agree=0.705, adj=0.402, (0 split)
+      lakids1      < 783.35     to the right, agree=0.675, adj=0.341, (0 split)
+      laseniors1   < 335.48     to the right, agree=0.672, adj=0.334, (0 split)
+
+Node number 81: 467 observations
+  mean=8.7621, MSE=13.076 
+
+Node number 82: 529 observations
+  mean=9.2543, MSE=15.743 
+
+Node number 83: 255 observations
+  mean=11.92, MSE=18.343 
+
+Node number 84: 1848 observations,    complexity param=0.00011087
+  mean=8.415, MSE=11.751 
+  left son=168 (576 obs) right son=169 (1272 obs)
+  Primary splits:
+      TractWhite         < 5078       to the right, improve=0.043941, (0 missing)
+      TractHispanic      < 384.5      to the left,  improve=0.037062, (0 missing)
+      TractOMultir       < 171.5      to the left,  improve=0.031533, (0 missing)
+      MedianFamilyIncome < 76708      to the right, improve=0.021289, (0 missing)
+      TractSNAP          < 141.5      to the left,  improve=0.020245, (0 missing)
+  Surrogate splits:
+      lawhite1     < 4965.5     to the right, agree=0.800, adj=0.358, (0 split)
+      TractKids    < 1518.5     to the right, agree=0.791, adj=0.330, (0 split)
+      lakids1      < 1248.9     to the right, agree=0.757, adj=0.220, (0 split)
+      laseniors1   < 786.47     to the right, agree=0.741, adj=0.168, (0 split)
+      TractSeniors < 952.5      to the right, agree=0.729, adj=0.132, (0 split)
+
+Node number 85: 1107 observations
+  mean=10.595, MSE=14.535 
+
+Node number 86: 760 observations
+  mean=10.152, MSE=12.994 
+
+Node number 87: 628 observations
+  mean=12.287, MSE=14.499 
+
+Node number 88: 1531 observations
+  mean=10.521, MSE=11.601 
+
+Node number 89: 1165 observations
+  mean=12.072, MSE=13.743 
+
+Node number 90: 1204 observations
+  mean=12.231, MSE=12.49 
+
+Node number 91: 687 observations
+  mean=13.771, MSE=12.223 
+
+Node number 92: 628 observations
+  mean=12.325, MSE=12.057 
+
+Node number 93: 1336 observations
+  mean=13.871, MSE=12.295 
+
+Node number 96: 4776 observations,    complexity param=0.0014238
+  mean=17.631, MSE=54.724 
+  left son=192 (4659 obs) right son=193 (117 obs)
+  Primary splits:
+      MedianFamilyIncome < 86453      to the left,  improve=0.050297, (0 missing)
+      PCTGQTRS           < 0.049854   to the left,  improve=0.032355, (0 missing)
+      TractSeniors       < 475.5      to the right, improve=0.024209, (0 missing)
+      TractKids          < 603.5      to the right, improve=0.023227, (0 missing)
+      laseniors1         < 459.5      to the right, improve=0.015347, (0 missing)
+  Surrogate splits:
+      TractHUNV  < 2317       to the left,  agree=0.976, adj=0.026, (0 split)
+      TractWhite < 8592       to the left,  agree=0.976, adj=0.017, (0 split)
+
+Node number 97: 2240 observations,    complexity param=0.00045962
+  mean=20.361, MSE=37.178 
+  left son=194 (2094 obs) right son=195 (146 obs)
+  Primary splits:
+      TractKids    < 638.5      to the right, improve=0.047498, (0 missing)
+      TractSeniors < 338.5      to the right, improve=0.026127, (0 missing)
+      TractWhite   < 2862       to the right, improve=0.025442, (0 missing)
+      PCTGQTRS     < 0.059469   to the left,  improve=0.020979, (0 missing)
+      TractSNAP    < 582.5      to the left,  improve=0.015088, (0 missing)
+  Surrogate splits:
+      MedianFamilyIncome < 95132      to the left,  agree=0.936, adj=0.021, (0 split)
+      TractSeniors       < 104.5      to the right, agree=0.936, adj=0.014, (0 split)
+      TractHispanic      < 11.5       to the right, agree=0.936, adj=0.014, (0 split)
+
+Node number 98: 2290 observations,    complexity param=0.0005439
+  mean=20.798, MSE=46.692 
+  left son=196 (1281 obs) right son=197 (1009 obs)
+  Primary splits:
+      TractSeniors < 357.5      to the right, improve=0.043778, (0 missing)
+      TractSNAP    < 103.5      to the left,  improve=0.031379, (0 missing)
+      TractHUNV    < 107.5      to the left,  improve=0.026634, (0 missing)
+      TractWhite   < 2179.5     to the right, improve=0.025343, (0 missing)
+      lawhite1     < 497.76     to the right, improve=0.024663, (0 missing)
+  Surrogate splits:
+      TractWhite   < 2061       to the right, agree=0.753, adj=0.440, (0 split)
+      laseniors1   < 39.74      to the right, agree=0.665, adj=0.240, (0 split)
+      lawhite1     < 77.399     to the right, agree=0.642, adj=0.188, (0 split)
+      lakids1      < 26.337     to the right, agree=0.637, adj=0.175, (0 split)
+      lahunv1share < 2.6741e-08 to the right, agree=0.634, adj=0.170, (0 split)
+
+Node number 99: 2256 observations,    complexity param=0.00036031
+  mean=23.725, MSE=36.834 
+  left son=198 (1762 obs) right son=199 (494 obs)
+  Primary splits:
+      TractSeniors < 389.5      to the right, improve=0.037316, (0 missing)
+      TractWhite   < 2966.5     to the right, improve=0.034841, (0 missing)
+      TractKids    < 381.5      to the right, improve=0.030830, (0 missing)
+      PCTGQTRS     < 0.072259   to the left,  improve=0.026004, (0 missing)
+      TractHUNV    < 174.5      to the left,  improve=0.016394, (0 missing)
+  Surrogate splits:
+      TractKids  < 519.5      to the right, agree=0.788, adj=0.032, (0 split)
+      TractWhite < 803.5      to the right, agree=0.785, adj=0.016, (0 split)
+
+Node number 100: 146 observations,    complexity param=0.00039932
+  mean=18.966, MSE=99.662 
+  left son=200 (116 obs) right son=201 (30 obs)
+  Primary splits:
+      MedianFamilyIncome < 65245      to the left,  improve=0.236180, (0 missing)
+      laseniors1         < 51.278     to the right, improve=0.087855, (0 missing)
+      TractSeniors       < 299        to the right, improve=0.079454, (0 missing)
+      TractAsian         < 18.5       to the left,  improve=0.079023, (0 missing)
+      PCTGQTRS           < 0.017422   to the left,  improve=0.066692, (0 missing)
+  Surrogate splits:
+      laasian1  < 12.27      to the left,  agree=0.822, adj=0.133, (0 split)
+      PCTGQTRS  < 0.17531    to the left,  agree=0.815, adj=0.100, (0 split)
+      lanhopi1  < 2          to the left,  agree=0.815, adj=0.100, (0 split)
+      TractKids < 259.5      to the left,  agree=0.815, adj=0.100, (0 split)
+      TractSNAP < 2.5        to the right, agree=0.815, adj=0.100, (0 split)
+
+Node number 101: 361 observations,    complexity param=0.00053131
+  mean=29.305, MSE=183.51 
+  left son=202 (351 obs) right son=203 (10 obs)
+  Primary splits:
+      laasian1     < 49.322     to the left,  improve=0.069024, (0 missing)
+      TractAsian   < 179.5      to the left,  improve=0.067078, (0 missing)
+      PCTGQTRS     < 0.061567   to the left,  improve=0.063690, (0 missing)
+      TractSeniors < 877.5      to the right, improve=0.063274, (0 missing)
+      TractWhite   < 1800.5     to the left,  improve=0.057851, (0 missing)
+  Surrogate splits:
+      lawhite1 < 1708       to the left,  agree=0.978, adj=0.2, (0 split)
+
+Node number 102: 13 observations
+  mean=16.654, MSE=118.47 
+
+Node number 103: 76 observations,    complexity param=0.00074582
+  mean=48.997, MSE=293.37 
+  left son=206 (60 obs) right son=207 (16 obs)
+  Primary splits:
+      TractKids          < 74.5       to the right, improve=0.287880, (0 missing)
+      TractSeniors       < 118.5      to the right, improve=0.282970, (0 missing)
+      MedianFamilyIncome < 61246      to the right, improve=0.194280, (0 missing)
+      TractBlack         < 464.5      to the right, improve=0.132810, (0 missing)
+      TractHispanic      < 401        to the right, improve=0.098485, (0 missing)
+  Surrogate splits:
+      TractSeniors      < 87         to the right, agree=0.895, adj=0.500, (0 split)
+      lahunv1share      < 0.0027854  to the left,  agree=0.842, adj=0.250, (0 split)
+      PCTGQTRS          < 0.78007    to the left,  agree=0.829, adj=0.188, (0 split)
+      LILATracts_1And10 splits as  LR, agree=0.816, adj=0.125, (0 split)
+      lawhite1          < 424.15     to the left,  agree=0.816, adj=0.125, (0 split)
+
+Node number 104: 105 observations,    complexity param=0.00011889
+  mean=19.044, MSE=57.597 
+  left son=208 (44 obs) right son=209 (61 obs)
+  Primary splits:
+      TractSNAP     < 117.5      to the left,  improve=0.169190, (0 missing)
+      TractHispanic < 1869.5     to the left,  improve=0.159560, (0 missing)
+      TractSeniors  < 20         to the left,  improve=0.157480, (0 missing)
+      TractOMultir  < 609.5      to the left,  improve=0.120440, (0 missing)
+      laasian1      < 42.496     to the right, improve=0.097473, (0 missing)
+  Surrogate splits:
+      TractSeniors < 51.5       to the left,  agree=0.752, adj=0.409, (0 split)
+      PCTGQTRS     < 0.013068   to the right, agree=0.743, adj=0.386, (0 split)
+      TractKids    < 401        to the left,  agree=0.724, adj=0.341, (0 split)
+      lanhopi1     < 2          to the right, agree=0.705, adj=0.295, (0 split)
+      TractHUNV    < 6          to the left,  agree=0.705, adj=0.295, (0 split)
+
+Node number 105: 856 observations,    complexity param=0.00030986
+  mean=24.569, MSE=44.238 
+  left son=210 (457 obs) right son=211 (399 obs)
+  Primary splits:
+      TractSeniors  < 395        to the right, improve=0.070423, (0 missing)
+      TractOMultir  < 288        to the left,  improve=0.047890, (0 missing)
+      TractHispanic < 270        to the left,  improve=0.040267, (0 missing)
+      TractAsian    < 92.5       to the left,  improve=0.040154, (0 missing)
+      TractWhite    < 1179       to the right, improve=0.028761, (0 missing)
+  Surrogate splits:
+      TractWhite < 2384       to the right, agree=0.780, adj=0.529, (0 split)
+      laseniors1 < 96.377     to the right, agree=0.725, adj=0.411, (0 split)
+      lawhite1   < 457.94     to the right, agree=0.710, adj=0.378, (0 split)
+      lakids1    < 192.1      to the right, agree=0.688, adj=0.331, (0 split)
+      laaian1    < 0.84743    to the right, agree=0.685, adj=0.323, (0 split)
+
+Node number 106: 968 observations,    complexity param=0.0002013
+  mean=27.192, MSE=42.949 
+  left son=212 (331 obs) right son=213 (637 obs)
+  Primary splits:
+      TractSeniors < 582.5      to the right, improve=0.041671, (0 missing)
+      TractSNAP    < 206.5      to the left,  improve=0.035407, (0 missing)
+      TractWhite   < 1845       to the right, improve=0.031083, (0 missing)
+      TractHUNV    < 385        to the left,  improve=0.028117, (0 missing)
+      TractBlack   < 371.5      to the left,  improve=0.028040, (0 missing)
+  Surrogate splits:
+      TractWhite < 3173.5     to the right, agree=0.762, adj=0.305, (0 split)
+      laseniors1 < 135.45     to the right, agree=0.760, adj=0.299, (0 split)
+      lawhite1   < 773.92     to the right, agree=0.745, adj=0.254, (0 split)
+      lakids1    < 160.7      to the right, agree=0.720, adj=0.181, (0 split)
+      laaian1    < 1.3209     to the right, agree=0.713, adj=0.160, (0 split)
+
+Node number 107: 16 observations
+  mean=38.975, MSE=218.14 
+
+Node number 108: 160 observations,    complexity param=0.00014531
+  mean=23.935, MSE=50.475 
+  left son=216 (12 obs) right son=217 (148 obs)
+  Primary splits:
+      TractSNAP    < 32         to the left,  improve=0.15485, (0 missing)
+      TractSeniors < 38.5       to the left,  improve=0.14146, (0 missing)
+      TractOMultir < 775        to the left,  improve=0.12001, (0 missing)
+      TractBlack   < 3.5        to the left,  improve=0.11191, (0 missing)
+      TractKids    < 887        to the left,  improve=0.10200, (0 missing)
+  Surrogate splits:
+      TractSeniors < 38.5       to the left,  agree=0.975, adj=0.667, (0 split)
+      PCTGQTRS     < 0.17291    to the right, agree=0.944, adj=0.250, (0 split)
+      TractKids    < 133        to the left,  agree=0.944, adj=0.250, (0 split)
+      lanhopi1     < 11.036     to the right, agree=0.938, adj=0.167, (0 split)
+      TractWhite   < 98.5       to the left,  agree=0.938, adj=0.167, (0 split)
+
+Node number 109: 1264 observations,    complexity param=0.00041339
+  mean=28.715, MSE=47.109 
+  left son=218 (1248 obs) right son=219 (16 obs)
+  Primary splits:
+      TractKids    < 173        to the right, improve=0.064990, (0 missing)
+      PCTGQTRS     < 0.047143   to the left,  improve=0.035509, (0 missing)
+      TractWhite   < 1529       to the right, improve=0.031825, (0 missing)
+      TractSeniors < 201.5      to the right, improve=0.030814, (0 missing)
+      TractHUNV    < 259.5      to the left,  improve=0.020866, (0 missing)
+  Surrogate splits:
+      TractSNAP < 36         to the right, agree=0.99, adj=0.187, (0 split)
+
+Node number 110: 1153 observations,    complexity param=0.00020808
+  mean=30.758, MSE=48.804 
+  left son=220 (49 obs) right son=221 (1104 obs)
+  Primary splits:
+      TractSeniors < 1028.5     to the right, improve=0.031824, (0 missing)
+      PCTGQTRS     < 0.10501    to the left,  improve=0.022552, (0 missing)
+      laseniors1   < 201.88     to the right, improve=0.019428, (0 missing)
+      TractHUNV    < 114.5      to the left,  improve=0.017785, (0 missing)
+      TractSNAP    < 172.5      to the left,  improve=0.016402, (0 missing)
+  Surrogate splits:
+      laseniors1   < 898.6      to the right, agree=0.963, adj=0.122, (0 split)
+      TractHUNV    < 2723       to the right, agree=0.960, adj=0.061, (0 split)
+      lawhite1     < 4971.8     to the right, agree=0.959, adj=0.041, (0 split)
+      laseniors10  < 530.93     to the right, agree=0.959, adj=0.041, (0 split)
+      TractOMultir < 5784.5     to the right, agree=0.959, adj=0.041, (0 split)
+
+Node number 111: 13 observations
+  mean=46.154, MSE=396.69 
+
+Node number 112: 241 observations,    complexity param=0.00010409
+  mean=31.219, MSE=38.635 
+  left son=224 (70 obs) right son=225 (171 obs)
+  Primary splits:
+      TractSNAP    < 440.5      to the left,  improve=0.096211, (0 missing)
+      TractKids    < 1181       to the left,  improve=0.086538, (0 missing)
+      TractBlack   < 2320.5     to the left,  improve=0.066894, (0 missing)
+      TractHUNV    < 284.5      to the left,  improve=0.062621, (0 missing)
+      TractSeniors < 1199       to the right, improve=0.052443, (0 missing)
+  Surrogate splits:
+      TractKids   < 852.5      to the left,  agree=0.813, adj=0.357, (0 split)
+      TractHUNV   < 119.5      to the left,  agree=0.755, adj=0.157, (0 split)
+      TractBlack  < 15         to the left,  agree=0.739, adj=0.100, (0 split)
+      lakids10    < 64.956     to the right, agree=0.730, adj=0.071, (0 split)
+      laseniors10 < 48.98      to the right, agree=0.730, adj=0.071, (0 split)
+
+Node number 113: 1146 observations,    complexity param=0.00024437
+  mean=34.241, MSE=51.049 
+  left son=226 (1137 obs) right son=227 (9 obs)
+  Primary splits:
+      TractKids  < 106        to the right, improve=0.040825, (0 missing)
+      TractHUNV  < 67.5       to the left,  improve=0.019111, (0 missing)
+      TractSNAP  < 431.5      to the left,  improve=0.018938, (0 missing)
+      PCTGQTRS   < 0.53151    to the left,  improve=0.017096, (0 missing)
+      TractWhite < 538.5      to the right, improve=0.014170, (0 missing)
+  Surrogate splits:
+      PCTGQTRS < 0.58559    to the left,  agree=0.993, adj=0.111, (0 split)
+
+Node number 114: 714 observations,    complexity param=0.00011407
+  mean=36.678, MSE=51.116 
+  left son=228 (530 obs) right son=229 (184 obs)
+  Primary splits:
+      TractKids    < 1406       to the left,  improve=0.026898, (0 missing)
+      TractHUNV    < 101.5      to the left,  improve=0.023873, (0 missing)
+      TractSNAP    < 199.5      to the left,  improve=0.021863, (0 missing)
+      TractWhite   < 4118.5     to the left,  improve=0.020108, (0 missing)
+      TractSeniors < 913.5      to the right, improve=0.015991, (0 missing)
+  Surrogate splits:
+      TractHispanic < 3197.5     to the left,  agree=0.859, adj=0.451, (0 split)
+      TractOMultir  < 1567.5     to the left,  agree=0.842, adj=0.386, (0 split)
+      TractSNAP     < 652        to the left,  agree=0.800, adj=0.223, (0 split)
+      TractWhite    < 2959.5     to the left,  agree=0.784, adj=0.163, (0 split)
+      TractAIAN     < 77.5       to the left,  agree=0.777, adj=0.136, (0 split)
+
+Node number 115: 30 observations,    complexity param=0.00011278
+  mean=43.753, MSE=99.292 
+  left son=230 (7 obs) right son=231 (23 obs)
+  Primary splits:
+      TractSeniors  < 454.5      to the right, improve=0.32585, (0 missing)
+      TractHispanic < 871        to the right, improve=0.29329, (0 missing)
+      TractOMultir  < 558.5      to the right, improve=0.25022, (0 missing)
+      TractKids     < 480.5      to the right, improve=0.22483, (0 missing)
+      TractAIAN     < 26.5       to the right, improve=0.18391, (0 missing)
+  Surrogate splits:
+      TractHUNV < 756.5      to the right, agree=0.900, adj=0.571, (0 split)
+      TractSNAP < 553        to the right, agree=0.867, adj=0.429, (0 split)
+      lawhite1  < 1571.1     to the right, agree=0.833, adj=0.286, (0 split)
+      Urban     splits as  LR, agree=0.800, adj=0.143, (0 split)
+      lahisp1   < 178.64     to the right, agree=0.800, adj=0.143, (0 split)
+
+Node number 116: 919 observations,    complexity param=0.0001528
+  mean=39.847, MSE=47.392 
+  left son=232 (61 obs) right son=233 (858 obs)
+  Primary splits:
+      TractSNAP    < 173.5      to the left,  improve=0.030193, (0 missing)
+      TractKids    < 3147       to the left,  improve=0.022754, (0 missing)
+      TractWhite   < 4740       to the left,  improve=0.019574, (0 missing)
+      TractOMultir < 1716.5     to the left,  improve=0.017497, (0 missing)
+      TractHUNV    < 39.5       to the left,  improve=0.016557, (0 missing)
+  Surrogate splits:
+      TractHUNV < 27         to the left,  agree=0.940, adj=0.098, (0 split)
+      TractKids < 143        to the left,  agree=0.937, adj=0.049, (0 split)
+      PCTGQTRS  < 0.19915    to the right, agree=0.936, adj=0.033, (0 split)
+
+Node number 117: 28 observations,    complexity param=0.00036146
+  mean=50.282, MSE=194.35 
+  left son=234 (20 obs) right son=235 (8 obs)
+  Primary splits:
+      TractKids    < 239.5      to the right, improve=0.59957, (0 missing)
+      TractSeniors < 127        to the right, improve=0.51524, (0 missing)
+      TractBlack   < 506        to the right, improve=0.25447, (0 missing)
+      TractWhite   < 2701.5     to the left,  improve=0.25305, (0 missing)
+      TractAsian   < 184.5      to the left,  improve=0.22193, (0 missing)
+  Surrogate splits:
+      TractSeniors < 101.5      to the right, agree=0.893, adj=0.625, (0 split)
+      TractSNAP    < 138        to the right, agree=0.857, adj=0.500, (0 split)
+      TractAsian   < 184.5      to the left,  agree=0.821, adj=0.375, (0 split)
+      TractHUNV    < 75         to the right, agree=0.821, adj=0.375, (0 split)
+      lawhite1     < 1221.4     to the left,  agree=0.786, adj=0.250, (0 split)
+
+Node number 118: 663 observations
+  mean=44.19, MSE=49.848 
+
+Node number 119: 8 observations
+  mean=58.837, MSE=160.64 
+
+Node number 120: 596 observations,    complexity param=0.00022813
+  mean=49.294, MSE=59.207 
+  left son=240 (268 obs) right son=241 (328 obs)
+  Primary splits:
+      MedianFamilyIncome < 21593      to the right, improve=0.055638, (0 missing)
+      TractSeniors       < 409        to the right, improve=0.029876, (0 missing)
+      TractKids          < 2335.5     to the left,  improve=0.028161, (0 missing)
+      Urban              splits as  LR, improve=0.022896, (0 missing)
+      TractWhite         < 3888.5     to the left,  improve=0.017956, (0 missing)
+  Surrogate splits:
+      TractSeniors  < 560.5      to the right, agree=0.574, adj=0.052, (0 split)
+      TractWhite    < 3306       to the right, agree=0.567, adj=0.037, (0 split)
+      TractHispanic < 587.5      to the right, agree=0.564, adj=0.030, (0 split)
+      laasian1      < 1.9071     to the right, agree=0.562, adj=0.026, (0 split)
+      TractHUNV     < 157.5      to the left,  agree=0.562, adj=0.026, (0 split)
+
+Node number 121: 41 observations
+  mean=57.107, MSE=85.405 
+
+Node number 122: 283 observations
+  mean=55.616, MSE=59.841 
+
+Node number 123: 8 observations
+  mean=71.7, MSE=71.755 
+
+Node number 124: 7 observations
+  mean=40.443, MSE=122.19 
+
+Node number 125: 234 observations,    complexity param=0.00056722
+  mean=66.771, MSE=248.74 
+  left son=250 (10 obs) right son=251 (224 obs)
+  Primary splits:
+      laseniors1 < 63.5       to the right, improve=0.086793, (0 missing)
+      laaian1    < 2.8097     to the right, improve=0.066254, (0 missing)
+      lawhite1   < 1709.2     to the right, improve=0.058146, (0 missing)
+      lablack1   < 38.041     to the right, improve=0.057275, (0 missing)
+      PCTGQTRS   < 0.99975    to the left,  improve=0.053633, (0 missing)
+  Surrogate splits:
+      lablack1   < 758        to the right, agree=0.974, adj=0.4, (0 split)
+      lawhite1   < 2779.1     to the right, agree=0.962, adj=0.1, (0 split)
+      lahisp1    < 968.5      to the right, agree=0.962, adj=0.1, (0 split)
+      laomultir1 < 401.53     to the right, agree=0.962, adj=0.1, (0 split)
+      laaian1    < 18.123     to the right, agree=0.962, adj=0.1, (0 split)
+
+Node number 130: 860 observations
+  mean=3.993, MSE=6.2767 
+
+Node number 131: 755 observations
+  mean=5.6744, MSE=11.179 
+
+Node number 132: 1269 observations
+  mean=4.3255, MSE=5.7742 
+
+Node number 133: 752 observations
+  mean=5.6867, MSE=8.9964 
+
+Node number 152: 2113 observations
+  mean=6.2558, MSE=10.39 
+
+Node number 153: 924 observations
+  mean=7.522, MSE=14.046 
+
+Node number 154: 788 observations
+  mean=7.4679, MSE=13.895 
+
+Node number 155: 879 observations
+  mean=9.2741, MSE=16.234 
+
+Node number 156: 1157 observations
+  mean=8.7866, MSE=13.514 
+
+Node number 157: 259 observations
+  mean=10.958, MSE=17.027 
+
+Node number 158: 414 observations
+  mean=9.5797, MSE=16.643 
+
+Node number 159: 684 observations
+  mean=11.812, MSE=14.845 
+
+Node number 160: 1046 observations
+  mean=5.8863, MSE=8.388 
+
+Node number 161: 1015 observations
+  mean=7.4011, MSE=11.658 
+
+Node number 168: 576 observations
+  mean=7.3472, MSE=9.356 
+
+Node number 169: 1272 observations
+  mean=8.8986, MSE=12.085 
+
+Node number 192: 4659 observations
+  mean=17.368, MSE=51.73 
+
+Node number 193: 117 observations
+  mean=28.1, MSE=61.582 
+
+Node number 194: 2094 observations
+  mean=20.01, MSE=33.637 
+
+Node number 195: 146 observations
+  mean=25.393, MSE=60.881 
+
+Node number 196: 1281 observations
+  mean=19.529, MSE=32.597 
+
+Node number 197: 1009 observations
+  mean=22.409, MSE=59.947 
+
+Node number 198: 1762 observations
+  mean=23.105, MSE=31.394 
+
+Node number 199: 494 observations
+  mean=25.94, MSE=49.959 
+
+Node number 200: 116 observations
+  mean=16.499, MSE=66.634 
+
+Node number 201: 30 observations
+  mean=28.507, MSE=112.82 
+
+Node number 202: 351 observations
+  mean=28.704, MSE=162.23 
+
+Node number 203: 10 observations
+  mean=50.39, MSE=472.97 
+
+Node number 206: 60 observations
+  mean=44.252, MSE=221.15 
+
+Node number 207: 16 observations
+  mean=66.794, MSE=163.05 
+
+Node number 208: 44 observations
+  mean=15.368, MSE=51.124 
+
+Node number 209: 61 observations
+  mean=21.695, MSE=45.492 
+
+Node number 210: 457 observations
+  mean=22.92, MSE=32.933 
+
+Node number 211: 399 observations
+  mean=26.458, MSE=50.503 
+
+Node number 212: 331 observations
+  mean=25.336, MSE=35.389 
+
+Node number 213: 637 observations
+  mean=28.156, MSE=44.157 
+
+Node number 216: 12 observations
+  mean=14.117, MSE=43.775 
+
+Node number 217: 148 observations
+  mean=24.731, MSE=42.568 
+
+Node number 218: 1248 observations
+  mean=28.517, MSE=42.141 
+
+Node number 219: 16 observations
+  mean=44.169, MSE=192.72 
+
+Node number 220: 49 observations
+  mean=24.843, MSE=45.47 
+
+Node number 221: 1104 observations
+  mean=31.021, MSE=47.33 
+
+Node number 224: 70 observations
+  mean=28.206, MSE=35.083 
+
+Node number 225: 171 observations
+  mean=32.453, MSE=34.85 
+
+Node number 226: 1137 observations
+  mean=34.112, MSE=48.2 
+
+Node number 227: 9 observations
+  mean=50.467, MSE=145.65 
+
+Node number 228: 530 observations
+  mean=35.988, MSE=55.894 
+
+Node number 229: 184 observations
+  mean=38.668, MSE=32.017 
+
+Node number 230: 7 observations
+  mean=33.443, MSE=65.677 
+
+Node number 231: 23 observations
+  mean=46.891, MSE=67.322 
+
+Node number 232: 61 observations
+  mean=35.361, MSE=81.364 
+
+Node number 233: 858 observations
+  mean=40.166, MSE=43.444 
+
+Node number 234: 20 observations
+  mean=43.455, MSE=36.871 
+
+Node number 235: 8 observations
+  mean=67.35, MSE=180.19 
+
+Node number 240: 268 observations
+  mean=47.287, MSE=49.348 
+
+Node number 241: 328 observations
+  mean=50.935, MSE=61.276 
+
+Node number 250: 10 observations
+  mean=44.78, MSE=194.61 
+
+Node number 251: 224 observations
+  mean=67.753, MSE=228.61 
+
