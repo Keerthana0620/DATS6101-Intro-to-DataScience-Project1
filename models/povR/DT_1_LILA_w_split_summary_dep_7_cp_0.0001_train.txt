@@ -1,0 +1,1085 @@
+Call:
+rpart(formula = formula_obj_lila, data = trainData, control = list(maxdepth = 7, 
+    cp = 1e-04))
+  n= 54034 
+
+           CP nsplit rel error  xerror      xstd
+1  0.15106356      0   1.00000 1.00000 0.0131359
+2  0.04480321      3   0.54681 0.54757 0.0099534
+3  0.02588842      5   0.45720 0.46924 0.0092508
+4  0.01767291      7   0.40543 0.41536 0.0087273
+5  0.01604891     10   0.35059 0.35652 0.0081094
+6  0.01069927     11   0.33454 0.34391 0.0079698
+7  0.00821551     13   0.31314 0.32747 0.0077834
+8  0.00496752     15   0.29671 0.30588 0.0075306
+9  0.00382117     16   0.29175 0.29901 0.0074480
+10 0.00296141     17   0.28793 0.29824 0.0074388
+11 0.00267482     19   0.28200 0.29767 0.0074318
+12 0.00191058     20   0.27933 0.29404 0.0073877
+13 0.00171953     21   0.27742 0.29347 0.0073807
+14 0.00162400     22   0.27570 0.29251 0.0073691
+15 0.00140110     24   0.27245 0.29041 0.0073433
+16 0.00133741     27   0.26825 0.28850 0.0073198
+17 0.00114635     30   0.26404 0.28506 0.0072773
+18 0.00085976     31   0.26290 0.28181 0.0072369
+19 0.00038212     33   0.26118 0.27914 0.0072034
+20 0.00028659     37   0.25965 0.28143 0.0072321
+21 0.00027294     39   0.25908 0.28219 0.0072417
+22 0.00010000     47   0.25678 0.28449 0.0072702
+
+Variable importance
+          lawhite1         laseniors1            lakids1         laomultir1              Urban            laaian1 
+                13                 13                 10                  8                  8                  8 
+      lahunv1share        laseniors10 MedianFamilyIncome           lakids10        PovertyRate         TractAsian 
+                 7                  6                  6                  6                  5                  4 
+         TractSNAP          TractHUNV            lahisp1         TractWhite 
+                 2                  1                  1                  1 
+
+Node number 1: 54034 observations,    complexity param=0.15106
+  predicted class=0  expected loss=0.096865  P(node) =1
+    class counts: 48800  5234
+   probabilities: 0.903 0.097 
+  left son=2 (30648 obs) right son=3 (23386 obs)
+  Primary splits:
+      MedianFamilyIncome < 57971      to the right, improve=807.86, (0 missing)
+      lakids1            < 94.986     to the left,  improve=726.26, (0 missing)
+      PovertyRate        < 17.15      to the left,  improve=716.78, (0 missing)
+      lahunv1share       < 0.0049441  to the left,  improve=701.46, (0 missing)
+      laomultir1         < 10         to the left,  improve=664.38, (0 missing)
+  Surrogate splits:
+      PovertyRate < 15.15      to the left,  agree=0.832, adj=0.611, (0 split)
+      TractSNAP   < 190.5      to the left,  agree=0.761, adj=0.448, (0 split)
+      TractHUNV   < 107.5      to the left,  agree=0.662, adj=0.219, (0 split)
+      TractAsian  < 29.5       to the right, agree=0.655, adj=0.203, (0 split)
+      TractWhite  < 2080.5     to the right, agree=0.646, adj=0.182, (0 split)
+
+Node number 2: 30648 observations,    complexity param=0.017673
+  predicted class=0  expected loss=0.021339  P(node) =0.5672
+    class counts: 29994   654
+   probabilities: 0.979 0.021 
+  left son=4 (29267 obs) right son=5 (1381 obs)
+  Primary splits:
+      PovertyRate        < 19.95      to the left,  improve=149.080, (0 missing)
+      MedianFamilyIncome < 68948      to the right, improve= 26.611, (0 missing)
+      TractSNAP          < 216.5      to the left,  improve= 20.207, (0 missing)
+      lablack1           < 34.935     to the left,  improve= 15.697, (0 missing)
+      laomultir1         < 15.395     to the left,  improve= 14.979, (0 missing)
+  Surrogate splits:
+      laomultir1 < 3716.9     to the left,  agree=0.955, adj=0.001, (0 split)
+      TractWhite < 9.5        to the right, agree=0.955, adj=0.001, (0 split)
+
+Node number 3: 23386 observations,    complexity param=0.15106
+  predicted class=0  expected loss=0.19584  P(node) =0.4328
+    class counts: 18806  4580
+   probabilities: 0.804 0.196 
+  left son=6 (13334 obs) right son=7 (10052 obs)
+  Primary splits:
+      lakids1    < 101.38     to the left,  improve=2044.3, (0 missing)
+      lawhite1   < 203.66     to the left,  improve=1754.8, (0 missing)
+      laseniors1 < 34.495     to the left,  improve=1753.8, (0 missing)
+      laomultir1 < 10.014     to the left,  improve=1739.9, (0 missing)
+      lahisp1    < 7.7096     to the left,  improve=1639.6, (0 missing)
+  Surrogate splits:
+      lawhite1     < 341.44     to the left,  agree=0.950, adj=0.883, (0 split)
+      laseniors1   < 45.108     to the left,  agree=0.946, adj=0.875, (0 split)
+      laomultir1   < 12.806     to the left,  agree=0.932, adj=0.842, (0 split)
+      laaian1      < 0.99745    to the left,  agree=0.921, adj=0.817, (0 split)
+      lahunv1share < 0.0049562  to the left,  agree=0.913, adj=0.798, (0 split)
+
+Node number 4: 29267 observations,    complexity param=0.00027294
+  predicted class=0  expected loss=0.010626  P(node) =0.54164
+    class counts: 28956   311
+   probabilities: 0.989 0.011 
+  left son=8 (21569 obs) right son=9 (7698 obs)
+  Primary splits:
+      MedianFamilyIncome < 68940      to the right, improve=10.3320, (0 missing)
+      TractSNAP          < 195.5      to the left,  improve= 4.2852, (0 missing)
+      lablack1           < 37         to the left,  improve= 3.7247, (0 missing)
+      laomultir1         < 14.304     to the left,  improve= 3.6470, (0 missing)
+      lahunv1share       < 0.0053427  to the left,  improve= 3.4689, (0 missing)
+  Surrogate splits:
+      PovertyRate < 12.65      to the left,  agree=0.761, adj=0.090, (0 split)
+      TractSNAP   < 248.5      to the left,  agree=0.755, adj=0.067, (0 split)
+      TractAsian  < 13.5       to the right, agree=0.754, adj=0.064, (0 split)
+      laseniors10 < 0.74494    to the left,  agree=0.750, adj=0.048, (0 split)
+      lakids10    < 1.1435     to the left,  agree=0.749, adj=0.046, (0 split)
+
+Node number 5: 1381 observations,    complexity param=0.017673
+  predicted class=0  expected loss=0.24837  P(node) =0.025558
+    class counts:  1038   343
+   probabilities: 0.752 0.248 
+  left son=10 (908 obs) right son=11 (473 obs)
+  Primary splits:
+      lawhite1   < 351.76     to the left,  improve=287.73, (0 missing)
+      laomultir1 < 23.299     to the left,  improve=257.91, (0 missing)
+      lakids1    < 75.608     to the left,  improve=256.91, (0 missing)
+      laasian1   < 6.4213     to the left,  improve=238.69, (0 missing)
+      laseniors1 < 38.448     to the left,  improve=237.23, (0 missing)
+  Surrogate splits:
+      lakids1    < 94.691     to the left,  agree=0.959, adj=0.879, (0 split)
+      laseniors1 < 64.638     to the left,  agree=0.947, adj=0.846, (0 split)
+      laomultir1 < 18.572     to the left,  agree=0.937, adj=0.816, (0 split)
+      lahisp1    < 17.931     to the left,  agree=0.924, adj=0.778, (0 split)
+      laaian1    < 1.8212     to the left,  agree=0.917, adj=0.759, (0 split)
+
+Node number 6: 13334 observations,    complexity param=0.0082155
+  predicted class=0  expected loss=0.014324  P(node) =0.24677
+    class counts: 13143   191
+   probabilities: 0.986 0.014 
+  left son=12 (13063 obs) right son=13 (271 obs)
+  Primary splits:
+      lawhite1   < 451.93     to the left,  improve=139.580, (0 missing)
+      laasian1   < 7.1452     to the left,  improve= 39.796, (0 missing)
+      laseniors1 < 117.87     to the left,  improve= 36.510, (0 missing)
+      laaian1    < 1.8725     to the left,  improve= 28.065, (0 missing)
+      lahisp1    < 7.7268     to the left,  improve= 27.303, (0 missing)
+  Surrogate splits:
+      laseniors1 < 149.46     to the left,  agree=0.985, adj=0.269, (0 split)
+      lablack1   < 476.79     to the left,  agree=0.983, adj=0.162, (0 split)
+      laomultir1 < 140.22     to the left,  agree=0.983, adj=0.162, (0 split)
+      lahisp1    < 335.29     to the left,  agree=0.983, adj=0.159, (0 split)
+      laasian1   < 74.662     to the left,  agree=0.981, adj=0.077, (0 split)
+
+Node number 7: 10052 observations,    complexity param=0.15106
+  predicted class=0  expected loss=0.43663  P(node) =0.18603
+    class counts:  5663  4389
+   probabilities: 0.563 0.437 
+  left son=14 (4918 obs) right son=15 (5134 obs)
+  Primary splits:
+      Urban              splits as  LR, improve=1818.70, (0 missing)
+      PovertyRate        < 19.95      to the left,  improve= 696.35, (0 missing)
+      laseniors1         < 279        to the right, improve= 574.66, (0 missing)
+      lawhite1           < 1610       to the right, improve= 527.08, (0 missing)
+      MedianFamilyIncome < 48986      to the right, improve= 492.42, (0 missing)
+  Surrogate splits:
+      laseniors1  < 291.52     to the right, agree=0.755, adj=0.499, (0 split)
+      laseniors10 < 5.4182e-05 to the right, agree=0.741, adj=0.472, (0 split)
+      lakids10    < 1.9576e-05 to the right, agree=0.741, adj=0.471, (0 split)
+      lawhite1    < 1610.8     to the right, agree=0.733, adj=0.454, (0 split)
+      TractAsian  < 19.5       to the left,  agree=0.721, adj=0.429, (0 split)
+
+Node number 8: 21569 observations
+  predicted class=0  expected loss=0.002689  P(node) =0.39917
+    class counts: 21511    58
+   probabilities: 0.997 0.003 
+
+Node number 9: 7698 observations,    complexity param=0.00027294
+  predicted class=0  expected loss=0.032866  P(node) =0.14247
+    class counts:  7445   253
+   probabilities: 0.967 0.033 
+  left son=18 (6381 obs) right son=19 (1317 obs)
+  Primary splits:
+      laasian1   < 35.01      to the left,  improve=10.5030, (0 missing)
+      lablack1   < 32.215     to the left,  improve= 9.9369, (0 missing)
+      laomultir1 < 14.304     to the left,  improve= 7.9460, (0 missing)
+      lakids1    < 69.098     to the left,  improve= 7.6043, (0 missing)
+      lahisp1    < 28.602     to the left,  improve= 7.1309, (0 missing)
+  Surrogate splits:
+      laomultir1 < 193        to the left,  agree=0.863, adj=0.199, (0 split)
+      lahisp1    < 315.31     to the left,  agree=0.857, adj=0.164, (0 split)
+      lanhopi1   < 6.0101     to the left,  agree=0.856, adj=0.156, (0 split)
+      lakids1    < 1570.2     to the left,  agree=0.845, adj=0.093, (0 split)
+      lablack1   < 179.2      to the left,  agree=0.845, adj=0.092, (0 split)
+
+Node number 10: 908 observations,    complexity param=0.0019106
+  predicted class=0  expected loss=0.015419  P(node) =0.016804
+    class counts:   894    14
+   probabilities: 0.985 0.015 
+  left son=20 (894 obs) right son=21 (14 obs)
+  Primary splits:
+      lablack1     < 187.27     to the left,  improve=20.1490, (0 missing)
+      lakids1      < 124.05     to the left,  improve=19.6040, (0 missing)
+      lahunv1share < 0.020123   to the left,  improve=14.7350, (0 missing)
+      laseniors1   < 76.202     to the left,  improve=10.4240, (0 missing)
+      laomultir1   < 23.839     to the left,  improve= 7.5775, (0 missing)
+  Surrogate splits:
+      lakids1      < 124.05     to the left,  agree=0.991, adj=0.429, (0 split)
+      lahunv1share < 0.019357   to the left,  agree=0.990, adj=0.357, (0 split)
+      laseniors1   < 90.415     to the left,  agree=0.987, adj=0.143, (0 split)
+      laasian1     < 84.323     to the left,  agree=0.986, adj=0.071, (0 split)
+      laomultir1   < 150.39     to the left,  agree=0.986, adj=0.071, (0 split)
+
+Node number 11: 473 observations,    complexity param=0.017673
+  predicted class=1  expected loss=0.30444  P(node) =0.0087537
+    class counts:   144   329
+   probabilities: 0.304 0.696 
+  left son=22 (160 obs) right son=23 (313 obs)
+  Primary splits:
+      Urban         splits as  LR, improve=127.910, (0 missing)
+      TractAsian    < 25.5       to the left,  improve= 26.881, (0 missing)
+      laseniors1    < 225.8      to the right, improve= 16.927, (0 missing)
+      laasian1      < 25.455     to the left,  improve= 16.691, (0 missing)
+      TractHispanic < 79         to the left,  improve= 11.156, (0 missing)
+  Surrogate splits:
+      TractAsian   < 25.5       to the left,  agree=0.791, adj=0.381, (0 split)
+      lakids10     < 0.047128   to the right, agree=0.784, adj=0.362, (0 split)
+      laseniors10  < 0.019901   to the right, agree=0.782, adj=0.356, (0 split)
+      laseniors1   < 357.8      to the right, agree=0.729, adj=0.200, (0 split)
+      TractOMultir < 116.5      to the left,  agree=0.712, adj=0.150, (0 split)
+
+Node number 12: 13063 observations,    complexity param=0.00038212
+  predicted class=0  expected loss=0.0039042  P(node) =0.24176
+    class counts: 13012    51
+   probabilities: 0.996 0.004 
+  left son=24 (13010 obs) right son=25 (53 obs)
+  Primary splits:
+      lablack1     < 279.09     to the left,  improve=7.2085, (0 missing)
+      lawhite1     < 318.4      to the left,  improve=3.5438, (0 missing)
+      lahunv1share < 0.03932    to the left,  improve=3.1129, (0 missing)
+      laasian1     < 63.419     to the left,  improve=2.9124, (0 missing)
+      PCTGQTRS     < 0.45069    to the left,  improve=2.6381, (0 missing)
+
+Node number 13: 271 observations,    complexity param=0.0082155
+  predicted class=1  expected loss=0.48339  P(node) =0.0050154
+    class counts:   131   140
+   probabilities: 0.483 0.517 
+  left son=26 (147 obs) right son=27 (124 obs)
+  Primary splits:
+      PovertyRate        < 17.85      to the left,  improve=49.840, (0 missing)
+      PCTGQTRS           < 0.93676    to the right, improve=24.439, (0 missing)
+      TractHUNV          < 1          to the left,  improve=24.303, (0 missing)
+      MedianFamilyIncome < 1250       to the left,  improve=23.339, (0 missing)
+      TractSNAP          < 1.5        to the left,  improve=22.277, (0 missing)
+  Surrogate splits:
+      TractSNAP  < 175.5      to the left,  agree=0.694, adj=0.331, (0 split)
+      TractAsian < 78.5       to the left,  agree=0.661, adj=0.258, (0 split)
+      TractKids  < 38         to the left,  agree=0.653, adj=0.242, (0 split)
+      TractHUNV  < 112.5      to the left,  agree=0.653, adj=0.242, (0 split)
+      lakids1    < 16.615     to the left,  agree=0.635, adj=0.202, (0 split)
+
+Node number 14: 4918 observations,    complexity param=0.025888
+  predicted class=0  expected loss=0.12932  P(node) =0.091017
+    class counts:  4282   636
+   probabilities: 0.871 0.129 
+  left son=28 (3851 obs) right son=29 (1067 obs)
+  Primary splits:
+      laseniors10        < 94.662     to the left,  improve=497.780, (0 missing)
+      lakids10           < 96.147     to the left,  improve=481.160, (0 missing)
+      TractBlack         < 8.5        to the right, improve= 23.704, (0 missing)
+      MedianFamilyIncome < 48887      to the right, improve= 23.189, (0 missing)
+      laaian1            < 26         to the left,  improve= 22.520, (0 missing)
+  Surrogate splits:
+      lakids10   < 118.25     to the left,  agree=0.956, adj=0.796, (0 split)
+      TractKids  < 199.5      to the right, agree=0.785, adj=0.007, (0 split)
+      TractSNAP  < 29.5       to the right, agree=0.784, adj=0.003, (0 split)
+      TractAsian < 1272       to the left,  agree=0.783, adj=0.002, (0 split)
+      laasian1   < 565.97     to the left,  agree=0.783, adj=0.001, (0 split)
+
+Node number 15: 5134 observations,    complexity param=0.044803
+  predicted class=1  expected loss=0.26899  P(node) =0.095014
+    class counts:  1381  3753
+   probabilities: 0.269 0.731 
+  left son=30 (2213 obs) right son=31 (2921 obs)
+  Primary splits:
+      PovertyRate        < 19.65      to the left,  improve=471.330, (0 missing)
+      MedianFamilyIncome < 51288      to the right, improve=348.670, (0 missing)
+      lakids1            < 137.04     to the left,  improve=117.860, (0 missing)
+      TractSNAP          < 298.5      to the left,  improve=109.050, (0 missing)
+      lahunv1share       < 0.027397   to the left,  improve= 55.713, (0 missing)
+  Surrogate splits:
+      MedianFamilyIncome < 47294      to the right, agree=0.761, adj=0.446, (0 split)
+      TractSNAP          < 260.5      to the left,  agree=0.679, adj=0.255, (0 split)
+      TractHUNV          < 74.5       to the left,  agree=0.631, adj=0.143, (0 split)
+      lawhite1           < 2097.1     to the right, agree=0.618, adj=0.113, (0 split)
+      laseniors1         < 370        to the right, agree=0.612, adj=0.100, (0 split)
+
+Node number 18: 6381 observations,    complexity param=0.00027294
+  predicted class=0  expected loss=0.021  P(node) =0.11809
+    class counts:  6247   134
+   probabilities: 0.979 0.021 
+  left son=36 (2534 obs) right son=37 (3847 obs)
+  Primary splits:
+      laomultir1   < 11.694     to the left,  improve=3.4337, (0 missing)
+      lakids1      < 69.098     to the left,  improve=3.3543, (0 missing)
+      lahunv1share < 0.0040718  to the left,  improve=3.1931, (0 missing)
+      lablack1     < 2          to the left,  improve=2.9863, (0 missing)
+      laasian1     < 1.8626     to the left,  improve=2.8121, (0 missing)
+  Surrogate splits:
+      lahisp1    < 7.9886     to the left,  agree=0.942, adj=0.855, (0 split)
+      lakids1    < 76.282     to the left,  agree=0.940, adj=0.848, (0 split)
+      lawhite1   < 239.91     to the left,  agree=0.925, adj=0.811, (0 split)
+      laaian1    < 0.6752     to the left,  agree=0.916, adj=0.788, (0 split)
+      laseniors1 < 29.165     to the left,  agree=0.914, adj=0.784, (0 split)
+
+Node number 19: 1317 observations,    complexity param=0.00027294
+  predicted class=0  expected loss=0.090357  P(node) =0.024374
+    class counts:  1198   119
+   probabilities: 0.910 0.090 
+  left son=38 (961 obs) right son=39 (356 obs)
+  Primary splits:
+      laseniors1 < 215.64     to the right, improve=7.8018, (0 missing)
+      lawhite1   < 1738.5     to the right, improve=7.7925, (0 missing)
+      Urban      splits as  LR, improve=7.0362, (0 missing)
+      lakids1    < 633.09     to the right, improve=6.5788, (0 missing)
+      TractHUNV  < 243        to the left,  improve=5.4817, (0 missing)
+  Surrogate splits:
+      lawhite1     < 1359.2     to the right, agree=0.854, adj=0.461, (0 split)
+      TractSeniors < 309        to the right, agree=0.816, adj=0.320, (0 split)
+      lakids1      < 318.08     to the right, agree=0.808, adj=0.289, (0 split)
+      TractWhite   < 2222.5     to the right, agree=0.766, adj=0.135, (0 split)
+      lahunv1share < 0.0037743  to the right, agree=0.763, adj=0.124, (0 split)
+
+Node number 20: 894 observations
+  predicted class=0  expected loss=0.0022371  P(node) =0.016545
+    class counts:   892     2
+   probabilities: 0.998 0.002 
+
+Node number 21: 14 observations
+  predicted class=1  expected loss=0.14286  P(node) =0.0002591
+    class counts:     2    12
+   probabilities: 0.143 0.857 
+
+Node number 22: 160 observations,    complexity param=0.0049675
+  predicted class=0  expected loss=0.18125  P(node) =0.0029611
+    class counts:   131    29
+   probabilities: 0.819 0.181 
+  left son=44 (130 obs) right son=45 (30 obs)
+  Primary splits:
+      laseniors10 < 70.11      to the left,  improve=41.7700, (0 missing)
+      lakids10    < 99.636     to the left,  improve=39.8240, (0 missing)
+      TractSNAP   < 46         to the right, improve= 5.7408, (0 missing)
+      TractKids   < 455        to the right, improve= 5.0511, (0 missing)
+      PovertyRate < 20.45      to the right, improve= 4.5000, (0 missing)
+  Surrogate splits:
+      lakids10   < 63.056     to the left,  agree=0.975, adj=0.867, (0 split)
+      laasian1   < 0.0014261  to the right, agree=0.831, adj=0.100, (0 split)
+      TractAsian < 0.5        to the right, agree=0.831, adj=0.100, (0 split)
+      PCTGQTRS   < 0.23183    to the left,  agree=0.825, adj=0.067, (0 split)
+      laseniors1 < 976        to the left,  agree=0.825, adj=0.067, (0 split)
+
+Node number 23: 313 observations,    complexity param=0.00085976
+  predicted class=1  expected loss=0.041534  P(node) =0.0057926
+    class counts:    13   300
+   probabilities: 0.042 0.958 
+  left son=46 (32 obs) right son=47 (281 obs)
+  Primary splits:
+      lawhite1   < 449.06     to the left,  improve=9.4826, (0 missing)
+      laomultir1 < 20.385     to the left,  improve=3.9435, (0 missing)
+      lakids1    < 124.85     to the left,  improve=3.8094, (0 missing)
+      laasian1   < 5.9333     to the left,  improve=3.5100, (0 missing)
+      lahisp1    < 20.561     to the left,  improve=2.4704, (0 missing)
+  Surrogate splits:
+      laomultir1    < 8.1911     to the left,  agree=0.917, adj=0.188, (0 split)
+      laasian1      < 1.4862     to the left,  agree=0.904, adj=0.062, (0 split)
+      TractWhite    < 882.5      to the left,  agree=0.904, adj=0.062, (0 split)
+      TractHispanic < 24         to the left,  agree=0.904, adj=0.062, (0 split)
+      lahisp1       < 3.4863     to the left,  agree=0.901, adj=0.031, (0 split)
+
+Node number 24: 13010 observations
+  predicted class=0  expected loss=0.002844  P(node) =0.24077
+    class counts: 12973    37
+   probabilities: 0.997 0.003 
+
+Node number 25: 53 observations,    complexity param=0.00038212
+  predicted class=0  expected loss=0.26415  P(node) =0.00098086
+    class counts:    39    14
+   probabilities: 0.736 0.264 
+  left son=50 (45 obs) right son=51 (8 obs)
+  Primary splits:
+      TractWhite   < 901.5      to the left,  improve=4.4482, (0 missing)
+      lawhite1     < 161.4      to the left,  improve=4.0801, (0 missing)
+      lahisp1      < 18.029     to the left,  improve=3.5221, (0 missing)
+      TractAsian   < 22.5       to the left,  improve=3.2684, (0 missing)
+      TractSeniors < 474        to the left,  improve=2.7805, (0 missing)
+  Surrogate splits:
+      TractAsian    < 26         to the left,  agree=0.962, adj=0.75, (0 split)
+      TractOMultir  < 230.5      to the left,  agree=0.925, adj=0.50, (0 split)
+      TractHispanic < 379        to the left,  agree=0.925, adj=0.50, (0 split)
+      laseniors1    < 100.39     to the left,  agree=0.887, adj=0.25, (0 split)
+      TractSeniors  < 666.5      to the left,  agree=0.887, adj=0.25, (0 split)
+
+Node number 26: 147 observations,    complexity param=0.0013374
+  predicted class=0  expected loss=0.2381  P(node) =0.0027205
+    class counts:   112    35
+   probabilities: 0.762 0.238 
+  left son=52 (62 obs) right son=53 (85 obs)
+  Primary splits:
+      TractHUNV          < 9          to the left,  improve=12.157, (0 missing)
+      PovertyRate        < 5.75       to the left,  improve=10.678, (0 missing)
+      GroupQuartersFlag  splits as  RL, improve=10.556, (0 missing)
+      PCTGQTRS           < 0.70594    to the right, improve=10.556, (0 missing)
+      MedianFamilyIncome < 17272      to the left,  improve=10.556, (0 missing)
+  Surrogate splits:
+      GroupQuartersFlag  splits as  RL, agree=0.966, adj=0.919, (0 split)
+      lahunv1share       < 2.9183e-06 to the left,  agree=0.966, adj=0.919, (0 split)
+      PCTGQTRS           < 0.70594    to the right, agree=0.966, adj=0.919, (0 split)
+      MedianFamilyIncome < 17272      to the left,  agree=0.966, adj=0.919, (0 split)
+      PovertyRate        < 0.45       to the left,  agree=0.946, adj=0.871, (0 split)
+
+Node number 27: 124 observations,    complexity param=0.0017195
+  predicted class=1  expected loss=0.15323  P(node) =0.0022949
+    class counts:    19   105
+   probabilities: 0.153 0.847 
+  left son=54 (13 obs) right son=55 (111 obs)
+  Primary splits:
+      Urban      splits as  LR, improve=13.9460, (0 missing)
+      lablack1   < 2.7176     to the left,  improve= 4.3423, (0 missing)
+      TractWhite < 1836.5     to the left,  improve= 4.2005, (0 missing)
+      TractAsian < 12.5       to the left,  improve= 3.8335, (0 missing)
+      lawhite1   < 473.36     to the left,  improve= 3.3530, (0 missing)
+  Surrogate splits:
+      laseniors10   < 0.07347    to the right, agree=0.919, adj=0.231, (0 split)
+      TractWhite    < 832.5      to the left,  agree=0.919, adj=0.231, (0 split)
+      TractHispanic < 21         to the left,  agree=0.919, adj=0.231, (0 split)
+      laomultir1    < 974.71     to the right, agree=0.911, adj=0.154, (0 split)
+      lakids10      < 0.036735   to the right, agree=0.911, adj=0.154, (0 split)
+
+Node number 28: 3851 observations,    complexity param=0.001624
+  predicted class=0  expected loss=0.010906  P(node) =0.07127
+    class counts:  3809    42
+   probabilities: 0.989 0.011 
+  left son=56 (3806 obs) right son=57 (45 obs)
+  Primary splits:
+      lakids10      < 150.24     to the left,  improve=27.0140, (0 missing)
+      laseniors10   < 74.109     to the left,  improve=11.0680, (0 missing)
+      lablack1      < 2072.9     to the left,  improve= 1.1508, (0 missing)
+      TractOMultir  < 2321       to the left,  improve= 1.1187, (0 missing)
+      TractHispanic < 6293       to the left,  improve= 1.0021, (0 missing)
+
+Node number 29: 1067 observations,    complexity param=0.025888
+  predicted class=1  expected loss=0.4433  P(node) =0.019747
+    class counts:   473   594
+   probabilities: 0.443 0.557 
+  left son=58 (760 obs) right son=59 (307 obs)
+  Primary splits:
+      PovertyRate        < 19.65      to the left,  improve=127.550, (0 missing)
+      MedianFamilyIncome < 49054      to the right, improve=125.630, (0 missing)
+      lakids10           < 92.212     to the left,  improve= 16.987, (0 missing)
+      lahunv1share       < 0.033149   to the left,  improve= 12.256, (0 missing)
+      TractSNAP          < 193.5      to the left,  improve= 10.155, (0 missing)
+  Surrogate splits:
+      MedianFamilyIncome < 43632      to the right, agree=0.820, adj=0.375, (0 split)
+      TractSNAP          < 380.5      to the left,  agree=0.730, adj=0.062, (0 split)
+      TractHUNV          < 130.5      to the left,  agree=0.728, adj=0.055, (0 split)
+      TractHispanic      < 2180.5     to the left,  agree=0.727, adj=0.052, (0 split)
+      lahisp1            < 1726.1     to the left,  agree=0.725, adj=0.046, (0 split)
+
+Node number 30: 2213 observations,    complexity param=0.044803
+  predicted class=0  expected loss=0.48486  P(node) =0.040956
+    class counts:  1140  1073
+   probabilities: 0.515 0.485 
+  left son=60 (1499 obs) right son=61 (714 obs)
+  Primary splits:
+      MedianFamilyIncome < 48944      to the right, improve=185.520, (0 missing)
+      TractSeniors       < 572.5      to the right, improve= 36.247, (0 missing)
+      TractWhite         < 2797.5     to the right, improve= 29.069, (0 missing)
+      laseniors1         < 251.76     to the right, improve= 26.507, (0 missing)
+      PovertyRate        < 14.85      to the left,  improve= 21.678, (0 missing)
+  Surrogate splits:
+      TractSeniors < 69         to the right, agree=0.691, adj=0.042, (0 split)
+      laseniors1   < 8.455      to the right, agree=0.687, adj=0.031, (0 split)
+      TractSNAP    < 25.5       to the right, agree=0.683, adj=0.018, (0 split)
+      PovertyRate  < 0.25       to the right, agree=0.682, adj=0.015, (0 split)
+      PCTGQTRS     < 0.29537    to the left,  agree=0.682, adj=0.014, (0 split)
+
+Node number 31: 2921 observations,    complexity param=0.010699
+  predicted class=1  expected loss=0.082506  P(node) =0.054059
+    class counts:   241  2680
+   probabilities: 0.083 0.917 
+  left son=62 (395 obs) right son=63 (2526 obs)
+  Primary splits:
+      lakids1    < 145.95     to the left,  improve=148.790, (0 missing)
+      laseniors1 < 48.976     to the left,  improve=102.280, (0 missing)
+      lawhite1   < 375.35     to the left,  improve= 91.697, (0 missing)
+      laaian1    < 2.3194     to the left,  improve= 26.686, (0 missing)
+      laasian1   < 2.6543     to the left,  improve= 23.324, (0 missing)
+  Surrogate splits:
+      laomultir1         < 7.6748     to the left,  agree=0.867, adj=0.018, (0 split)
+      lawhite1           < 4.0456     to the left,  agree=0.866, adj=0.010, (0 split)
+      lahisp1            < 1.154      to the left,  agree=0.866, adj=0.010, (0 split)
+      TractKids          < 250        to the left,  agree=0.866, adj=0.010, (0 split)
+      MedianFamilyIncome < 13657      to the left,  agree=0.865, adj=0.005, (0 split)
+
+Node number 36: 2534 observations
+  predicted class=0  expected loss=0.00078927  P(node) =0.046896
+    class counts:  2532     2
+   probabilities: 0.999 0.001 
+
+Node number 37: 3847 observations,    complexity param=0.00027294
+  predicted class=0  expected loss=0.034312  P(node) =0.071196
+    class counts:  3715   132
+   probabilities: 0.966 0.034 
+  left son=74 (3820 obs) right son=75 (27 obs)
+  Primary splits:
+      TractWhite   < 586        to the right, improve=7.5699, (0 missing)
+      Urban        splits as  LR, improve=5.3872, (0 missing)
+      TractHUNV    < 280.5      to the left,  improve=4.6481, (0 missing)
+      TractSeniors < 40.5       to the right, improve=4.0463, (0 missing)
+      laseniors1   < 230.04     to the right, improve=3.7774, (0 missing)
+  Surrogate splits:
+      TractBlack < 4662.5     to the left,  agree=0.994, adj=0.148, (0 split)
+      lawhite1   < 22.166     to the right, agree=0.994, adj=0.111, (0 split)
+      lablack1   < 2770.1     to the left,  agree=0.994, adj=0.111, (0 split)
+
+Node number 38: 961 observations
+  predicted class=0  expected loss=0.057232  P(node) =0.017785
+    class counts:   906    55
+   probabilities: 0.943 0.057 
+
+Node number 39: 356 observations,    complexity param=0.00027294
+  predicted class=0  expected loss=0.17978  P(node) =0.0065884
+    class counts:   292    64
+   probabilities: 0.820 0.180 
+  left son=78 (342 obs) right son=79 (14 obs)
+  Primary splits:
+      TractHUNV  < 248.5      to the left,  improve=6.2503, (0 missing)
+      laseniors1 < 8.717      to the right, improve=4.0450, (0 missing)
+      lahisp1    < 378.88     to the right, improve=3.4643, (0 missing)
+      TractSNAP  < 496        to the left,  improve=3.2445, (0 missing)
+      laomultir1 < 279.71     to the right, improve=3.0820, (0 missing)
+  Surrogate splits:
+      TractSNAP   < 491.5      to the left,  agree=0.963, adj=0.071, (0 split)
+      PovertyRate < 19.7       to the left,  agree=0.963, adj=0.071, (0 split)
+
+Node number 44: 130 observations
+  predicted class=0  expected loss=0.0076923  P(node) =0.0024059
+    class counts:   129     1
+   probabilities: 0.992 0.008 
+
+Node number 45: 30 observations
+  predicted class=1  expected loss=0.066667  P(node) =0.00055521
+    class counts:     2    28
+   probabilities: 0.067 0.933 
+
+Node number 46: 32 observations,    complexity param=0.00085976
+  predicted class=1  expected loss=0.40625  P(node) =0.00059222
+    class counts:    13    19
+   probabilities: 0.406 0.594 
+  left son=92 (13 obs) right son=93 (19 obs)
+  Primary splits:
+      lablack1   < 21.895     to the left,  improve=8.4739, (0 missing)
+      TractBlack < 131.5      to the left,  improve=7.0920, (0 missing)
+      laasian1   < 6.1688     to the left,  improve=4.5102, (0 missing)
+      lakids1    < 115.78     to the left,  improve=3.4534, (0 missing)
+      laomultir1 < 45.432     to the left,  improve=2.9575, (0 missing)
+  Surrogate splits:
+      TractBlack < 131.5      to the left,  agree=0.844, adj=0.615, (0 split)
+      laasian1   < 7.0678     to the left,  agree=0.812, adj=0.538, (0 split)
+      TractWhite < 3149       to the right, agree=0.781, adj=0.462, (0 split)
+      TractAsian < 34.5       to the left,  agree=0.719, adj=0.308, (0 split)
+      TractHUNV  < 82.5       to the right, agree=0.719, adj=0.308, (0 split)
+
+Node number 47: 281 observations
+  predicted class=1  expected loss=0  P(node) =0.0052004
+    class counts:     0   281
+   probabilities: 0.000 1.000 
+
+Node number 50: 45 observations,    complexity param=0.00038212
+  predicted class=0  expected loss=0.17778  P(node) =0.00083281
+    class counts:    37     8
+   probabilities: 0.822 0.178 
+  left son=100 (37 obs) right son=101 (8 obs)
+  Primary splits:
+      PovertyRate  < 51.3       to the left,  improve=3.8920, (0 missing)
+      TractAIAN    < 0.5        to the right, improve=2.5691, (0 missing)
+      TractSeniors < 131.5      to the right, improve=2.5565, (0 missing)
+      lablack1     < 465.11     to the left,  improve=1.8677, (0 missing)
+      lahisp1      < 45.331     to the left,  improve=1.6000, (0 missing)
+  Surrogate splits:
+      TractBlack < 483        to the right, agree=0.844, adj=0.125, (0 split)
+      TractAsian < 0.5        to the right, agree=0.844, adj=0.125, (0 split)
+
+Node number 51: 8 observations
+  predicted class=1  expected loss=0.25  P(node) =0.00014805
+    class counts:     2     6
+   probabilities: 0.250 0.750 
+
+Node number 52: 62 observations
+  predicted class=0  expected loss=0  P(node) =0.0011474
+    class counts:    62     0
+   probabilities: 1.000 0.000 
+
+Node number 53: 85 observations,    complexity param=0.0013374
+  predicted class=0  expected loss=0.41176  P(node) =0.0015731
+    class counts:    50    35
+   probabilities: 0.588 0.412 
+  left son=106 (65 obs) right son=107 (20 obs)
+  Primary splits:
+      MedianFamilyIncome < 47189      to the right, improve=10.0460, (0 missing)
+      TractBlack         < 522.5      to the left,  improve= 7.8431, (0 missing)
+      TractAsian         < 113        to the left,  improve= 6.2502, (0 missing)
+      lablack1           < 37.736     to the left,  improve= 4.9664, (0 missing)
+      laomultir1         < 27.321     to the left,  improve= 4.4020, (0 missing)
+  Surrogate splits:
+      lahunv1share  < 0.044586   to the left,  agree=0.776, adj=0.05, (0 split)
+      TractSeniors  < 160        to the right, agree=0.776, adj=0.05, (0 split)
+      TractAsian    < 3.5        to the right, agree=0.776, adj=0.05, (0 split)
+      TractAIAN     < 83.5       to the left,  agree=0.776, adj=0.05, (0 split)
+      TractHispanic < 11         to the right, agree=0.776, adj=0.05, (0 split)
+
+Node number 54: 13 observations
+  predicted class=0  expected loss=0.15385  P(node) =0.00024059
+    class counts:    11     2
+   probabilities: 0.846 0.154 
+
+Node number 55: 111 observations
+  predicted class=1  expected loss=0.072072  P(node) =0.0020543
+    class counts:     8   103
+   probabilities: 0.072 0.928 
+
+Node number 56: 3806 observations,    complexity param=0.00028659
+  predicted class=0  expected loss=0.0044666  P(node) =0.070437
+    class counts:  3789    17
+   probabilities: 0.996 0.004 
+  left son=112 (3706 obs) right son=113 (100 obs)
+  Primary splits:
+      laseniors10  < 74.808     to the left,  improve=3.77300, (0 missing)
+      lakids10     < 105.5      to the left,  improve=2.40610, (0 missing)
+      PCTGQTRS     < 0.4153     to the left,  improve=0.30045, (0 missing)
+      lahunv1share < 0.062326   to the left,  improve=0.20273, (0 missing)
+      lablack1     < 2227.1     to the left,  improve=0.16278, (0 missing)
+  Surrogate splits:
+      lakids10 < 115.34     to the left,  agree=0.976, adj=0.07, (0 split)
+
+Node number 57: 45 observations,    complexity param=0.001624
+  predicted class=1  expected loss=0.44444  P(node) =0.00083281
+    class counts:    20    25
+   probabilities: 0.444 0.556 
+  left son=114 (28 obs) right son=115 (17 obs)
+  Primary splits:
+      PovertyRate        < 19.4       to the left,  improve=10.7940, (0 missing)
+      MedianFamilyIncome < 54342      to the right, improve= 6.7265, (0 missing)
+      TractSNAP          < 323        to the left,  improve= 4.2677, (0 missing)
+      TractBlack         < 481        to the left,  improve= 3.6393, (0 missing)
+      lahunv1share       < 0.024486   to the right, improve= 3.2783, (0 missing)
+  Surrogate splits:
+      MedianFamilyIncome < 42648      to the right, agree=0.800, adj=0.471, (0 split)
+      TractSNAP          < 323        to the left,  agree=0.800, adj=0.471, (0 split)
+      laseniors10        < 60.687     to the right, agree=0.778, adj=0.412, (0 split)
+      TractOMultir       < 843        to the left,  agree=0.733, adj=0.294, (0 split)
+      TractHispanic      < 2403.5     to the left,  agree=0.733, adj=0.294, (0 split)
+
+Node number 58: 760 observations,    complexity param=0.016049
+  predicted class=0  expected loss=0.40132  P(node) =0.014065
+    class counts:   455   305
+   probabilities: 0.599 0.401 
+  left son=116 (542 obs) right son=117 (218 obs)
+  Primary splits:
+      MedianFamilyIncome < 49054      to the right, improve=51.8940, (0 missing)
+      lablack1           < 51         to the right, improve=15.8380, (0 missing)
+      TractBlack         < 102.5      to the right, improve=15.1270, (0 missing)
+      laseniors10        < 176.72     to the left,  improve= 6.7914, (0 missing)
+      lakids10           < 92.212     to the left,  improve= 6.2334, (0 missing)
+  Surrogate splits:
+      laseniors10  < 96.409     to the right, agree=0.720, adj=0.023, (0 split)
+      TractSeniors < 1269       to the left,  agree=0.720, adj=0.023, (0 split)
+      laseniors1   < 1036.9     to the left,  agree=0.718, adj=0.018, (0 split)
+      PovertyRate  < 18.75      to the left,  agree=0.718, adj=0.018, (0 split)
+      lahisp1      < 3326.1     to the left,  agree=0.716, adj=0.009, (0 split)
+
+Node number 59: 307 observations,    complexity param=0.0011464
+  predicted class=1  expected loss=0.058632  P(node) =0.0056816
+    class counts:    18   289
+   probabilities: 0.059 0.941 
+  left son=118 (18 obs) right son=119 (289 obs)
+  Primary splits:
+      lakids10    < 89.44      to the left,  improve=14.1380, (0 missing)
+      laseniors10 < 125.83     to the left,  improve= 3.0172, (0 missing)
+      PCTGQTRS    < 0.14217    to the right, improve= 2.3801, (0 missing)
+      PovertyRate < 19.95      to the left,  improve= 1.6841, (0 missing)
+      TractHUNV   < 136.5      to the right, improve= 1.0878, (0 missing)
+
+Node number 60: 1499 observations,    complexity param=0.0029614
+  predicted class=0  expected loss=0.34356  P(node) =0.027742
+    class counts:   984   515
+   probabilities: 0.656 0.344 
+  left son=120 (788 obs) right son=121 (711 obs)
+  Primary splits:
+      MedianFamilyIncome < 53670      to the right, improve=25.275, (0 missing)
+      TractSeniors       < 572.5      to the right, improve=21.617, (0 missing)
+      laseniors1         < 420        to the right, improve=20.205, (0 missing)
+      lawhite1           < 1981       to the right, improve=14.216, (0 missing)
+      TractOMultir       < 832        to the left,  improve=13.448, (0 missing)
+  Surrogate splits:
+      PovertyRate < 15.65      to the left,  agree=0.582, adj=0.118, (0 split)
+      TractSNAP   < 339.5      to the left,  agree=0.555, adj=0.062, (0 split)
+      lawhite1    < 820.48     to the right, agree=0.550, adj=0.052, (0 split)
+      TractBlack  < 1212.5     to the left,  agree=0.546, adj=0.042, (0 split)
+      laasian1    < 11.212     to the right, agree=0.542, adj=0.035, (0 split)
+
+Node number 61: 714 observations,    complexity param=0.0014011
+  predicted class=1  expected loss=0.21849  P(node) =0.013214
+    class counts:   156   558
+   probabilities: 0.218 0.782 
+  left son=122 (287 obs) right son=123 (427 obs)
+  Primary splits:
+      MedianFamilyIncome < 45878      to the right, improve=22.8620, (0 missing)
+      PovertyRate        < 1          to the left,  improve=13.6470, (0 missing)
+      TractSNAP          < 1.5        to the left,  improve= 9.1891, (0 missing)
+      lakids1            < 129.89     to the left,  improve= 8.1047, (0 missing)
+      lawhite1           < 371.31     to the left,  improve= 7.0976, (0 missing)
+  Surrogate splits:
+      TractKids    < 2405.5     to the right, agree=0.609, adj=0.028, (0 split)
+      TractWhite   < 6823       to the right, agree=0.608, adj=0.024, (0 split)
+      TractOMultir < 55.5       to the left,  agree=0.608, adj=0.024, (0 split)
+      lahunv1share < 0.056743   to the right, agree=0.606, adj=0.021, (0 split)
+      TractAIAN    < 3.5        to the left,  agree=0.606, adj=0.021, (0 split)
+
+Node number 62: 395 observations,    complexity param=0.010699
+  predicted class=1  expected loss=0.48608  P(node) =0.0073102
+    class counts:   192   203
+   probabilities: 0.486 0.514 
+  left son=124 (224 obs) right son=125 (171 obs)
+  Primary splits:
+      laseniors1 < 70.407     to the left,  improve=72.084, (0 missing)
+      lawhite1   < 425.38     to the left,  improve=69.074, (0 missing)
+      laasian1   < 2.6754     to the left,  improve=16.245, (0 missing)
+      lakids1    < 118.63     to the left,  improve=16.170, (0 missing)
+      lanhopi1   < 0.46195    to the left,  improve=12.027, (0 missing)
+  Surrogate splits:
+      lawhite1      < 419.19     to the left,  agree=0.795, adj=0.526, (0 split)
+      TractSeniors  < 435        to the left,  agree=0.699, adj=0.304, (0 split)
+      TractOMultir  < 124.5      to the right, agree=0.623, adj=0.129, (0 split)
+      TractBlack    < 44         to the right, agree=0.620, adj=0.123, (0 split)
+      TractHispanic < 230.5      to the right, agree=0.620, adj=0.123, (0 split)
+
+Node number 63: 2526 observations
+  predicted class=1  expected loss=0.019398  P(node) =0.046748
+    class counts:    49  2477
+   probabilities: 0.019 0.981 
+
+Node number 74: 3820 observations
+  predicted class=0  expected loss=0.031675  P(node) =0.070696
+    class counts:  3699   121
+   probabilities: 0.968 0.032 
+
+Node number 75: 27 observations,    complexity param=0.00027294
+  predicted class=0  expected loss=0.40741  P(node) =0.00049969
+    class counts:    16    11
+   probabilities: 0.593 0.407 
+  left son=150 (15 obs) right son=151 (12 obs)
+  Primary splits:
+      lahunv1share       < 0.016374   to the left,  improve=5.0704, (0 missing)
+      TractHUNV          < 80.5       to the left,  improve=4.9712, (0 missing)
+      laaian1            < 6.3887     to the left,  improve=3.8228, (0 missing)
+      TractAIAN          < 6.5        to the left,  improve=2.5037, (0 missing)
+      MedianFamilyIncome < 60722      to the left,  improve=2.3704, (0 missing)
+  Surrogate splits:
+      TractHUNV          < 51         to the left,  agree=0.852, adj=0.667, (0 split)
+      laaian1            < 5.1063     to the left,  agree=0.778, adj=0.500, (0 split)
+      TractAIAN          < 6.5        to the left,  agree=0.741, adj=0.417, (0 split)
+      TractSNAP          < 143.5      to the left,  agree=0.741, adj=0.417, (0 split)
+      MedianFamilyIncome < 65811      to the left,  agree=0.704, adj=0.333, (0 split)
+
+Node number 78: 342 observations,    complexity param=0.00027294
+  predicted class=0  expected loss=0.16082  P(node) =0.0063293
+    class counts:   287    55
+   probabilities: 0.839 0.161 
+  left son=156 (330 obs) right son=157 (12 obs)
+  Primary splits:
+      laseniors1         < 8.717      to the right, improve=4.4402, (0 missing)
+      TractSeniors       < 14.5       to the right, improve=2.9350, (0 missing)
+      lahisp1            < 307.04     to the right, improve=2.8855, (0 missing)
+      MedianFamilyIncome < 59806      to the right, improve=2.5693, (0 missing)
+      TractHUNV          < 113.5      to the left,  improve=2.3752, (0 missing)
+  Surrogate splits:
+      TractSeniors < 12.5       to the right, agree=0.994, adj=0.833, (0 split)
+      TractSNAP    < 10.5       to the right, agree=0.977, adj=0.333, (0 split)
+      PCTGQTRS     < 0.56768    to the left,  agree=0.974, adj=0.250, (0 split)
+      PovertyRate  < 3.15       to the right, agree=0.968, adj=0.083, (0 split)
+
+Node number 79: 14 observations
+  predicted class=1  expected loss=0.35714  P(node) =0.0002591
+    class counts:     5     9
+   probabilities: 0.357 0.643 
+
+Node number 92: 13 observations
+  predicted class=0  expected loss=0.15385  P(node) =0.00024059
+    class counts:    11     2
+   probabilities: 0.846 0.154 
+
+Node number 93: 19 observations
+  predicted class=1  expected loss=0.10526  P(node) =0.00035163
+    class counts:     2    17
+   probabilities: 0.105 0.895 
+
+Node number 100: 37 observations
+  predicted class=0  expected loss=0.081081  P(node) =0.00068475
+    class counts:    34     3
+   probabilities: 0.919 0.081 
+
+Node number 101: 8 observations
+  predicted class=1  expected loss=0.375  P(node) =0.00014805
+    class counts:     3     5
+   probabilities: 0.375 0.625 
+
+Node number 106: 65 observations,    complexity param=0.0013374
+  predicted class=0  expected loss=0.27692  P(node) =0.0012029
+    class counts:    47    18
+   probabilities: 0.723 0.277 
+  left son=212 (57 obs) right son=213 (8 obs)
+  Primary splits:
+      TractBlack    < 571.5      to the left,  improve=9.5395, (0 missing)
+      TractAsian    < 113        to the left,  improve=7.8244, (0 missing)
+      lablack1      < 37.736     to the left,  improve=5.2411, (0 missing)
+      TractHispanic < 331.5      to the left,  improve=5.1430, (0 missing)
+      laseniors1    < 183.22     to the right, improve=4.8008, (0 missing)
+  Surrogate splits:
+      PCTGQTRS     < 0.21932    to the left,  agree=0.938, adj=0.500, (0 split)
+      lablack1     < 42.421     to the left,  agree=0.938, adj=0.500, (0 split)
+      TractOMultir < 315.5      to the left,  agree=0.938, adj=0.500, (0 split)
+      lahisp1      < 120.01     to the left,  agree=0.923, adj=0.375, (0 split)
+      laomultir1   < 71.668     to the left,  agree=0.923, adj=0.375, (0 split)
+
+Node number 107: 20 observations
+  predicted class=1  expected loss=0.15  P(node) =0.00037014
+    class counts:     3    17
+   probabilities: 0.150 0.850 
+
+Node number 112: 3706 observations
+  predicted class=0  expected loss=0.0008095  P(node) =0.068586
+    class counts:  3703     3
+   probabilities: 0.999 0.001 
+
+Node number 113: 100 observations,    complexity param=0.00028659
+  predicted class=0  expected loss=0.14  P(node) =0.0018507
+    class counts:    86    14
+   probabilities: 0.860 0.140 
+  left son=226 (93 obs) right son=227 (7 obs)
+  Primary splits:
+      MedianFamilyIncome < 37558      to the right, improve=4.9648, (0 missing)
+      PovertyRate        < 25.05      to the left,  improve=4.0909, (0 missing)
+      TractSNAP          < 276        to the left,  improve=2.8800, (0 missing)
+      lakids10           < 79.474     to the left,  improve=2.3022, (0 missing)
+      TractHUNV          < 111        to the left,  improve=1.8334, (0 missing)
+  Surrogate splits:
+      PovertyRate  < 25.6       to the left,  agree=0.97, adj=0.571, (0 split)
+      lahunv1share < 0.058295   to the left,  agree=0.94, adj=0.143, (0 split)
+      TractSNAP    < 358.5      to the left,  agree=0.94, adj=0.143, (0 split)
+
+Node number 114: 28 observations,    complexity param=0.00038212
+  predicted class=0  expected loss=0.28571  P(node) =0.00051819
+    class counts:    20     8
+   probabilities: 0.714 0.286 
+  left son=228 (20 obs) right son=229 (8 obs)
+  Primary splits:
+      lawhite1   < 1992.2     to the right, improve=2.5786, (0 missing)
+      TractWhite < 2079.5     to the right, improve=2.5786, (0 missing)
+      TractKids  < 992        to the right, improve=2.1158, (0 missing)
+      lakids1    < 990.05     to the right, improve=1.7202, (0 missing)
+      laseniors1 < 562.14     to the right, improve=1.7202, (0 missing)
+  Surrogate splits:
+      TractWhite   < 2079.5     to the right, agree=1.000, adj=1.000, (0 split)
+      lakids1      < 489.39     to the right, agree=0.857, adj=0.500, (0 split)
+      TractKids    < 510        to the right, agree=0.857, adj=0.500, (0 split)
+      TractSeniors < 290        to the right, agree=0.857, adj=0.500, (0 split)
+      laseniors1   < 289.45     to the right, agree=0.821, adj=0.375, (0 split)
+
+Node number 115: 17 observations
+  predicted class=1  expected loss=0  P(node) =0.00031462
+    class counts:     0    17
+   probabilities: 0.000 1.000 
+
+Node number 116: 542 observations
+  predicted class=0  expected loss=0.28413  P(node) =0.010031
+    class counts:   388   154
+   probabilities: 0.716 0.284 
+
+Node number 117: 218 observations,    complexity param=0.0026748
+  predicted class=1  expected loss=0.30734  P(node) =0.0040345
+    class counts:    67   151
+   probabilities: 0.307 0.693 
+  left son=234 (34 obs) right son=235 (184 obs)
+  Primary splits:
+      TractBlack         < 300.5      to the right, improve=12.7970, (0 missing)
+      lablack1           < 300.5      to the right, improve=11.8070, (0 missing)
+      laseniors10        < 118.47     to the left,  improve= 7.8432, (0 missing)
+      lakids1            < 719.49     to the right, improve= 4.8891, (0 missing)
+      MedianFamilyIncome < 42058      to the right, improve= 4.4966, (0 missing)
+  Surrogate splits:
+      lablack1    < 300.5      to the right, agree=0.995, adj=0.971, (0 split)
+      PCTGQTRS    < 0.25314    to the right, agree=0.862, adj=0.118, (0 split)
+      laseniors10 < 95.745     to the left,  agree=0.849, adj=0.029, (0 split)
+
+Node number 118: 18 observations
+  predicted class=0  expected loss=0.33333  P(node) =0.00033312
+    class counts:    12     6
+   probabilities: 0.667 0.333 
+
+Node number 119: 289 observations
+  predicted class=1  expected loss=0.020761  P(node) =0.0053485
+    class counts:     6   283
+   probabilities: 0.021 0.979 
+
+Node number 120: 788 observations
+  predicted class=0  expected loss=0.25635  P(node) =0.014583
+    class counts:   586   202
+   probabilities: 0.744 0.256 
+
+Node number 121: 711 observations,    complexity param=0.0029614
+  predicted class=0  expected loss=0.44023  P(node) =0.013158
+    class counts:   398   313
+   probabilities: 0.560 0.440 
+  left son=242 (298 obs) right son=243 (413 obs)
+  Primary splits:
+      TractSeniors < 662.5      to the right, improve=18.6600, (0 missing)
+      TractAsian   < 347.5      to the left,  improve=13.0420, (0 missing)
+      TractOMultir < 1207.5     to the left,  improve=12.9290, (0 missing)
+      laseniors1   < 438.84     to the right, improve=11.4590, (0 missing)
+      lakids1      < 129.75     to the left,  improve= 9.0588, (0 missing)
+  Surrogate splits:
+      TractWhite < 3659       to the right, agree=0.799, adj=0.520, (0 split)
+      laseniors1 < 429.5      to the right, agree=0.747, adj=0.396, (0 split)
+      TractHUNV  < 155        to the right, agree=0.677, adj=0.228, (0 split)
+      PCTGQTRS   < 0.012542   to the right, agree=0.660, adj=0.188, (0 split)
+      lawhite1   < 2866.2     to the right, agree=0.658, adj=0.185, (0 split)
+
+Node number 122: 287 observations,    complexity param=0.0014011
+  predicted class=1  expected loss=0.37282  P(node) =0.0053115
+    class counts:   107   180
+   probabilities: 0.373 0.627 
+  left son=244 (92 obs) right son=245 (195 obs)
+  Primary splits:
+      TractSeniors < 719.5      to the right, improve=7.8869, (0 missing)
+      lablack1     < 32.653     to the right, improve=6.8999, (0 missing)
+      TractBlack   < 105        to the right, improve=6.2415, (0 missing)
+      laseniors1   < 560.99     to the right, improve=5.8010, (0 missing)
+      TractAIAN    < 49.5       to the left,  improve=5.3678, (0 missing)
+  Surrogate splits:
+      TractWhite < 4718.5     to the right, agree=0.819, adj=0.435, (0 split)
+      laseniors1 < 517.37     to the right, agree=0.770, adj=0.283, (0 split)
+      TractHUNV  < 177.5      to the right, agree=0.746, adj=0.207, (0 split)
+      TractSNAP  < 488        to the right, agree=0.707, adj=0.087, (0 split)
+      lawhite1   < 3296.3     to the right, agree=0.690, adj=0.033, (0 split)
+
+Node number 123: 427 observations,    complexity param=0.0014011
+  predicted class=1  expected loss=0.11475  P(node) =0.0079024
+    class counts:    49   378
+   probabilities: 0.115 0.885 
+  left son=246 (14 obs) right son=247 (413 obs)
+  Primary splits:
+      MedianFamilyIncome < 30490      to the left,  improve=22.686, (0 missing)
+      PovertyRate        < 1          to the left,  improve=17.696, (0 missing)
+      TractSNAP          < 1.5        to the left,  improve=13.033, (0 missing)
+      lawhite1           < 413.15     to the left,  improve=10.970, (0 missing)
+      lakids1            < 133.08     to the left,  improve=10.218, (0 missing)
+  Surrogate splits:
+      PovertyRate       < 1          to the left,  agree=0.993, adj=0.786, (0 split)
+      TractSNAP         < 1.5        to the left,  agree=0.986, adj=0.571, (0 split)
+      PCTGQTRS          < 0.8978     to the right, agree=0.981, adj=0.429, (0 split)
+      GroupQuartersFlag splits as  RL, agree=0.977, adj=0.286, (0 split)
+      laomultir1        < 1559.7     to the right, agree=0.970, adj=0.071, (0 split)
+
+Node number 124: 224 observations,    complexity param=0.0038212
+  predicted class=0  expected loss=0.25  P(node) =0.0041455
+    class counts:   168    56
+   probabilities: 0.750 0.250 
+  left son=248 (200 obs) right son=249 (24 obs)
+  Primary splits:
+      lawhite1   < 425.97     to the left,  improve=23.8930, (0 missing)
+      TractKids  < 370        to the right, improve=13.0140, (0 missing)
+      laseniors1 < 39.513     to the left,  improve= 9.4316, (0 missing)
+      lablack1   < 442.13     to the left,  improve= 8.1290, (0 missing)
+      laasian1   < 3.2737     to the left,  improve= 8.0460, (0 missing)
+  Surrogate splits:
+      TractKids    < 370        to the right, agree=0.933, adj=0.375, (0 split)
+      PCTGQTRS     < 0.42056    to the left,  agree=0.911, adj=0.167, (0 split)
+      TractSNAP    < 89         to the right, agree=0.902, adj=0.083, (0 split)
+      lahunv1share < 0.062095   to the left,  agree=0.897, adj=0.042, (0 split)
+      lablack1     < 528.33     to the left,  agree=0.897, adj=0.042, (0 split)
+
+Node number 125: 171 observations
+  predicted class=1  expected loss=0.14035  P(node) =0.0031647
+    class counts:    24   147
+   probabilities: 0.140 0.860 
+
+Node number 150: 15 observations
+  predicted class=0  expected loss=0.13333  P(node) =0.0002776
+    class counts:    13     2
+   probabilities: 0.867 0.133 
+
+Node number 151: 12 observations
+  predicted class=1  expected loss=0.25  P(node) =0.00022208
+    class counts:     3     9
+   probabilities: 0.250 0.750 
+
+Node number 156: 330 observations
+  predicted class=0  expected loss=0.14545  P(node) =0.0061073
+    class counts:   282    48
+   probabilities: 0.855 0.145 
+
+Node number 157: 12 observations
+  predicted class=1  expected loss=0.41667  P(node) =0.00022208
+    class counts:     5     7
+   probabilities: 0.417 0.583 
+
+Node number 212: 57 observations
+  predicted class=0  expected loss=0.17544  P(node) =0.0010549
+    class counts:    47    10
+   probabilities: 0.825 0.175 
+
+Node number 213: 8 observations
+  predicted class=1  expected loss=0  P(node) =0.00014805
+    class counts:     0     8
+   probabilities: 0.000 1.000 
+
+Node number 226: 93 observations
+  predicted class=0  expected loss=0.096774  P(node) =0.0017211
+    class counts:    84     9
+   probabilities: 0.903 0.097 
+
+Node number 227: 7 observations
+  predicted class=1  expected loss=0.28571  P(node) =0.00012955
+    class counts:     2     5
+   probabilities: 0.286 0.714 
+
+Node number 228: 20 observations
+  predicted class=0  expected loss=0.15  P(node) =0.00037014
+    class counts:    17     3
+   probabilities: 0.850 0.150 
+
+Node number 229: 8 observations
+  predicted class=1  expected loss=0.375  P(node) =0.00014805
+    class counts:     3     5
+   probabilities: 0.375 0.625 
+
+Node number 234: 34 observations
+  predicted class=0  expected loss=0.29412  P(node) =0.00062923
+    class counts:    24    10
+   probabilities: 0.706 0.294 
+
+Node number 235: 184 observations
+  predicted class=1  expected loss=0.2337  P(node) =0.0034053
+    class counts:    43   141
+   probabilities: 0.234 0.766 
+
+Node number 242: 298 observations
+  predicted class=0  expected loss=0.30537  P(node) =0.005515
+    class counts:   207    91
+   probabilities: 0.695 0.305 
+
+Node number 243: 413 observations
+  predicted class=1  expected loss=0.46247  P(node) =0.0076433
+    class counts:   191   222
+   probabilities: 0.462 0.538 
+
+Node number 244: 92 observations
+  predicted class=0  expected loss=0.45652  P(node) =0.0017026
+    class counts:    50    42
+   probabilities: 0.543 0.457 
+
+Node number 245: 195 observations
+  predicted class=1  expected loss=0.29231  P(node) =0.0036088
+    class counts:    57   138
+   probabilities: 0.292 0.708 
+
+Node number 246: 14 observations
+  predicted class=0  expected loss=0  P(node) =0.0002591
+    class counts:    14     0
+   probabilities: 1.000 0.000 
+
+Node number 247: 413 observations
+  predicted class=1  expected loss=0.084746  P(node) =0.0076433
+    class counts:    35   378
+   probabilities: 0.085 0.915 
+
+Node number 248: 200 observations
+  predicted class=0  expected loss=0.17  P(node) =0.0037014
+    class counts:   166    34
+   probabilities: 0.830 0.170 
+
+Node number 249: 24 observations
+  predicted class=1  expected loss=0.083333  P(node) =0.00044416
+    class counts:     2    22
+   probabilities: 0.083 0.917 
+
