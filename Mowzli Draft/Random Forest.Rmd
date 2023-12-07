@@ -1,0 +1,43 @@
+---
+title: "RandomForest"
+output: html_document
+date: "2023-12-07"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load necessary libraries
+library(randomForest)
+library(utils)
+
+food_access_data <- read.csv("../Documents/food_access_research_atlas.csv")
+
+# Preprocess the data
+# This might include handling missing values, transforming variables, etc.
+# Example:
+food_access_data <- na.omit(food_access_data) # Remove rows with NA values
+# Assuming your dataset is named 'food_access_data'
+# Assuming 'target_variable' is your target column, and you have predictor columns
+# Convert the column to a factor
+food_access_data$LILATracts_1And10 <- as.factor(food_access_data$LILATracts_1And10)
+
+# Split the data into training and testing sets
+set.seed(123) # for reproducibility
+training_indices <- sample(1:nrow(food_access_data), 0.8 * nrow(food_access_data))
+train_data <- food_access_data[training_indices, ]
+test_data <- food_access_data[-training_indices, ]
+
+
+# Train the Random Forest model
+# For classification
+rf_model_1 <- randomForest(food_access_data$LILATracts_1And10 ~ food_access_data$TractKids + food_access_data$TractSeniors, data = train_data, ntree = 500)
+# For regression
+
+rf_model_2 <- randomForest(food_access_data$LILATracts_1And10 ~ food_access_data$TractKids + food_access_data$TractSeniors, data = train_data, ntree = 500, method="regression")
+
+importance(rf_model_1)
+importance(rf_model_2)
+```
