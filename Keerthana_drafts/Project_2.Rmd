@@ -119,14 +119,15 @@ for a one-unit increase in GroupQuartersFlag1, the odds of the event (typically 
 
 ```{r}
 #install.packages("car")
-df$Urban <- factor(df$Urban)
+df$Urban <- as.factor(df$Urban)
+df$LowIncomeTracts <- as.factor(df$LowIncomeTracts)
 library(car)
 
 # Assuming df is your data frame with predictor variables
 # Replace 'df' with your actual data frame and include only the predictor variables
 
 # Fit a linear regression model (assuming 'response_variable' is your response variable)
-model <- glm(LILATracts_1And10 ~ HUNVFlag + LATractsVehicle_20, data = df, family = binomial(link = "logit"))
+model <- lm(PovertyRate ~ MedianFamilyIncome + LowIncomeTracts + TractSNAP + TractHUNV + laasian1 + TractSeniors + TractWhite, data = df)
 
 # TractWhite+TractBlack+TractAsian+TractNHOPI+TractAIAN+TractOMultir+TractHispanic+lawhite10+lawhite10share+lablack10+lablack10share+laasian10+laasian10share+lanhopi10+lanhopi10share+laaian10+laaian10share+laomultir10+laomultir10share+lahisp10+lahisp10share
 
@@ -359,6 +360,92 @@ model12 <- lm(PovertyRate ~ LILATracts_1And10, data = df)
 summary(model12)
 #df$TractSNAP
 ```
+
+```{r model}
+
+modelVIF <- lm(PovertyRate ~ MedianFamilyIncome + LowIncomeTracts + TractSNAP + TractHUNV + laasian1 + TractSeniors + TractWhite, data = df)
+summary(modelVIF)
+#df$TractSNAP
+```
+
+```{r}
+library(car)
+
+
+# Observed vs. Predicted plot
+#plot(modelVIF, col="blue", pch=16, main="Observed vs. Predicted", cex.main=1.2, col.main="red")
+
+plot_data <- data.frame(
+  Observed = df$PovertyRate,  # Replace 'df' with your actual data frame
+  Predicted = predict(modelVIF)
+)
+
+# Create the observed vs. predicted plot
+plot(plot_data$Predicted, plot_data$Observed, 
+     main = "Observed vs. Predicted",
+     xlab = "Predicted Values",
+     ylab = "Observed Values",
+     col = "blue", pch = 16)
+
+# Add a reference line for a perfect fit (y = x)
+abline(0, 1, col = "red")
+
+```
+
+```{r}
+library(car)
+
+# Compute influence measures
+influence_data <- influence.measures(modelVIF)
+
+# Cook's distance
+cooksd <- influence_data$infmat[, "cook.d"]
+
+# Studentized residuals
+student_resid <- rstandard(modelVIF)
+
+# Leverage vs. Residuals plot
+plot(hatvalues(modelVIF), student_resid,
+     main = "Residuals vs. Leverage",
+     xlab = "Leverage",
+     ylab = "Studentized Residuals",
+     pch = 16,
+     col = ifelse(cooksd > 4/nrow(df), "red", "blue"))
+
+# Identify influential points using Cook's distance
+influential_points_cook <- which(cooksd > 4/nrow(df))
+
+# Print influential points identified by Cook's distance
+cat("Influential Points (Cook's Distance):", influential_points_cook, "\n")
+
+```
+
+## Normality of Median family income
+
+```{r}
+hist(df$MedianFamilyIncome, main = "Histogram of Median Family Income", xlab = "Median Family Income")
+
+# Check normality with a Q-Q plot
+qqnorm(df$MedianFamilyIncome, main = "Q-Q Plot of Median Family Income")
+qqline(df$MedianFamilyIncome, col = 2)
+
+# Check normality with the Shapiro-Wilk test
+shapiro.test(df$MedianFamilyIncome)
+```
+
+## Normality of Poverty rate
+
+```{r}
+hist(df$PovertyRate, main = "Histogram of PovertyRate", xlab = "PovertyRate")
+
+# Check normality with a Q-Q plot
+qqnorm(df$PovertyRate, main = "Q-Q Plot of PovertyRate")
+qqline(df$PovertyRate, col = 2)
+
+# Check normality with the Shapiro-Wilk test
+shapiro.test(df$PovertyRate)
+```
+
 
 ############################################################
 # What specific factors most significantly contribute to a tract being classified as a food desert?
@@ -963,4 +1050,107 @@ ks.test(df$lawhite1,pnorm) # Kolmogorov-Smirnov Tests against normal distributio
 
 ```{r}
 mlbclean = outlierKD2(df, laomultir1, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
+
+```{r}
+mlbclean1 = ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
+
+## Food desert variable importance
+
+```{r}
+
+variable_values <- c(5.9063e-03, 9.9995e-01, 4.3839e+01, 1.0096e+00, 1.0012e+00, 
+                     9.9130e-01, 1.0035e+00, 9.9986e-01, 1.0004e+00, 9.9966e-01, 1.0172e+00,
+                     1.0005e+00, 9.5884e-02, 9.9924e-01, 1.0006e+00, 1.0006e+00, 1.9875e+00,
+                     1.0005e+00, 1.0010e+00, 9.9960e-01, 1.0001e+00, 9.9904e-01, 1.0005e+00)
+
+variable_names <- c("lahunv1share", "MedianFamilyIncome", "Urban1", 
+                    "laseniors10", "laomultir1", "TractHUNV", "TractSNAP", "lawhite1",
+                    "TractWhite", "TractHispanic", "PovertyRate", "lablack1", 
+                    "GroupQuartersFlag1", "lakids1", "lahisp1", "TractAIAN", "PCTGQTRS",
+                    "TractOMultir", "lakids10", "TractKids", "TractBlack", "laseniors1",
+                    "TractSeniors")
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Variable importance",
+       x = "Variable",
+       y = "importance") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+
+
+```{r}
+metrics_data <- data.frame(
+  Method = c("CART", "CART", "CART", "Logistic", "Logistic", "Logistic"),
+  Metric = c("precision", "recall", "accuracy", "precision", "recall", "accuracy"),
+  Value = c(0.43029, 0.83996, 0.89117, 0.30786, 0.87071, 0.82149)
+)
+
+# Create the line graph using ggplot2
+ggplot(metrics_data, aes(x = Metric, y = Value, group = Method, color = Method)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Comparison of CART and Logistic Metrics",
+       x = "Metric",
+       y = "Value") +
+  theme_minimal()
+
+```
+
+## Poverty rate variable importance
+
+```{r}
+
+variable_values <- c(100, 58.0798, 38.5578, 29.0375, 12.6898, 11.8240, 9.7042, 0, 0, 0)
+
+variable_names <- c("MedianFamilyIncome","LowIncomeTracts","TractSNAP","TractHUNV","TractBlack","TractSeniors","TractWhite", "lahisp","lawhite1","lakids10")
+  
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Variable importance",
+       x = "Variable",
+       y = "importance") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+```{r}
+metrics_data <- data.frame(
+  Method = c("Linear", "Linear", "CART", "CART"),
+  Metric = c("R2", "RMSE", "R2", "RMSE"),
+  Value = c(0.63682, 7.4614, 0.68551, 6.9420)
+)
+
+# Create the line graph using ggplot2
+ggplot(metrics_data, aes(x = Metric, y = Value, group = Method, color = Method)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Comparison of CART and Linear Metrics",
+       x = "Metric",
+       y = "Value") +
+  theme_minimal()
+
 ```
