@@ -103,8 +103,11 @@ All the coefficients are found significant (small p-values). Poverty rate have p
 xkabledply(model, title = paste("Logistic Regression :", format(formula(model)) ))
 ```
 
+##########################################3
+##########################################
+
 ```{r growthDecayFactors, results='markup', collapse=F}
-expcoeff = exp(coef(model))
+expcoeff = exp(coef(model10))
 expcoeff
 #xkabledply(as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
 ```
@@ -116,14 +119,15 @@ for a one-unit increase in GroupQuartersFlag1, the odds of the event (typically 
 
 ```{r}
 #install.packages("car")
-df$Urban <- factor(df$Urban)
+df$Urban <- as.factor(df$Urban)
+df$LowIncomeTracts <- as.factor(df$LowIncomeTracts)
 library(car)
 
 # Assuming df is your data frame with predictor variables
 # Replace 'df' with your actual data frame and include only the predictor variables
 
 # Fit a linear regression model (assuming 'response_variable' is your response variable)
-model <- glm(LILATracts_1And10 ~ HUNVFlag + LATractsVehicle_20, data = df, family = binomial(link = "logit"))
+model <- lm(PovertyRate ~ MedianFamilyIncome + LowIncomeTracts + TractSNAP + TractHUNV + laasian1 + TractSeniors + TractWhite, data = df)
 
 # TractWhite+TractBlack+TractAsian+TractNHOPI+TractAIAN+TractOMultir+TractHispanic+lawhite10+lawhite10share+lablack10+lablack10share+laasian10+laasian10share+lanhopi10+lanhopi10share+laaian10+laaian10share+laomultir10+laomultir10share+lahisp10+lahisp10share
 
@@ -219,6 +223,227 @@ In urban areas, the presence of group quarters (GroupQuartersFlag1) is associate
 model6 <- glm(LILATracts_1And10 ~ GroupQuartersFlag + Urban + PovertyRate, family = binomial(link = "logit"), data = df)
 
 summary(model6)
+```
+
+## Model 8: PovertyRate ~ GroupQuarters
+
+```{r model}
+
+model8 <- lm(PovertyRate ~ GroupQuartersFlag, data = df)
+
+summary(model8)
+```
+
+
+- How is Groupquarters associated with Poverty rate:
+
+```{r code8, include=FALSE}
+
+# data_outliers <- ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+data_outliers <- df
+GroupQuarters_Poverty <- data_outliers[data_outliers$GroupQuartersFlag == 1, c("GroupQuartersFlag", "PovertyRate")]
+NonGroupQuarters_Poverty <- data_outliers[data_outliers$GroupQuartersFlag == 0, c("GroupQuartersFlag", "PovertyRate")]
+
+```
+
+```{r code9, echo=TRUE}
+
+data2 = data.frame()
+Percentage_GroupQuarters_Poverty = sum(GroupQuarters_Poverty$PovertyRate)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+Percentage_NonGroupQuarters_Poverty = sum(NonGroupQuarters_Poverty$PovertyRate)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+data2 <- rbind(data2, Percentage_GroupQuarters_Poverty)
+data2 <- rbind(data2, Percentage_NonGroupQuarters_Poverty)
+GroupQuartersFlag = c(1,0)
+data2 <- cbind(data2, GroupQuartersFlag)
+colnames(data2) <- c('Percentage', 'GroupQuartersFlag')
+
+library(ggplot2)
+ggplot(data2, aes(x = factor(GroupQuartersFlag), y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("0" = "pink", "1" = "lightblue")) +
+  labs(title = "Percentage of Poverty in group quarters",
+       fill = "GroupQuartersFlag") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+## Model 9: PovertyRate ~ medianFamilyIncome : Urban
+
+```{r model}
+
+model9 <- lm(PovertyRate ~ MedianFamilyIncome * Urban, data = df)
+summary(model9)
+```
+
+
+```{r}
+
+ggplot(df, aes(x = MedianFamilyIncome, y = PovertyRate, color)) +
+  geom_point() +
+  labs(x = "Median Family Income", y = "Poverty Rate") +
+  theme_minimal()
+
+ggplot(df, aes(x = factor(Urban), y = MedianFamilyIncome, fill = factor(Urban))) +
+  geom_boxplot() +
+  labs(x = "Urban", y = "Median Family Income", title = "Box Plot of Median Family Income by Urban/Rural") +
+  theme_minimal()
+
+```
+
+```{r}
+data_outliers <- ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
+
+## Model 10: PovertyRate ~ TractSNAP
+
+```{r model}
+
+model10 <- lm(PovertyRate ~ TractSNAP, data = df)
+summary(model10)
+#df$TractSNAP
+```
+
+```{r}
+
+ggplot(df, aes(x = TractSNAP, y = PovertyRate, color = 'g')) +
+  geom_point() +
+  labs(x = "TractSNAP", y = "Poverty Rate") +
+  theme_minimal()
+```
+
+## Model 11: PovertyRate ~ LowIncomeTracts
+
+```{r model}
+df$LowIncomeTracts = as.factor(df$LowIncomeTracts)
+model11 <- lm(PovertyRate ~ LowIncomeTracts, data = df)
+summary(model11)
+#df$TractSNAP
+```
+
+```{r code8, include=FALSE}
+
+# data_outliers <- ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+data_outliers <- df
+LowIncomeTracts_Poverty <- data_outliers[data_outliers$LowIncomeTracts == 1, c("LowIncomeTracts", "PovertyRate")]
+NonLowIncomeTracts_Poverty <- data_outliers[data_outliers$LowIncomeTracts == 0, c("LowIncomeTracts", "PovertyRate")]
+
+```
+
+```{r code9, echo=TRUE}
+
+data2 = data.frame()
+Percentage_LowIncomeTracts_Poverty = sum(LowIncomeTracts_Poverty$PovertyRate)/(sum(nrow(LowIncomeTracts_Poverty)+ nrow(NonLowIncomeTracts_Poverty)))*100
+Percentage_NonLowIncomeTracts_Poverty = sum(NonLowIncomeTracts_Poverty$PovertyRate)/(sum(nrow(LowIncomeTracts_Poverty)+ nrow(NonLowIncomeTracts_Poverty)))*100
+data2 <- rbind(data2, Percentage_LowIncomeTracts_Poverty)
+data2 <- rbind(data2, Percentage_NonLowIncomeTracts_Poverty)
+LowIncomeTracts = c(1,0)
+data2 <- cbind(data2, LowIncomeTracts)
+colnames(data2) <- c('Percentage', 'LowIncomeTracts')
+
+library(ggplot2)
+ggplot(data2, aes(x = factor(LowIncomeTracts), y = Percentage, fill = factor(LowIncomeTracts))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("0" = "lightgreen", "1" = "lightblue")) +
+  labs(title = "Percentage of Poverty in LowIncomeTracts",
+       fill = "LowIncomeTracts") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+## Model 12: PovertyRate ~ LILATracts_1And10
+
+```{r model}
+
+model12 <- lm(PovertyRate ~ LILATracts_1And10, data = df)
+summary(model12)
+#df$TractSNAP
+```
+
+```{r model}
+
+modelVIF <- lm(PovertyRate ~ MedianFamilyIncome + LowIncomeTracts + TractSNAP + TractHUNV + laasian1 + TractSeniors + TractWhite, data = df)
+summary(modelVIF)
+#df$TractSNAP
+```
+
+```{r}
+library(car)
+
+
+# Observed vs. Predicted plot
+#plot(modelVIF, col="blue", pch=16, main="Observed vs. Predicted", cex.main=1.2, col.main="red")
+
+plot_data <- data.frame(
+  Observed = df$PovertyRate,  # Replace 'df' with your actual data frame
+  Predicted = predict(modelVIF)
+)
+
+# Create the observed vs. predicted plot
+plot(plot_data$Predicted, plot_data$Observed, 
+     main = "Observed vs. Predicted",
+     xlab = "Predicted Values",
+     ylab = "Observed Values",
+     col = "blue", pch = 16)
+
+# Add a reference line for a perfect fit (y = x)
+abline(0, 1, col = "red")
+
+```
+
+```{r}
+library(car)
+
+# Compute influence measures
+influence_data <- influence.measures(modelVIF)
+
+# Cook's distance
+cooksd <- influence_data$infmat[, "cook.d"]
+
+# Studentized residuals
+student_resid <- rstandard(modelVIF)
+
+# Leverage vs. Residuals plot
+plot(hatvalues(modelVIF), student_resid,
+     main = "Residuals vs. Leverage",
+     xlab = "Leverage",
+     ylab = "Studentized Residuals",
+     pch = 16,
+     col = ifelse(cooksd > 4/nrow(df), "red", "blue"))
+
+# Identify influential points using Cook's distance
+influential_points_cook <- which(cooksd > 4/nrow(df))
+
+# Print influential points identified by Cook's distance
+cat("Influential Points (Cook's Distance):", influential_points_cook, "\n")
+
+```
+
+## Normality of Median family income
+
+```{r}
+hist(df$MedianFamilyIncome, main = "Histogram of Median Family Income", xlab = "Median Family Income")
+
+# Check normality with a Q-Q plot
+qqnorm(df$MedianFamilyIncome, main = "Q-Q Plot of Median Family Income")
+qqline(df$MedianFamilyIncome, col = 2)
+
+# Check normality with the Shapiro-Wilk test
+shapiro.test(df$MedianFamilyIncome)
+```
+
+## Normality of Poverty rate
+
+```{r}
+hist(df$PovertyRate, main = "Histogram of PovertyRate", xlab = "PovertyRate")
+
+# Check normality with a Q-Q plot
+qqnorm(df$PovertyRate, main = "Q-Q Plot of PovertyRate")
+qqline(df$PovertyRate, col = 2)
+
+# Check normality with the Shapiro-Wilk test
+shapiro.test(df$PovertyRate)
 ```
 
 
@@ -825,4 +1050,107 @@ ks.test(df$lawhite1,pnorm) # Kolmogorov-Smirnov Tests against normal distributio
 
 ```{r}
 mlbclean = outlierKD2(df, laomultir1, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
+
+```{r}
+mlbclean1 = ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
+
+## Food desert variable importance
+
+```{r}
+
+variable_values <- c(5.9063e-03, 9.9995e-01, 4.3839e+01, 1.0096e+00, 1.0012e+00, 
+                     9.9130e-01, 1.0035e+00, 9.9986e-01, 1.0004e+00, 9.9966e-01, 1.0172e+00,
+                     1.0005e+00, 9.5884e-02, 9.9924e-01, 1.0006e+00, 1.0006e+00, 1.9875e+00,
+                     1.0005e+00, 1.0010e+00, 9.9960e-01, 1.0001e+00, 9.9904e-01, 1.0005e+00)
+
+variable_names <- c("lahunv1share", "MedianFamilyIncome", "Urban1", 
+                    "laseniors10", "laomultir1", "TractHUNV", "TractSNAP", "lawhite1",
+                    "TractWhite", "TractHispanic", "PovertyRate", "lablack1", 
+                    "GroupQuartersFlag1", "lakids1", "lahisp1", "TractAIAN", "PCTGQTRS",
+                    "TractOMultir", "lakids10", "TractKids", "TractBlack", "laseniors1",
+                    "TractSeniors")
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Variable importance",
+       x = "Variable",
+       y = "importance") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+
+
+```{r}
+metrics_data <- data.frame(
+  Method = c("CART", "CART", "CART", "Logistic", "Logistic", "Logistic"),
+  Metric = c("precision", "recall", "accuracy", "precision", "recall", "accuracy"),
+  Value = c(0.43029, 0.83996, 0.89117, 0.30786, 0.87071, 0.82149)
+)
+
+# Create the line graph using ggplot2
+ggplot(metrics_data, aes(x = Metric, y = Value, group = Method, color = Method)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Comparison of CART and Logistic Metrics",
+       x = "Metric",
+       y = "Value") +
+  theme_minimal()
+
+```
+
+## Poverty rate variable importance
+
+```{r}
+
+variable_values <- c(100, 58.0798, 38.5578, 29.0375, 12.6898, 11.8240, 9.7042, 0, 0, 0)
+
+variable_names <- c("MedianFamilyIncome","LowIncomeTracts","TractSNAP","TractHUNV","TractBlack","TractSeniors","TractWhite", "lahisp","lawhite1","lakids10")
+  
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Variable importance",
+       x = "Variable",
+       y = "importance") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+```{r}
+metrics_data <- data.frame(
+  Method = c("Linear", "Linear", "CART", "CART"),
+  Metric = c("R2", "RMSE", "R2", "RMSE"),
+  Value = c(0.63682, 7.4614, 0.68551, 6.9420)
+)
+
+# Create the line graph using ggplot2
+ggplot(metrics_data, aes(x = Metric, y = Value, group = Method, color = Method)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Comparison of CART and Linear Metrics",
+       x = "Metric",
+       y = "Value") +
+  theme_minimal()
+
 ```
