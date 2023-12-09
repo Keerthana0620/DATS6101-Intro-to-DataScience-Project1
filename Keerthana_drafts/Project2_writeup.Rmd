@@ -1,0 +1,512 @@
+---
+title: "Keerthana Writeup - Project2"
+author: "Keerthana"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    number_sections: true
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+---
+
+```{r include=FALSE}
+# The package "ezids" (EZ Intro to Data Science) includes a lot of the helper functions we developed for the course. 
+# Some of the frequently used functions are loadPkg(), xkabledply(), xkablesummary(), uzscale(), etc.
+library(ezids)
+ 
+# some of common options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+# knitr::opts_chunk$set(warning = F, results = "markup", message = F)
+knitr::opts_chunk$set(warning = F, results = "hide", message = F)
+options(scientific=T, digits = 3) 
+# options(scipen=9, digits = 3) 
+# ‘scipen’: integer. A penalty to be applied when deciding to print numeric values in fixed or exponential notation.  Positive values bias towards fixed and negative towards scientific notation: fixed notation will be preferred unless it is more than ‘scipen’ digits wider.
+# use scipen=999 to prevent scientific notation at all times
+```
+
+```{r base_lib}
+loadPkg("ggplot2")
+```
+
+## Loading dataset
+
+```{r}
+df <- data.frame(read.csv("FoodDesert2015.csv")) 
+head(df)
+#summary(df)
+```
+
+## Factorizing Categorical variable
+
+```{r encoding}
+df$LILATracts_1And10 <- as.factor(df$LILATracts_1And10)
+df$GroupQuartersFlag <- as.factor(df$GroupQuartersFlag)
+df$Urban = as.factor(df$Urban)
+df$LILATracts_halfAnd10 = as.factor(df$LILATracts_halfAnd10)
+df$LILATracts_1And20 = as.factor(df$LILATracts_1And20)
+df$LILATracts_Vehicle = as.factor(df$LILATracts_Vehicle)
+df$HUNVFlag = as.factor(df$HUNVFlag)
+df$LowIncomeTracts = as.factor(df$LowIncomeTracts)
+df$LA1and10 = as.factor(df$LA1and10)
+df$LAhalfand10 = as.factor(df$LAhalfand10)
+df$LA1and20 = as.factor(df$LA1and20)
+df$LATracts_half = as.factor(df$LATracts_half)
+df$LATracts1 = as.factor(df$LATracts1)
+df$LATracts10 = as.factor(df$LATracts10)
+df$LATracts20 = as.factor(df$LATracts20)
+df$LATractsVehicle_20 = as.factor(df$LATractsVehicle_20)
+str(df)
+```
+
+********** Slide 8 and 9 ****************
+
+## Correlation analysis between GroupQuarters and Food desert:
+
+### Chi sq test analysis:
+
+chi-square (GOF) test between 2 categorical variables (GroupQuartersFlag and LILATracts_1And10):
+
+-   Null Hypothesis (H0): There is no association between the two categorical variables
+
+-   Alternative Hypothesis (H1): There is an association between the two categorical variables
+
+Significance level $\alpha$ = 0.05
+
+```{r chisq, echo=TRUE}
+contingency_table <- table(df$GroupQuartersFlag, df$LILATracts_1And10)
+
+chi_squared_test_result <- chisq.test(contingency_table)
+chi_squared_test_result
+
+```
+
+Due to the extremely low p value, H0 is rejected. Therefore, there is a **significant association or correlation** between "GroupQuartersFlag" and "LILATracts_1And10."
+
+### Graph analysis:
+
+```{r GQchart1, echo=TRUE}
+GroupQuarters_LILA <- df[ (df$GroupQuartersFlag == 1 & df$LILATracts_1And10 == 1), c("GroupQuartersFlag", "LILATracts_1And10")]
+NonGroupQuarters_LILA <- df[df$GroupQuartersFlag == 0 & df$LILATracts_1And10 == 1, c("GroupQuartersFlag", "LILATracts_1And10")]
+
+data1 = data.frame()
+Percentage_GroupQuarters_LILA = nrow(GroupQuarters_LILA)/(sum(nrow(GroupQuarters_LILA)+ nrow(NonGroupQuarters_LILA)))*100
+Percentage_NonGroupQuarters_LILA = nrow(NonGroupQuarters_LILA)/(sum(nrow(GroupQuarters_LILA)+ nrow(NonGroupQuarters_LILA)))*100
+data1 <- rbind(data1, Percentage_GroupQuarters_LILA)
+data1 <- rbind(data1, Percentage_NonGroupQuarters_LILA)
+GroupQuartersFlag = c(1,0)
+data1 <- cbind(data1, GroupQuartersFlag)
+colnames(data1) <- c('Percentage', 'GroupQuartersFlag')
+```
+
+```{r GQchart2, echo=TRUE}
+
+library(ggplot2)
+pie_chart <- ggplot(data1, aes(x = "", y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Group quarters in Food desert regions",
+       fill = "GroupQuartersFlag") +
+  scale_fill_manual(values = c("0" = "grey", "1" = "black"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+
+```
+
+The pie chart clearly illustrates that within food desert regions, the percentage of Group Quarters is significantly lower when compared to Non-Group Quarters.
+
+### Impact of Group Quarters on Food desert - Inference:
+
+```{r GQinference1, echo=TRUE}
+
+model1 <- glm(LILATracts_1And10 ~ PovertyRate + GroupQuartersFlag, family = binomial(link = "logit"), data = df)
+xkabledply(model1, title = paste("Logistic Regression :", format(formula(model1)) ))
+# summary(model1)
+```
+
+GroupQuartersFlag = 1 is associated with a decrease of 0.643663 in the log-odds of the response variable (LILATracts_1And10) being 1. The coefficient is significant (p-value = 8e-06).
+
+```{r GQinference2, results='markup', collapse=F}
+expcoeff = exp(coef(model1))
+#expcoeff
+xkabledply(as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
+```
+
+The effect of being in GroupQuartersFlag = 1, compared to GroupQuartersFlag = 0, is hurting by a factor of `r format(expcoeff[3],digit=4)`, for the log(odds-ratio).  Any factor less than 1 represents a negative effect.
+
+`Analysis` :
+
+Hence, insights drawn from both graphical representation and logistic regression models converge to indicate that `GroupQuartersflag negatively affect the Food deserts.`
+
+********** Slide 10 ****************
+
+## Impact of GroupQuarters and poverty rate on Food desert:
+
+### Graph analysis:
+
+```{r GQPTYchart1, include=FALSE}
+
+data_outliers <- ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+GroupQuarters_Poverty <- data_outliers[data_outliers$GroupQuartersFlag == 1, c("GroupQuartersFlag", "PovertyRate")]
+NonGroupQuarters_Poverty <- data_outliers[data_outliers$GroupQuartersFlag == 0, c("GroupQuartersFlag", "PovertyRate")]
+
+```
+
+```{r GQPTYchart2, echo=TRUE}
+
+data2 = data.frame()
+Percentage_GroupQuarters_Poverty = nrow(GroupQuarters_Poverty)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+Percentage_NonGroupQuarters_Poverty = nrow(NonGroupQuarters_Poverty)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+data2 <- rbind(data2, Percentage_GroupQuarters_Poverty)
+data2 <- rbind(data2, Percentage_NonGroupQuarters_Poverty)
+GroupQuartersFlag = c(1,0)
+data2 <- cbind(data2, GroupQuartersFlag)
+colnames(data2) <- c('Percentage', 'GroupQuartersFlag')
+
+pie_chart <- ggplot(data2, aes(x = "", y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Poverty in group quarters",
+       fill = "GroupQuartersFlag") +
+  scale_fill_manual(values = c("0" = "pink", "1" = "black"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+
+```
+
+Analysis of the pie chart reveals that Non-Group Quarters tracts exhibit a higher poverty rate compared to Group Quarters tracts.
+
+### Interaction term between group quarters and poverty rate - inference:
+
+```{r GQPTYinference1, echo=TRUE}
+
+model2 <- glm(LILATracts_1And10 ~ PovertyRate * GroupQuartersFlag, family = binomial(link = "logit"), data = df)
+xkabledply(model2, title = paste("Logistic Regression :", format(formula(model2)) ))
+# summary(model1)
+```
+
+* In Non GroupQuarters (GroupQuartersFlag is 0), one unit increase in PovertyRate is associated with a relatively larger increase (0.0570596) in the log-odds of the response variable being 1.
+
+* In GroupQuarters (GroupQuartersFlag is 1), one unit increase in PovertyRate is associated with smaller increase (0.026) in the log-odds of the response variable being 1.
+
+
+```{r GQPTYinference2, results='markup', collapse=F}
+expcoeff = exp(coef(model2))
+#expcoeff
+xkabledply(as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
+```
+
+`Analysis` :  
+
+* Through EDA and consideration of interaction terms, it becomes evident that a one-unit increase in the poverty rate within Non-Group Quarters has a more substantial impact on the prevalence of food deserts compared to a one-unit increase in the poverty rate within Group Quarters.
+
+* Consequently, relationship between PovertyRate and the odds of the Food desert is influenced by the presence of GroupQuartersFlag.
+
+
+********** Slide 11 ****************
+
+## Impact of GroupQuarters and Urban on Food desert:
+
+### Graph analysis:
+
+```{r GQUrbanchart1, echo=TRUE}
+
+GroupQuarters <- df[df$GroupQuartersFlag == 1, c("GroupQuartersFlag", "Urban")]
+
+bar_chart <- ggplot(GroupQuarters, aes(x = GroupQuartersFlag, fill = Urban)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Comparison of GroupQuartersFlag and Urban Flag",
+       x = "Group Quarters Flag",
+       y = "Count") +
+  scale_fill_manual(values = c("1" = "lightgreen", "0" = "magenta")) +
+  theme_minimal()
+
+print(bar_chart)
+```
+
+The bar chart highlights a higher prevalence of Group Quarters in Urban areas than in Rural.
+
+### Interaction term between group quarters and Urban - inference:
+
+```{r GQUrbaninference1, echo=TRUE}
+
+model3 <- glm(LILATracts_1And10 ~ GroupQuartersFlag * Urban, family = binomial(link = "logit"), data = df)
+xkabledply(model3, title = paste("Logistic Regression :", format(formula(model3)) ))
+# summary(model1)
+```
+
+* In non-urban areas, the presence of group quarters (GroupQuartersFlag1) is not statistically significant in predicting the log-odds of the response variable being 1.
+
+* In urban areas, the presence of group quarters (GroupQuartersFlag1) is associated with an increase in the log-odds of the response variable being 1. However, the statistical significance of this effect is not strong based on the p-value.
+
+
+```{r GQUrbaninference2, results='markup', collapse=F}
+expcoeff = exp(coef(model3))
+#expcoeff
+xkabledply(as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
+```
+
+
+The log(odds-ratio) for a tract to be food desert is improve by a factor of `r format(expcoeff[4],digit=6)` for GroupQuartersFlag = 1 when Urban1 is 1 compared to when it is 0.
+
+`Analysis` :
+
+The EDA analysis and inference provides the fact that presence of GroupQuarters have stronger positve impact on Food desert in Urban than in Rural.
+
+## Impact of Urban on Food desert:
+
+```{r Urbaninference1, echo=TRUE}
+
+model4 <- glm(LILATracts_1And10 ~ Urban, family = binomial(link = "logit"), data = df)
+xkabledply(model4, title = paste("Logistic Regression :", format(formula(model4)) ))
+# summary(model1)
+```
+
+
+```{r Urbaninference2, results='markup', collapse=F}
+expcoeff = exp(coef(model4))
+#expcoeff
+xkabledply(as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
+```
+
+`Analysis`
+
+The effect of a tract being food desert from Urban area, compared to Rural, is associated with a statistically significant increase by a factor of `r format(expcoeff[2],digit=4)`, for the log(odds-ratio).
+
+********** Slide 11 ****************
+
+## Logg odds ratio of Food desert model.
+
+```{r Varimp, echo=TRUE}
+
+variable_values <- c(9.9995e-01, 4.3839e+01, 1.0096e+00, 1.0012e+00, 
+                     9.9130e-01, 1.0035e+00, 9.9986e-01, 1.0004e+00, 9.9966e-01, 1.0172e+00,
+                     1.0005e+00, 9.5884e-02, 9.9924e-01, 1.0006e+00, 1.0006e+00, 1.9875e+00,
+                     1.0005e+00, 1.0010e+00, 9.9960e-01, 1.0001e+00, 9.9904e-01, 1.0005e+00)
+
+variable_names <- c("MedianFamilyIncome", "Urban1", 
+                    "laseniors10", "laomultir1", "TractHUNV", "TractSNAP", "lawhite1",
+                    "TractWhite", "TractHispanic", "PovertyRate", "lablack1", 
+                    "GroupQuartersFlag1", "lakids1", "lahisp1", "TractAIAN", "PCTGQTRS",
+                    "TractOMultir", "lakids10", "TractKids", "TractBlack", "laseniors1",
+                    "TractSeniors")
+
+# "lahunv1share",    2.0088e+43
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Log odds ratio of model",
+       x = "Variable",
+       y = "Log odds") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+First 4 variables that impact Food desert:
+
+* lahunv1share - 2.0088e+43
+* Urban1       - 4.3839e+01
+* PCTGQTRS     - 1.9875e+00
+* PovertyRate  - 1.0172e+00
+
+
+********** Slide 18 ****************
+
+## Comparison of CART and Logistic Metrics.
+
+```{r comp, echo=TRUE}
+
+metrics_data <- data.frame(
+  Method = c("CART", "CART", "CART", "Logistic", "Logistic", "Logistic"),
+  Metric = c("precision", "recall", "accuracy", "precision", "recall", "accuracy"),
+  Value = c(0.43029, 0.83996, 0.89117, 0.30786, 0.87071, 0.82149)
+)
+
+# Create the line graph using ggplot2
+ggplot(metrics_data, aes(x = Metric, y = Value, group = Method, color = Method)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Comparison of CART and Logistic Metrics",
+       x = "Metric",
+       y = "Value") +
+  theme_minimal()
+
+```
+
+
+********** Slide 20 ****************
+
+## Impact of Low income tracts on Poverty Rate.
+
+### Graph analysis:
+
+```{r GQUrbanchart1, include=FALSE}
+
+LowIncomeTracts_Poverty <- df[df$LowIncomeTracts == 1, c("LowIncomeTracts", "PovertyRate")]
+NonLowIncomeTracts_Poverty <- df[df$LowIncomeTracts == 0, c("LowIncomeTracts", "PovertyRate")]
+
+```
+
+```{r GQUrbanchart2, echo=TRUE}
+
+data2 = data.frame()
+Percentage_LowIncomeTracts_Poverty = sum(LowIncomeTracts_Poverty$PovertyRate)/(sum(nrow(LowIncomeTracts_Poverty)+ nrow(NonLowIncomeTracts_Poverty)))*100
+Percentage_NonLowIncomeTracts_Poverty = sum(NonLowIncomeTracts_Poverty$PovertyRate)/(sum(nrow(LowIncomeTracts_Poverty)+ nrow(NonLowIncomeTracts_Poverty)))*100
+data2 <- rbind(data2, Percentage_LowIncomeTracts_Poverty)
+data2 <- rbind(data2, Percentage_NonLowIncomeTracts_Poverty)
+LowIncomeTracts = c(1,0)
+data2 <- cbind(data2, LowIncomeTracts)
+colnames(data2) <- c('Percentage', 'LowIncomeTracts')
+
+library(ggplot2)
+ggplot(data2, aes(x = factor(LowIncomeTracts), y = Percentage, fill = factor(LowIncomeTracts))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("0" = "lightgreen", "1" = "lightblue")) +
+  labs(title = "Percentage of Poverty in LowIncomeTracts",
+       fill = "LowIncomeTracts") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+```{r PTYLITinference1, echo=TRUE}
+
+model5 <- lm(PovertyRate ~ LowIncomeTracts, data = df)
+xkabledply(model5, title = paste("Logistic Regression :", format(formula(model5)) ))
+# summary(model1)
+```
+
+In this case, it suggests that when "LowIncomeTracts" is 1 (compared to 0), the estimated poverty rate increases by approximately 18.72349 units.
+
+**The model indicates that the presence of low-income tracts (LowIncomeTracts1) is a statistically significant predictor of the poverty rate.**
+
+
+********** Slide 21 ****************
+
+## Impact of Food desert on Poverty Rate.
+
+```{r PTYLITinference1, echo=TRUE}
+
+model6 <- lm(PovertyRate ~ LILATracts_1And10, data = df)
+xkabledply(model6, title = paste("Logistic Regression :", format(formula(model6)) ))
+# summary(model1)
+```
+
+It suggests that when "LILATracts_1And10" changes from 0 to 1, the estimated poverty rate increases by approximately 11.35890 units.
+
+**The coefficient for "LILATracts_1And101" suggests a positive association between the presence of such tracts and the poverty rate.**
+
+
+********** Slide 26 to Slide 30 ****************
+
+## Linear regression assumptions:
+
+### Normality of Median family income
+
+```{r norm1, echo=TRUE}
+
+hist(df$MedianFamilyIncome, main = "Histogram of Median Family Income", xlab = "Median Family Income")
+
+# Check normality with a Q-Q plot
+qqnorm(df$MedianFamilyIncome, main = "Q-Q Plot of Median Family Income")
+qqline(df$MedianFamilyIncome, col = 2)
+```
+
+**Removing outliers**
+
+```{r norm2 ,echo=TRUE}
+MedianFamilyIncome_outliers <- ezids::outlierKD2(df, MedianFamilyIncome, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
+
+### Normality of Poverty rate:
+
+```{r norm3, echo=TRUE}
+hist(df$PovertyRate, main = "Histogram of PovertyRate", xlab = "PovertyRate")
+
+# Check normality with a Q-Q plot
+qqnorm(df$PovertyRate, main = "Q-Q Plot of PovertyRate")
+qqline(df$PovertyRate, col = 2)
+```
+**Removing outliers**
+
+```{r norm2 ,echo=TRUE}
+PovertyRate_outliers <- ezids::outlierKD2(df, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
+
+
+********** Slide 24 ****************
+
+
+## Variable importance of Linear regression model.
+
+```{r varimp2, echo=TRUE}
+
+variable_values <- c(100, 58.0798, 38.5578, 29.0375, 12.6898, 11.8240, 9.7042, 0, 0, 0)
+
+variable_names <- c("MedianFamilyIncome","LowIncomeTracts","TractSNAP","TractHUNV","TractBlack","TractSeniors","TractWhite", "lahisp","lawhite1","lakids10")
+  
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Variable importance",
+       x = "Variable",
+       y = "importance") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+Top 4 variables impacting Poverty rate:
+
+* MedianFamilyIncome   100.0000
+* LowIncomeTracts       58.0798
+* TractSNAP             38.5578
+* TractHUNV             29.0375
+
+    
+********** Slide 25 ****************
+
+## Comparison of CART and Linear Regression Metrics.
+
+```{r comp2, echo=TRUE}
+metrics_data <- data.frame(
+  Method = c("Linear", "Linear", "CART", "CART"),
+  Metric = c("R2", "RMSE", "R2", "RMSE"),
+  Value = c(0.63682, 7.4614, 0.68551, 6.9420)
+)
+
+# Create the line graph using ggplot2
+ggplot(metrics_data, aes(x = Metric, y = Value, group = Method, color = Method)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Comparison of CART and Linear Metrics",
+       x = "Metric",
+       y = "Value") +
+  theme_minimal()
+
+```
+
+
