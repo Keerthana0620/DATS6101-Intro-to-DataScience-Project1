@@ -185,4 +185,41 @@ trainData <- cleaned_data[trainIndex, ]
 testData <- cleaned_data[-trainIndex, ]
 ```
 
+## Stepwise forward
+
+In order to consider only the best variables for a model we used stepwise forward model building by including the previously considered variables but excluding the LowIncomeTracts1.
+
+```{r}
+# Load necessary library
+
+model_lila_1_10_var_stepwise = c("Urban","GroupQuartersFlag","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "PovertyRate")
+# Assuming your data is in a dataframe called 'data' and the response variable is 'response'
+# Replace 'response' with your actual response variable name
+formula_str_2 <- paste("LILATracts_1And10 ~", paste(model_lila_1_10_var_stepwise, collapse = " + "))
+# Fit the GLM model
+# Initial model with only the intercept (no predictors)
+initial_logit2_model <- glm(LILATracts_1And10 ~ 1, data = trainData, family = binomial(link = "logit"))
+# Full model with all potential predictors
+full_logit2_model <- glm(as.formula(formula_str_2), data = trainData, family = binomial(link = "logit"))
+# Perform stepwise forward selection
+stepwise_model <- step(initial_logit2_model, scope = list(lower = initial_logit2_model, upper = full_logit2_model), direction = "forward")
+# View the summary of the selected model
+summary(stepwise_model)
+sum_LILATracts_1And10_stepwise_logit2 = summary(stepwise_model)
+#capture.output(sum_LILATracts_1And10_stepwise_logit2, file = "models/glm_3_stepwise_logit_lila1_10_wo_lowincome_summary.txt")
+#capture.output(factors_LILATracts_1And10_logit2, file = "chiffon_drafts/models/glm_3_stepwise_logit_lila1_10_wo_lowincome_factors.txt")
+#saveRDS(stepwise_model, file = "chiffon_drafts/models/rds/glm_3_stepwise_logit_lila1_10_wo_lowincome.rds")
+```
+
+The AIC of the intial stepwise model is 34708. But the final AIC of the model is 19854. Which means the final model is actually better. 
+
+
+
+```{r}
+print(stepwise_model$deviance)
+print(stepwise_model$null.deviance)
+pchisq(  stepwise_model$null.deviance - stepwise_model$deviance  , 54033 - 54010  , lower.tail = F )
+
+```
+
 
