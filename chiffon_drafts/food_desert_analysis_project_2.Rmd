@@ -259,4 +259,32 @@ The auc of the stepwise model is `r auc`. And now we see that AUC is reasonable 
 
 
 
+# Need accuracy code here
+
+```{r}
+ggplot(testData, aes(x = prob, fill = as.factor(LILATracts_1And10))) +
+geom_density(alpha = 0.5) +
+scale_fill_manual(values = c("blue", "red"), labels = c("Negative", "Positive")) +
+labs(title = "Test Set's Predicted Score",
+x = "Predicted Probability",
+y = "Density",
+fill = "Data") +
+theme_minimal() +
+theme(legend.position = "bottom")
+
+cut_off = coords(h, "best", ret = "threshold")
+
+cm = table(testData$LILATracts_1And10,testData$prob >cut_off)
+cm
+precision_stepwise = cm[2,2]/(cm[2,2]+cm[1,2])
+precision_stepwise
+recall_stepwise = cm[2,2]/(cm[2,2]+cm[2,1])
+recall_stepwise
+accuracy_stepwise =  (cm[1,1]+cm[2,2])/(cm[1,1]+ cm[1,2]+cm[2,1] + cm[2,2])
+accuracy_stepwise
+
+```
+* The probability density distribution of the results indicate that it is highly rightly skewed. This is because the data is highly unablanced. 
+* We got the best cut_off for our model from the youden's index as `r cut_off`. We are focused on capturing as many food deserts from the prediction and so our key performance indicator is recall.
+* The model gives a very good recall of `r recall_stepwise`. 
 
