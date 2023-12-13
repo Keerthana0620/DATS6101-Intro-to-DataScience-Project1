@@ -591,6 +591,31 @@ sum_pov_linr_model
 * For every unit increase of the TractSeniors we see that poverty rate decreases by a unit of 1.74e-03.
 * The Count of Black and White people have an a very small negative impact to povertyrate. It is interesting to note that poverty rate decreases more for tractWhite than TractBlack
 
+## Performance of the Linear Regression for Povery Rate 
 
+```{r}
+
+testData$pred = predict(pov_linr_model,testData)
+trainData$pred = predict(pov_linr_model,trainData)
+#print(testData$pred)
+print("Test Data R2")
+test_lin_R2 = adjustedR2(testData,length(select_cart_vars),pov_linr_model)
+print(test_lin_R2)
+print("Train Data R2")
+train_lin_R2 = adjustedR2(trainData,length(select_cart_vars),pov_linr_model)
+print(train_lin_R2)
+print(pov_linr_model)
+sum = summary(pov_linr_model)
+#capture.output(sum, file = "chiffon_drafts/models/lm_pov_summary.txt")
+residuals <- testData$PovertyRate -testData$pred
+# Calculate RMSE
+rmse <- sqrt(mean(residuals^2))
+# Print the RMSE
+print("The RMSE")
+print(rmse)
+
+```
+* The adjusted R square of the Linear Regression model for test set is `r test_lin_R2`. The train set R2 is `r train_lin_R2`. Indicates that there is no overfitting and the model is decent in explaining the poverty rate.
+* The RMSE of the linear model for poverty rate is `r rmse`.
 
 
