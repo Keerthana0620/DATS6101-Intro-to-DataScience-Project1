@@ -375,4 +375,42 @@ fancyRpartPlot(lila_cart_model$finalModel)
 * In addition, being in urban, median family Income, Share of tract housing units that are without vehicle and beyond 1 mile from supermarket, Tract housing units receiving SNAP benefits also have an impact on the tract being a food desert.  
 * These results of the significant factors are confirming our EDA analysis.
 
+# Poverty Rate
+
+## Poverty rate using CART
+
+As the poverty rate is related to food desert through government policies. We analysed poverty rate and also created a models to predict poveryrate.
+
+We created a CART model on the Poverty Rate to create a decision tree and help any decision maker to find out whether a place is Povery rate or not by asking few questions from the data. 
+
+```{r}
+#Poverty Rate
+model_pov_rate_columns =  c("LILATracts_1And10","Urban",
+"GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP")
+print(head(cleaned_data))
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+
+```
+Here we consider the lowincometract variable because poveryrate is not derived from lowincometract. 
+
+# Adjusted R2 method for Poverty Rate
+
+```{r }
+adjustedR2 <- function(data, p = NULL, model = NULL) {
+pred <- data$pred
+obs <- data$PovertyRate
+n <- length(obs)
+#p <- model$finalModel$terms$term.labels # number of predictors
+# Assuming 'model' is your trained model
+#p <- length(all.vars(model$finalModel$call$formula)) - 1
+rss <- sum((pred - obs) ^ 2)
+tss <- sum((obs - mean(obs)) ^ 2)
+#print(tss)
+#print(rss)
+#print(p)
+adjR2 <- 1 - (rss/(n-p-1))/(tss/(n-1))
+adjR2
+}
+```
+
 
