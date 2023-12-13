@@ -342,4 +342,15 @@ coords(h, "best", ret = "threshold")
 * The auc of the stepwise model is `r auc`. And now we see that AUC is reasonable and the ROC curve doesn't indicate a perfect separation after removing the LowIncomeTract variable.
 
 
+```{r }
+
+cm = table(testData$LILATracts_1And10,testData$treeLilaCVModelProb >0.074475)
+cm
+precision_stepwise = cm[2,2]/(cm[2,2]+cm[1,2])
+precision_stepwise
+recall_stepwise = cm[2,2]/(cm[2,2]+cm[2,1])
+recall_stepwise
+accuracy_stepwise =  (cm[1,1]+cm[2,2])/(cm[1,1]+ cm[1,2]+cm[2,1] + cm[2,2])
+accuracy_stepwise
+```
 
