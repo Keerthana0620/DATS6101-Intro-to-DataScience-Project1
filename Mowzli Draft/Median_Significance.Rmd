@@ -63,7 +63,7 @@ The t-test was conducted to assess the difference in median family incomes betwe
 Average Median Family Income in Potential Food Deserts: **$22,544.33**
 Average Median Family Income in Non-Food Desert Areas: **$67,927.53**
 
-The t-test resulted in a t-statistic of [Insert t-statistic here] and a p-value of [Insert p-value here]. The small p-value suggests a significant difference in median family incomes between potential food desert and non-food desert areas.
+The t-test resulted in a t-statistic of **-149.61** and a p-value of **< 2.2e-16**. The small p-value suggests a significant difference in median family incomes between potential food desert and non-food desert areas.
 
 **Inference:**
 
