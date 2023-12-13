@@ -1,35 +1,31 @@
+## DATS6101 Intro to Data Science Project 1
 
-# DATS6101-Intro-to-DataScience-Project1
-University : The George Washington university.
+**The George Washington University**
 
-Github repo for DATS6101-Intro-to-DataScience-Project Group 1
+### Introduction
 
-Team members:
+Welcome to the DATS6101 Intro to Data Science Project Group 1's repository! We are a team of dedicated students from The George Washington University, and we're excited to share our project on Food Deserts with you.
 
-    Abishek Chiffon
-    Keerthana Aravindhan
-    Mowzli Sre Mohan Dass
-    Robert Williams
+### Team Members
 
-Project Description:
+- Abishek Chiffon
+- Keerthana Aravindhan
+- Mowzli Sre Mohan Dass
+- Robert Williams
 
-We have observed that our friends and family members in the USA are encountering challenges
-when it comes to accessing groceries. Some reside in remote rural areas, while others live in
-close proximity to urban centers, yet they all face this issue. Consequently, we have chosen to
-investigate the phenomenon of Food Deserts, which often go unnoticed, existing both within city
-centers and in rural regions. According to the USDA, residing in a food desert is defined as
-"living more than one mile from a supermarket in urban or suburban areas and more than 10
-miles from a supermarket in rural areas." Notably, we have observed a recent increase in the
-prevalence of food deserts, and we hypothesize that the COVID-19 pandemic may be a
-contributing factor. To gain a deeper insight and develop strategies to address food deserts, this
-study will utilize Generalized Linear Models (GLMs) and decision trees to analyze and forecast
-their prevalence and features. Additionally, we will explore how variables such as age, race,
-income, poverty rate, and vehicle accessibility may affect the status of food deserts. The
-overarching aim is to contribute towards the eradication of hunger across the United States.
+### Project Description
 
-Data Source:
+In the diverse landscape of the United States, we've noticed that many of our friends and family members face challenges accessing groceries, regardless of whether they live in remote rural areas or urban centers. This inspired us to delve into the concept of "Food Deserts," which often go unnoticed but have a significant impact on communities.
 
-Link : Food Access Research Atlas
+According to the USDA, a food desert is defined as "living more than one mile from a supermarket in urban or suburban areas and more than 10 miles from a supermarket in rural areas." Recently, we've observed an increase in the prevalence of food deserts, and we suspect that the COVID-19 pandemic may be a contributing factor.
+
+Our project aims to provide a deeper understanding of food deserts and develop strategies to address this issue. We will employ Generalized Linear Models (GLMs) and decision trees to analyze and forecast the prevalence and features of food deserts. Additionally, we will explore how variables such as age, race, income, poverty rate, and vehicle accessibility influence the status of food deserts. Our overarching goal is to contribute to the eradication of hunger across the United States.
+
+### Data Source
+
+We have gathered our data from the [Food Access Research Atlas](https://www.ers.usda.gov/data-products/food-access-research-atlas/), which provides valuable insights into food access and food deserts in the United States.
 
 
+For more details and to explore our project further, please visit our [GitHub repository](https://github.com/Keerthana0620/DATS6101-Intro-to-DataScience-Project1).
 
+Thank you for joining us on this journey to tackle the issue of food deserts in the USA.
