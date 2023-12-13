@@ -465,6 +465,57 @@ bestRMSE
 
 
 
+## Pov rate using linear model
+
+We decided to use linear model on the variables we found more influential in the CART model to find out the extent actual quantity of influence each variable had on poverty rate. Essentially we used CART as also feature selection for the linear model.
+
+### Converted the medianFamilyIncome in units of 1000$
+
+We did this to see the acutal effect of medianfamilyincome on poveryrate.
+
+```{r }
+
+
+# Convert to units of 1,000 dollars
+trainData$MedianFamilyIncome <- trainData$MedianFamilyIncome / 1000
+testData$MedianFamilyIncome <- testData$MedianFamilyIncome / 1000
+# View the transformed data
+head(testData$MedianFamilyIncome)
+
+```
+
+## Converted TractSNAP, TractHUNV, TractSeniors, TractWhite, TractBlack to units of 100.
+
+In order to see the actual effect of these variables on poverty rate.
+
+```{r }
+
+
+# Convert to units of 1,00 dolla
+trainData$TractSNAP <- trainData$TractSNAP / 100
+testData$TractSNAP <- testData$TractSNAP / 100
+
+# Convert to units of 1,000 dollars
+trainData$TractHUNV <- trainData$TractHUNV / 100
+testData$TractHUNV <- testData$TractHUNV / 100
+
+# Convert to units of 1,000 dollars
+trainData$TractSeniors <- trainData$TractSeniors / 100
+testData$TractSeniors <- testData$TractSeniors / 100
+
+# Convert to units of 1,000 dollars
+trainData$TractWhite <- trainData$TractWhite / 100
+testData$TractWhite <- testData$TractWhite / 100
+
+# Convert to units of 1,000 dollars
+trainData$TractBlack <- trainData$TractBlack / 100
+testData$TractBlack <- testData$TractBlack / 100
+# View the transformed data
+head(testData)
+
+```
+
+
 
 
 
