@@ -440,6 +440,31 @@ varImp(povCARTModel)
 * In addition, median family Income, LowIncomeTracts, Share of tract housing units that are without vehicle and beyond 1 mile from supermarket, Tract housing units receiving SNAP benefits also have an impact on the tract being a food desert. 
 * These results of the significant factors are confirming our EDA analysis.
 
+### Performance of the CART model
+ 
+```{r}
+testData$pred = predict(povCARTModel,testData)
+trainData$pred = predict(povCARTModel,trainData)
+#print(testData$pred)
+print("Test Data R2")
+test_R2 = adjustedR2(testData,length(model_pov_rate_columns),povCARTModel)
+print(test_R2)
+print("Train Data R2")
+train_R2 = adjustedR2(trainData,length(model_pov_rate_columns),povCARTModel)
+print(train_R2)
+
+
+print("The best RMSE of the model is")
+bestRMSE <- min(povCARTModel$results$RMSE)
+bestRMSE
+###############
+```
+* The adjusted R square of the CART model for test set is `r test_R2`. The train set R2 is `r train_R2`. Indicates that there is no overfitting and the model is decent in explaining the poverty rate.
+* The RMSE of the best CART model of poverty rate is `r bestRMSE`.
+
+
+
+
 
 
 
