@@ -601,11 +601,42 @@ variable_values <- unname(model_variable)
 
 # "lahunv1share",    2.0088e+43
 merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df$Importance <- log(merged_df$Importance + 1)  # Adding 1 to avoid log(0) or log(negative values)
 merged_df <- merged_df[order(merged_df$Importance), ]
 
 bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
   geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
   labs(title = "Log odds ratio of model",
+       x = "Variable",
+       y = "Log odds") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+### Logg odds ratio of Food desert model after removing lahunv.
+
+```{r Varimp}
+
+model_variable <- factors_stepwise_model[3:25]
+
+variable_names <- names(model_variable)
+variable_values <- unname(model_variable)
+
+# "lahunv1share",    2.0088e+43
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df$Importance <- log(merged_df$Importance + 1)  # Adding 1 to avoid log(0) or log(negative values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Log odds ratio of model after removing lahunv",
        x = "Variable",
        y = "Log odds") +
   theme_minimal() +
