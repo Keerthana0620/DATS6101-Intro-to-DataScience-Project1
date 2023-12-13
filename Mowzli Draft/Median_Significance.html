@@ -366,7 +366,7 @@ library(dplyr)</code></pre>
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code># Read the dataset
-food_access_data &lt;- read.csv(&quot;Documents/food_access_research_atlas.csv&quot;)
+food_access_data &lt;- read.csv(&quot;../datasets/food_access_research_atlas.csv&quot;)
 
 # Set thresholds for defining potential food deserts
 poverty_rate_threshold &lt;- 20  # percent
@@ -416,6 +416,36 @@ with significantly lower median family incomes are more likely to meet
 the criteria set for potential food deserts in this analysis,
 considering the poverty rate and SNAP beneficiaries as additional
 factors.</p>
+<pre class="r"><code>logistic_model &lt;- glm(
+  PotentialFoodDesert ~ MedianFamilyIncome,
+  data = food_access_data,
+  family = binomial
+)
+
+# Summarize the logistic regression results
+summary(logistic_model)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = PotentialFoodDesert ~ MedianFamilyIncome, family = binomial, 
+##     data = food_access_data)
+## 
+## Coefficients:
+##                      Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)        -8.477e-01  6.341e-02  -13.37   &lt;2e-16 ***
+## MedianFamilyIncome -8.847e-05  2.038e-06  -43.41   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 8773.9  on 72863  degrees of freedom
+## Residual deviance: 6233.0  on 72862  degrees of freedom
+## AIC: 6237
+## 
+## Number of Fisher Scoring iterations: 9</code></pre>
+<pre class="r"><code>exp(coef(logistic_model))</code></pre>
+<pre><code>##        (Intercept) MedianFamilyIncome 
+##          0.4284204          0.9999115</code></pre>
 
 
 

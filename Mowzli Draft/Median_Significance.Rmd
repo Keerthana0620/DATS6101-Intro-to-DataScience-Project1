@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
 
 # Read the dataset
-food_access_data <- read.csv("Documents/food_access_research_atlas.csv")
+food_access_data <- read.csv("../datasets/food_access_research_atlas.csv")
 
 # Set thresholds for defining potential food deserts
 poverty_rate_threshold <- 20  # percent
@@ -46,3 +46,16 @@ print(t_test_result)
 *Inference:*
 
 These findings suggest that lower median family income is a strong indicator of an area's likelihood to be a potential food desert. Areas with significantly lower median family incomes are more likely to meet the criteria set for potential food deserts in this analysis, considering the poverty rate and SNAP beneficiaries as additional factors.
+
+```{r}
+logistic_model <- glm(
+  PotentialFoodDesert ~ MedianFamilyIncome,
+  data = food_access_data,
+  family = binomial
+)
+
+# Summarize the logistic regression results
+summary(logistic_model)
+
+exp(coef(logistic_model))
+```
