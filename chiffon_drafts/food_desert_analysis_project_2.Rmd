@@ -222,4 +222,23 @@ pchisq(  stepwise_model$null.deviance - stepwise_model$deviance  , 54033 - 54010
 
 ```
 
+In addition we also see the residual deviance is significantly lower than Null deviance. The chi-square test also indicates that the trained model is statistically better than the null model.
+
+## Stepwise Coeff
+```{r logistic_reg_all_analysis_2}
+
+factors_stepwise_model = exp(coef(stepwise_model))
+factors_stepwise_model
+options(max.print = 1e6)
+
+```
+## Keerthana need graph here for the coeff of odds ratio, get them using code
+
+### SMART Question 1: What specific factors most significantly contribute to a tract being classified as a food desert?
+
+* From the exponents of the coefficients we get from the Stepwise model we can see population count of white, kids, seniors, beyond 1 mile from supermarket has a great impact on the food desert. 
+* In addition, Share of tract housing units(lahunv1share) that are without vehicle and beyond 1 mile from supermarket has a huge impact on the Food desert. Meaning if the variable increase by one unit, then it increases the odd ratio of being a food desert by a factor of 1.3539e+36.
+* Median Family Income as we thought has negative impact.
+* Percent of tract population residing in group quarters has a positive impact, meaning if the percentage increases by one unit then the odds ration of being a food desert is 64% higher.
+
 
