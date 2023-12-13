@@ -551,6 +551,46 @@ cleaned_data <- ezids::outlierKD2(cleaned_data, PovertyRate, rm = TRUE, boxplt =
 
 ```
 
+## Train/Test Split
+We split the data into train and test. Test set has 20% of data. This is to check overfitting and check the performance for unseen data.
+
+```{r}
+
+print(nrow(cleaned_data))
+n <- nrow(cleaned_data)
+# Calculate the size of the training set (e.g., 80% of the dataset)
+trainSize <- floor(0.8 * n)
+# Randomly sample row indices for the training set
+trainIndex <- sample(seq_len(n), size = trainSize)
+# Create training and test datasets
+trainData <- cleaned_data[trainIndex, ]
+testData <- cleaned_data[-trainIndex, ]
+```
+
+********** Slide 24 ****************
+```{r}
+
+
+select_cart_vars = c("MedianFamilyIncome","LowIncomeTracts","TractSNAP","TractHUNV","TractSeniors","TractWhite","TractBlack")
+
+formula_str_pov_linr <- paste("PovertyRate ~", paste(select_cart_vars, collapse = " + "))
+formula_obj_pov_linr <- as.formula(formula_str_pov_linr)
+pov_linr_model = lm(formula_obj_pov_linr , data=trainData)
+sum_pov_linr_model = summary(pov_linr_model)  # this is easier to be used in the inline codes to pull out coefficients and other info
+sum_pov_linr_model
+#xkabledply(sum_pov_linr_model)
+```
+
+## contribution of the most significant factors to povertyrate
+
+* All variables are statistically significant as the p-values are less than 0.05.
+* Just as we thought for every unit increase of the medianfamilyIncome we see that poverty rate decreases by a unit of 6.93e-05.
+* Holding all other variables constant, being in a low-income tract (as defined by LowIncomeTracts1 being 1) is associated with an increase of approximately 8.33 units in the poverty rate compared to not being in a low-income tract (where 
+* The population count in the SNAP porgram (TractSNAP) has a small positive impact on the poverty rate as well. We expected it to have a bigger influence.
+* Similarly the population count who does not have vehicle also have a small positive impact on poverty rate.
+* For every unit increase of the TractSeniors we see that poverty rate decreases by a unit of 1.74e-03.
+* The Count of Black and White people have an a very small negative impact to povertyrate. It is interesting to note that poverty rate decreases more for tractWhite than TractBlack
+
 
 
 
