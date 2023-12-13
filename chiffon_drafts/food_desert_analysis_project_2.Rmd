@@ -354,3 +354,25 @@ accuracy_stepwise =  (cm[1,1]+cm[2,2])/(cm[1,1]+ cm[1,2]+cm[2,1] + cm[2,2])
 accuracy_stepwise
 ```
 
+```{r var_import_lila_cart}
+#print(testData$pred)
+plot(lila_cart_model)
+varImp(lila_cart_model)
+print(lila_cart_model)
+fancyRpartPlot(lila_cart_model$finalModel)
+```
+ 
+* We are focused on capturing as many food deserts from the prediction and so our key performance indicator is recall.
+* The model gives a very good recall of `r recall_stepwise`. 
+* The recall is 
+* The model decision graph says that if the medianFamilyIncome is higher than 58000 then the tract is definitely non food desert.
+* Similary either the poverty rate should be greater than 20 or medianFamilyIncome less than than 49000 for a tract to be predicted as food desert.
+* From the model we got a very good accuracy of 87% on the test data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as cp = 0.028453.
+
+### What specific factors most significantly contribute to predict food desert?
+
+* From the feature importance we get from the Decision Trees we can see population count of the white, kids, seniors,  multiple race, Hispanic or Latino ethnicity beyond 1 mile from supermarket has a great impact on the food desert. 
+* In addition, being in urban, median family Income, Share of tract housing units that are without vehicle and beyond 1 mile from supermarket, Tract housing units receiving SNAP benefits also have an impact on the tract being a food desert.  
+* These results of the significant factors are confirming our EDA analysis.
+
+
