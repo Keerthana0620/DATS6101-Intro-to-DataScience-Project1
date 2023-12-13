@@ -82,3 +82,28 @@ data <- ezids::outlierKD2(data, lahunv1share ,qqplt= TRUE, boxplt= TRUE, rm = TR
 
 ```
 
+```{r logistic_reg_all}
+# Create the formula for the glm model
+formula_str <- paste("LILATracts_1And10 ~", paste(model_lila_1_10_var, collapse = " + "))
+
+# Fit the GLM model
+LILATracts_1And10_logit1 <- glm(as.formula(formula_str), data = data, family = binomial(link = "logit"))
+
+
+```
+
+```{r logistic_reg_all_analysis_1}
+options(max.print = 1e6)
+sum_LILATracts_1And10_logit1 = summary(LILATracts_1And10_logit1)
+sum_LILATracts_1And10_logit1
+#capture.output(sum_LILATracts_1And10_logit1, file = "models/glm_1_logit_lila1_10_summary.txt")
+options(max.print = .Options$max.print)
+```
+The residual deviance decreased by a considerable amount indicating the model is better than a null model
+
+```{r save_model}
+saveRDS(LILATracts_1And10_logit1, file = "glm_1_logit_lila1_10.rds")
+
+```
+
+
