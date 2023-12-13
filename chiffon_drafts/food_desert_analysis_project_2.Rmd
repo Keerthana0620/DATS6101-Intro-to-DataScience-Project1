@@ -141,4 +141,32 @@ accuracy_stepwise
 ```
 The accuracy of the model is `r accuracy_stepwise`.
 
+## Receiver-Operator-Characteristic (ROC) curve and Area-Under-Curve (AUC)
+
+
+```{r }
+
+cleaned_data$prob=predict(LILATracts_1And10_logit1, type = c("response")) # Add new column of predicted probabilities
+h <- roc(LILATracts_1And10~prob, data=cleaned_data)
+auc(h)
+plot(h)
+```
+
+
+
+
+```{r logistic_reg_all_analysis_2}
+
+factors_LILATracts_1And10_logit1 = exp(coef(LILATracts_1And10_logit1))
+factors_LILATracts_1And10_logit1
+options(max.print = 1e6)
+#capture.output(factors_LILATracts_1And10_logit1, file = "models/glm_1_logit_lila1_10_factors.txt")
+
+```
+
+Even though the model gave very good accuracy and AUC is near 1. The ROC curve is also in a perfect shape. We understood all of this indicating some sort of overfitting or perfect separtion. So when we did exponents of the coefficient to find out the odds ratio factors, we found that for every unit increase in LowIncomeTracts1 will increase the odd ratio of being in a food desert by infinity, so we de decided to enquire about it and found out the LILATracts_1And10 is derived variable from LowIncomeTracts1
+and that is why there is perfect separation. So we removed the LowIncomeTracts1 variable and then trained models for food desert. Being in urban has a huge impact in a tract being food desert.
+
+
+
 
