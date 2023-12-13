@@ -1,0 +1,84 @@
+---
+title: "food_desert_analysis_project_2"
+author: "Team 1"
+date: "`r Sys.Date()`"
+
+output:
+  html_document:
+    code_folding: hide
+    number_sections: false
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+## Data Loading and Preprocessing
+```{r init, include=F}
+install.packages("caret")
+```
+
+```{r init, include=F}
+library(tidyverse)
+library(ezids)
+library(usmap)
+library(ModelMetrics)
+library(pROC) 
+library(ggplot2)
+loadPkg("ISLR")
+loadPkg("tree") 
+library(stats)
+loadPkg("rpart")
+library(caret)
+loadPkg("rattle")
+
+```
+
+
+```{r setup, include=FALSE}
+# Some of common RMD options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+knitr::opts_chunk$set(warning = F, message = F)
+# Can globally set option for number display format.
+options(scientific=T, digits = 5) 
+```
+
+
+```{r read_data}
+# Loading data
+data <- read.csv("../Documents/food_access_research_atlas.csv")
+
+```
+
+# Summary of the dataset:
+
+```{r code1.1, echo=TRUE}
+str(data)
+head(data)
+summary(data)
+```
+
+# GLM model for food desert
+
+The variable denoting a tract being a food desert is LILATracts_1And10. We initially created a logistic regression model for food desert from the variables we got from the EDA we did in the first project. We found all these variables has significant effect on a tract being a food desert.
+Variables : "Urban","GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "PovertyRate"
+
+```{r glm_with_low_income }
+
+model_lila_1_10_var = c("Urban","GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "PovertyRate")
+data$State  <- as.factor(data$State)
+data$County  <- as.factor(data$County)
+data$Urban <- as.factor(data$Urban)
+data$GroupQuartersFlag <- as.factor(data$GroupQuartersFlag)
+data$LILATracts_1And10 <-  as.factor(data$LILATracts_1And10)
+data$LowIncomeTracts <- as.factor(data$LowIncomeTracts)
+data$HUNVFlag= as.factor(data$HUNVFlag)
+data$LATracts1 = as.factor(data$LATracts1)
+data$LATractsVehicle_20 = as.factor(data$LATractsVehicle_20)
+data <- ezids::outlierKD2(data, lahunv1share ,qqplt= TRUE, boxplt= TRUE, rm = TRUE)
+# Load necessary library
+
+```
+

@@ -2,43 +2,44 @@
 Call:
 glm(formula = LILATracts_1And10 ~ lahunv1share + MedianFamilyIncome + 
     Urban + laseniors10 + laomultir1 + TractHUNV + TractSNAP + 
-    TractHispanic + lakids1 + TractWhite + lablack1 + GroupQuartersFlag + 
-    PovertyRate + lahisp1 + TractAIAN + laseniors1 + TractSeniors + 
-    TractOMultir + TractKids + TractBlack + lakids10, family = binomial(link = "logit"), 
-    data = cleaned_data)
+    lakids1 + TractWhite + lablack1 + TractHispanic + GroupQuartersFlag + 
+    PovertyRate + lahisp1 + laseniors1 + TractSeniors + laaian1 + 
+    TractOMultir + PCTGQTRS + lakids10 + TractAsian + lanhopi1, 
+    family = binomial(link = "logit"), data = trainData)
 
 Coefficients:
-                    Estimate Std. Error z value Pr(>|z|)    
-(Intercept)        -4.99e+00   1.21e-01  -41.15  < 2e-16 ***
-lahunv1share        8.21e+01   1.33e+00   61.79  < 2e-16 ***
-MedianFamilyIncome -5.28e-05   1.46e-06  -36.27  < 2e-16 ***
-Urban1              3.97e+00   7.55e-02   52.58  < 2e-16 ***
-laseniors10         1.06e-02   5.17e-04   20.56  < 2e-16 ***
-laomultir1          1.41e-03   1.70e-04    8.27  < 2e-16 ***
-TractHUNV          -8.48e-03   2.52e-04  -33.66  < 2e-16 ***
-TractSNAP           3.32e-03   1.53e-04   21.72  < 2e-16 ***
-TractHispanic      -3.43e-04   3.22e-05  -10.66  < 2e-16 ***
-lakids1            -1.05e-03   1.02e-04  -10.31  < 2e-16 ***
-TractWhite          3.62e-04   2.45e-05   14.78  < 2e-16 ***
-lablack1            6.08e-04   5.61e-05   10.84  < 2e-16 ***
-GroupQuartersFlag1 -2.15e+00   1.94e-01  -11.11  < 2e-16 ***
-PovertyRate         1.66e-02   1.84e-03    9.00  < 2e-16 ***
-lahisp1             5.55e-04   7.19e-05    7.72  1.1e-14 ***
-TractAIAN           7.01e-04   1.09e-04    6.45  1.1e-10 ***
-laseniors1         -1.09e-03   1.32e-04   -8.24  < 2e-16 ***
-TractSeniors        4.39e-04   8.79e-05    4.99  6.0e-07 ***
-TractOMultir        3.99e-04   8.11e-05    4.92  8.5e-07 ***
-TractKids          -3.60e-04   8.65e-05   -4.16  3.2e-05 ***
-TractBlack          1.17e-04   3.73e-05    3.14   0.0017 ** 
-lakids10            8.63e-04   3.63e-04    2.38   0.0175 *  
+                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        -5.238e+00  1.520e-01 -34.465  < 2e-16 ***
+lahunv1share        1.120e+02  2.131e+00  52.564  < 2e-16 ***
+MedianFamilyIncome -4.989e-05  1.759e-06 -28.367  < 2e-16 ***
+Urban1              3.804e+00  9.792e-02  38.843  < 2e-16 ***
+laseniors10         9.663e-03  6.560e-04  14.731  < 2e-16 ***
+laomultir1          1.610e-03  2.150e-04   7.489 6.92e-14 ***
+TractHUNV          -8.628e-03  3.074e-04 -28.064  < 2e-16 ***
+TractSNAP           3.458e-03  1.732e-04  19.965  < 2e-16 ***
+lakids1            -1.333e-03  1.087e-04 -12.265  < 2e-16 ***
+TractWhite          2.579e-04  2.179e-05  11.838  < 2e-16 ***
+lablack1            6.149e-04  5.824e-05  10.558  < 2e-16 ***
+TractHispanic      -3.356e-04  3.741e-05  -8.972  < 2e-16 ***
+GroupQuartersFlag1 -2.528e+00  3.246e-01  -7.788 6.78e-15 ***
+PovertyRate         1.701e-02  2.216e-03   7.677 1.63e-14 ***
+lahisp1             5.679e-04  8.870e-05   6.402 1.53e-10 ***
+laseniors1         -1.125e-03  1.587e-04  -7.089 1.35e-12 ***
+TractSeniors        5.547e-04  1.035e-04   5.361 8.28e-08 ***
+laaian1             9.984e-04  2.595e-04   3.848 0.000119 ***
+TractOMultir        3.172e-04  8.084e-05   3.923 8.73e-05 ***
+PCTGQTRS            1.101e+00  3.071e-01   3.586 0.000336 ***
+lakids10            8.552e-04  4.665e-04   1.833 0.066754 .  
+TractAsian         -1.389e-04  8.343e-05  -1.665 0.095989 .  
+lanhopi1            1.280e-03  7.629e-04   1.677 0.093465 .  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 43179  on 67542  degrees of freedom
-Residual deviance: 24885  on 67521  degrees of freedom
-AIC: 24929
+    Null deviance: 28457  on 50070  degrees of freedom
+Residual deviance: 16798  on 50048  degrees of freedom
+AIC: 16844
 
 Number of Fisher Scoring iterations: 7
 
