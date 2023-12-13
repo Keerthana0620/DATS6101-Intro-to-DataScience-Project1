@@ -413,4 +413,33 @@ adjR2
 }
 ```
 
+```{r}
+# Assuming 'data' is your dataset and 'target' is your target variable
+set.seed(123)  # for reproducibility
+# Custom summary function
+# Define control method for cross-validation
+fitControl <- trainControl(method = "cv",  # k-fold cross-validation
+number = 10)    # number of folds
+formula_str_3 <- paste("PovertyRate ~", paste(model_pov_rate_columns, collapse = " + "))
+# Convert the string to a formula object
+##### full regression tree
+formula_obj_3 <- as.formula(formula_str_3)
+# Train the model
+povCARTModel <- train(formula_obj_3, data = trainData,
+method = "rpart",
+trControl = fitControl)
+# Summary of the povCARTModel performance
+print(povCARTModel)
+plot(povCARTModel)
+varImp(povCARTModel)
+
+```
+### Factors that contributed most significantly contribute from the CART to povertyrate ?
+
+*  From the feature importance we get from the Decision Trees we can see population count of the white, seniors, Black has a great impact on the food desert. 
+* In addition, median family Income, LowIncomeTracts, Share of tract housing units that are without vehicle and beyond 1 mile from supermarket, Tract housing units receiving SNAP benefits also have an impact on the tract being a food desert. 
+* These results of the significant factors are confirming our EDA analysis.
+
+
+
 
