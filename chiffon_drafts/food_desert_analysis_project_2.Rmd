@@ -288,3 +288,28 @@ accuracy_stepwise
 * We got the best cut_off for our model from the youden's index as `r cut_off`. We are focused on capturing as many food deserts from the prediction and so our key performance indicator is recall.
 * The model gives a very good recall of `r recall_stepwise`. 
 
+# LILA CART
+
+## Classification and Regression Tree on Food deserts
+
+We decide to create a CART model on the food deserts again to create a decision tree and help any decision maker to find out whether a place is food desert or not by asking few questions from the data. This also helps to compare the important factors between logistic regression and CART.
+```{r}
+# Assuming 'data' is your dataset and 'target' is your target variable
+set.seed(123)  # for reproducibility
+# Custom summary function
+# Define control method for cross-validation
+fitControl <- trainControl(method = "cv",   number = 10)    # number of folds
+formula_str_3 <- paste("LILATracts_1And10 ~", paste(model_lila_1_10_var_stepwise, collapse = " + "))
+# Convert the string to a formula object
+##### full regression tree
+formula_obj_3 <- as.formula(formula_str_3)
+# Train the model
+lila_cart_model <- train(formula_obj_3, data = trainData,method = "rpart",trControl = fitControl)
+# Summary of the model performance
+print(lila_cart_model)
+
+```
+
+From the model we got a very good accuracy of 96% on the train data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as cp = 0.028453.
+
+
