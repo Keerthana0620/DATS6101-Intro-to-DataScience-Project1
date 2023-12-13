@@ -106,4 +106,39 @@ saveRDS(LILATracts_1And10_logit1, file = "glm_1_logit_lila1_10.rds")
 
 ```
 
+## Summary of the model
+
+```{r check_model}
+str(LILATracts_1And10_logit1$fitted.values)
+summary(LILATracts_1And10_logit1$fitted.values)
+complete_cases <- complete.cases(data[model_lila_1_10_var])
+sum(complete_cases)
+```
+
+## Removing the nan values
+
+```{r}
+sapply(data[model_lila_1_10_var], function(x) sum(is.na(x)))
+cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+```
+
+## Accuracy and confusion matrix  
+```{r}
+
+cm = table(cleaned_data$LILATracts_1And10,LILATracts_1And10_logit1$fitted.values>.5)
+xkabledply( table(cleaned_data$LILATracts_1And10,LILATracts_1And10_logit1$fitted.values>.5), title = "Confusion matrix from Logit Model" )
+
+precision_stepwise = cm[2,2]/(cm[2,2]+cm[1,2])
+precision_stepwise
+recall_stepwise = cm[2,2]/(cm[2,2]+cm[2,1])
+recall_stepwise
+accuracy_stepwise =  (cm[1,1]+cm[2,2])/(cm[1,1]+ cm[1,2]+cm[2,1] + cm[2,2])
+accuracy_stepwise
+
+
+
+```
+The accuracy of the model is `r accuracy_stepwise`.
+
 
