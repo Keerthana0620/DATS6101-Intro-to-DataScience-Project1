@@ -312,4 +312,34 @@ print(lila_cart_model)
 
 From the model we got a very good accuracy of 96% on the train data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as cp = 0.028453.
 
+```{r tree_lila_find_threshold}
+
+########## LILA CV
+
+testData$treeLilaCVModelProb <- predict(lila_cart_model, newdata = testData, type = "prob")[,2]
+ggplot(testData, aes(x = treeLilaCVModelProb, fill = as.factor(LILATracts_1And10))) +
+geom_density(alpha = 0.5) +
+scale_fill_manual(values = c("blue", "red"), labels = c("Negative", "Positive")) +
+labs(title = "Test Set's Predicted Score",
+x = "Predicted Probability",
+y = "Density",
+fill = "Data") +
+theme_minimal() +
+theme(legend.position = "bottom")
+
+#print(cleaned_data$prob)
+# Add new column of predicted probabilities
+h <- roc(LILATracts_1And10~treeLilaCVModelProb, data=testData)
+auc(h)
+plot(h)
+coords(h, "best", ret = "threshold")
+
+```
+
+* The probability density distribution of the results indicate that it is highly rightly skewed. This is because the data is highly unablanced. 
+* We got the best cut_off for our model from the youden's index as `r cut_off`.
+
+* The auc of the stepwise model is `r auc`. And now we see that AUC is reasonable and the ROC curve doesn't indicate a perfect separation after removing the LowIncomeTract variable.
+
+
 
