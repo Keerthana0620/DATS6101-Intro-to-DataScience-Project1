@@ -516,6 +516,41 @@ head(testData)
 ```
 
 
+## Linear regression assumptions:
+
+### Normality of Median family income
+
+```{r norm1, echo=TRUE}
+
+hist(cleaned_data$MedianFamilyIncome, main = "Histogram of Median Family Income", xlab = "Median Family Income")
+
+# Check normality with a Q-Q plot
+qqnorm(cleaned_data$MedianFamilyIncome, main = "Q-Q Plot of Median Family Income")
+qqline(cleaned_data$MedianFamilyIncome, col = 2)
+```
+
+**Removing outliers**
+
+```{r norm2 ,echo=TRUE}
+cleaned_data <- ezids::outlierKD2(cleaned_data, MedianFamilyIncome, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
+
+### Normality of Poverty rate:
+
+```{r norm3, echo=TRUE}
+hist(cleaned_data$PovertyRate, main = "Histogram of PovertyRate", xlab = "PovertyRate")
+
+# Check normality with a Q-Q plot
+qqnorm(cleaned_data$PovertyRate, main = "Q-Q Plot of PovertyRate")
+qqline(cleaned_data$PovertyRate, col = 2)
+```
+**Removing outliers**
+
+```{r norm2 ,echo=TRUE}
+cleaned_data <- ezids::outlierKD2(cleaned_data, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+
+```
+
 
 
 
