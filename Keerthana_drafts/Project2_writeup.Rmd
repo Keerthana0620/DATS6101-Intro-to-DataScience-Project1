@@ -41,6 +41,86 @@ head(df)
 #summary(df)
 ```
 
+## Median Family Income Analysis
+
+From the previous EDA analysis, we learned that Median Family Income is an important feature contributing to the prevalence of a region being a food desert. To further investigate this, we conducted a t-test over the `MedianFamilyIncome` variable.
+
+```{r include=FALSE}
+# Set thresholds for defining potential food deserts
+poverty_rate_threshold <- 20  # percent
+median_income_threshold <- quantile(df$MedianFamilyIncome, 0.25)  # lower quartile
+snap_beneficiary_threshold <- 20  # percent
+
+# Creating a food desert indicator
+df$PotentialFoodDesert <- with(df, 
+  (PovertyRate >= poverty_rate_threshold) &
+  (MedianFamilyIncome <= median_income_threshold) &
+  (TractSNAP / POP2010 * 100 >= snap_beneficiary_threshold)
+)
+
+# Calculating average median family income for potential food desert areas and non-food desert areas
+average_income_food_desert <- mean(df[df$PotentialFoodDesert, "MedianFamilyIncome"])
+average_income_non_food_desert <- mean(df[!df$PotentialFoodDesert, "MedianFamilyIncome"])
+
+# Performing a t-test to check if the difference in median family incomes is statistically significant
+t_test_result <- t.test(
+  df[df$PotentialFoodDesert, "MedianFamilyIncome"],
+  df[!df$PotentialFoodDesert, "MedianFamilyIncome"]
+)
+
+# Print the results
+cat("Average Median Family Income in Potential Food Deserts:", average_income_food_desert, "\n")
+cat("Average Median Family Income in Non-Food Desert Areas:", average_income_non_food_desert, "\n")
+cat("T-Test Results:\n")
+print(t_test_result)
+```
+
+
+### T-Test Results
+
+The t-test was conducted to assess the difference in median family incomes between potential food desert areas and non-food desert areas. Here are the results:
+
+Average Median Family Income in Potential Food Deserts: **$22,544.33**
+Average Median Family Income in Non-Food Desert Areas: **$67,927.53**
+
+The t-test resulted in a t-statistic of **-149.61** and a p-value of **< 2.2e-16**. The small p-value suggests a significant difference in median family incomes between potential food desert and non-food desert areas.
+
+**Inference:**
+
+Based on the t-test results, we can conclude that there is a statistically significant difference in median family incomes between potential food desert areas and non-food desert areas. Areas classified as potential food deserts tend to have lower median family incomes.
+
+
+```{r include=FALSE}
+logistic_model <- glm(
+  PotentialFoodDesert ~ MedianFamilyIncome,
+  data = df,
+  family = binomial
+)
+
+# Summarize the logistic regression results
+summary(logistic_model)
+
+exp(coef(logistic_model))
+```
+
+### Logistic Regression Results
+
+A logistic regression model was employed to further investigate the relationship between MedianFamilyIncome and the likelihood of an area being a potential food desert. Here are the results:
+
+The odds ratio for MedianFamilyIncome is approximately **-0.915**. This suggests that for every one-unit increase in `MedianFamilyIncome`, the odds of an area being a potential food desert decrease by a factor of approximately **-0.915**, holding other variables constant.
+
+### Effect of a $1,000 Increase in Median Family Income
+
+To understand the effect of a **$1,000** increase in median family income, we can calculate the change in odds:
+
+Change in Odds = Coefficient for **`MedianFamilyIncome` * 1000**
+
+Change in Odds ≈ **-0.915**
+
+So, a **$1,000** increase in median family income is associated with a decrease in the odds of an area being a potential food desert by a factor of approximately **-0.915**, or a **9.15%** reduction in the odds.
+
+This analysis highlights the importance of `MedianFamilyIncome` in determining the likelihood of an area being classified as a potential food desert. Higher median family incomes are associated with a reduced likelihood of an area being a potential food desert.
+
 ## Factorizing Categorical variable
 
 ```{r encoding}
