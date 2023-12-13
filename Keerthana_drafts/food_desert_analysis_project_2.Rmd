@@ -1039,6 +1039,12 @@ qqline(cleaned_data$MedianFamilyIncome, col = 2)
 cleaned_data <- ezids::outlierKD2(cleaned_data, MedianFamilyIncome, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
 ```
 
+```{r}
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+```
+
 #### Normality of Poverty rate:
 
 ```{r norm3, echo=TRUE}
@@ -1053,6 +1059,12 @@ qqline(cleaned_data$PovertyRate, col = 2)
 ```{r norm4 ,echo=TRUE}
 cleaned_data <- ezids::outlierKD2(cleaned_data, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
 
+```
+
+```{r}
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
 ```
 
 ### Train/Test Split
