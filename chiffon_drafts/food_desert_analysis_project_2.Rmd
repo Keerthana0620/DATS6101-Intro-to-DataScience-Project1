@@ -241,4 +241,22 @@ options(max.print = 1e6)
 * Median Family Income as we thought has negative impact.
 * Percent of tract population residing in group quarters has a positive impact, meaning if the percentage increases by one unit then the odds ration of being a food desert is 64% higher.
 
+``` {r step_performance}
+#print(nrow(testData))
+testData$prob=predict(stepwise_model, newdata = testData, type = c("response")) # Add new column of predicted probabilities
+
+# Assuming testData is your data frame, and it has the actual classes in a binary column 'actual_class'
+# and the predicted probabilities in a column 'predicted_prob'
+
+
+h <- roc(LILATracts_1And10~prob, data=testData)
+auc = auc(h)
+plot(h)
+
+```
+
+The auc of the stepwise model is `r auc`. And now we see that AUC is reasonable and the ROC curve doesn't indicate a perfect separation after removing the LowIncomeTract variable.
+
+
+
 
