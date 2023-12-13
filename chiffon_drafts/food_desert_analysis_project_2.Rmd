@@ -169,4 +169,20 @@ and that is why there is perfect separation. So we removed the LowIncomeTracts1 
 
 
 
+## Train/Test Split
+We split the data into train and test. Test set has 20% of data. This is to check overfitting and check the performance for unseen data.
+
+```{r}
+
+
+n <- nrow(cleaned_data)
+# Calculate the size of the training set (e.g., 80% of the dataset)
+trainSize <- floor(0.8 * n)
+# Randomly sample row indices for the training set
+trainIndex <- sample(seq_len(n), size = trainSize)
+# Create training and test datasets
+trainData <- cleaned_data[trainIndex, ]
+testData <- cleaned_data[-trainIndex, ]
+```
+
 
