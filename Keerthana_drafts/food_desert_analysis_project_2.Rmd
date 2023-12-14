@@ -46,24 +46,25 @@ knitr::opts_chunk$set(warning = F, message = F)
 options(scientific=T, digits = 5) 
 ```
 
-# Introduction
+<br>
+<br>
 
-a) Exposition and Curation
-1. What do we know about this dataset?
+- Limited access to supermarkets, supercenters, grocery stores, or other sources of healthy and affordable food may make it harder for some people to eat a healthy diet in this country and to achieve food security.
+
+- Expanding the availability of nutritious and affordable food by developing and equipping grocery stores, small retailers, corner markets and farmers’ markets in communities with limited access is an important part of the Healthy Food Financing Initiative.
+
+# Introduction
 
 This information on supermarket availability at different distances was taken from the Food Access Research Atlas. This data gives a rich detailed summary because it measures access by the Census-Tract. Data on food access was linked with information on age, race, location (rural or urban), and income.
 
-2. What are the limitations of the dataset?
-
-The dataset lacks variables to monitor the median household income and vehicle accessibility across different ethnic groups. It is crucial to note that the term “vehicle access” in this context does not necessarily imply the absence of vehicles at a residence; rather, individuals are deemed to have access to a vehicle if public transportation is readily available to them. Additionally, there are no variables present to explicitly denote households without any vehicles.
-
-
+- USDA calls Low income Low access areas as Food deserts.
+- Census tract level : subdivisions of counties.
 
 # Data Loading and Preprocessing
 
 ```{r read_data}
 # Loading data
-data <- data.frame(read.csv("../datasets/food_access_research_atlas.csv")) 
+data <- data.frame(read.csv("FoodDesert2015.csv")) 
 knitr::kable(head(data, 5), format ='markdown')
 
 ```
@@ -1207,10 +1208,10 @@ ggplot(metrics_data_povertyrate, aes(x = Metric, y = Value, group = Method, colo
 
 ## Best models
  * From the model comparison we found that CART performs better for povery rate prediction compared to linear regression.
- *  Our smart question are more prediction related and our final R2 score for best cart model for the povery rate is  `r test_R2`. Our predictions are very good and it is validated from the good R2 score for test set
+ * Our smart question are more prediction related and our final R2 score for best cart model for the povery rate is  `r test_R2`. Our predictions are very good and it is validated from the good R2 score for test set
  
-#Conclusion:
-The analysis revealed significant connections between factors such as vehicle availability, income, ethnicity, and the prevalence of food deserts. Additionally, examining poverty rates further informed our recommendations. Among these suggestions are:
+# Conclusion:
+The analysis revealed significant connections between factors such as vehicle availability, income, groupquarters, and the prevalence of food deserts. Additionally, examining poverty rates further informed our recommendations. Among these suggestions are:
 
 **Targeted Support for Specific Ethnicities and Communities:** Recognizing the pivotal role of median family income, it's essential to launch initiatives aimed at specific ethnic groups and communities. These should focus on enhancing financial literacy and stability.
 
@@ -1221,5 +1222,16 @@ The analysis revealed significant connections between factors such as vehicle av
 **Broadening the Scope of Online Grocery Services:** We recommend expanding the availability of online grocery shopping and delivery options in areas identified as food deserts, which would be particularly beneficial for residents facing mobility challenges or without access to personal transport.
 
 
-
 According to another article, “Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise” (FFAC Staff, 2023), from Food Research & Action Center (FRAC), stated today by the U.S. Department of Agriculture’s Economic Research Service (ERS), that the COVID-19 pandemic relief efforts caused hunger in America to decline the previous year, but it surged in 2022. So additional information on how covid affected food desert status would be beneficial
+
+Furthermore, we recognize that an avenue for potential model enhancement lies in conducting more extensive hyperparameter tuning. The belief is that a deeper exploration of hyperparameters could yield incremental improvements in the performance of our model.
+
+# References
+
+- [Strengthen SNAP Benefits. (2023, October 13)](https://frac.salsalabs.org/update-13october2023?eType=EmailBlastContent&eId=abd0e534-77e3-409c-957e-ae342b6d3f50)
+
+- [FFAC Staff. (2022, April 05). What Are Food Deserts and Why Do They Exist? Factory Farming Awareness Coalition](https://ffacoalition.org/articles/food-deserts/)
+
+- [FFRA Staff. (2023, October 25). Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise](https://frac.org/news/usdafoodinsecurityreport2023)
+
+- [The Census Bureau's Planning Database (PDB)](https://www.census.gov/topics/research/guidance/planning-databases.html)
