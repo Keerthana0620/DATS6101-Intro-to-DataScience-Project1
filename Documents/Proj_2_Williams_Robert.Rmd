@@ -1,0 +1,318 @@
+---
+title: "Proj2: Food Deserts"
+author: "Robert Williams"
+date: "`r Sys.Date()`"
+output:
+  html_document
+    code_folding: hide
+    number_sections: false
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+---
+
+```{r init, include=F}
+# The package "ezids" (EZ Intro to Data Science) includes some helper functions we developed for the course. 
+# Some of the frequently used functions are loadPkg(), xkabledply(), xkablesummary(), uzscale(), etc.
+# You will need to install it (once) from GitHub.
+# library(devtools)
+# devtools::install_github("physicsland/ezids")
+# Then load the package in your R session.
+library(ezids)
+```
+
+
+```{r setup, include=FALSE}
+# Some of common RMD options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+knitr::opts_chunk$set(warning = F, message = F)
+# Can globally set option for number display format.
+options(scientific=T, digits = 3) 
+# options(scipen=9, digits = 3) 
+```
+
+```{r}
+# 1. Do not provide answers/comments inside code blocks (like here) -- those are notes between coders/self and will be ignored for grading. 
+# 2. Make sure your knitr options are set to include all results/code to be graded in the final document.
+# 3. All charts/graphs/tables should have appropriate titles/labels/captions. 
+# 4. Compose your answers using inline R code instead of using the code-block output as much as you can. 
+# 5. Your grade is also determined by the style. Even if you answer everything correctly, but the .html does not look appealing, you will not get full credit. Pay attention to the details that we mentioned in class/homework and in previous sample .Rmd files. For example, how to use #, ##, ###, ..., bold face, italics, inline codes, tables, ..., {results = "asis"}, use of colors in plots/ggplots, and so forth.
+```
+
+Project 2 uses a food access research atlas, *food_access_research_atlas.csv* file from kaggle.com.  
+
+
+
+**Their are 14 variables in `fd2015`. Their are 6 `int` variables. **
+
+
+
+```{r}
+fdorg = read.csv("food_access_research_atlas.csv")
+str(fdorg)
+
+fd2015 <- fdorg[-c(1:9,11:14,18:61,63,65:81,83:87,89,91:107,109:134:135,139:146)]
+
+ncol(fd2015)
+
+dim(fd2015)
+
+
+str(fd2015)
+```
+
+
+**Their are 7330 observations.**
+
+
+```{r}
+library(dplyr)
+fd2015nz = filter(fd2015, MedianFamilyIncome != "0")
+#fd2015nz = filter(fd2015, laseniors1 != "0")
+#fd2015nz = filter(fd2015, laseniors10 != "0")
+
+fd2015nz = filter(fd2015, lakids1 != "0")
+fd2015nz = filter(fd2015, lakids10 != "0")
+
+fd2015nz = filter(fd2015, lasnap1 != "0")
+fd2015nz = filter(fd2015, lasnap10 != "0")
+
+
+
+head(fd2015nz, 5)
+tail(fd2015nz, 5)
+
+nrow(fd2015nz)
+```
+
+**Recorded the variables, LILATracts_1And10, LowIncomeTracts, as categorical.**
+
+
+```{r}
+library(dplyr)
+
+fd2015nz$LILATracts_1And10 = as.factor(fd2015nz$LILATracts_1And10)
+fd2015nz$LowIncomeTracts = as.factor(fd2015nz$LowIncomeTracts)
+
+fd2015_final <- fd2015nz
+
+str(fd2015_final)
+```
+
+**Made a `pairs()` plot with all the variables (quantitative and qualitative) in the `fd2015_final` dataset.**  
+
+**See code block below.**
+
+Note: While the `cor()` function does not accept categorical variables (and therefore we cannot use it for `corrplot()`), the `lattice::pairs()` function does not complain about categorical columns. We can still use it to get a visual distribution of data values from it.
+
+
+```{r lattice}
+loadPkg("lattice") # lattice and ggplot2 combined allow us to use the "pairs" function below 
+```
+
+
+```{r lattice_paris}
+pairs(fd2015_final[1:14])
+```
+
+**Made a `corrplot()` with the numerical variables in the `fd2015_final` dataset.**  
+
+**Answer:  See code below.**
+
+
+```{r }
+loadPkg("corrplot")
+```
+
+
+```{r include = TRUE, warning=FALSE}
+library(corrplot)
+
+fd2015f2 <- fd2015_final[-c(1,2,10)]
+
+fd2015f2_cor = cor(fd2015f2)
+
+corrplot(fd2015f2_cor)
+
+```
+
+
+```{r warning=F}
+corrplot(fd2015f2_cor, method = "square")
+```
+
+```{r}
+loadPkg("MASS")
+surveyfd = subset(fd2015_final, TractLOWI>0 & !is.na(LILATracts_1And10), select=c('LILATracts_1And10','TractLOWI'))  # remove NAs
+loadPkg("ggplot2")
+ggplot(surveyfd, aes(x=LILATracts_1And10, y=TractLOWI)) + 
+  geom_boxplot( colour=c("#0000ff","#ff00ff"), outlier.shape=8, outlier.size=4) +
+  labs(title="Total Low Income for Food Desert with Low Income and Low Access", x= "Low Income Low Access @ 1 & 10 miles", y="Total Low Income")
+
+#plot(Pulse ~ Smoke, data=surveyPulseSmoke , main="Pulse Rate for MASS data with different Smoke Habits", col=c("#ff0000","#00ff00","#0000ff","#ff00ff") )
+```
+```{r}
+loadPkg("MASS")
+surveyfd = subset(fd2015_final, PovertyRate>0 & !is.na(LowIncomeTracts), select=c('PovertyRate', 'LowIncomeTracts'))  # remove NAs
+loadPkg("ggplot2")
+ggplot(surveyfd, aes(x=LowIncomeTracts, y=PovertyRate)) + 
+  geom_boxplot( colour=c("#0000ff","#ff00ff"), outlier.shape=8, outlier.size=4) +
+  labs(title="Poverty Rate SNAP with different Low Income", x= "Total Low Income", y="Povery Rate")
+
+#plot(Pulse ~ Smoke, data=surveyPulseSmoke , main="Pulse Rate for MASS data with different Smoke Habits", col=c("#ff0000","#00ff00","#0000ff","#ff00ff") )
+```
+
+
+```{r aov}
+anovaRes = aov(TractLOWI ~ LILATracts_1And10, data=fd2015_final)
+# This is the standard R-notation of entering an equation, y ~ x
+# We will learn and use this more as it goes on.
+anovaRes  # this does not give the easy-to-read result of the aov analysis
+# Use the summary function instead.
+# summary(anovaRes) # better yet, use the xkabledply() function.
+names(anovaRes)
+summary(anovaRes)
+```
+
+```{r aov}
+anovaRes = aov(PovertyRate ~ LowIncomeTracts, data=fd2015_final)
+# This is the standard R-notation of entering an equation, y ~ x
+# We will learn and use this more as it goes on.
+anovaRes  # this does not give the easy-to-read result of the aov analysis
+# Use the summary function instead.
+# summary(anovaRes) # better yet, use the xkabledply() function.
+names(anovaRes)
+summary(anovaRes)
+```
+
+
+```{r warning=F}
+corrplot(fd2015f2_cor, method = "number")
+```
+```{r warning=F}
+corrplot(fd2015f2_cor, method = "square", type="upper")
+```
+
+```{r warning=F}
+corrplot.mixed(fd2015f2_cor)
+```
+
+
+  
+**Using the numerical variables from the `fd2015_final` dataset, build a linear model with 1 independent variable to infer the `TractLOWI`.**  
+
+**p-values is lower than .05 **
+
+
+```{r model1}
+fit1 <- lm(TractLOWI ~ LILATracts_1And10, data = fd2015_final)
+
+fit2 <- lm(TractLOWI ~ LowIncomeTracts, data = fd2015_final)
+
+summary(fit1)
+
+summary(fit2)
+
+```
+```{r model3}
+fit3 <- lm(PovertyRate ~ LowIncomeTracts, data = fd2015_final)
+
+
+
+summary(fit3)
+
+
+
+```
+
+```{r results='markup'}
+xkabledply(fit2, title = paste("Model :", format(formula(fit2)) ) )
+```
+```{r results='markup'}
+xkabledply(fit3, title = paste("Model :", format(formula(fit3)) ) )
+```
+
+
+
+** Added a second variable to both models. ** 
+
+**p-values is <2e-16 **
+
+Note: When you have the model, check the VIF values. If the VIF is higher than 5, discard this model, and try the variable with the next strongest correlation until you find one that works (ideally with VIF<5, or if you have to, allow VIF up to 10).  
+
+
+```{r cor_test, results='markup'}
+fit3a <- lm(TractLOWI ~ LowIncomeTracts + TractSNAP, data = fd2015_final)
+summary(fit3)
+
+```
+
+```{r cor_test, results='markup'}
+fit5a <- lm(PovertyRate ~ LowIncomeTracts + TractSNAP, data = fd2015_final)
+summary(fit5)
+
+```
+
+
+```{r results='markup'}
+fit4 <- lm(TractLOWI ~ TractSNAP + TractSeniors, data = fd2015_final)
+xkabledply(fit4, title = paste("Model :", format(formula(fit4)) ) )
+xkablevif(fit4)
+
+```
+
+
+```{r results='markup'}
+fit4 <- lm(TractLOWI ~ TractSNAP + TractSeniors, data = fd2015_final)
+xkabledply(fit4, title = paste("Model :", format(formula(fit4)) ) )
+xkablevif(fit4)
+
+```
+
+```{r results='markup'}
+fit7a <- lm(PovertyRate ~ LowIncomeTracts + TractSNAP, data = fd2015_final)
+xkabledply(fit7a, title = paste("Model :", format(formula(fit7a)) ) )
+xkablevif(fit7a)
+
+```
+
+```{r model2b}
+plot(fit4)
+
+```
+
+```{r model3a}
+plot(fit7a)
+
+```
+
+
+```{r model2b}
+plot(fit2)
+```
+
+**Use ANOVA to compare both models. **  
+
+
+```{r modelanova}
+anova(fit2,fit7a) -> anovaRes
+anovaRes
+str(anovaRes)
+```
+
+
+
+```{r modelanova}
+anova(fit4,fit3) -> anovaRes
+anovaRes
+str(anovaRes)
+
+
+```
+
+
+
+
