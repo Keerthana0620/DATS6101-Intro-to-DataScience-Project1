@@ -605,7 +605,7 @@ options(max.print = 1e6)
 
 ### Logg odds ratio of Food desert model.
 
-```{r Varimp}
+```{r Varimp_1}
 
 model_variable <- factors_stepwise_model[2:25]
 
@@ -635,7 +635,7 @@ print(bar_chart)
 
 ### Logg odds ratio of Food desert model after removing lahunv.
 
-```{r Varimp}
+```{r Varimp_2}
 
 model_variable <- factors_stepwise_model[3:25]
 
@@ -1219,11 +1219,6 @@ The analysis revealed significant connections between factors such as vehicle av
 **Enhancing Public Transport Systems:** By improving public transportation networks, we can ensure easier access to grocery stores for individuals who do not own vehicles.
 
 **Broadening the Scope of Online Grocery Services:** We recommend expanding the availability of online grocery shopping and delivery options in areas identified as food deserts, which would be particularly beneficial for residents facing mobility challenges or without access to personal transport.
-
-
-
-
-
 
 
 
