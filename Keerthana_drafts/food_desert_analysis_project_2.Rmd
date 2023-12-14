@@ -46,11 +46,24 @@ knitr::opts_chunk$set(warning = F, message = F)
 options(scientific=T, digits = 5) 
 ```
 
+# Introduction
+
+a) Exposition and Curation
+1. What do we know about this dataset?
+
+This information on supermarket availability at different distances was taken from the Food Access Research Atlas. This data gives a rich detailed summary because it measures access by the Census-Tract. Data on food access was linked with information on age, race, location (rural or urban), and income.
+
+2. What are the limitations of the dataset?
+
+The dataset lacks variables to monitor the median household income and vehicle accessibility across different ethnic groups. It is crucial to note that the term “vehicle access” in this context does not necessarily imply the absence of vehicles at a residence; rather, individuals are deemed to have access to a vehicle if public transportation is readily available to them. Additionally, there are no variables present to explicitly denote households without any vehicles.
+
+
+
 # Data Loading and Preprocessing
 
 ```{r read_data}
 # Loading data
-data <- data.frame(read.csv("FoodDesert2015.csv")) 
+data <- data.frame(read.csv("../datasets/food_access_research_atlas.csv")) 
 knitr::kable(head(data, 5), format ='markdown')
 
 ```
@@ -677,6 +690,13 @@ The auc of the stepwise model is `r auc`. And now we see that AUC is reasonable 
 ## Need accuracy code here
 
 ```{r}
+sapply(testData[model_lila_1_10_var], function(x) sum(is.na(x)))
+#cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+```
+
+```{r}
+
+testData$prob = predict(stepwise_model, newdata = testData, type = c("response")) 
 
 ggplot(testData, aes(x = prob, fill = as.factor(LILATracts_1And10))) +
 geom_density(alpha = 0.5) +
@@ -689,8 +709,8 @@ theme_minimal() +
 theme(legend.position = "bottom")
 
 cut_off = coords(h, "best", ret = "threshold")
-
-cm = table(testData$LILATracts_1And10,testData$prob >cut_off)
+print(cut_off[1, 'threshold'])
+cm = table(testData$LILATracts_1And10, (testData$prob > cut_off[1, 'threshold']))
 cm
 precision_stepwise = cm[2,2]/(cm[2,2]+cm[1,2])
 precision_stepwise
@@ -762,12 +782,12 @@ coords(h, "best", ret = "threshold")
 
 cm = table(testData$LILATracts_1And10,testData$treeLilaCVModelProb >0.074475)
 cm
-precision_stepwise = cm[2,2]/(cm[2,2]+cm[1,2])
-precision_stepwise
-recall_stepwise = cm[2,2]/(cm[2,2]+cm[2,1])
-recall_stepwise
-accuracy_stepwise =  (cm[1,1]+cm[2,2])/(cm[1,1]+ cm[1,2]+cm[2,1] + cm[2,2])
-accuracy_stepwise
+precision_cart = cm[2,2]/(cm[2,2]+cm[1,2])
+precision_cart
+recall_cart = cm[2,2]/(cm[2,2]+cm[2,1])
+recall_cart
+accuracy_cart =  (cm[1,1]+cm[2,2])/(cm[1,1]+ cm[1,2]+cm[2,1] + cm[2,2])
+accuracy_cart
 ```
 
 ```{r var_import_lila_cart}
@@ -779,8 +799,7 @@ fancyRpartPlot(lila_cart_model$finalModel)
 ```
  
 * We are focused on capturing as many food deserts from the prediction and so our key performance indicator is recall.
-* The model gives a very good recall of `r recall_stepwise`. 
-* The recall is 
+* The model gives a very good recall of `r recall_cart`. 
 * The model decision graph says that if the medianFamilyIncome is higher than 58000 then the tract is definitely non food desert.
 * Similary either the poverty rate should be greater than 20 or medianFamilyIncome less than than 49000 for a tract to be predicted as food desert.
 * From the model we got a very good accuracy of 87% on the test data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as cp = 0.028453.
@@ -796,26 +815,29 @@ fancyRpartPlot(lila_cart_model$finalModel)
 
 ```{r comp, echo=TRUE}
 
-#metrics_data_LILA = data.frame()
-#metrics_data_LILA <- rbind(metrics_data_LILA, c("CART", "accuracy", test_R2))
-#metrics_data_LILA <- rbind(metrics_data_LILA, c("CART", "Precision", bestRMSE))
-#metrics_data_LILA <- rbind(metrics_data_LILA, c("CART", "Recall", bestRMSE))
-#metrics_data_LILA <- rbind(metrics_data_LILA, c("Logistic", "accuracy", test_R2))
-#metrics_data_LILA <- rbind(metrics_data_LILA, c("Logistic", "Precision", bestRMSE))
-#metrics_data_LILA <- rbind(metrics_data_LILA, c("Logistic", "Recall", bestRMSE))
-#colnames(metrics_data_LILA) <- c('Method', 'Metric', 'Value')
+metrics_data_LILA = data.frame()
+metrics_data_LILA <- rbind(metrics_data_LILA, c("CART", "accuracy", accuracy_cart))
+metrics_data_LILA <- rbind(metrics_data_LILA, c("CART", "Precision", precision_cart))
+metrics_data_LILA <- rbind(metrics_data_LILA, c("CART", "Recall", recall_cart))
+metrics_data_LILA <- rbind(metrics_data_LILA, c("Logistic", "accuracy", accuracy_stepwise))
+metrics_data_LILA <- rbind(metrics_data_LILA, c("Logistic", "Precision", precision_stepwise))
+metrics_data_LILA <- rbind(metrics_data_LILA, c("Logistic", "Recall", recall_stepwise))
+colnames(metrics_data_LILA) <- c('Method', 'Metric', 'Value')
 
 # Create the line graph using ggplot2
-#ggplot(metrics_data_LILA, aes(x = Metric, y = Value, group = Method, color = Method)) +
-#  geom_line() +
-#  geom_point() +
-#  labs(title = "Comparison of CART and Logistic Metrics",
-#       x = "Metric",
-#       y = "Value") +
-#  theme_minimal()
+ggplot(metrics_data_LILA, aes(x = Metric, y = Value, group = Method, color = Method)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Comparison of CART and Logistic Metrics",
+       x = "Metric",
+       y = "Value") +
+  theme_minimal()
 
 ```
 
+## Best model for Food desert 
+ * From the model comparison we found that stepwise logistic regression performs better for food desert prediction compared to CART.
+  *  Our smart question are more prediction related and our final recall score for best stepwise logistic mode for the food desert is  `r recall_stepwise`. Our predictions are very good.
 
 # EDA and inference of Poverty rate:
 
@@ -1182,3 +1204,7 @@ ggplot(metrics_data_povertyrate, aes(x = Metric, y = Value, group = Method, colo
   theme_minimal()
 
 ```
+
+## Best models
+ * From the model comparison we found that CART performs better for povery rate prediction compared to linear regression.
+ *  Our smart question are more prediction related and our final R2 score for best cart model for the povery rate is  `r test_R2`. Our predictions are very good.
