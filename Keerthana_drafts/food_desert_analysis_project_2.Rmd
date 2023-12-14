@@ -50,7 +50,7 @@ options(scientific=T, digits = 5)
 
 ```{r read_data}
 # Loading data
-data <- data.frame(read.csv("../datasets/food_access_research_atlas.csv")) 
+data <- data.frame(read.csv("FoodDesert2015.csv")) 
 knitr::kable(head(data, 5), format ='markdown')
 
 ```
@@ -521,7 +521,7 @@ options(max.print = 1e6)
 
 Even though the model gave very good accuracy and AUC is near 1. The ROC curve is also in a perfect shape. 
 
-We understood all of this indicating some sort of overfitting or perfect separation. So when we did exponents of the coefficient to find out the odds ratio factors, we found that for every unit increase in LowIncomeTracts1 will increase the odd ratio of being in a food desert by infinity, so we de decided to enquire about it and found out the LILATracts_1And10 is derived variable from LowIncomeTracts1
+We understood all of this indicating some sort of overfitting or perfect separtion. So when we did exponents of the coefficient to find out the odds ratio factors, we found that for every unit increase in LowIncomeTracts1 will increase the odd ratio of being in a food desert by infinity, so we de decided to enquire about it and found out the LILATracts_1And10 is derived variable from LowIncomeTracts1
 and that is why there is perfect separation. So we removed the LowIncomeTracts1 variable and then trained models for food desert. Being in urban has a huge impact in a tract being food desert.
 
 
@@ -604,10 +604,39 @@ merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
 merged_df$Importance <- log(merged_df$Importance + 1)  # Adding 1 to avoid log(0) or log(negative values)
 merged_df <- merged_df[order(merged_df$Importance), ]
 
-
 bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
   geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
   labs(title = "Log odds ratio of model",
+       x = "Variable",
+       y = "Log odds") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+### Logg odds ratio of Food desert model after removing lahunv.
+
+```{r Varimp}
+
+model_variable <- factors_stepwise_model[3:25]
+
+variable_names <- names(model_variable)
+variable_values <- unname(model_variable)
+
+# "lahunv1share",    2.0088e+43
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df$Importance <- log(merged_df$Importance + 1)  # Adding 1 to avoid log(0) or log(negative values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Log odds ratio of model after removing lahunv",
        x = "Variable",
        y = "Log odds") +
   theme_minimal() +
@@ -1041,6 +1070,12 @@ qqline(cleaned_data$MedianFamilyIncome, col = 2)
 cleaned_data <- ezids::outlierKD2(cleaned_data, MedianFamilyIncome, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
 ```
 
+```{r}
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+```
+
 #### Normality of Poverty rate:
 
 ```{r norm3, echo=TRUE}
@@ -1055,6 +1090,12 @@ qqline(cleaned_data$PovertyRate, col = 2)
 ```{r norm4 ,echo=TRUE}
 cleaned_data <- ezids::outlierKD2(cleaned_data, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
 
+```
+
+```{r}
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
 ```
 
 ### Train/Test Split
