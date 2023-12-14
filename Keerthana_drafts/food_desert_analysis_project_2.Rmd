@@ -1207,4 +1207,24 @@ ggplot(metrics_data_povertyrate, aes(x = Metric, y = Value, group = Method, colo
 
 ## Best models
  * From the model comparison we found that CART performs better for povery rate prediction compared to linear regression.
- *  Our smart question are more prediction related and our final R2 score for best cart model for the povery rate is  `r test_R2`. Our predictions are very good.
+ *  Our smart question are more prediction related and our final R2 score for best cart model for the povery rate is  `r test_R2`. Our predictions are very good and it is validated from the good R2 score for test set
+ 
+#Conclusion:
+The analysis revealed significant connections between factors such as vehicle availability, income, ethnicity, and the prevalence of food deserts. Additionally, examining poverty rates further informed our recommendations. Among these suggestions are:
+
+**Targeted Support for Specific Ethnicities and Communities:** Recognizing the pivotal role of median family income, it's essential to launch initiatives aimed at specific ethnic groups and communities. These should focus on enhancing financial literacy and stability.
+
+**Community-Oriented Educational Programs:** We advocate for the implementation of educational initiatives that foster knowledge about nutrition, cooking, and healthy eating practices within the community. This might encompass cooking workshops, nutrition classes, and programs integrated into school curricula.
+
+**Enhancing Public Transport Systems:** By improving public transportation networks, we can ensure easier access to grocery stores for individuals who do not own vehicles.
+
+**Broadening the Scope of Online Grocery Services:** We recommend expanding the availability of online grocery shopping and delivery options in areas identified as food deserts, which would be particularly beneficial for residents facing mobility challenges or without access to personal transport.
+
+
+
+
+
+
+
+
+According to another article, “Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise” (FFAC Staff, 2023), from Food Research & Action Center (FRAC), stated today by the U.S. Department of Agriculture’s Economic Research Service (ERS), that the COVID-19 pandemic relief efforts caused hunger in America to decline the previous year, but it surged in 2022. So additional information on how covid affected food desert status would be beneficial
