@@ -71,7 +71,7 @@ knitr::kable(head(data, 5), format ='markdown')
 
 ## Summary of the dataset:
 
-```{r code1.1, echo=TRUE}
+```{r code1.1, include=FALSE}
 str(data)
 summary(data)
 ```
@@ -80,7 +80,7 @@ summary(data)
 
 Factorizing Categorical variable
 
-```{r encoding, echo=TRUE}
+```{r encoding, include=FALSE}
 data$LILATracts_1And10 <- as.factor(data$LILATracts_1And10)
 data$GroupQuartersFlag <- as.factor(data$GroupQuartersFlag)
 data$Urban = as.factor(data$Urban)
@@ -168,15 +168,27 @@ exp(coef(logistic_model))
 
 A logistic regression model was employed to further investigate the relationship between MedianFamilyIncome and the likelihood of an area being a potential food desert. Here are the results:
 
-The odds ratio for MedianFamilyIncome is approximately **-0.915**. This suggests that for every one-unit increase in `MedianFamilyIncome`, the odds of an area being a potential food desert decrease by a factor of approximately **-0.915**, holding other variables constant.
+The odds ratio for MedianFamilyIncome is approximately **0.99991**.
 
 ### Effect of a $1,000 Increase in Median Family Income
 
 To understand the effect of a **$1,000** increase in median family income, we can calculate the change in odds:
 
-Change in Odds = Coefficient for **`MedianFamilyIncome` * 1000**
+```{r ,echo=TRUE}
 
-Change in Odds ≈ **-0.915**
+data$mfi2 <- data$MedianFamilyIncome/1000
+
+logistic_model <- glm(
+  PotentialFoodDesert ~ mfi2,
+  data = data,
+  family = binomial
+)
+
+# Summarize the logistic regression results
+summary(logistic_model)
+
+exp(coef(logistic_model))
+```
 
 So, a **$1,000** increase in median family income is associated with a decrease in the odds of an area being a potential food desert by a factor of approximately **-0.915**, or a **9.15%** reduction in the odds.
 
@@ -432,7 +444,9 @@ The effect of a tract being food desert from Urban area, compared to Rural, is a
 ## GLM model for food desert
 
 The variable denoting a tract being a food desert is LILATracts_1And10. We initially created a logistic regression model for food desert from the variables we got from the EDA we did in the first project. We found all these variables has significant effect on a tract being a food desert.
-Variables : "Urban","GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "PovertyRate"
+Variables : 
+
+"Urban","GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "PovertyRate"
 
 ```{r glm_with_low_income }
 
@@ -560,7 +574,7 @@ testData <- cleaned_data[-trainIndex, ]
 
 In order to consider only the best variables for a model we used stepwise forward model building by including the previously considered variables but excluding the LowIncomeTracts1.
 
-```{r include=FALSE}
+```{r echo=TRUE}
 # Load necessary library
 
 model_lila_1_10_var_stepwise = c("Urban","GroupQuartersFlag","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "PovertyRate")
@@ -603,6 +617,8 @@ factors_stepwise_model
 options(max.print = 1e6)
 
 ```
+
+**SMART Question : What specific factors most significantly contribute to a tract being classified as a food desert?**
 
 ### Logg odds ratio of Food desert model.
 
@@ -664,12 +680,10 @@ options(
 print(bar_chart)
 ```
 
-**SMART Question : What specific factors most significantly contribute to a tract being classified as a food desert?**
 
 * From the exponents of the coefficients we get from the Stepwise model we can see population count of white, kids, seniors, beyond 1 mile from supermarket has a great impact on the food desert. 
 * In addition, Share of tract housing units(lahunv1share) that are without vehicle and beyond 1 mile from supermarket has a huge impact on the Food desert. Meaning if the variable increase by one unit, then it increases the odd ratio of being a food desert by a factor of 1.3539e+36.
 * Median Family Income as we thought has negative impact.
-* Percent of tract population residing in group quarters has a positive impact, meaning if the percentage increases by one unit then the odds ration of being a food desert is 64% higher.
 
 ``` {r step_performance}
 #print(nrow(testData))
@@ -687,8 +701,10 @@ plot(h)
 The auc of the stepwise model is `r auc`. And now we see that AUC is reasonable and the ROC curve doesn't indicate a perfect separation after removing the LowIncomeTract variable.
 
 
-
-## Need accuracy code here
+```{r}
+sapply(testData[model_lila_1_10_var], function(x) sum(is.na(x)))
+#cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+```
 
 ```{r}
 sapply(testData[model_lila_1_10_var], function(x) sum(is.na(x)))
@@ -696,6 +712,8 @@ sapply(testData[model_lila_1_10_var], function(x) sum(is.na(x)))
 ```
 
 ```{r}
+
+testData$prob = predict(stepwise_model, newdata = testData, type = c("response")) 
 
 testData$prob = predict(stepwise_model, newdata = testData, type = c("response")) 
 
@@ -747,14 +765,15 @@ print(lila_cart_model)
 
 ```
 
-From the model we got a very good accuracy of 96% on the train data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as cp = 0.028453.
+From the model we got a very good accuracy of 96% on the train data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as cp = 0.027804.
+
 
 ```{r tree_lila_find_threshold}
 
 ########## LILA CV
 
-testData$treeLilaCVModelProb <- predict(lila_cart_model, newdata = testData, type = "prob")[,2]
-ggplot(testData, aes(x = treeLilaCVModelProb, fill = as.factor(LILATracts_1And10))) +
+trainData$treeLilaCVModelProb <- predict(lila_cart_model, newdata = trainData, type = "prob")[,2]
+ggplot(trainData, aes(x = treeLilaCVModelProb, fill = as.factor(LILATracts_1And10))) +
 geom_density(alpha = 0.5) +
 scale_fill_manual(values = c("blue", "red"), labels = c("Negative", "Positive")) +
 labs(title = "Test Set's Predicted Score",
@@ -766,7 +785,7 @@ theme(legend.position = "bottom")
 
 #print(cleaned_data$prob)
 # Add new column of predicted probabilities
-h <- roc(LILATracts_1And10~treeLilaCVModelProb, data=testData)
+h <- roc(LILATracts_1And10~treeLilaCVModelProb, data=trainData)
 auc(h)
 plot(h)
 coords(h, "best", ret = "threshold")
@@ -781,7 +800,7 @@ coords(h, "best", ret = "threshold")
 
 ```{r }
 
-cm = table(testData$LILATracts_1And10,testData$treeLilaCVModelProb >0.074475)
+cm = table(trainData$LILATracts_1And10,trainData$treeLilaCVModelProb >0.074475)
 cm
 precision_cart = cm[2,2]/(cm[2,2]+cm[1,2])
 precision_cart
@@ -847,7 +866,7 @@ ggplot(metrics_data_LILA, aes(x = Metric, y = Value, group = Method, color = Met
 
 ### Graph analysis:
 
-```{r PTYLITchart1, include=FALSE}
+```{r PTYLITchart1}
 
 LowIncomeTracts_Poverty <- data[data$LowIncomeTracts == 1, c("LowIncomeTracts", "PovertyRate")]
 NonLowIncomeTracts_Poverty <- data[data$LowIncomeTracts == 0, c("LowIncomeTracts", "PovertyRate")]
@@ -913,7 +932,6 @@ We created a CART model on the Poverty Rate to create a decision tree and help a
 #Poverty Rate
 model_pov_rate_columns =  c("LILATracts_1And10","Urban",
 "GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP")
-print(head(cleaned_data))
 sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
 
 ```
@@ -1068,13 +1086,13 @@ testData$TractWhite <- testData$TractWhite / 100
 # Convert to units of 1,000 dollars
 trainData$TractBlack <- trainData$TractBlack / 100
 testData$TractBlack <- testData$TractBlack / 100
-# View the transformed data
-head(testData)
 
 ```
 
 
 ### Linear regression assumptions:
+
+We made sure the dataset follows the linear regression assumptions.
 
 #### Normality of Median family income
 
@@ -1150,14 +1168,14 @@ sum_pov_linr_model
 #xkabledply(sum_pov_linr_model)
 ```
 
-### contribution of the most significant factors to povertyrate
+### Contribution of the most significant factors to povertyrate
 
 * All variables are statistically significant as the p-values are less than 0.05.
-* Just as we thought for every unit increase of the medianfamilyIncome we see that poverty rate decreases by a unit of 6.93e-05.
-* Holding all other variables constant, being in a low-income tract (as defined by LowIncomeTracts1 being 1) is associated with an increase of approximately 8.33 units in the poverty rate compared to not being in a low-income tract (where 
+* Just as we thought for every unit increase of the medianfamilyIncome we see that poverty rate decreases by a unit of -7.85e-05.
+* Holding all other variables constant, being in a low-income tract (as defined by LowIncomeTracts1 being 1) is associated with an increase of approximately 9.87 units in the poverty rate compared to not being in a low-income tract (where 
 * The population count in the SNAP porgram (TractSNAP) has a small positive impact on the poverty rate as well. We expected it to have a bigger influence.
 * Similarly the population count who does not have vehicle also have a small positive impact on poverty rate.
-* For every unit increase of the TractSeniors we see that poverty rate decreases by a unit of 1.74e-03.
+* For every unit increase of the TractSeniors we see that poverty rate decreases by a unit of 4.13e-03.
 * The Count of Black and White people have an a very small negative impact to povertyrate. It is interesting to note that poverty rate decreases more for tractWhite than TractBlack
 
 ### Performance of the Linear Regression for Povery Rate 
@@ -1209,6 +1227,7 @@ ggplot(metrics_data_povertyrate, aes(x = Metric, y = Value, group = Method, colo
 ## Best models
  * From the model comparison we found that CART performs better for povery rate prediction compared to linear regression.
  * Our smart question are more prediction related and our final R2 score for best cart model for the povery rate is  `r test_R2`. Our predictions are very good and it is validated from the good R2 score for test set
+ * We also validated the models by train and test datas.
  
 # Conclusion:
 The analysis revealed significant connections between factors such as vehicle availability, income, groupquarters, and the prevalence of food deserts. Additionally, examining poverty rates further informed our recommendations. Among these suggestions are:
@@ -1224,7 +1243,9 @@ The analysis revealed significant connections between factors such as vehicle av
 
 According to another article, “Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise” (FFAC Staff, 2023), from Food Research & Action Center (FRAC), stated today by the U.S. Department of Agriculture’s Economic Research Service (ERS), that the COVID-19 pandemic relief efforts caused hunger in America to decline the previous year, but it surged in 2022. So additional information on how covid affected food desert status would be beneficial
 
-Furthermore, we recognize that an avenue for potential model enhancement lies in conducting more extensive hyperparameter tuning. The belief is that a deeper exploration of hyperparameters could yield incremental improvements in the performance of our model.
+## Improvement :
+
+Furthermore, during the modeling we recognize that an avenue for potential model enhancement lies in conducting more extensive hyperparameter tuning. The belief is that a deeper exploration of hyperparameters could yield incremental improvements in the performance of our model.
 
 # References
 
