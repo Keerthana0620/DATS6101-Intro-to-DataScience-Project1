@@ -69,11 +69,10 @@ knitr::kable(head(data, 5), format ='markdown')
 
 ```
 
-## Summary of the dataset:
 
 ```{r code1.1, include=FALSE}
-str(data)
-summary(data)
+#str(data)
+#summary(data)
 ```
 
 ### Data Preprocessing:
@@ -97,7 +96,7 @@ data$LATracts1 = as.factor(data$LATracts1)
 data$LATracts10 = as.factor(data$LATracts10)
 data$LATracts20 = as.factor(data$LATracts20)
 data$LATractsVehicle_20 = as.factor(data$LATractsVehicle_20)
-str(data)
+#str(data)
 ```
 
 # EDA and Inference of LILA tract:
@@ -190,7 +189,7 @@ summary(logistic_model)
 exp(coef(logistic_model))
 ```
 
-So, a **$1,000** increase in median family income is associated with a decrease in the odds of an area being a potential food desert by a factor of approximately **-0.915**, or a **9.15%** reduction in the odds.
+So, a **$1,000** increase in median family income is associated with a decrease in the log odds of an area being a potential food desert by a factor of approximately **0.915**.
 
 This analysis highlights the importance of `MedianFamilyIncome` in determining the likelihood of an area being classified as a potential food desert. Higher median family incomes are associated with a reduced likelihood of an area being a potential food desert.
 
@@ -475,6 +474,8 @@ LILATracts_1And10_logit1 <- glm(as.formula(formula_str), data = data, family = b
 
 ```
 
+### Summary of the model
+
 ```{r logistic_reg_all_analysis_1}
 options(max.print = 1e6)
 sum_LILATracts_1And10_logit1 = summary(LILATracts_1And10_logit1)
@@ -489,19 +490,19 @@ saveRDS(LILATracts_1And10_logit1, file = "glm_1_logit_lila1_10.rds")
 
 ```
 
-### Summary of the model
+
 
 ```{r check_model}
 str(LILATracts_1And10_logit1$fitted.values)
-summary(LILATracts_1And10_logit1$fitted.values)
+#summary(LILATracts_1And10_logit1$fitted.values)
 complete_cases <- complete.cases(data[model_lila_1_10_var])
-sum(complete_cases)
+#sum(complete_cases)
 ```
 
 ### Removing the nan values
 
 ```{r}
-sapply(data[model_lila_1_10_var], function(x) sum(is.na(x)))
+#sapply(data[model_lila_1_10_var], function(x) sum(is.na(x)))
 cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
 sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
 ```
@@ -596,7 +597,7 @@ sum_LILATracts_1And10_stepwise_logit2 = summary(stepwise_model)
 #saveRDS(stepwise_model, file = "chiffon_drafts/models/rds/glm_3_stepwise_logit_lila1_10_wo_lowincome.rds")
 ```
 
-The AIC of the intial stepwise model is 34708. But the final AIC of the model is 19854. Which means the final model is actually better. 
+The AIC of the intial stepwise model is 34708. But the final AIC of the model is 20002. Which means the final model is actually better. 
 
 
 ```{r}
@@ -682,7 +683,7 @@ print(bar_chart)
 
 
 * From the exponents of the coefficients we get from the Stepwise model we can see population count of white, kids, seniors, beyond 1 mile from supermarket has a great impact on the food desert. 
-* In addition, Share of tract housing units(lahunv1share) that are without vehicle and beyond 1 mile from supermarket has a huge impact on the Food desert. Meaning if the variable increase by one unit, then it increases the odd ratio of being a food desert by a factor of 1.3539e+36.
+* In addition, Share of tract housing units(lahunv1share) that are without vehicle and beyond 1 mile from supermarket has a huge impact on the Food desert. Meaning if the variable increase by one unit, then it increases the odd ratio of being a food desert by a factor of 6.8e^35.
 * Median Family Income as we thought has negative impact.
 
 ``` {r step_performance}
@@ -758,7 +759,7 @@ print(lila_cart_model)
 
 ```
 
-From the model we got a very good accuracy of 96% on the train data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as cp = 0.027804.
+From the model we got a very good accuracy of 96% on the train data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as cp = 0.025838.
 
 
 ```{r tree_lila_find_threshold}
@@ -779,16 +780,16 @@ theme(legend.position = "bottom")
 #print(cleaned_data$prob)
 # Add new column of predicted probabilities
 h <- roc(LILATracts_1And10~treeLilaCVModelProb, data=trainData)
-auc(h)
+auc_cart = auc(h)
 plot(h)
-coords(h, "best", ret = "threshold")
+cut_off_cart = coords(h, "best", ret = "threshold")
 
 ```
 
 * The probability density distribution of the results indicate that it is highly rightly skewed. This is because the data is highly unablanced. 
-* We got the best cut_off for our model from the youden's index as `r cut_off`.
+* We got the best cut_off for our model from the youden's index as `r cut_off_cart`.
 
-* The auc of the stepwise model is `r auc`. And now we see that AUC is reasonable and the ROC curve doesn't indicate a perfect separation after removing the LowIncomeTract variable.
+* The auc of the stepwise model is `r auc_cart`. And now we see that AUC is reasonable and the ROC curve doesn't indicate a perfect separation after removing the LowIncomeTract variable.
 
 
 ```{r }
@@ -815,7 +816,7 @@ fancyRpartPlot(lila_cart_model$finalModel)
 * The model gives a very good recall of 0.78786.
 * The model decision graph says that if the medianFamilyIncome is higher than 58000 then the tract is definitely non food desert.
 * Similary either the poverty rate should be greater than 20 or medianFamilyIncome less than than 49000 for a tract to be predicted as food desert.
-* From the model we got a very good accuracy of 87% on the test data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as cp = 0.028453.
+* From the model we got a very good accuracy of 87% on the test data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as cp = 0.025838.
 
 ### What specific factors most significantly contribute to predict food desert?
 
@@ -850,7 +851,7 @@ ggplot(metrics_data_LILA, aes(x = Metric, y = Value, group = Method, color = Met
 
 ## Best model for Food desert 
  * From the model comparison we found that stepwise logistic regression performs better for food desert prediction compared to CART.
-  *  Our smart question are more prediction related and our final recall score for best stepwise logistic mode for the food desert is  `r recall_stepwise`. Our predictions are very good.
+  *  Our smart question are more prediction related and our final recall score for best stepwise logistic mode for the food desert is  `r recall_stepwise`. The predictions results are very good.
 
 # EDA and inference of Poverty rate:
 
