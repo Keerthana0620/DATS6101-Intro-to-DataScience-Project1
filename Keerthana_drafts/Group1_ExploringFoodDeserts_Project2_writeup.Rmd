@@ -1,0 +1,1266 @@
+---
+title: "Food Deserts Analysis and Modeling"
+author: "Team 1 : Abishek Chiffon, Keerthana Aravindhan, Mowzli Sre Mohan Dass, Robert Williams"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    number_sections: false
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  editor_options: 
+    markdown: 
+      wrap: sentence
+---
+
+```{css, echo=F}
+#TOC::before {
+  content: "";
+  display: block;
+  height: 200px;
+  margin: 20px 20px 40px 20px;
+  background-image: url("image.webp");
+  background-size: contain;
+  background-color: white
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+```
+
+```{=html}
+<style>
+/* Footer Styles */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 19%;
+  background-color: white; /* Background color for the footer */
+  border: 1px solid #ddd; /* Optional border line at the top of the footer */
+  padding: 10px; /* Adjust padding as needed */
+  text-align: center; /* Center-align the content in the footer */
+  margin-left: 25px;
+  border-radius: 5px;
+}
+
+body {
+  
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+</style>
+```
+
+```{r init, include=F}
+library(ezids)
+library(ModelMetrics)
+library(pROC) 
+library(ggplot2)
+loadPkg("ISLR")
+loadPkg("tree") 
+library(stats)
+loadPkg("rpart")
+library(caret)
+loadPkg("rattle")
+```
+
+```{r setup, include=FALSE}
+# Some of common RMD options (and the defaults) are: 
+# include=T, eval=T, echo=T, results='hide'/'asis'/'markup',..., collapse=F, warning=T, message=T, error=T, cache=T, fig.width=6, fig.height=4, fig.dim=c(6,4) #inches, fig.align='left'/'center','right', 
+knitr::opts_chunk$set(warning = F, message = F)
+# Can globally set option for number display format.
+options(scientific=T, digits = 5) 
+```
+
+<br>
+<br>
+
+- Limited access to supermarkets, supercenters, grocery stores, or other sources of healthy and affordable food may make it harder for some people to eat a healthy diet in this country and to achieve food security.
+
+- Expanding the availability of nutritious and affordable food by developing and equipping grocery stores, small retailers, corner markets and farmers’ markets in communities with limited access is an important part of the Healthy Food Financing Initiative.
+
+# Introduction
+
+This information on supermarket availability at different distances was taken from the Food Access Research Atlas. This data gives a rich detailed summary because it measures access by the Census-Tract. Data on food access was linked with information on age, race, location (rural or urban), and income.
+
+- USDA calls Low income Low access areas as Food deserts.
+- Census tract level : subdivisions of counties.
+
+# Data Loading and Preprocessing
+
+## Viewing Food desert dataset:
+
+<div style="width: 100%; overflow-x: scroll;">
+```{r read_data, echo=TRUE}
+# Loading data
+data <- data.frame(read.csv("food_access_research_atlas.csv"))
+knitr::kable(head(data, 5), format ='markdown')
+```
+</div>
+
+## Summary of the dataset:
+
+<div style="max-height: 300px; overflow-y: scroll;">
+```{r summary, echo=TRUE}
+summary(data)
+```
+</div>
+
+## Data Preprocessing:
+
+Factorizing Categorical variable
+
+<div style="max-height: 300px; overflow-y: scroll;">
+```{r encoding, echo=TRUE}
+data$LILATracts_1And10 <- as.factor(data$LILATracts_1And10)
+data$GroupQuartersFlag <- as.factor(data$GroupQuartersFlag)
+data$Urban = as.factor(data$Urban)
+data$LILATracts_halfAnd10 = as.factor(data$LILATracts_halfAnd10)
+data$LILATracts_1And20 = as.factor(data$LILATracts_1And20)
+data$LILATracts_Vehicle = as.factor(data$LILATracts_Vehicle)
+data$HUNVFlag = as.factor(data$HUNVFlag)
+data$LowIncomeTracts = as.factor(data$LowIncomeTracts)
+data$LA1and10 = as.factor(data$LA1and10)
+data$LAhalfand10 = as.factor(data$LAhalfand10)
+data$LA1and20 = as.factor(data$LA1and20)
+data$LATracts_half = as.factor(data$LATracts_half)
+data$LATracts1 = as.factor(data$LATracts1)
+data$LATracts10 = as.factor(data$LATracts10)
+data$LATracts20 = as.factor(data$LATracts20)
+data$LATractsVehicle_20 = as.factor(data$LATractsVehicle_20)
+str(data)
+```
+</div>
+
+# EDA and Inference of LILA tract:
+
+## Median Family Income Analysis
+
+From the Project 1, we learned that Median Family Income is an important feature contributing to the prevalence of a region being a food desert. To further investigate this, we conducted a t-test over the **MedianFamilyIncome** variable.
+
+```{r MFI1, echo=TRUE}
+# Set thresholds for defining potential food deserts
+poverty_rate_threshold <- 20  # percent
+median_income_threshold <- quantile(data$MedianFamilyIncome, 0.25)  # lower quartile
+snap_beneficiary_threshold <- 20  # percent
+
+# Creating a food desert indicator
+data$PotentialFoodDesert <- with(data, 
+  (PovertyRate >= poverty_rate_threshold) &
+  (MedianFamilyIncome <= median_income_threshold) &
+  (TractSNAP / POP2010 * 100 >= snap_beneficiary_threshold)
+)
+
+# Calculating average median family income for potential food desert areas and non-food desert areas
+average_income_food_desert <- mean(data[data$PotentialFoodDesert, "MedianFamilyIncome"])
+average_income_non_food_desert <- mean(data[!data$PotentialFoodDesert, "MedianFamilyIncome"])
+
+# Performing a t-test to check if the difference in median family incomes is statistically significant
+t_test_result <- t.test(
+  data[data$PotentialFoodDesert, "MedianFamilyIncome"],
+  data[!data$PotentialFoodDesert, "MedianFamilyIncome"]
+)
+
+# Print the results
+print(t_test_result)
+```
+
+### T-Test Results
+
+The t-test was conducted to assess the difference in median family incomes between potential food desert areas and non-food desert areas. Here are the results:
+
+Average Median Family Income in Potential Food Deserts: **$22,544.33**
+Average Median Family Income in Non-Food Desert Areas: **$67,927.53**
+
+The t-test resulted in a t-statistic of **-149.61** and a p-value of **< 2.2e-16**. The small p-value suggests a significant difference in median family incomes between potential food desert and non-food desert areas.
+
+**Inference:**
+
+Based on the t-test results, we can conclude that there is a statistically significant difference in median family incomes between potential food desert areas and non-food desert areas. Areas classified as potential food deserts tend to have lower median family incomes.
+
+### Logistic Regression Results
+
+```{r MFI2, echo=TRUE}
+logistic_model <- glm(
+  PotentialFoodDesert ~ MedianFamilyIncome,
+  data = data,
+  family = binomial
+)
+
+# Summarize the logistic regression results
+summary(logistic_model)
+
+exp(coef(logistic_model))
+```
+
+A logistic regression model was employed to further investigate the relationship between MedianFamilyIncome and the likelihood of an area being a potential food desert. Here are the results:
+
+The odds ratio for MedianFamilyIncome is approximately **0.99991**.
+
+### Effect of a $1,000 Increase in Median Family Income
+
+To understand the effect of a **$1,000** increase in median family income, we can calculate the change in odds:
+
+```{r MFI3, echo=TRUE}
+
+data$mfi2 <- data$MedianFamilyIncome/1000
+
+logistic_model <- glm(
+  PotentialFoodDesert ~ mfi2,
+  data = data,
+  family = binomial
+)
+
+# Summarize the logistic regression results
+summary(logistic_model)
+
+exp(coef(logistic_model))
+```
+
+So, a **$1,000** increase in median family income is associated with a decrease in the log odds of an area being a potential food desert by a factor of approximately **0.915**.
+
+This analysis highlights the importance of **MedianFamilyIncome** in determining the likelihood of an area being classified as a potential food desert. Higher median family incomes are associated with a reduced likelihood of an area being a potential food desert.
+
+## Impact of GroupQuarters on Food desert:
+
+### Chi sq test analysis:
+
+chi-square (GOF) test between 2 categorical variables (GroupQuartersFlag and LILATracts_1And10):
+
+-   Null Hypothesis (H0): There is no association between the two categorical variables
+
+-   Alternative Hypothesis (H1): There is an association between the two categorical variables
+
+Significance level $\alpha$ = 0.05
+
+```{r GQchisq, echo=TRUE}
+# creating contingency table
+contingency_table <- table(data$GroupQuartersFlag, data$LILATracts_1And10)
+# executing chi sq test
+chi_squared_test_result <- chisq.test(contingency_table)
+chi_squared_test_result
+
+```
+
+Due to the extremely low p value(**1e-09**), H0 is rejected. Therefore, there is a **significant association or correlation** between "GroupQuartersFlag" and "LILATracts_1And10."
+
+### Graph analysis:
+
+```{r GQchart1, echo=TRUE}
+
+GroupQuarters_LILA <- data[ (data$GroupQuartersFlag == 1 & data$LILATracts_1And10 == 1), c("GroupQuartersFlag", "LILATracts_1And10")]
+NonGroupQuarters_LILA <- data[data$GroupQuartersFlag == 0 & data$LILATracts_1And10 == 1, c("GroupQuartersFlag", "LILATracts_1And10")]
+
+data1 = data.frame()
+Percentage_GroupQuarters_LILA = nrow(GroupQuarters_LILA)/(nrow(GroupQuarters_LILA)+ nrow(NonGroupQuarters_LILA))*100
+Percentage_NonGroupQuarters_LILA = nrow(NonGroupQuarters_LILA)/(nrow(GroupQuarters_LILA)+ nrow(NonGroupQuarters_LILA))*100
+data1 <- rbind(data1, Percentage_GroupQuarters_LILA)
+data1 <- rbind(data1, Percentage_NonGroupQuarters_LILA)
+GroupQuartersFlag = c(1,0)
+data1 <- cbind(data1, GroupQuartersFlag)
+colnames(data1) <- c('Percentage', 'GroupQuartersFlag')
+```
+
+```{r GQchart2, echo=TRUE}
+
+library(ggplot2)
+pie_chart <- ggplot(data1, aes(x = "", y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Group quarters in Food desert regions",
+       fill = "GroupQuartersFlag") +
+  scale_fill_manual(values = c("0" = "grey", "1" = "black"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+
+```
+
+The pie chart clearly illustrates that within food desert regions, the percentage of Group Quarters is significantly lower when compared to Non-Group Quarters.
+
+```{r NGQchart1, echo=TRUE}
+
+GroupQuarters_NonLILA <- data[ (data$GroupQuartersFlag == 1 & data$LILATracts_1And10 == 0), c("GroupQuartersFlag", "LILATracts_1And10")]
+NonGroupQuarters_NonLILA <- data[ (data$GroupQuartersFlag == 0 & data$LILATracts_1And10 == 0), c("GroupQuartersFlag", "LILATracts_1And10")]
+
+data1 = data.frame()
+Percentage_GroupQuarters_NonLILA = nrow(GroupQuarters_NonLILA)/(nrow(GroupQuarters_NonLILA)+ nrow(NonGroupQuarters_NonLILA))*100
+Percentage_NonGroupQuarters_NonLILA = nrow(NonGroupQuarters_NonLILA)/(nrow(GroupQuarters_NonLILA)+ nrow(NonGroupQuarters_NonLILA))*100
+data1 <- rbind(data1, Percentage_GroupQuarters_NonLILA)
+data1 <- rbind(data1, Percentage_NonGroupQuarters_NonLILA)
+GroupQuartersFlag = c(0,1)
+data1 <- cbind(data1, GroupQuartersFlag)
+colnames(data1) <- c('Percentage', 'GroupQuartersFlag')
+```
+
+```{r NGQchart2, echo=TRUE}
+
+library(ggplot2)
+pie_chart <- ggplot(data1, aes(x = "", y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Group quarters in Non Food desert regions",
+       fill = "GroupQuartersFlag") +
+  scale_fill_manual(values = c("0" = "orange", "1" = "lightblue"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+```
+
+The above pie chart illustrates that within Non food desert regions, the percentage of Group Quarters is significantly higher when compared to Non-Group Quarters.
+
+This shows the perfect result that, group quarters are more in Non-food deserts and less in food deserts.
+
+### Inference about Group Quarters on Food desert:
+
+```{r GQinference1, echo=TRUE}
+
+model1 <- glm(LILATracts_1And10 ~ PovertyRate + GroupQuartersFlag, family = binomial(link = "logit"), data = data)
+summary(model1)
+```
+
+```{r GQinference2, results='markup', collapse=F}
+expcoeffmodel1 = exp(coef(model1))
+#expcoeff
+xkabledply(as.table(expcoeffmodel1), title = "Exponential of coefficients in Logit Reg" )
+```
+
+The effect of being in GroupQuartersFlag = 1, compared to GroupQuartersFlag = 0, is hurting by a factor of `r format(expcoeffmodel1[3],digit=4)`, for the log(odds-ratio).  Any factor less than 1 represents a negative effect.
+
+**Analysis** :
+
+Hence, insights drawn from both graphical representation and logistic regression models converge to indicate that `GroupQuartersflag negatively affect the Food deserts.
+
+
+## Impact of GroupQuarters and poverty rate together on Food desert:
+
+SMART Question : Can we quantify the impact of the "PovertyRate" and "Group Quarters" on the likelihood
+of a census tract being classified as a food desert?
+
+
+### Graph analysis:
+
+```{r GQPTYchart1, include=FALSE}
+
+data_outliers <- ezids::outlierKD2(data, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+GroupQuarters_Poverty <- data_outliers[data_outliers$GroupQuartersFlag == 1, c("GroupQuartersFlag", "PovertyRate")]
+NonGroupQuarters_Poverty <- data_outliers[data_outliers$GroupQuartersFlag == 0, c("GroupQuartersFlag", "PovertyRate")]
+
+```
+
+```{r GQPTYchart2, echo=TRUE}
+
+data2 = data.frame()
+Percentage_GroupQuarters_Poverty = nrow(GroupQuarters_Poverty)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+Percentage_NonGroupQuarters_Poverty = nrow(NonGroupQuarters_Poverty)/(sum(nrow(GroupQuarters_Poverty)+ nrow(NonGroupQuarters_Poverty)))*100
+data2 <- rbind(data2, Percentage_GroupQuarters_Poverty)
+data2 <- rbind(data2, Percentage_NonGroupQuarters_Poverty)
+GroupQuartersFlag = c(1,0)
+data2 <- cbind(data2, GroupQuartersFlag)
+colnames(data2) <- c('Percentage', 'GroupQuartersFlag')
+
+pie_chart <- ggplot(data2, aes(x = "", y = Percentage, fill = factor(GroupQuartersFlag))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Percentage of Poverty in group quarters",
+       fill = "GroupQuartersFlag") +
+  scale_fill_manual(values = c("0" = "pink", "1" = "black"), labels = c("0", "1")) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+print(pie_chart)
+
+```
+
+Analysis of the pie chart reveals that Non-Group Quarters tracts exhibit a higher poverty rate compared to Group Quarters tracts.
+
+### Interaction term between group quarters and poverty rate - inference:
+
+```{r GQPTYinference1, echo=TRUE}
+
+model2 <- glm(LILATracts_1And10 ~ PovertyRate * GroupQuartersFlag, family = binomial(link = "logit"), data = data)
+summary(model2)
+```
+```{r GQPTYinference2, results='markup', collapse=F}
+expcoeff = exp(coef(model2))
+#expcoeff
+xkabledply(as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
+```
+
+
+* In Non GroupQuarters (GroupQuartersFlag is 0), one unit increase in PovertyRate is associated with a relatively larger increase (2.3246) in the log-odds of the response variable being 1.
+
+* In GroupQuarters (GroupQuartersFlag is 1), one unit increase in PovertyRate is associated with smaller increase (1.0587-0.9691 = 0.0896) in the log-odds of the response variable being 1.
+
+**Analysis** :  
+
+* Through EDA and consideration of interaction terms, it becomes evident that a one-unit increase in the poverty rate within Non-Group Quarters has a more substantial impact on the prevalence of food deserts compared to a one-unit increase in the poverty rate within Group Quarters.
+
+* Consequently, relationship between PovertyRate and the odds of the Food desert is influenced by the presence of GroupQuartersFlag.`
+
+## Impact of GroupQuarters and Urban together on Food desert:
+
+### Graph analysis:
+
+```{r GQUrbanchart1, echo=TRUE}
+
+GroupQuarters <- data[data$GroupQuartersFlag == 1, c("GroupQuartersFlag", "Urban")]
+
+bar_chart <- ggplot(GroupQuarters, aes(x = GroupQuartersFlag, fill = Urban)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Comparison of GroupQuartersFlag and Urban Flag",
+       x = "Group Quarters Flag",
+       y = "Count") +
+  scale_fill_manual(values = c("1" = "lightgreen", "0" = "magenta")) +
+  theme_minimal()
+
+print(bar_chart)
+```
+
+The bar chart highlights a higher prevalence of Group Quarters in Urban areas than in Rural.
+
+### Interaction term between group quarters and Urban - inference:
+
+```{r GQUrbaninference1, echo=TRUE}
+
+model3 <- glm(LILATracts_1And10 ~ GroupQuartersFlag * Urban, family = binomial(link = "logit"), data = data)
+summary(model3)
+```
+
+* In non-urban areas, the presence of group quarters (GroupQuartersFlag1) is not statistically significant in predicting the log-odds of the response variable being 1.
+
+* In urban areas, the presence of group quarters (GroupQuartersFlag1) is associated with an increase in the log-odds of the response variable being 1. However, the statistical significance of this effect is not strong based on the p-value.
+
+```{r GQUrbaninference2, results='markup', collapse=F}
+expcoeff = exp(coef(model3))
+#expcoeff
+xkabledply(as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
+```
+
+The log(odds-ratio) for a tract to be food desert is improved by a factor of `r format(expcoeff[4],digit=6)` for GroupQuartersFlag = 1 when Urban1 is 1 compared to when it is 0.
+
+**Analysis** :
+
+The EDA analysis and inference provides the fact that presence of GroupQuarters have stronger positve impact on Food desert in Urban than in Rural.
+
+
+## Impact of Urban on Food desert:
+
+```{r Urbaninference1, echo=TRUE}
+model4 <- glm(LILATracts_1And10 ~ Urban, family = binomial(link = "logit"), data = data)
+summary(model4)
+```
+
+```{r Urbaninference2, results='markup', collapse=F}
+expcoeff = exp(coef(model4))
+#expcoeff
+xkabledply(as.table(expcoeff), title = "Exponential of coefficients in Logit Reg" )
+```
+
+**Analysis** :
+
+The effect of a tract being food desert from Urban area, compared to Rural, is associated with a statistically significant increase by a factor of `r format(expcoeff[2],digit=4)`, for the log(odds-ratio).
+
+
+# Predicting Food desert:
+
+## GLM model for food desert
+
+The variable 'LILATracts_1And10' designates whether a tract is a food desert. 
+In our initial project, we conducted EDA and identified key variables that significantly impact the classification of a tract as a food desert. These variables, which were utilized to construct a logistic regression model, are mentioned below. Our findings indicate that these factors play a substantial role in determining whether a tract falls under the category of a food desert.
+
+Variables : 
+
+* Urban                   GroupQuartersFlag            LowIncomeTracts          lahunv1share       PCTGQTRS
+* MedianFamilyIncome      lawhite1                     lablack1                 laasian1           lahisp1
+* lanhopi1                laomultir1                   laaian1                  lakids10           lakids1
+* TractKids               laseniors1                   laseniors10              TractSeniors       TractWhite
+* TractBlack              TractAsian                   TractNHOPI               TractAIAN          TractOMultir
+* TractHispanic           TractHUNV                    TractSNAP                PovertyRate
+ 
+ 
+```{r glm_with_low_income, echo=TRUE}
+
+model_lila_1_10_var = c("Urban","GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "PovertyRate")
+data$State  <- as.factor(data$State)
+data$County  <- as.factor(data$County)
+data$Urban <- as.factor(data$Urban)
+data$GroupQuartersFlag <- as.factor(data$GroupQuartersFlag)
+data$LILATracts_1And10 <-  as.factor(data$LILATracts_1And10)
+data$LowIncomeTracts <- as.factor(data$LowIncomeTracts)
+data$HUNVFlag= as.factor(data$HUNVFlag)
+data$LATracts1 = as.factor(data$LATracts1)
+data$LATractsVehicle_20 = as.factor(data$LATractsVehicle_20)
+data <- ezids::outlierKD2(data, lahunv1share ,qqplt= TRUE, boxplt= TRUE, rm = TRUE)
+```
+
+```{r logistic_reg_all, echo=TRUE}
+# Create the formula for the glm model
+formula_str <- paste("LILATracts_1And10 ~", paste(model_lila_1_10_var, collapse = " + "))
+# Fit the GLM model
+LILATracts_1And10_logit1 <- glm(as.formula(formula_str), data = data, family = binomial(link = "logit"))
+```
+
+### Summary of the model
+
+<div style="max-height: 300px; overflow-y: scroll;">
+```{r logistic_reg_all_analysis_1, echo=TRUE}
+options(max.print = 1e6)
+sum_LILATracts_1And10_logit1 = summary(LILATracts_1And10_logit1)
+sum_LILATracts_1And10_logit1
+#capture.output(sum_LILATracts_1And10_logit1, file = "models/glm_1_logit_lila1_10_summary.txt")
+options(max.print = .Options$max.print)
+```
+<div>
+
+The residual deviance decreased by a considerable amount indicating the model is better than a null model
+
+```{r save_model, echo=TRUE}
+saveRDS(LILATracts_1And10_logit1, file = "glm_1_logit_lila1_10.rds")
+```
+
+```{r check_model, echo=TRUE}
+# str(LILATracts_1And10_logit1$fitted.values)
+# summary(LILATracts_1And10_logit1$fitted.values)
+complete_cases <- complete.cases(data[model_lila_1_10_var])
+#sum(complete_cases)
+```
+
+### Removing the nan values
+
+```{r removing_nan, echo=TRUE}
+#sapply(data[model_lila_1_10_var], function(x) sum(is.na(x)))
+cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+```
+
+### Accuracy and confusion matrix  
+
+```{r accuracy_confusion, echo=TRUE}
+
+cm = table(cleaned_data$LILATracts_1And10,LILATracts_1And10_logit1$fitted.values>.5)
+xkabledply( table(cleaned_data$LILATracts_1And10,LILATracts_1And10_logit1$fitted.values>.5), title = "Confusion matrix from Logit Model" )
+
+precision_stepwise = cm[2,2]/(cm[2,2]+cm[1,2])
+recall_stepwise = cm[2,2]/(cm[2,2]+cm[2,1])
+accuracy_stepwise =  (cm[1,1]+cm[2,2])/(cm[1,1]+ cm[1,2]+cm[2,1] + cm[2,2])
+
+```
+
+The accuracy of the model is `r accuracy_stepwise`.
+
+### Receiver-Operator-Characteristic (ROC) curve and Area-Under-Curve (AUC)
+
+```{r ROC, echo=TRUE}
+cleaned_data$prob=predict(LILATracts_1And10_logit1, type = c("response")) # Add new column of predicted probabilities
+h <- roc(LILATracts_1And10~prob, data=cleaned_data)
+auc(h)
+plot(h)
+```
+
+Log odds ratio of model :
+
+```{r logistic_reg_all_analysis_2, echo=TRUE}
+
+factors_LILATracts_1And10_logit1 = exp(coef(LILATracts_1And10_logit1))
+factors_LILATracts_1And10_logit1
+options(max.print = 1e6)
+#capture.output(factors_LILATracts_1And10_logit1, file = "models/glm_1_logit_lila1_10_factors.txt")
+
+```
+
+While our model exhibited high accuracy and a near-perfect AUC with a flawlessly shaped ROC curve, we recognized these seemingly exceptional results as indicative of potential overfitting or perfect separation. Upon exponentiating the coefficients to derive odds ratio factors, a concerning revelation emerged: the variable 'LowIncomeTracts1' exhibited an infinite increase in the odds ratio for being in a food desert with every unit increase.
+
+Further investigation revealed that 'LILATracts_1And10,' is a derived variable from 'LowIncomeTracts1,' was the root cause of the perfect separation issue. To address this, we strategically removed the 'LowIncomeTracts1' variable and retrained our models for food desert classification. The subsequent analysis emphasized the significant impact of the 'Urban' variable, underscoring its pivotal role in determining whether a tract is classified as a food desert.
+
+### Train/Test Split
+
+We split the data into train and test. Test set has 20% of data. This is to check overfitting and the performance for unseen data.
+
+```{r train, echo=TRUE}
+n <- nrow(cleaned_data)
+# Calculate the size of the training set (e.g., 80% of the dataset)
+trainSize <- floor(0.8 * n)
+# Randomly sample row indices for the training set
+trainIndex <- sample(seq_len(n), size = trainSize)
+# Create training and test datasets
+trainData <- cleaned_data[trainIndex, ]
+testData <- cleaned_data[-trainIndex, ]
+```
+
+### Stepwise forward
+
+In order to consider only the best variables for a model we used stepwise forward model building by including the previously considered variables but excluding the LowIncomeTracts1.
+
+<div style="max-height: 300px; overflow-y: scroll;">
+```{r stepwise, echo=TRUE, results='hide'}
+# Load necessary library
+
+model_lila_1_10_var_stepwise = c("Urban","GroupQuartersFlag","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP", "PovertyRate")
+# Assuming your data is in a dataframe called 'data' and the response variable is 'response'
+# Replace 'response' with your actual response variable name
+formula_str_2 <- paste("LILATracts_1And10 ~", paste(model_lila_1_10_var_stepwise, collapse = " + "))
+# Fit the GLM model
+# Initial model with only the intercept (no predictors)
+initial_logit2_model <- glm(LILATracts_1And10 ~ 1, data = trainData, family = binomial(link = "logit"))
+# Full model with all potential predictors
+full_logit2_model <- glm(as.formula(formula_str_2), data = trainData, family = binomial(link = "logit"))
+# Perform stepwise forward selection
+stepwise_model <- step(initial_logit2_model, scope = list(lower = initial_logit2_model, upper = full_logit2_model), direction = "forward")
+```
+<div>
+
+
+```{r, echo=TRUE}
+# View the summary of the selected model
+summary(stepwise_model)
+sum_LILATracts_1And10_stepwise_logit2 = summary(stepwise_model)
+```
+
+The AIC of the intial stepwise model is 34708. But the final AIC of the model is 19944. Which means the final model is actually better. 
+
+Chisq on deviance:
+
+```{r chisqmodel, echo=TRUE}
+pchisq(stepwise_model$null.deviance - stepwise_model$deviance  , 54033 - 54010  , lower.tail = F )
+```
+
+* Stepwise model deviance : `r stepwise_model$deviance`
+* Stepwise model null deviance : `r stepwise_model$null.deviance`
+
+In addition we can also find that the residual deviance is significantly lower than Null deviance. The chi-square test also indicates that the trained model is statistically better than the null model.
+
+### Stepwise Coeff
+
+```{r logistic_reg_all_analysis_22, echo=TRUE}
+
+factors_stepwise_model = exp(coef(stepwise_model))
+factors_stepwise_model
+options(max.print = 1e6)
+```
+
+**SMART Question : What specific factors most significantly contribute to a tract being classified as a food desert?**
+
+### Logg odds ratio of Food desert model.
+
+```{r Varimp_1, echo=TRUE}
+
+model_variable <- factors_stepwise_model[2:25]
+
+variable_names <- names(model_variable)
+variable_values <- unname(model_variable)
+
+# "lahunv1share",    2.0088e+43
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df$Importance <- log(merged_df$Importance + 1)  # Adding 1 to avoid log(0) or log(negative values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Log odds ratio of model",
+       x = "Variable",
+       y = "Log odds") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+### Logg odds ratio of Food desert model after removing lahunv for better plot.
+
+```{r Varimp_2, echo=TRUE}
+
+model_variable <- factors_stepwise_model[3:25]
+
+variable_names <- names(model_variable)
+variable_values <- unname(model_variable)
+
+# "lahunv1share",    2.0088e+43
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df$Importance <- log(merged_df$Importance + 1)  # Adding 1 to avoid log(0) or log(negative values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Log odds ratio of model after removing lahunv",
+       x = "Variable",
+       y = "Log odds") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+
+* From the exponents of the coefficients we get from the Stepwise model we can see population count of white, kids, seniors, beyond 1 mile from supermarket has a great impact on the food desert. 
+* In addition, Share of tract housing units(lahunv1share) that are without vehicle and beyond 1 mile from supermarket and Urban has a huge impact on the Food desert. Meaning if the variable increase by one unit, then it increases the odd ratio of being a food desert by a factor of 5.7971e^35.
+* Median Family Income as we thought has negative impact.
+
+``` {r step_performance, echo=TRUE}
+#print(nrow(testData))
+testData$prob=predict(stepwise_model, newdata = testData, type = c("response")) # Add new column of predicted probabilities
+
+h <- roc(LILATracts_1And10~prob, data=testData)
+auc = auc(h)
+plot(h)
+```
+
+The **auc** of the stepwise model is `r auc`. 
+
+And now we see that AUC is reasonable and the ROC curve doesn't indicate a perfect separation after removing the LowIncomeTract variable.
+
+```{r naremove, echo=TRUE}
+sapply(testData[model_lila_1_10_var], function(x) sum(is.na(x)))
+#cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+```
+
+```{r tree, echo=TRUE}
+
+testData$prob = predict(stepwise_model, newdata = testData, type = c("response")) 
+
+ggplot(testData, aes(x = prob, fill = as.factor(LILATracts_1And10))) +
+geom_density(alpha = 0.5) +
+scale_fill_manual(values = c("blue", "red"), labels = c("Negative", "Positive")) +
+labs(title = "Test Set's Predicted Score",
+x = "Predicted Probability",
+y = "Density",
+fill = "Data") +
+theme_minimal() +
+theme(legend.position = "bottom")
+
+cut_off = coords(h, "best", ret = "threshold")
+print(cut_off[1, 'threshold'])
+cm = table(testData$LILATracts_1And10, (testData$prob > cut_off[1, 'threshold']))
+precision_stepwise = cm[2,2]/(cm[2,2]+cm[1,2])
+recall_stepwise = cm[2,2]/(cm[2,2]+cm[2,1])
+accuracy_stepwise =  (cm[1,1]+cm[2,2])/(cm[1,1]+ cm[1,2]+cm[2,1] + cm[2,2])
+
+```
+
+* The probability density distribution of the results indicate that it is highly rightly skewed. This is because the data is highly unbalanced. 
+* We got the best cut_off for our model from the youden's index as `r cut_off`. We are focused on capturing as many food deserts from the prediction and so our key performance indicator is recall.
+* The model gives a very good recall of `r recall_stepwise`. 
+
+## CART Model for Food deserts.
+
+### Classification and Regression Tree on Food deserts
+
+We have opted to construct a Classification and Regression Trees (CART) model once again, specifically focusing on food deserts. This decision aims to generate a decision tree that can assist decision-makers in determining whether a location qualifies as a food desert through a series of targeted questions based on the available data. Additionally, this approach enables us to compare and contrast the key factors identified by the CART model with those obtained from the logistic regression analysis, providing valuable insights into the varying perspectives offered by these two modeling techniques.
+
+```{r cart, echo=TRUE}
+# Assuming 'data' is your dataset and 'target' is your target variable
+set.seed(123)  # for reproducibility
+# Custom summary function
+# Define control method for cross-validation
+fitControl <- trainControl(method = "cv",   number = 10)    # number of folds
+formula_str_3 <- paste("LILATracts_1And10 ~", paste(model_lila_1_10_var_stepwise, collapse = " + "))
+# Convert the string to a formula object
+##### full regression tree
+formula_obj_3 <- as.formula(formula_str_3)
+# Train the model
+lila_cart_model <- train(formula_obj_3, data = trainData,method = "rpart",trControl = fitControl)
+# Summary of the model performance
+print(lila_cart_model)
+
+```
+
+Upon training the model, we achieved an impressive accuracy of **96%** on the training dataset. The CART model leveraged a sophisticated approach, incorporating 10-fold cross-validation techniques and optimizations, ultimately identifying the optimal complexity parameter as **cp = 0.025838**.
+
+
+```{r tree_lila_find_threshold}
+
+########## LILA CV
+
+trainData$treeLilaCVModelProb <- predict(lila_cart_model, newdata = trainData, type = "prob")[,2]
+ggplot(trainData, aes(x = treeLilaCVModelProb, fill = as.factor(LILATracts_1And10))) +
+geom_density(alpha = 0.5) +
+scale_fill_manual(values = c("blue", "red"), labels = c("Negative", "Positive")) +
+labs(title = "Test Set's Predicted Score",
+x = "Predicted Probability",
+y = "Density",
+fill = "Data") +
+theme_minimal() +
+theme(legend.position = "bottom")
+
+#print(cleaned_data$prob)
+# Add new column of predicted probabilities
+h <- roc(LILATracts_1And10~treeLilaCVModelProb, data=trainData)
+auc_cart = auc(h)
+plot(h)
+cut_off_cart = coords(h, "best", ret = "threshold")
+
+```
+
+* The probability density distribution of the results indicate that it is highly rightly skewed. This is because the data is highly unbalanced. 
+* We got the best cut_off for our model from the youden's index as `r cut_off_cart`.
+
+* The auc of the stepwise model is `r auc_cart`. And now we see that AUC is reasonable and the ROC curve doesn't indicate a perfect separation after removing the LowIncomeTract variable.
+
+
+```{r }
+
+cm = table(trainData$LILATracts_1And10,trainData$treeLilaCVModelProb >0.074475)
+precision_cart = cm[2,2]/(cm[2,2]+cm[1,2])
+recall_cart = cm[2,2]/(cm[2,2]+cm[2,1])
+accuracy_cart =  (cm[1,1]+cm[2,2])/(cm[1,1]+ cm[1,2]+cm[2,1] + cm[2,2])
+```
+
+```{r var_import_lila_cart}
+#print(testData$pred)
+plot(lila_cart_model)
+varImp(lila_cart_model)
+print(lila_cart_model)
+fancyRpartPlot(lila_cart_model$finalModel)
+```
+ 
+* We are focused on capturing as many food deserts from the prediction and so our key performance indicator is recall.
+* The model gives a very good recall of **0.78786.**
+* The model decision graph says that if the medianFamilyIncome is higher than 58000 then the tract is definitely non food desert.
+* Similary either the poverty rate should be greater than 20 or medianFamilyIncome less than than 49000 for a tract to be predicted as food desert.
+* From the model we got a very good accuracy of **87%** on the test data. The CART used 10 fold cross validation techniques and optimizations to arrive at the best complexity parameter as **cp = 0.025838**.
+
+### What specific factors most significantly contribute to predict food desert?
+
+* From the feature importance we get from the Decision Trees we can see population count of the white, kids, seniors,  multiple race, Hispanic or Latino ethnicity beyond 1 mile from supermarket has a great impact on the food desert. 
+
+* In addition, being in urban, median family Income, Share of tract housing units that are without vehicle and beyond 1 mile from supermarket, Tract housing units receiving SNAP benefits also have an impact on the tract being a food desert.  
+* These results of the significant factors are confirming our EDA analysis.
+
+
+## Comparison of CART and Logistic Metrics.
+
+```{r comp, echo=TRUE}
+
+metrics_data_LILA = data.frame()
+metrics_data_LILA <- rbind(metrics_data_LILA, c("CART", "accuracy", accuracy_cart))
+metrics_data_LILA <- rbind(metrics_data_LILA, c("CART", "Precision", precision_cart))
+metrics_data_LILA <- rbind(metrics_data_LILA, c("CART", "Recall", recall_cart))
+metrics_data_LILA <- rbind(metrics_data_LILA, c("Logistic", "accuracy", accuracy_stepwise))
+metrics_data_LILA <- rbind(metrics_data_LILA, c("Logistic", "Precision", precision_stepwise))
+metrics_data_LILA <- rbind(metrics_data_LILA, c("Logistic", "Recall", recall_stepwise))
+colnames(metrics_data_LILA) <- c('Method', 'Metric', 'Value')
+
+# Create the line graph using ggplot2
+ggplot(metrics_data_LILA, aes(x = Metric, y = Value, group = Method, color = Method)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Comparison of CART and Logistic Metrics",
+       x = "Metric",
+       y = "Value") +
+  theme_minimal()
+
+```
+
+## Best model for Food desert 
+ * From the model comparison we found that stepwise logistic regression performs better for food desert prediction compared to CART.
+ * Our smart question are more prediction related and our final recall score for best stepwise logistic mode for the food desert is  `r recall_stepwise`. The predictions results are very good.
+  
+# EDA and inference of Poverty rate:
+
+## Impact of Low income tracts on Poverty Rate.
+
+### Graph analysis:
+
+```{r PTYLITchart1}
+
+LowIncomeTracts_Poverty <- data[data$LowIncomeTracts == 1, c("LowIncomeTracts", "PovertyRate")]
+NonLowIncomeTracts_Poverty <- data[data$LowIncomeTracts == 0, c("LowIncomeTracts", "PovertyRate")]
+
+```
+
+```{r PTYLITchart2, echo=TRUE}
+
+data2 = data.frame()
+Percentage_LowIncomeTracts_Poverty = sum(LowIncomeTracts_Poverty$PovertyRate)/(sum(nrow(LowIncomeTracts_Poverty)+ nrow(NonLowIncomeTracts_Poverty)))*100
+Percentage_NonLowIncomeTracts_Poverty = sum(NonLowIncomeTracts_Poverty$PovertyRate)/(sum(nrow(LowIncomeTracts_Poverty)+ nrow(NonLowIncomeTracts_Poverty)))*100
+data2 <- rbind(data2, Percentage_LowIncomeTracts_Poverty)
+data2 <- rbind(data2, Percentage_NonLowIncomeTracts_Poverty)
+LowIncomeTracts = c(1,0)
+data2 <- cbind(data2, LowIncomeTracts)
+colnames(data2) <- c('Percentage', 'LowIncomeTracts')
+
+library(ggplot2)
+ggplot(data2, aes(x = factor(LowIncomeTracts), y = Percentage, fill = factor(LowIncomeTracts))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("0" = "lightgreen", "1" = "lightblue")) +
+  labs(title = "Percentage of Poverty in LowIncomeTracts",
+       fill = "LowIncomeTracts") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+### Inference on effect of LowIncomeTracts on Poverty rate:
+
+```{r PTYLITinference1, echo=TRUE}
+
+model5 <- lm(PovertyRate ~ LowIncomeTracts, data = data)
+summary(model5)
+```
+
+In this case, it suggests that when "LowIncomeTracts" is 1 (compared to 0), the estimated poverty rate increases by approximately 18.72349 units.
+
+**The model indicates that the presence of low-income tracts (LowIncomeTracts1) is a statistically significant predictor of the poverty rate.**
+
+## Impact of Food desert on Poverty Rate.
+
+```{r PTYinference2, echo=TRUE}
+
+model6 <- lm(PovertyRate ~ LILATracts_1And10, data = data)
+summary(model6)
+```
+
+It suggests that when "LILATracts_1And10" changes from 0 to 1, the estimated poverty rate increases by approximately 11.35890 units.
+
+**The coefficient for "LILATracts_1And101" suggests a positive association between the presence of such tracts and the poverty rate.**
+
+
+# Predicting Poverty Rate
+
+## Poverty rate using CART
+
+As government policies often tie poverty rates to the phenomenon of food deserts, we undertook a comprehensive analysis of the poverty rate, including the development of predictive models. 
+
+Specifically, we employed a CART model on the Poverty Rate, crafting a decision tree that serves as a valuable tool for decision-makers. 
+
+By posing targeted questions to the dataset, this decision tree aids in determining whether a location falls within a specified poverty rate threshold, offering actionable insights for stakeholders
+
+```{r echo=TRUE}
+#Poverty Rate
+model_pov_rate_columns =  c("LILATracts_1And10","Urban",
+"GroupQuartersFlag","LowIncomeTracts","lahunv1share","PCTGQTRS","MedianFamilyIncome","lawhite1","lablack1","laasian1","lahisp1","lanhopi1","laomultir1","laaian1","lakids10","lakids1","TractKids","laseniors1","laseniors10","TractKids","TractSeniors","TractWhite","TractBlack","TractAsian","TractNHOPI","TractAIAN","TractOMultir","TractHispanic","TractHUNV","TractSNAP")
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+
+```
+
+Here we consider the `lowincometract` variable because poveryrate is not derived from lowincometract. 
+
+### Adjusted R2 method for Poverty Rate
+
+```{r, echo=TRUE}
+
+adjustedR2 <- function(data, p = NULL, model = NULL) {
+pred <- data$pred
+obs <- data$PovertyRate
+n <- length(obs)
+#p <- model$finalModel$terms$term.labels # number of predictors
+# Assuming 'model' is your trained model
+#p <- length(all.vars(model$finalModel$call$formula)) - 1
+rss <- sum((pred - obs) ^ 2)
+tss <- sum((obs - mean(obs)) ^ 2)
+#print(tss)
+#print(rss)
+#print(p)
+adjR2 <- 1 - (rss/(n-p-1))/(tss/(n-1))
+adjR2
+}
+```
+
+```{r echo=TRUE}
+
+# Assuming 'data' is your dataset and 'target' is your target variable
+set.seed(123)  # for reproducibility
+# Custom summary function
+# Define control method for cross-validation
+fitControl <- trainControl(method = "cv",  # k-fold cross-validation
+number = 10)    # number of folds
+formula_str_3 <- paste("PovertyRate ~", paste(model_pov_rate_columns, collapse = " + "))
+# Convert the string to a formula object
+##### full regression tree
+formula_obj_3 <- as.formula(formula_str_3)
+# Train the model
+povCARTModel <- train(formula_obj_3, data = trainData,
+method = "rpart",
+trControl = fitControl)
+# Summary of the povCARTModel performance
+print(povCARTModel)
+plot(povCARTModel)
+varImp(povCARTModel)
+
+```
+
+### Factors that contributed most significantly contribute from the CART to povertyrate ?
+
+```{r featureimp, echo=TRUE}
+
+feature_importance <- varImp(povCARTModel)
+
+variable_names <- row.names(feature_importance$importance)
+variable_values <- feature_importance$importance$Overall
+
+# "lahunv1share",    2.0088e+43
+merged_df <- data.frame(Variable = variable_names, Importance = variable_values)
+merged_df <- merged_df[order(merged_df$Importance), ]
+
+bar_chart <- ggplot(merged_df, aes(x = variable_names, y = variable_values)) +
+  geom_bar(stat = "identity", fill = "lightblue", width = 0.5) +
+  labs(title = "Log odds ratio of model",
+       x = "Variable",
+       y = "Log odds") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=0.2))  
+
+options(
+  repr.plot.width = 25,  # Set the desired width in inches
+  repr.plot.height = 30  # Set the desired height in inches
+)
+
+print(bar_chart)
+```
+
+*  From the feature importance we get from the Decision Trees we can see population count of the white, seniors, Black has a great impact on the food desert. 
+* In addition, median family Income, LowIncomeTracts, Share of tract housing units that are without vehicle and beyond 1 mile from supermarket, Tract housing units receiving SNAP benefits also have an impact on the tract being a food desert. 
+* These results of the significant factors are confirming our EDA analysis.
+
+### Performance of the CART model
+ 
+```{r}
+testData$pred = predict(povCARTModel,testData)
+trainData$pred = predict(povCARTModel,trainData)
+test_R2 = adjustedR2(testData,length(model_pov_rate_columns),povCARTModel)
+train_R2 = adjustedR2(trainData,length(model_pov_rate_columns),povCARTModel)
+
+bestRMSE <- min(povCARTModel$results$RMSE)
+
+metrics_data_povertyrate = data.frame()
+metrics_data_povertyrate <- rbind(metrics_data_povertyrate, c("CART", "R2", test_R2))
+metrics_data_povertyrate <- rbind(metrics_data_povertyrate, c("CART", "RMSE", bestRMSE))
+colnames(metrics_data_povertyrate) <- c('Method', 'Metric', 'Value')
+
+###############
+```
+
+
+* The adjusted R square of the CART model for test set is `r test_R2`. The train set R2 is `r train_R2`. Indicates that there is no overfitting and the model is decent in explaining the poverty rate.
+* The RMSE of the best CART model of poverty rate is `r bestRMSE`.
+
+## Pov rate using linear model
+
+We decided to use linear model on the variables we found more influential in the CART model to find out the extent actual quantity of influence each variable had on poverty rate. Essentially we used CART as also feature selection for the linear model.
+
+### Converted the medianFamilyIncome in units of 1000$
+
+We did this to see the acutal effect of medianfamilyincome on poveryrate.
+
+viewing median family income:
+
+```{r, echo=TRUE}
+# Convert to units of 1,000 dollars
+trainData$MedianFamilyIncome <- trainData$MedianFamilyIncome / 1000
+testData$MedianFamilyIncome <- testData$MedianFamilyIncome / 1000
+# View the transformed data
+head(testData$MedianFamilyIncome)
+
+```
+
+### Converted TractSNAP, TractHUNV, TractSeniors, TractWhite, TractBlack to units of 100.
+
+In order to see the actual effect of these variables on poverty rate.
+
+```{r, echo=TRUE}
+
+# Convert to units of 1,00 dolla
+trainData$TractSNAP <- trainData$TractSNAP / 100
+testData$TractSNAP <- testData$TractSNAP / 100
+
+# Convert to units of 1,000 dollars
+trainData$TractHUNV <- trainData$TractHUNV / 100
+testData$TractHUNV <- testData$TractHUNV / 100
+
+# Convert to units of 1,000 dollars
+trainData$TractSeniors <- trainData$TractSeniors / 100
+testData$TractSeniors <- testData$TractSeniors / 100
+
+# Convert to units of 1,000 dollars
+trainData$TractWhite <- trainData$TractWhite / 100
+testData$TractWhite <- testData$TractWhite / 100
+
+# Convert to units of 1,000 dollars
+trainData$TractBlack <- trainData$TractBlack / 100
+testData$TractBlack <- testData$TractBlack / 100
+
+```
+
+### Linear regression assumptions:
+
+We made sure the dataset follows the linear regression assumptions.
+
+#### Normality of Median family income
+
+```{r norm1, echo=TRUE}
+
+hist(cleaned_data$MedianFamilyIncome, main = "Histogram of Median Family Income", xlab = "Median Family Income")
+
+# Check normality with a Q-Q plot
+qqnorm(cleaned_data$MedianFamilyIncome, main = "Q-Q Plot of Median Family Income")
+qqline(cleaned_data$MedianFamilyIncome, col = 2)
+```
+
+**Removing outliers**
+
+```{r norm2 ,echo=TRUE}
+cleaned_data <- ezids::outlierKD2(cleaned_data, MedianFamilyIncome, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+```
+
+```{r, echo=TRUE}
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+```
+
+#### Normality of Poverty rate:
+
+```{r norm3, echo=TRUE}
+hist(cleaned_data$PovertyRate, main = "Histogram of PovertyRate", xlab = "PovertyRate")
+
+# Check normality with a Q-Q plot
+qqnorm(cleaned_data$PovertyRate, main = "Q-Q Plot of PovertyRate")
+qqline(cleaned_data$PovertyRate, col = 2)
+```
+
+**Removing outliers**
+
+```{r norm4 ,echo=TRUE}
+cleaned_data <- ezids::outlierKD2(cleaned_data, PovertyRate, rm = TRUE, boxplt = TRUE, qqplt = TRUE)
+
+```
+
+```{r}
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+cleaned_data <- na.omit(data, cols = model_lila_1_10_var)
+sapply(cleaned_data[model_lila_1_10_var], function(x) sum(is.na(x)))
+```
+
+### Train/Test Split
+
+We split the data into train and test. Test set has 20% of data. This is to check overfitting and check the performance for unseen data.
+
+```{r, echo=TRUE}
+
+print(nrow(cleaned_data))
+n <- nrow(cleaned_data)
+# Calculate the size of the training set (e.g., 80% of the dataset)
+trainSize <- floor(0.8 * n)
+# Randomly sample row indices for the training set
+trainIndex <- sample(seq_len(n), size = trainSize)
+# Create training and test datasets
+trainData <- cleaned_data[trainIndex, ]
+testData <- cleaned_data[-trainIndex, ]
+```
+
+```{r, echo=TRUE}
+
+select_cart_vars = c("MedianFamilyIncome","LowIncomeTracts","TractSNAP","TractHUNV","TractSeniors","TractWhite","TractBlack")
+
+formula_str_pov_linr <- paste("PovertyRate ~", paste(select_cart_vars, collapse = " + "))
+formula_obj_pov_linr <- as.formula(formula_str_pov_linr)
+pov_linr_model = lm(formula_obj_pov_linr , data=trainData)
+sum_pov_linr_model = summary(pov_linr_model)  # this is easier to be used in the inline codes to pull out coefficients and other info
+sum_pov_linr_model
+#xkabledply(sum_pov_linr_model)
+```
+
+### Contribution of the most significant factors to povertyrate
+
+* All variables are statistically significant as the p-values are less than 0.05.
+* Just as we thought for every unit increase of the medianfamilyIncome we see that poverty rate decreases by a unit of -7.85e-05.
+* Holding all other variables constant, being in a low-income tract (as defined by LowIncomeTracts1 being 1) is associated with an increase of approximately 9.87 units in the poverty rate compared to not being in a low-income tract (where 
+* The population count in the SNAP porgram (TractSNAP) has a small positive impact on the poverty rate as well. We expected it to have a bigger influence.
+* Similarly the population count who does not have vehicle also have a small positive impact on poverty rate.
+* For every unit increase of the TractSeniors we see that poverty rate decreases by a unit of 4.13e-03.
+* The Count of Black and White people have an a very small negative impact to povertyrate. It is interesting to note that poverty rate decreases more for tractWhite than TractBlack
+
+### Performance of the Linear Regression for Povery Rate 
+
+```{r}
+
+testData$pred = predict(pov_linr_model,testData)
+trainData$pred = predict(pov_linr_model,trainData)
+test_lin_R2 = adjustedR2(testData,length(select_cart_vars),pov_linr_model)
+train_lin_R2 = adjustedR2(trainData,length(select_cart_vars),pov_linr_model)
+print(pov_linr_model)
+sum = summary(pov_linr_model)
+#capture.output(sum, file = "chiffon_drafts/models/lm_pov_summary.txt")
+residuals <- testData$PovertyRate -testData$pred
+# Calculate RMSE
+rmse <- sqrt(mean(residuals^2))
+
+metrics_data_povertyrate <- rbind(metrics_data_povertyrate, c("Linear", "R2", test_lin_R2))
+metrics_data_povertyrate <- rbind(metrics_data_povertyrate, c("Linear", "RMSE", rmse))
+
+```
+
+* The adjusted R square of the Linear Regression model for test set is `r test_lin_R2`. The train set R2 is `r train_lin_R2`. Indicates that there is no overfitting and the model is decent in explaining the poverty rate.
+* The RMSE of the linear model for poverty rate is `r rmse`.
+
+
+## Comparison of CART and Linear Regression Metrics.
+
+```{r comp2, echo=TRUE}
+
+# Create the line graph using ggplot2
+ggplot(metrics_data_povertyrate, aes(x = Metric, y = Value, group = Method, color = Method)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Comparison of CART and Linear Metrics",
+       x = "Metric",
+       y = "Value") +
+  theme_minimal()
+
+```
+
+## Best models
+ * From the model comparison we found that CART performs better for povery rate prediction compared to linear regression.
+ * Our smart question are more prediction related and our final R2 score for best cart model for the povery rate is  `r test_R2`. Our predictions are very good and it is validated from the good R2 score for test set
+ * We also validated the models by train and test datas.
+ 
+# Conclusion:
+The analysis revealed significant connections between factors such as vehicle availability, income, groupquarters, and the prevalence of food deserts. Additionally, examining poverty rates further informed our recommendations. Among these suggestions are:
+
+**Targeted Support for Specific Ethnicities and Communities:** Recognizing the pivotal role of median family income, it's essential to launch initiatives aimed at specific ethnic groups and communities. These should focus on enhancing financial literacy and stability.
+
+**Community-Oriented Educational Programs:** We advocate for the implementation of educational initiatives that foster knowledge about nutrition, cooking, and healthy eating practices within the community. This might encompass cooking workshops, nutrition classes, and programs integrated into school curricula.
+
+**Enhancing Public Transport Systems:** By improving public transportation networks, we can ensure easier access to grocery stores for individuals who do not own vehicles.
+
+**Broadening the Scope of Online Grocery Services:** We recommend expanding the availability of online grocery shopping and delivery options in areas identified as food deserts, which would be particularly beneficial for residents facing mobility challenges or without access to personal transport.
+
+
+According to another article, “Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise” (FFAC Staff, 2023), from Food Research & Action Center (FRAC), stated today by the U.S. Department of Agriculture’s Economic Research Service (ERS), that the COVID-19 pandemic relief efforts caused hunger in America to decline the previous year, but it surged in 2022. So additional information on how covid affected food desert status would be beneficial
+
+## Improvement :
+
+Furthermore, during the modeling we recognize that an avenue for potential model enhancement lies in conducting more extensive hyperparameter tuning. The belief is that a deeper exploration of hyperparameters could yield incremental improvements in the performance of our model.
+
+# References
+
+- [Strengthen SNAP Benefits. (2023, October 13)](https://frac.salsalabs.org/update-13october2023?eType=EmailBlastContent&eId=abd0e534-77e3-409c-957e-ae342b6d3f50)
+
+- [FFAC Staff. (2022, April 05). What Are Food Deserts and Why Do They Exist? Factory Farming Awareness Coalition](https://ffacoalition.org/articles/food-deserts/)
+
+- [FFRA Staff. (2023, October 25). Food Research & Action Center Calls for WIC Funding, SNAP Benefit Adequacy as Rates of Hunger Rise](https://frac.org/news/usdafoodinsecurityreport2023)
+
+<footer>
+<p style="text-align: center;">
+BY TEAM 1
+</p>
+<p style="text-align: center;">
+Date: "`r Sys.Date()`"
+</p>
+</footer>
